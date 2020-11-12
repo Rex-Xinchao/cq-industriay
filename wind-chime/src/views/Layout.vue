@@ -1,18 +1,25 @@
 <template>
-  <div class="main">
-    <h1>123123</h1>
-  </div>
+  <el-container id="layout">
+    <el-header height="60px">
+      <head-com></head-com>
+    </el-header>
+    <el-container>
+      <el-aside width="200px">
+        <sider-com></sider-com>
+      </el-aside>
+      <el-main>
+        <router-view></router-view>
+      </el-main>
+    </el-container>
+  </el-container>
 </template>
 // <script>
-// import headCom from '@components/public/head'
-// import siderCom from '@components/public/siderbar'
-// import footCom from '@components/public/foot'
-// export default {
-//   components: {
-//     headCom,
-//     siderCom,
-//     footCom
-//   }
-// }
-//
+import headCom from '@components/public/head'
+import siderCom from '@components/public/siderbar'
+export default {
+  components: {
+    headCom,
+    siderCom
+  }
+}
 </script>

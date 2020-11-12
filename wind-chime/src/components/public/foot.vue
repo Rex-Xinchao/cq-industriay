@@ -1,3 +1,3 @@
 <template>
-  <div class="foot"></div>
+  <div class="foot">1</div>
 </template>
