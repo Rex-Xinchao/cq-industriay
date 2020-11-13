@@ -5,9 +5,9 @@
       <span class="sign">汽车行业</span>
     </h1>
     <div class="item-box">
-      <div class="item_33"></div>
-      <div class="item_33"></div>
-      <div class="item_33"></div>
+      <bar-chart class="item_33"></bar-chart>
+      <stack-chart class="item_33"></stack-chart>
+      <circle-chart class="item_33"></circle-chart>
       <div class="item_25"></div>
       <div class="item_25"></div>
       <div class="item_25"></div>
@@ -17,6 +17,14 @@
     </div>
   </div>
 </template>
+<script>
+import barChart from '@components/stockCustom/bar'
+import stackChart from '@components/stockCustom/stack'
+import circleChart from '@components/stockCustom/circle'
+export default {
+  components: { barChart, stackChart, circleChart }
+}
+</script>
 <style lang="scss" scoped>
 .main {
   width: 100%;
@@ -60,25 +68,28 @@
     .item_50 {
       display: flex;
       width: calc(50% - 10px);
-      height: 204px;
+      height: 224px;
       background-color: white;
       margin-bottom: 20px;
+      box-sizing: border-box;
     }
 
     .item_33 {
       display: flex;
       width: calc(100% / 3 - 40px / 3);
-      height: 204px;
+      height: 224px;
       background-color: white;
       margin-bottom: 20px;
+      box-sizing: border-box;
     }
 
     .item_25 {
       display: flex;
       width: calc(100% / 4 - 15px);
-      height: 204px;
+      height: 224px;
       background-color: white;
       margin-bottom: 20px;
+      box-sizing: border-box;
     }
   }
 }
