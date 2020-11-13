@@ -26,13 +26,16 @@ export default {
   box-sizing: border-box;
   background-color: white;
   box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.03);
+  z-index: 1000;
 
   .log_main {
     display: inline-block;
     width: 122px;
     height: 24px;
-    background-color: #cccccc;
     vertical-align: middle;
+    background-image: url(~@/assets/imgs/logo_2.png);
+    background-size: contain;
+    background-repeat: no-repeat;
   }
 
   .log_bar {
@@ -47,9 +50,11 @@ export default {
   .log_sub {
     display: inline-block;
     width: 124px;
-    height: 50px;
-    background-color: #cccccc;
+    height: 32px;
     vertical-align: middle;
+    background-image: url(~@/assets/imgs/logo_1.png);
+    background-size: contain;
+    background-repeat: no-repeat;
   }
 
   .user-right {
