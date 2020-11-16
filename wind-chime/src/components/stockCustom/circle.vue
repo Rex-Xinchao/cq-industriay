@@ -15,6 +15,7 @@
 
 <script>
 const echarts = require('echarts')
+import { numberFormat } from '@/libs/utils'
 export default {
   name: '',
   data() {
@@ -37,18 +38,20 @@ export default {
           data: vm.legend,
           formatter: function (name) {
             let number = vm.data.find((item) => item.name === name).value
-            return '{a|' + name + '}' + '{b|' + number + ' 家}'
+            let amount = vm.data.find((item) => item.name === name).amount
+            amount = numberFormat(amount, 0)
+            return '{a|' + name + '}' + '{b|' + number + ' 家} ' + '{b|' + amount + ' 万元} '
           },
           textStyle: {
             rich: {
               a: {
                 fontSize: 12,
                 color: '#9EA2AE',
-                padding: [0, 20, 4, 0]
+                padding: [0, 16, 4, 0]
               },
               b: {
                 fontSize: 14,
-                padding: [0, 0, 0, 0],
+                padding: [0, 16, 0, 0],
                 fontWeight: 500
               }
             }
@@ -91,7 +94,8 @@ export default {
         this.data = this.legend.map((item, index) => {
           return {
             name: item,
-            value: data[index]
+            value: data[index],
+            amount: Math.ceil(Math.random() * 100000)
           }
         })
         this.chartOption.series[0].data = this.data

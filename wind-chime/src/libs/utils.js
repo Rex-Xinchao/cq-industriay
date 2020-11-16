@@ -140,4 +140,4 @@ function getAxisMax(max) {
   return Math.ceil(max / index) * index
 }
 
-export { checkAddZone, isEmail, isUrl, converUnit, formatDate, getTimeLine, getAxisMax, getAllDate }
+export { checkAddZone, isEmail, isUrl, converUnit, formatDate, getTimeLine, getAxisMax, getAllDate, numberFormat }

@@ -5,16 +5,21 @@
       <span class="sign">汽车行业</span>
     </h1>
     <div class="item-box">
-      <multipleChart class="item_25" title="汽车产量及同比变化" subTitle="近12月"></multipleChart>
-      <multipleChart class="item_25" title="汽车销量及同比变化" subTitle="近12月"></multipleChart>
-      <div class="item_25"></div>
-      <div class="item_25"></div>
+      <multiple-chart class="item_25" title="汽车产量及同比变化" subTitle="近12月"></multiple-chart>
+      <multiple-chart class="item_25" title="汽车销量及同比变化" subTitle="近12月"></multiple-chart>
+      <line-chart class="item_25" title="行业资产负债率" name="负债率" color="#344CE9"></line-chart>
+      <line-chart class="item_25" title="行业亏损企业数同比变化" name="企业数同比" color="#FF6D02"></line-chart>
       <bar-chart class="item_50"></bar-chart>
       <circle-chart class="item_50" title="总投放规模"></circle-chart>
       <stack-chart class="item_50"></stack-chart>
-      <circle-chart class="item_50" title="非正常贷款投放规模">></circle-chart>
-      <div class="item_50" style="height: 385px"></div>
-      <div class="item_50" style="height: 385px"></div>
+      <circle-chart class="item_50" title="非正常贷款投放规模"></circle-chart>
+      <table-com class="item_50" style="height: 385px"></table-com>
+      <doucle-circle-chart
+        class="item_50"
+        style="height: 385px"
+        title="存量客户近期负面事件"
+        subTitle="汽车行业"
+      ></doucle-circle-chart>
     </div>
   </div>
 </template>
@@ -23,15 +28,18 @@ import barChart from '@components/stockCustom/bar'
 import stackChart from '@components/stockCustom/stack'
 import circleChart from '@components/stockCustom/circle'
 import multipleChart from '@components/stockCustom/multiple'
+import lineChart from '@components/stockCustom/line'
+import tableCom from '@components/stockCustom/table'
+import doucleCircleChart from '@components/stockCustom/circle_double'
 export default {
-  components: { barChart, stackChart, circleChart, multipleChart }
+  components: { barChart, stackChart, circleChart, multipleChart, lineChart, tableCom, doucleCircleChart }
 }
 </script>
 <style lang="scss" scoped>
 .main {
   width: 100%;
   height: 100%;
-  padding: 24px;
+  padding: 24px 60px 24px 24px;
   box-sizing: border-box;
   background-color: #F4F6F9;
 

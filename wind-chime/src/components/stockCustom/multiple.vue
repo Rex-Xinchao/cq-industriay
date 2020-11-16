@@ -6,7 +6,7 @@
       <i class="el-icon-warning icon-tip" title="这是一个提示"></i>
     </h1>
     <div v-if="!noData" class="multipleChart" :id="`multipleChart_${timeStamp}`"></div>
-    <no-data-show style="height: calc(100% - 30px); top: 30px" :show="noData"></no-data-show>
+    <no-data-show class="chart-nodata" :show="noData"></no-data-show>
   </div>
 </template>
 
@@ -17,16 +17,12 @@ export default {
   data() {
     let vm = this
     return {
-      isScale: true,
       noData: false,
       loading: false,
       timeStamp: new Date().getTime(),
       chartOption: {
         tooltip: {
           trigger: 'axis',
-          axisPointer: {
-            type: 'cross'
-          },
           formatter: function (data) {
             let time = data[0].axisValue + '月'
             let result = `${time}<br/>`
@@ -149,11 +145,6 @@ export default {
   props: {
     title: String,
     subTitle: String
-  },
-  watch: {
-    isScale() {
-      this.init()
-    }
   },
   methods: {
     init() {

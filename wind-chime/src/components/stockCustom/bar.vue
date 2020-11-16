@@ -1,12 +1,11 @@
 <template>
-  <div class="chartMain" v-loading="loading">
+  <div class="chartMain">
     <div class="operation-bar">
-      <span :class="{ active: isScale }" @click="isScale = true">贷款余额规模</span>
-      <span :class="{ active: !isScale }" @click="isScale = false">贷款企业数量</span>
-      <i class="el-icon-warning icon-tip" title="这是一个提示"></i>
+      <span class="bar-item" :class="{ active: isScale }" @click="isScale = true">贷款余额规模</span>
+      <span class="bar-item" :class="{ active: !isScale }" @click="isScale = false">贷款企业数量</span>
     </div>
-    <div v-if="!noData" id="barChart"></div>
-    <no-data-show style="height: calc(100% - 30px); top: 30px" :show="noData"></no-data-show>
+    <div v-loading="loading" v-if="!noData" id="barChart"></div>
+    <no-data-show v-loading="loading" class="chart-nodata" :show="noData"></no-data-show>
   </div>
 </template>
 

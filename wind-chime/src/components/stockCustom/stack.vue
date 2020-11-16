@@ -1,11 +1,11 @@
 <template>
-  <div class="chartMain" v-loading="loading">
+  <div class="chartMain">
     <div class="operation-bar">
-      <span :class="{ active: isScale }" @click="isScale = true">非正常贷款规模</span>
-      <span :class="{ active: !isScale }" @click="isScale = false">非正常贷款企业数量</span>
+      <span class="bar-item" :class="{ active: isScale }" @click="isScale = true">非正常贷款规模</span>
+      <span class="bar-item" :class="{ active: !isScale }" @click="isScale = false">非正常贷款企业数量</span>
     </div>
-    <div v-if="!noData" id="stackChart"></div>
-    <no-data-show class="chart-nodata" :show="noData"></no-data-show>
+    <div v-loading="loading" v-if="!noData" id="stackChart"></div>
+    <no-data-show v-loading="loading" class="chart-nodata" :show="noData"></no-data-show>
   </div>
 </template>
 
