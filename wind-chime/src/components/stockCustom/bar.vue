@@ -16,6 +16,7 @@ export default {
   data() {
     let vm = this
     return {
+      myChart: null,
       isScale: true,
       noData: false,
       loading: false,
@@ -127,6 +128,12 @@ export default {
   },
   mounted() {
     this.init()
+    window.addEventListener('resize', () => {
+      this.myChart && this.myChart.resize()
+    })
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize')
   }
 }
 </script>

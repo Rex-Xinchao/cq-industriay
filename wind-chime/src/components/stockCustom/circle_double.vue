@@ -12,16 +12,30 @@
     </h1>
     <div v-loading="loading" v-if="!noData" class="circleChart" :id="`circleChart_${timeStamp}`"></div>
     <no-data-show v-loading="loading" class="chart-nodata" :show="noData"></no-data-show>
+    <el-dialog :title="dialogTitle" :visible.sync="dialogVisible" :before-close="handleClose">
+      <el-table height="200" :data="dialogData" v-loading="dialogLoading">
+        <el-table-column property="name" label="公司名称" width="150"></el-table-column>
+        <el-table-column property="org" label="管护机构" width="200"></el-table-column>
+        <el-table-column label="贷款余额（万元）">
+          <template slot-scope="scope">{{ numberFormat(scope.row.amount, 0) }}</template>
+        </el-table-column>
+      </el-table>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 const echarts = require('echarts')
+import { numberFormat } from '@/libs/utils'
 export default {
   name: '',
   data() {
     let vm = this
     return {
+      dialogTitle: null,
+      dialogData: [],
+      dialogLoading: false,
+      dialogVisible: false,
       noData: false,
       loading: false,
       type: 1,
@@ -88,6 +102,27 @@ export default {
     }
   },
   methods: {
+    numberFormat,
+    handleOpen(data) {
+      if (data.seriesIndex === 0) return
+      this.dialogTitle = data.data.name
+      this.dialogVisible = true
+      this.dialogLoading = true
+      setTimeout(() => {
+        this.dialogLoading = false
+        this.dialogData = [
+          {
+            name: '客户名称',
+            org: '分行名称',
+            amount: '5146',
+            time: '23'
+          }
+        ]
+      }, 1000)
+    },
+    handleClose() {
+      this.dialogVisible = false
+    },
     init() {
       this.loading = true
       setTimeout(() => {
@@ -121,13 +156,26 @@ export default {
             value: 75
           }
         ]
-        this.myChart = echarts.init(document.getElementById(`circleChart_${this.timeStamp}`))
+        if (!this.myChart) {
+          this.myChart = echarts.init(document.getElementById(`circleChart_${this.timeStamp}`))
+          this.myChart.on('click', (params) => {
+            if (params.componentSubType === 'pie') {
+              this.handleOpen(params)
+            }
+          })
+        }
         this.myChart.setOption(this.chartOption, true)
       }, 1000)
     }
   },
   mounted() {
     this.init()
+    window.addEventListener('resize', () => {
+      this.myChart && this.myChart.resize()
+    })
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize')
   }
 }
 </script>

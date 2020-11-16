@@ -12,6 +12,11 @@ const routes = [
     component: Layout,
     children: [
       {
+        path: '',
+        redirect: '/stockCustom'
+      },
+
+      {
         path: 'stockCustom',
         name: 'StockCustom',
         component: StockCustom,

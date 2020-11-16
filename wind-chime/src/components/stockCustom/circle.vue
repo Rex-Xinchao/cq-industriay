@@ -3,10 +3,28 @@
     <h1 class="chart-title">
       {{ title }}
       <i class="el-icon-warning icon-tip" title="这是一个提示"></i>
-      <span class="button-cfg fr">
-        <i class="icon-img"></i>
-        配置
-      </span>
+      <el-popover ref="popover" placement="bottom" width="220" trigger="click">
+        <div class="popover-main">
+          <p>配置规模（万元）</p>
+          <div class="block" v-for="(item, index) in cfgs" :key="index">
+            <span class="demonstration">{{ item.name }}</span>
+            <el-slider
+              class="slider"
+              style="margin-left: 46px"
+              v-model="item.range"
+              range
+              :min="item.min"
+              :max="item.max"
+            ></el-slider>
+          </div>
+          <el-button class="add-btn" @click="add">新增分类</el-button>
+          <el-button class="save-btn fr" type="primary" @click="save">保存</el-button>
+        </div>
+        <span class="button-cfg fr" slot="reference">
+          <i class="icon-img"></i>
+          配置
+        </span>
+      </el-popover>
     </h1>
     <div v-if="!noData" class="circleChart" :id="`circleChart_${timeStamp}`"></div>
     <no-data-show class="chart-nodata" :show="noData"></no-data-show>
@@ -21,6 +39,7 @@ export default {
   data() {
     let vm = this
     return {
+      cfgs: [],
       isScale: true,
       noData: false,
       loading: false,
@@ -85,6 +104,29 @@ export default {
     }
   },
   methods: {
+    add() {
+      if (!this.cfgs.length) {
+        this.cfgs.push({
+          name: `分类1`,
+          range: [0, 0],
+          min: 0,
+          max: 3000
+        })
+      } else {
+        let min = this.cfgs[this.cfgs.length - 1].range[1]
+        let cfg = {
+          name: `分类${this.cfgs.length + 1}`,
+          range: [min, min],
+          min: min,
+          max: 3000
+        }
+        this.cfgs.push(cfg)
+      }
+    },
+    save() {
+      this.$refs.popover.doClose()
+      this.init()
+    },
     init() {
       this.loading = true
       setTimeout(() => {
@@ -106,6 +148,12 @@ export default {
   },
   mounted() {
     this.init()
+    window.addEventListener('resize', () => {
+      this.myChart && this.myChart.resize()
+    })
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize')
   }
 }
 </script>
@@ -114,5 +162,14 @@ export default {
 .circleChart {
   width: 100%;
   flex: 1;
+}
+
+.add-btn {
+  margin-top: 12px;
+  width: 100%;
+}
+
+.save-btn {
+  margin-top: 12px;
 }
 </style>

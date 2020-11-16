@@ -164,6 +164,12 @@ export default {
   },
   mounted() {
     this.init()
+    window.addEventListener('resize', () => {
+      this.myChart && this.myChart.resize()
+    })
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize')
   }
 }
 </script>

@@ -4,15 +4,31 @@
       <span class="bar-item" :class="{ active: type === 1 }" @click="type = 1">{{ `逾期客户  (${number_1})` }}</span>
       <span class="bar-item" :class="{ active: type === 2 }" @click="type = 2">{{ `黑名单  (${number_2})` }}</span>
       <span class="bar-item" :class="{ active: type === 3 }" @click="type = 3">{{ `大中型企业  (${number_3})` }}</span>
-      <span class="button-cfg fr">
-        <i class="icon-img"></i>
-        筛选
-      </span>
+      <el-popover ref="popover" placement="bottom" width="220" trigger="click">
+        <div class="popover-main">
+          <p>逾期客户筛选</p>
+          <div class="block">
+            <span class="demonstration">金额</span>
+            <el-slider class="slider" style="margin-left: 46px" v-model="amountRange" range :max="3000"></el-slider>
+          </div>
+          <div class="block">
+            <span class="demonstration">逾期天数</span>
+            <el-slider class="slider" style="margin-left: 18px" v-model="timeRange" range :max="100"></el-slider>
+          </div>
+          <el-button class="save-btn fr" type="primary" @click="save">保存</el-button>
+        </div>
+        <span class="button-cfg fr" slot="reference">
+          <i class="icon-img"></i>
+          筛选
+        </span>
+      </el-popover>
     </div>
     <el-table v-loading="loading" class="table-main" :data="tableData" style="width: 100%">
       <el-table-column prop="name" label="名称"></el-table-column>
       <el-table-column prop="org" label="管理机构"></el-table-column>
-      <el-table-column prop="amount" label="贷款余额（万元）"></el-table-column>
+      <el-table-column label="贷款余额（万元）">
+        <template slot-scope="scope">{{ numberFormat(scope.row.amount, 0) }}</template>
+      </el-table-column>
       <el-table-column label="逾期天数">
         <template slot-scope="scope">
           {{ scope.row.time + '天' }}
@@ -24,11 +40,14 @@
 
 <script>
 const echarts = require('echarts')
+import { numberFormat } from '@/libs/utils'
 export default {
   name: '',
   data() {
     let vm = this
     return {
+      amountRange: [0, 500],
+      timeRange: [0, 30],
       type: 1,
       number_1: 6,
       number_2: 6,
@@ -45,6 +64,11 @@ export default {
     }
   },
   methods: {
+    numberFormat,
+    save() {
+      this.$refs.popover.doClose()
+      this.init()
+    },
     init() {
       this.loading = true
       setTimeout(() => {
@@ -127,9 +151,26 @@ export default {
   margin-top: 20px;
   flex: 1;
 }
+.save-btn {
+  margin-top: 12px;
+}
 </style>
 <style lang="scss">
 .el-table thead th {
   background: #EFF0F3;
+}
+.popover-main {
+  .demonstration {
+    display: inline-block;
+    font-size: 14px;
+    color: #8492a6;
+    vertical-align: top;
+    line-height: 44px;
+  }
+
+  .slider {
+    display: inline-block;
+    width: calc(100% - 88px);
+  }
 }
 </style>

@@ -39,7 +39,7 @@ export default {
 .main {
   width: 100%;
   height: 100%;
-  padding: 24px 60px 24px 24px;
+  padding: 24px 120px 24px 24px;
   box-sizing: border-box;
   background-color: #F4F6F9;
 
