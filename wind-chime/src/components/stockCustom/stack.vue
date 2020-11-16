@@ -39,74 +39,71 @@ export default {
         },
         legend: {
           show: true,
-          icon: 'circle',
+          icon: 'square',
+          itemWidth: 16,
           bottom: 0,
           data: ['关注类', '次级类', '可疑类', '损失类']
         },
         grid: {
           left: '30px',
           right: '20px',
-          bottom: '44px',
+          bottom: '50px',
           top: '20px'
         },
-        xAxis: [
-          {
-            type: 'category',
-            data: [],
-            axisLine: {
-              lineStyle: {
-                color: '#ddd'
-              }
-            },
-            axisTick: {
-              alignWithLabel: true,
-              lineStyle: {
-                color: '#ddd'
-              }
-            },
-            axisLabel: {
-              formatter: '{value}',
-              color: '#999999'
-            },
-            splitLine: {
-              lineStyle: {
-                type: 'dashed',
-                color: '#F2F2F2'
-              }
+        xAxis: {
+          type: 'category',
+          data: [],
+          axisLine: {
+            lineStyle: {
+              color: '#ddd'
+            }
+          },
+          axisTick: {
+            alignWithLabel: true,
+            lineStyle: {
+              color: '#ddd'
+            }
+          },
+          axisLabel: {
+            formatter: '{value}',
+            color: '#999999'
+          },
+          splitLine: {
+            lineStyle: {
+              type: 'dashed',
+              color: '#F2F2F2'
             }
           }
-        ],
-        yAxis: [
-          {
-            type: 'value',
-            gridIndex: 0,
-            axisLine: {
-              show: false,
-              lineStyle: {
-                color: '#ddd'
-              }
-            },
-            axisTick: {
-              alignWithLabel: true,
-              lineStyle: {
-                color: '#ddd'
-              }
-            },
-            axisLabel: {
-              formatter: '{value}',
-              color: '#999999'
-            },
-            splitLine: {
-              lineStyle: {
-                type: 'dashed',
-                color: '#F2F2F2'
-              }
-            },
-            minInterval: 10,
-            splitNumber: 4,
-            min: 0
-          }
-        ],
+        },
+        yAxis: {
+          type: 'value',
+          gridIndex: 0,
+          axisLine: {
+            show: false,
+            lineStyle: {
+              color: '#ddd'
+            }
+          },
+          axisTick: {
+            alignWithLabel: true,
+            lineStyle: {
+              color: '#ddd'
+            }
+          },
+          axisLabel: {
+            formatter: '{value}',
+            color: '#999999'
+          },
+          splitLine: {
+            lineStyle: {
+              type: 'dashed',
+              color: '#F2F2F2'
+            }
+          },
+          minInterval: 10,
+          splitNumber: 4,
+          min: 0
+        },
         series: []
       }
     }
@@ -123,9 +120,9 @@ export default {
       setTimeout(() => {
         this.loading = false
         this.noData = false
-        // this.chartOption.yAxis[0].minInterval = max < 10 ? 1 : 10
-        // this.chartOption.yAxis[0].max = max ? max : 10
-        this.chartOption.xAxis[0].data = ['2020 Q1', '2020 Q2', '2020 Q3', '2020 Q4']
+        // this.chartOption.yAxis.minInterval = max < 10 ? 1 : 10
+        // this.chartOption.yAxis.max = max ? max : 10
+        this.chartOption.xAxis.data = ['2020 Q1', '2020 Q2', '2020 Q3', '2020 Q4']
         this.chartOption.series = [
           {
             name: '关注类',

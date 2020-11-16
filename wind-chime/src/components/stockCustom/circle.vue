@@ -1,7 +1,14 @@
 <template>
   <div class="chartMain" v-loading="loading">
-    <h1 class="chart-title">总投放规模</h1>
-    <div v-if="!noData" id="circleChart"></div>
+    <h1 class="chart-title">
+      {{ title }}
+      <i class="el-icon-warning icon-tip" title="这是一个提示"></i>
+      <span class="button-cfg fr">
+        <i class="icon-img"></i>
+        配置
+      </span>
+    </h1>
+    <div v-if="!noData" class="circleChart" :id="`circleChart_${timeStamp}`"></div>
     <no-data-show class="chart-nodata" :show="noData"></no-data-show>
   </div>
 </template>
@@ -16,6 +23,7 @@ export default {
       isScale: true,
       noData: false,
       loading: false,
+      timeStamp: new Date().getTime(),
       data: [],
       legend: ['500万以下', '500~3000万', '3000万以上'],
       chartOption: {
@@ -24,8 +32,8 @@ export default {
           show: true,
           icon: 'circle',
           orient: 'vertical',
-          right: 0,
-          top: '50',
+          right: '10%',
+          top: '40',
           data: vm.legend,
           formatter: function (name) {
             let number = vm.data.find((item) => item.name === name).value
@@ -65,7 +73,9 @@ export default {
       }
     }
   },
-  props: {},
+  props: {
+    title: String
+  },
   watch: {
     isScale() {
       this.init()
@@ -85,7 +95,7 @@ export default {
           }
         })
         this.chartOption.series[0].data = this.data
-        this.myChart = echarts.init(document.getElementById('circleChart'))
+        this.myChart = echarts.init(document.getElementById(`circleChart_${this.timeStamp}`))
         this.myChart.setOption(this.chartOption, true)
       }, 1000)
     }
@@ -97,7 +107,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '~@/assets/styles/chartMain';
-#circleChart {
+.circleChart {
   width: 100%;
   flex: 1;
 }

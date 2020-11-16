@@ -46,6 +46,24 @@
         font-size: 16px;
         font-weight: 400;
         color: #000a12;
+
+        .chart-title_sub {
+            font-size: 14px;
+            font-weight: 400;
+            color: #94979b;
+        }
+
+        .button-cfg {
+            font-size: 14px;
+            font-weight: 400;
+            color: #666666;
+            line-height: 20px;
+            cursor: pointer;
+        }
+    }
+
+    .icon-tip {
+        margin-left: 4px;
     }
 }
 .chart-nodata {

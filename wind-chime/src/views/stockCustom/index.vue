@@ -5,13 +5,14 @@
       <span class="sign">汽车行业</span>
     </h1>
     <div class="item-box">
-      <bar-chart class="item_33"></bar-chart>
-      <stack-chart class="item_33"></stack-chart>
-      <circle-chart class="item_33"></circle-chart>
+      <multipleChart class="item_25" title="汽车产量及同比变化" subTitle="近12月"></multipleChart>
+      <multipleChart class="item_25" title="汽车销量及同比变化" subTitle="近12月"></multipleChart>
       <div class="item_25"></div>
       <div class="item_25"></div>
-      <div class="item_25"></div>
-      <div class="item_25"></div>
+      <bar-chart class="item_50"></bar-chart>
+      <circle-chart class="item_50" title="总投放规模"></circle-chart>
+      <stack-chart class="item_50"></stack-chart>
+      <circle-chart class="item_50" title="非正常贷款投放规模">></circle-chart>
       <div class="item_50" style="height: 385px"></div>
       <div class="item_50" style="height: 385px"></div>
     </div>
@@ -21,8 +22,9 @@
 import barChart from '@components/stockCustom/bar'
 import stackChart from '@components/stockCustom/stack'
 import circleChart from '@components/stockCustom/circle'
+import multipleChart from '@components/stockCustom/multiple'
 export default {
-  components: { barChart, stackChart, circleChart }
+  components: { barChart, stackChart, circleChart, multipleChart }
 }
 </script>
 <style lang="scss" scoped>

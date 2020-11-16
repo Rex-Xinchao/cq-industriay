@@ -3,6 +3,7 @@
     <div class="operation-bar">
       <span :class="{ active: isScale }" @click="isScale = true">贷款余额规模</span>
       <span :class="{ active: !isScale }" @click="isScale = false">贷款企业数量</span>
+      <i class="el-icon-warning icon-tip" title="这是一个提示"></i>
     </div>
     <div v-if="!noData" id="barChart"></div>
     <no-data-show style="height: calc(100% - 30px); top: 30px" :show="noData"></no-data-show>
@@ -43,70 +44,64 @@ export default {
           bottom: '20px',
           top: '20px'
         },
-        xAxis: [
-          {
-            type: 'category',
-            data: [],
-            axisLine: {
-              lineStyle: {
-                color: '#ddd'
-              }
-            },
-            axisTick: {
-              alignWithLabel: true,
-              lineStyle: {
-                color: '#ddd'
-              }
-            },
-            axisLabel: {
-              formatter: '{value}',
-              color: '#999999'
-            },
-            splitLine: {
-              lineStyle: {
-                type: 'dashed',
-                color: '#F2F2F2'
-              }
+        xAxis: {
+          type: 'category',
+          data: [],
+          axisLine: {
+            lineStyle: {
+              color: '#ddd'
+            }
+          },
+          axisTick: {
+            alignWithLabel: true,
+            lineStyle: {
+              color: '#ddd'
+            }
+          },
+          axisLabel: {
+            formatter: '{value}',
+            color: '#999999'
+          },
+          splitLine: {
+            lineStyle: {
+              type: 'dashed',
+              color: '#F2F2F2'
             }
           }
-        ],
-        yAxis: [
-          {
-            type: 'value',
-            gridIndex: 0,
-            axisLine: {
-              show: false,
-              lineStyle: {
-                color: '#ddd'
-              }
-            },
-            axisTick: {
-              alignWithLabel: true,
-              lineStyle: {
-                color: '#ddd'
-              }
-            },
-            axisLabel: {
-              formatter: '{value}',
-              color: '#999999'
-            },
-            splitLine: {
-              lineStyle: {
-                type: 'dashed',
-                color: '#F2F2F2'
-              }
-            },
-            minInterval: 10,
-            min: 0
-          }
-        ],
-        series: [
-          {
-            type: 'bar',
-            barWidth: '36%',
-            data: []
-          }
-        ]
+        },
+        yAxis: {
+          type: 'value',
+          gridIndex: 0,
+          axisLine: {
+            show: false,
+            lineStyle: {
+              color: '#ddd'
+            }
+          },
+          axisTick: {
+            alignWithLabel: true,
+            lineStyle: {
+              color: '#ddd'
+            }
+          },
+          axisLabel: {
+            formatter: '{value}',
+            color: '#999999'
+          },
+          splitLine: {
+            lineStyle: {
+              type: 'dashed',
+              color: '#F2F2F2'
+            }
+          },
+          minInterval: 10,
+          min: 0
+        },
+        series: {
+          type: 'bar',
+          barWidth: '36%',
+          data: []
+        }
       }
     }
   },
@@ -124,8 +119,8 @@ export default {
         this.noData = false
         // this.chartOption.yAxis[0].minInterval = max < 10 ? 1 : 10
         // this.chartOption.yAxis[0].max = max ? max : 10
-        this.chartOption.xAxis[0].data = ['2020 Q1', '2020 Q2', '2020 Q3', '2020 Q4']
-        this.chartOption.series[0].data = ['100', '200', '80', '99']
+        this.chartOption.xAxis.data = ['2020 Q1', '2020 Q2', '2020 Q3', '2020 Q4']
+        this.chartOption.series.data = ['100', '200', '80', '99']
         this.myChart = echarts.init(document.getElementById('barChart'))
         this.myChart.setOption(this.chartOption, true)
       }, 1000)
