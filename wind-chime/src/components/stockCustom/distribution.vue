@@ -35,85 +35,87 @@
         <el-option v-for="item in ratioOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
       </el-select>
     </div>
-    <div v-if="distributionType === 1" class="information-main" v-loading="loading">
-      <div class="chart-main" id="chart"></div>
-      <el-table class="table-main" :data="tableData">
-        <el-table-column prop="name" label="客户"></el-table-column>
-        <el-table-column prop="org" label="所属行业"></el-table-column>
-        <el-table-column label="投放规模（万元）">
-          <template slot-scope="scope">{{ numberFormat(scope.row.amount, 0) }}</template>
-        </el-table-column>
-        <el-table-column label="占比">
-          <template slot-scope="scope">
-            {{ scope.row.time + '天' }}
-          </template>
-        </el-table-column>
-      </el-table>
-    </div>
-    <div v-else class="information-main" v-loading="loading">
-      <div class="map-main" id="map"></div>
-      <div class="legend-main">
-        <p class="title">
-          全部非正常客户数：
-          <span class="info-num">700家</span>
-        </p>
-        <p>
-          <span class="name">关注类</span>
-          <span class="progress">
-            <span
-              class="bar"
-              style="background-color: #4A84FF"
-              :style="{ width: `${numMap.one ? (numMap.one / numMap.total) * 100 : 0}%` }"
-            ></span>
-            {{ numMap.one }}家
-          </span>
-        </p>
-        <p>
-          <span class="name">次级类</span>
-          <span class="progress">
-            <span
-              class="bar"
-              style="background-color: #79D2DE"
-              :style="{ width: `${numMap.two ? (numMap.two / numMap.total) * 100 : 0}%` }"
-            ></span>
-            {{ numMap.two }}家
-          </span>
-        </p>
-        <p>
-          <span class="name">可疑类</span>
-          <span class="progress">
-            <span
-              class="bar"
-              style="background-color: #FFD37A"
-              :style="{ width: `${numMap.three ? (numMap.three / numMap.total) * 100 : 0}%` }"
-            ></span>
-            {{ numMap.three }}家
-          </span>
-        </p>
-        <p>
-          <span class="name">损失类</span>
-          <span class="progress">
-            <span
-              class="bar"
-              style="background-color: #F57E4A"
-              :style="{ width: `${numMap.four ? (numMap.four / numMap.total) * 100 : 0}%` }"
-            ></span>
-            {{ numMap.four }}家
-          </span>
-        </p>
+    <div v-loading="loading" style="width: 100%">
+      <div v-if="distributionType === 1" class="information-main">
+        <div class="chart-main" id="chart"></div>
+        <el-table class="table-main" :data="tableData">
+          <el-table-column prop="name" label="客户"></el-table-column>
+          <el-table-column prop="org" label="所属行业"></el-table-column>
+          <el-table-column label="投放规模（万元）">
+            <template slot-scope="scope">{{ numberFormat(scope.row.amount, 0) }}</template>
+          </el-table-column>
+          <el-table-column label="占比">
+            <template slot-scope="scope">
+              {{ scope.row.time + '天' }}
+            </template>
+          </el-table-column>
+        </el-table>
       </div>
-      <el-table class="table-main_min" :data="tableData">
-        <el-table-column prop="name" label="客户"></el-table-column>
-        <el-table-column prop="org" label="所属行业"></el-table-column>
-        <el-table-column label="投放规模（万元）" width="180">
-          <template slot-scope="scope">{{ numberFormat(scope.row.amount, 0) }}</template>
-        </el-table-column>
-        <el-table-column label="占比">
-          <template slot-scope="scope">
-            {{ scope.row.time + '天' }}
-          </template>
-        </el-table-column>
-      </el-table>
+      <div v-else class="information-main">
+        <div class="map-main" id="map"></div>
+        <div class="legend-main">
+          <p class="title">
+            全部非正常客户数：
+            <span class="info-num">700家</span>
+          </p>
+          <p>
+            <span class="name">关注类</span>
+            <span class="progress">
+              <span
+                class="bar"
+                style="background-color: #4A84FF"
+                :style="{ width: `${numMap.one ? (numMap.one / numMap.total) * 100 : 0}%` }"
+              ></span>
+              {{ numMap.one }}家
+            </span>
+          </p>
+          <p>
+            <span class="name">次级类</span>
+            <span class="progress">
+              <span
+                class="bar"
+                style="background-color: #79D2DE"
+                :style="{ width: `${numMap.two ? (numMap.two / numMap.total) * 100 : 0}%` }"
+              ></span>
+              {{ numMap.two }}家
+            </span>
+          </p>
+          <p>
+            <span class="name">可疑类</span>
+            <span class="progress">
+              <span
+                class="bar"
+                style="background-color: #FFD37A"
+                :style="{ width: `${numMap.three ? (numMap.three / numMap.total) * 100 : 0}%` }"
+              ></span>
+              {{ numMap.three }}家
+            </span>
+          </p>
+          <p>
+            <span class="name">损失类</span>
+            <span class="progress">
+              <span
+                class="bar"
+                style="background-color: #F57E4A"
+                :style="{ width: `${numMap.four ? (numMap.four / numMap.total) * 100 : 0}%` }"
+              ></span>
+              {{ numMap.four }}家
+            </span>
+          </p>
+        </div>
+        <el-table class="table-main_min" :data="tableData">
+          <el-table-column prop="name" label="客户"></el-table-column>
+          <el-table-column prop="org" label="所属行业"></el-table-column>
+          <el-table-column label="投放规模（万元）" width="180">
+            <template slot-scope="scope">{{ numberFormat(scope.row.amount, 0) }}</template>
+          </el-table-column>
+          <el-table-column label="占比">
+            <template slot-scope="scope">
+              {{ scope.row.time + '天' }}
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
     </div>
   </div>
 </template>
@@ -247,19 +249,23 @@ export default {
     },
     handledDistributionType(distributionType) {
       this.distributionType = distributionType
-      this.$nextTick(() => {
-        if (this.distributionType === 1) {
-          this.initChart()
-        } else {
-          this.initMap()
-        }
-        this.initTable()
-      })
+      this.loading = true
+      setTimeout(() => {
+        this.$nextTick(() => {
+          if (this.distributionType === 1) {
+            this.initChart()
+          } else {
+            this.initMap()
+          }
+          this.initTable()
+        })
+      }, 1000)
     },
     initChart() {
       this.myChart = echarts.init(document.getElementById('chart'))
       this.myChart.setOption(this.chartOption, true)
       this.myChart.resize()
+      this.loading = false
     },
     initTable() {
       this.tableData = []
@@ -286,6 +292,7 @@ export default {
       this.mapChart = echarts.init(document.getElementById('map'))
       this.mapChart.setOption(this.mapOption, true)
       this.mapChart.resize()
+      this.loading = false
     }
   },
   mounted() {
