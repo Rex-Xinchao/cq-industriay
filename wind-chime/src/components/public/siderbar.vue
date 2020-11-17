@@ -76,10 +76,6 @@ export default {
           page: 'industrial',
           children: [
             {
-              page: 'pillar',
-              name: '支柱产业'
-            },
-            {
               page: 'boom',
               name: '景气图谱'
             },

@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 const Layout = () => import('@/views/Layout')
 const StockCustom = () => import('@/views/stockCustom/index')
+const Boom = () => import('@/views/industrial/boom')
+const Risk = () => import('@/views/industrial/risk')
 
 Vue.use(VueRouter)
 
@@ -14,6 +16,23 @@ const routes = [
       {
         path: '',
         redirect: '/stockCustom'
+      },
+      {
+        path: 'industrial',
+        name: 'industrial',
+        component: Boom,
+        children: [
+          {
+            path: 'boom',
+            name: 'Boom',
+            component: Boom
+          },
+          {
+            path: 'risk',
+            name: 'Risk',
+            component: Risk
+          }
+        ]
       },
       {
         path: 'stockCustom',
