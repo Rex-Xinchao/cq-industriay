@@ -1,0 +1,34 @@
+.event-tag {
+    display: inline-block;
+    padding: 0 8px;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 4px;
+    color: white;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+
+    .sign {
+        display: inline-block;
+        vertical-align: middle;
+        height: 12px;
+        margin: -2px 4px 0 4px;
+        border-left: 1px solid white;
+    }
+
+    &.tag-grade_undefined {
+        background: linear-gradient(50deg, #e68b6b 0%, #e86b4a 100%);
+    }
+
+    &.tag-grade_1 {
+        background: linear-gradient(50deg, #e68b6b 0%, #e86b4a 100%);
+    }
+    &.tag-grade_2 {
+        background: linear-gradient(50deg, #fac731 0%, #f7b232 100%);
+    }
+    &.tag-grade_3 {
+        background: linear-gradient(50deg, #58abeb 0%, #6f9efe 100%);
+    }
+}

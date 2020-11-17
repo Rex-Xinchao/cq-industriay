@@ -15,7 +15,6 @@ const routes = [
         path: '',
         redirect: '/stockCustom'
       },
-
       {
         path: 'stockCustom',
         name: 'StockCustom',

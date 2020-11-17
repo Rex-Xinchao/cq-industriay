@@ -1,5 +1,5 @@
 <template>
-  <div class="tableMain">
+  <div class="com-main data-table-main">
     <div class="operation-bar">
       <span class="bar-item" :class="{ active: type === 1 }" @click="type = 1">{{ `逾期客户  (${number_1})` }}</span>
       <span class="bar-item" :class="{ active: type === 2 }" @click="type = 2">{{ `黑名单  (${number_2})` }}</span>
@@ -91,68 +91,16 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.tableMain {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  padding: 12px 16px;
-  position: relative;
-
-  .operation-bar {
+@import '~@/assets/styles/component';
+.data-table-main {
+  .table-main {
     width: 100%;
-    height: 30px;
-
-    .bar-item {
-      display: inline-block;
-      font-size: 14px;
-      border: 1px solid #d9d9d9;
-      padding: 4px 12px;
-      box-sizing: border-box;
-      font-weight: 400;
-      color: #000000;
-      cursor: pointer;
-      border-right: none;
-
-      &:first-of-type {
-        border-radius: 4px 0px 0px 4px;
-      }
-
-      &:nth-of-type(2) {
-        border-right: none;
-      }
-
-      &:nth-of-type(3) {
-        border-radius: 0px 4px 4px 0px;
-        border-right: 1px solid #d9d9d9;
-      }
-
-      &.active {
-        border-color: #3a84ff;
-        color: #3a84ff;
-
-        & + .bar-item {
-          border-left-color: #3a84ff;
-        }
-      }
-    }
-
-    .button-cfg {
-      font-size: 14px;
-      font-weight: 400;
-      color: #3A84FF;
-      line-height: 30px;
-      cursor: pointer;
-    }
+    margin-top: 20px;
+    flex: 1;
   }
-}
-.table-main {
-  width: 100%;
-  margin-top: 20px;
-  flex: 1;
-}
-.save-btn {
-  margin-top: 12px;
+  .save-btn {
+    margin-top: 12px;
+  }
 }
 </style>
 <style lang="scss">

@@ -20,6 +20,7 @@
         title="存量客户近期负面事件"
         subTitle="汽车行业"
       ></doucle-circle-chart>
+      <risk-table style="height: 340px" class="item_100" title="近期重点风险"></risk-table>
     </div>
   </div>
 </template>
@@ -31,8 +32,9 @@ import multipleChart from '@components/stockCustom/multiple'
 import lineChart from '@components/stockCustom/line'
 import tableCom from '@components/stockCustom/table'
 import doucleCircleChart from '@components/stockCustom/circle_double'
+import riskTable from '@components/stockCustom/risk'
 export default {
-  components: { barChart, stackChart, circleChart, multipleChart, lineChart, tableCom, doucleCircleChart }
+  components: { barChart, stackChart, circleChart, multipleChart, lineChart, tableCom, doucleCircleChart, riskTable }
 }
 </script>
 <style lang="scss" scoped>
@@ -74,6 +76,15 @@ export default {
     flex-wrap: wrap;
     align-content: flex-start;
     justify-content: space-between;
+
+    .item_100 {
+      display: flex;
+      width: 100%;
+      height: 224px;
+      background-color: white;
+      margin-bottom: 20px;
+      box-sizing: border-box;
+    }
 
     .item_50 {
       display: flex;
