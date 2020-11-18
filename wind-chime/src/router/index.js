@@ -18,33 +18,19 @@ const routes = [
         redirect: '/stockCustom'
       },
       {
-        path: 'industrial',
-        name: 'industrial',
-        component: Boom,
-        children: [
-          {
-            path: 'boom',
-            name: 'Boom',
-            component: Boom
-          },
-          {
-            path: 'risk',
-            name: 'Risk',
-            component: Risk
-          }
-        ]
+        path: 'industrial/boom',
+        name: 'component',
+        component: Boom
       },
       {
-        path: 'stockCustom',
+        path: 'industrial/risk',
+        name: 'component',
+        component: Risk
+      },
+      {
+        path: 'stockCustom/index',
         name: 'StockCustom',
-        component: StockCustom,
-        children: [
-          {
-            path: 'index',
-            name: 'StockCustom',
-            component: StockCustom
-          }
-        ]
+        component: StockCustom
       }
     ]
   }
