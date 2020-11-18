@@ -94,8 +94,7 @@ export default {
             }
           },
           max: 100,
-          min: 0,
-          splitNumber: 3
+          min: 0
         },
         series: {
           name: vm.name,

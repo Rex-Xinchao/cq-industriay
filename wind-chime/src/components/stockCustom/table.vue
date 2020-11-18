@@ -3,7 +3,9 @@
     <div class="operation-bar">
       <span class="bar-item" :class="{ active: type === 1 }" @click="type = 1">{{ `逾期客户  (${number_1})` }}</span>
       <span class="bar-item" :class="{ active: type === 2 }" @click="type = 2">{{ `黑名单  (${number_2})` }}</span>
-      <span class="bar-item" :class="{ active: type === 3 }" @click="type = 3">{{ `大中型企业  (${number_3})` }}</span>
+      <span class="bar-item last" :class="{ active: type === 3 }" @click="type = 3">
+        {{ `大中型企业  (${number_3})` }}
+      </span>
       <el-popover ref="popover" placement="bottom" width="220" trigger="click">
         <div class="popover-main">
           <p>逾期客户筛选</p>
@@ -102,10 +104,14 @@ export default {
     margin-top: 12px;
   }
 }
+.last {
+  border-radius: 0px 4px 4px 0px;
+  border-right: 1px solid #d9d9d9;
+}
 </style>
 <style lang="scss">
 .el-table thead th {
-  background: #EFF0F3;
+  background: #eff0f3;
 }
 .popover-main {
   .demonstration {
