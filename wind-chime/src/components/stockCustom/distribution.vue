@@ -63,7 +63,7 @@
             <span class="progress">
               <span
                 class="bar"
-                style="background-color: #4A84FF"
+                style="background-color: #4a84ff"
                 :style="{ width: `${numMap.one ? (numMap.one / numMap.total) * 100 : 0}%` }"
               ></span>
               {{ numMap.one }}家
@@ -74,7 +74,7 @@
             <span class="progress">
               <span
                 class="bar"
-                style="background-color: #79D2DE"
+                style="background-color: #79d2de"
                 :style="{ width: `${numMap.two ? (numMap.two / numMap.total) * 100 : 0}%` }"
               ></span>
               {{ numMap.two }}家
@@ -85,7 +85,7 @@
             <span class="progress">
               <span
                 class="bar"
-                style="background-color: #FFD37A"
+                style="background-color: #ffd37a"
                 :style="{ width: `${numMap.three ? (numMap.three / numMap.total) * 100 : 0}%` }"
               ></span>
               {{ numMap.three }}家
@@ -96,7 +96,7 @@
             <span class="progress">
               <span
                 class="bar"
-                style="background-color: #F57E4A"
+                style="background-color: #f57e4a"
                 :style="{ width: `${numMap.four ? (numMap.four / numMap.total) * 100 : 0}%` }"
               ></span>
               {{ numMap.four }}家
@@ -128,6 +128,7 @@ import gz from '@/libs/map/guizhou'
 import sx from '@/libs/map/shanxi'
 import all from '@/libs/map/all'
 import { numberFormat } from '@/libs/utils'
+import resize from '@/mixins/resize'
 export default {
   data() {
     return {
@@ -232,7 +233,7 @@ export default {
       }
     }
   },
-  props: {},
+  mixins: [resize],
   watch: {
     activeType: {
       immediate: true,
@@ -294,15 +295,6 @@ export default {
       this.mapChart.resize()
       this.loading = false
     }
-  },
-  mounted() {
-    window.addEventListener('resize', () => {
-      this.myChart && this.myChart.resize()
-      this.mapChart && this.mapChart.resize()
-    })
-  },
-  beforeDestroy() {
-    window.removeEventListener('resize')
   }
 }
 </script>
@@ -324,7 +316,7 @@ export default {
   .text {
     font-size: 12px;
     font-weight: 400;
-    color: #94979B;
+    color: #94979b;
   }
   .select {
     width: 150px;
@@ -363,7 +355,7 @@ export default {
     .title {
       font-size: 16px;
       font-weight: 400;
-      color: #000A12;
+      color: #000a12;
       line-height: 22px;
       margin-top: 0;
 
@@ -371,7 +363,7 @@ export default {
         display: inline-block;
         padding: 0 6px;
         height: 22px;
-        background: #EC6666;
+        background: #ec6666;
         border-radius: 2px;
         color: white;
       }
@@ -393,7 +385,7 @@ export default {
         vertical-align: top;
         width: calc(100% - 120px);
         height: 20px;
-        background: #E9EAF0;
+        background: #e9eaf0;
         line-height: 20px;
 
         .bar {

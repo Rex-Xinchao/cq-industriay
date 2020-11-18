@@ -1,11 +1,15 @@
 <template>
-  <el-menu default-active="/stockCustom/index" class="sidebar" @open="handleOpen" @close="handleClose">
-    <el-submenu v-for="(item, index) in menu" :index="`/${item.page}`">
+  <el-menu :default-active="activeName" class="sidebar" @select="pageTo">
+    <el-submenu v-for="(item, index) in menu" :index="`/${item.page}`" :key="`/${item.page}`">
       <template slot="title">
         <span>{{ item.name }}</span>
       </template>
-      <el-menu-item v-for="(child, index) in item.children" :index="`/${item.page}/${child.page}`">
-        <router-link :to="`/${item.page}/${child.page}`">{{ child.name }}</router-link>
+      <el-menu-item
+        v-for="(child, index) in item.children"
+        :index="`/${item.page}/${child.page}`"
+        :key="`/${item.page}/${child.page}`"
+      >
+        {{ child.name }}
       </el-menu-item>
     </el-submenu>
   </el-menu>
@@ -13,7 +17,9 @@
 <script>
 export default {
   data() {
+    const vm = this
     return {
+      activeName: vm.$route.path,
       menu: [
         {
           name: '行业分析',
@@ -99,11 +105,8 @@ export default {
     }
   },
   methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath)
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath)
+    pageTo(path) {
+      this.$router.push(path)
     }
   }
 }
@@ -115,13 +118,13 @@ export default {
 .el-menu-item {
   a {
     text-decoration: none;
-    color: #94979B;
+    color: #94979b;
   }
 }
 
 .is-active {
   a {
-    color: #409EFF;
+    color: #409eff;
   }
 }
 

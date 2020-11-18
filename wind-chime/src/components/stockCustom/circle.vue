@@ -12,6 +12,7 @@
 <script>
 const echarts = require('echarts')
 import { numberFormat } from '@/libs/utils'
+import resize from '@/mixins/resize'
 export default {
   name: '',
   data() {
@@ -72,6 +73,7 @@ export default {
       }
     }
   },
+  mixins: [resize],
   props: {
     title: String
   },
@@ -97,12 +99,6 @@ export default {
   },
   mounted() {
     this.init()
-    window.addEventListener('resize', () => {
-      this.myChart && this.myChart.resize()
-    })
-  },
-  beforeDestroy() {
-    window.removeEventListener('resize')
   }
 }
 </script>
