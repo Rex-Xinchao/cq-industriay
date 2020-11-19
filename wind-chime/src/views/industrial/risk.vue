@@ -5,7 +5,7 @@
       <span class="sign">汽车行业</span>
     </h1>
     <div class="chart">
-      <div class="graph-box"></div>
+      <div class="graph-box" @click="hideMenu"></div>
       <div ref="tooltip" class="chart-tooltip">
         <h1 class="tooltip-title">
           异动指标

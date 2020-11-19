@@ -48,6 +48,10 @@ export default {
             {
               page: 'customer',
               name: '行业货客'
+            },
+            {
+              page: 'information',
+              name: '行业舆情'
             }
           ]
         },

@@ -62,18 +62,7 @@ export default {
     padding-right: 40px;
 
     .search-main {
-      display: inline-block;
       width: 240px;
-      position: relative;
-
-      &::before {
-        content: '@';
-        display: inline-block;
-        position: absolute;
-        width: 16px;
-        height: 16px;
-        left: 12px;
-      }
     }
     .user-info {
       display: inline-block;
@@ -94,15 +83,6 @@ export default {
         text-align: center;
       }
     }
-  }
-}
-</style>
-<style lang="scss">
-.search-main {
-  .el-input__inner {
-    border-radius: 12px;
-    background-color: #F8F9FB;
-    padding-left: 30px;
   }
 }
 </style>
