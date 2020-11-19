@@ -110,6 +110,7 @@ export default {
   },
   methods: {
     pageTo(path) {
+      if (path === this.$route.path) return
       this.$router.push(path)
     }
   }

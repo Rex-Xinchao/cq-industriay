@@ -104,7 +104,6 @@ export default {
   height: calc(100% - 40px);
   background-color: white;
   position: relative;
-
   .chart-tooltip {
     display: none;
     position: absolute;
@@ -118,7 +117,6 @@ export default {
       0px 3px 6px -4px rgba(0, 0, 0, 0.12);
     padding: 14px 20px;
     box-sizing: border-box;
-
     h1 {
       font-size: 12px;
       font-weight: 500;
@@ -128,15 +126,12 @@ export default {
     }
     .table {
       height: 100%;
-
       .negative {
         color: #08a24c;
       }
-
       .postive {
         color: #ea444e;
       }
-
       .icon {
         display: inline-block;
         vertical-align: middle;
@@ -152,10 +147,8 @@ export default {
         }
       }
     }
-
     .tag-list {
       width: 100%;
-
       .tag {
         display: inline-block;
         vertical-align: top;
@@ -169,7 +162,6 @@ export default {
         font-size: 12px;
       }
     }
-
     .tooltip-link {
       font-size: 12px;
       font-weight: 400;
@@ -190,29 +182,23 @@ export default {
 <style lang="scss">
 $UP_COLOR: #a49fff;
 $DOWN_COLOR: #83bfff;
-
 .link.up {
   stroke: $UP_COLOR;
 }
-
 .link.down {
   stroke: $DOWN_COLOR;
 }
-
 path.link {
   fill: none;
   stroke-width: 1px;
   stroke-dasharray: 3, 3;
-
   .down {
     stroke: $DOWN_COLOR;
   }
-
   .up {
     stroke: $UP_COLOR;
   }
 }
-
 .typeNode {
   &.up {
     text {
@@ -225,17 +211,14 @@ path.link {
     }
   }
 }
-
 .node {
   circle {
     fill: none;
     stroke-width: 1.5px;
   }
-
   .down circle {
     stroke: $DOWN_COLOR;
   }
-
   .up circle {
     stroke: $UP_COLOR;
   }
