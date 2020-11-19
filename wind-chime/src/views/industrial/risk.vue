@@ -103,6 +103,7 @@ export default {
   width: 100%;
   height: calc(100% - 40px);
   background-color: white;
+<<<<<<< HEAD
   position: relative;
 
   .chart-tooltip {
@@ -178,6 +179,8 @@ export default {
       text-align: center;
     }
   }
+=======
+>>>>>>> b72acb1554e87528a14c6e441e67e69ad43fb4ab
 }
 .graph-box {
   width: 100%;
