@@ -13,19 +13,17 @@
         </h1>
         <div class="tooltip-main">
           <div id="tooltipChart" class="chart" v-loading="loading"></div>
-          <div class="table" v-loading="loading">
-            <el-table v-loading="loading" class="table-main" :data="tableData" style="width: 100%" height="200px">
-              <el-table-column prop="name" label=""></el-table-column>
-              <el-table-column prop="last" label="最新值"></el-table-column>
-              <el-table-column prop="change" label="变动值"></el-table-column>
-              <el-table-column label="变动率">
-                <template slot-scope="scope">
-                  <span :class="scope.row.ratio.indexOf('-') < 0 ? 'postive' : 'negative'">{{ scope.row.ratio }}</span>
-                  <i :class="scope.row.ratio.indexOf('-') < 0 ? 'postive' : 'negative'" class="icon"></i>
-                </template>
-              </el-table-column>
-            </el-table>
-          </div>
+          <el-table v-loading="loading" class="table" :data="tableData" height="200px">
+            <el-table-column prop="name" label=""></el-table-column>
+            <el-table-column prop="last" label="最新值"></el-table-column>
+            <el-table-column prop="change" label="变动值"></el-table-column>
+            <el-table-column label="变动率">
+              <template slot-scope="scope">
+                <span :class="scope.row.ratio.indexOf('-') < 0 ? 'postive' : 'negative'">{{ scope.row.ratio }}</span>
+                <i :class="scope.row.ratio.indexOf('-') < 0 ? 'postive' : 'negative'" class="icon"></i>
+              </template>
+            </el-table-column>
+          </el-table>
         </div>
       </div>
     </div>
@@ -40,7 +38,6 @@ export default {
     return {
       loading: false,
       noData: false,
-      showTooltip: false,
       type: 'boom',
       tooltip: {
         width: 780,

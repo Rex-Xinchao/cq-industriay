@@ -6,6 +6,38 @@
     </h1>
     <div class="chart">
       <div class="graph-box"></div>
+      <div ref="tooltip" class="chart-tooltip">
+        <h1 class="tooltip-title">
+          异动指标
+          <i class="el-icon-warning icon-tip" title="这是一个提示"></i>
+        </h1>
+        <el-table v-loading="loading" class="table" :data="tableData" height="108px">
+          <el-table-column prop="name" label=""></el-table-column>
+          <el-table-column prop="last" label="最新值"></el-table-column>
+          <el-table-column prop="change" label="变动值"></el-table-column>
+          <el-table-column label="变动率">
+            <template slot-scope="scope">
+              <span :class="scope.row.ratio.indexOf('-') < 0 ? 'postive' : 'negative'">{{ scope.row.ratio }}</span>
+              <i :class="scope.row.ratio.indexOf('-') < 0 ? 'postive' : 'negative'" class="icon"></i>
+            </template>
+          </el-table-column>
+        </el-table>
+        <h1 class="tooltip-title" style="margin-top: 12px">
+          高发事件
+          <i class="el-icon-warning icon-tip" title="这是一个提示"></i>
+        </h1>
+        <div class="tag-list">
+          <div class="tag">调查立案</div>
+          <div class="tag">调查立案</div>
+          <div class="tag">调查立案</div>
+          <div class="tag">调查立案</div>
+          <div class="tag">调查立案</div>
+          <div class="tag">调查立案</div>
+          <div class="tag">调查立案</div>
+          <div class="tag">调查立案</div>
+        </div>
+        <p class="tooltip-link"><a @click="pageTo">查看行业风险</a></p>
+      </div>
     </div>
   </div>
 </template>
@@ -14,11 +46,54 @@ import chart from '@/mixins/chart'
 export default {
   data() {
     return {
-      noData: false
+      noData: false,
+      loading: false,
+      type: 'risk',
+      tooltip: {
+        width: 400,
+        height: 280
+      },
+      tableData: [
+        { name: '行业营', ratio: '+10%' },
+        { name: '行业净利润', ratio: '+10%' },
+        { name: '行业毛利率', ratio: '+10%' },
+        { name: '汽车产量', ratio: '+10%' },
+        { name: '汽车销量', ratio: '+10%' },
+        { name: '汽车销量', ratio: '+10%' },
+        { name: '汽车销量', ratio: '+10%' },
+        { name: '汽车销量', ratio: '+10%' }
+      ]
     }
   },
   mixins: [chart],
-  methods: {},
+  methods: {
+    showMenu(event, data) {
+      this.hideMenu()
+      let top = 0
+      let left = 0
+      if (event.pageX < this.tooltip.width) {
+        left = this.treeNode.width / 2
+      } else if (event.pageX > this.d3TreeBox.width - this.tooltip.width / 2) {
+        left = this.d3TreeBox.width - this.tooltip.width - this.treeNode.width / 2
+      } else {
+        left = event.pageX - this.tooltip.width
+      }
+      if (event.pageY + this.tooltip.height > this.d3TreeBox.height) {
+        top = event.pageY - this.tooltip.height - this.treeNode.height - 100
+      } else {
+        top = event.pageY - this.tooltip.height / 2
+      }
+      setTimeout(() => {
+        this.$refs.tooltip.style.display = 'block'
+        this.$refs.tooltip.style.top = top + 'px'
+        this.$refs.tooltip.style.left = left + 'px'
+      }, 100)
+    },
+    hideMenu() {
+      this.$refs.tooltip.style.display = 'none'
+    },
+    pageTo() {}
+  },
   mounted() {}
 }
 </script>
@@ -28,6 +103,81 @@ export default {
   width: 100%;
   height: calc(100% - 40px);
   background-color: white;
+  position: relative;
+
+  .chart-tooltip {
+    display: none;
+    position: absolute;
+    width: 400px;
+    height: auto;
+    top: 0;
+    left: 0;
+    background: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0px 9px 28px 8px rgba(0, 0, 0, 0.05), 0px 6px 16px 0px rgba(0, 0, 0, 0.08),
+      0px 3px 6px -4px rgba(0, 0, 0, 0.12);
+    padding: 14px 20px;
+    box-sizing: border-box;
+
+    h1 {
+      font-size: 12px;
+      font-weight: 500;
+      color: #444444;
+      padding: 0;
+      margin: 0 0 12px 0;
+    }
+    .table {
+      height: 100%;
+
+      .negative {
+        color: #08a24c;
+      }
+
+      .postive {
+        color: #ea444e;
+      }
+
+      .icon {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 4px;
+        width: 8px;
+        height: 16px;
+        background-repeat: no-repeat;
+        &.negative {
+          background-image: url(~@/assets/imgs/icons/down.svg);
+        }
+        &.postive {
+          background-image: url(~@/assets/imgs/icons/up.svg);
+        }
+      }
+    }
+
+    .tag-list {
+      width: 100%;
+
+      .tag {
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 6px;
+        margin-bottom: 6px;
+        padding: 0 8px;
+        line-height: 22px;
+        border-radius: 2px;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        color: rgba(0, 0, 0, 0.65);
+        font-size: 12px;
+      }
+    }
+
+    .tooltip-link {
+      font-size: 12px;
+      font-weight: 400;
+      color: #3a84ff;
+      line-height: 18px;
+      text-align: center;
+    }
+  }
 }
 .graph-box {
   width: 100%;
