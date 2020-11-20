@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 const Layout = () => import('@/views/Layout')
 const StockCustom = () => import('@/views/stockCustom/index')
+const StockCustom_All = () => import('@/views/stockCustom/all')
 const Boom = () => import('@/views/industrial/boom')
 const Risk = () => import('@/views/industrial/risk')
 const IndustryEnv = () => import('@/views/analysis/env')
@@ -39,6 +40,11 @@ const routes = [
         component: StockCustom
       }
     ]
+  },
+  {
+    path: '/stockCustom/all',
+    name: 'StockCustom_All',
+    component: StockCustom_All
   }
 ]
 

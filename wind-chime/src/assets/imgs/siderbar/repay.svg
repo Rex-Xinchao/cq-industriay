@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>导航/小icon/偿还能力/未选中</title>
+    <g id="导航/小icon/偿还能力/未选中" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="concept-sharing">
+            <rect id="矩形" fill-opacity="0.01" fill="#FFFFFF" fill-rule="nonzero" x="0" y="0" width="16" height="16"></rect>
+            <g id="编组-80备份" transform="translate(5.511530, 2.428571)" stroke="#94979B">
+                <circle id="椭圆形" cx="4.5" cy="3.74619543" r="3.58986206"></circle>
+                <polyline id="路径" stroke-linecap="round" stroke-linejoin="round" points="3.21428571 1.72222222 4.5 3.05555556 5.78571429 1.72222222"></polyline>
+                <line x1="3" y1="3.5" x2="6" y2="3.5" id="路径" stroke-linecap="round" stroke-linejoin="round"></line>
+                <line x1="3" y1="4.83333333" x2="6" y2="4.83333333" id="路径" stroke-linecap="round" stroke-linejoin="round"></line>
+                <line x1="4.5" y1="3.5" x2="4.5" y2="5.94444444" id="路径" stroke-linecap="round" stroke-linejoin="round"></line>
+            </g>
+            <path d="M9.45563333,12 L8,12 L5,10.3465333 L1.33626333,11.6939333 L2.33689333,13.6752333 L4.69443333,12.6909667 C6.9,14.0081 8.2424,14.6666667 8.7217,14.6666667 C9.201,14.6666667 11.1826333,13.7778 14.6666667,12" id="路径" stroke="#94979B" stroke-linecap="round" stroke-linejoin="round"></path>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>导航/小icon/行业资讯/选中</title>
+    <g id="导航/小icon/行业资讯/选中" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="table-report">
+            <rect id="矩形" fill-opacity="0.01" fill="#FFFFFF" fill-rule="nonzero" x="0" y="0" width="16" height="16"></rect>
+            <path d="M1.66666667,2.33333333 C1.66666667,1.78105 2.11438333,1.33333333 2.66666667,1.33333333 L10.6666667,1.33333333 C11.2189667,1.33333333 11.6666667,1.78105 11.6666667,2.33333333 L11.6666667,14.6666667 L2.66666667,14.6666667 C2.11438333,14.6666667 1.66666667,14.2189667 1.66666667,13.6666667 L1.66666667,2.33333333 Z" id="路径" stroke="#3A84FF" stroke-linejoin="round"></path>
+            <path d="M11.6666667,8 C11.6666667,7.6318 11.9651333,7.33333333 12.3333333,7.33333333 L13.6666667,7.33333333 C14.0348667,7.33333333 14.3333333,7.6318 14.3333333,8 L14.3333333,13.6666667 C14.3333333,14.2189667 13.8856333,14.6666667 13.3333333,14.6666667 L11.6666667,14.6666667 L11.6666667,8 Z" id="路径" stroke="#3A84FF" stroke-linejoin="round"></path>
+            <line x1="3.66666667" y1="4" x2="6.33333333" y2="4" id="路径" stroke="#3A84FF" stroke-linecap="round" stroke-linejoin="round"></line>
+            <line x1="3.66666667" y1="6.33333333" x2="7.66666667" y2="6.33333333" id="路径" stroke="#3A84FF" stroke-linecap="round" stroke-linejoin="round"></line>
+        </g>
+    </g>
+</svg>

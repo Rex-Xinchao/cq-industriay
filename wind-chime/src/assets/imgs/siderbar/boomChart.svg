@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>导航/小icon/景气图谱/未选中</title>
+    <g id="导航/小icon/景气图谱/未选中" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="smart-optimization">
+            <rect id="矩形" fill-opacity="0.01" fill="#FFFFFF" fill-rule="nonzero" x="0" y="0" width="16" height="16"></rect>
+            <path d="M8.00006667,15 C9.0736,15 10.9091667,13.6 10.9091667,8 C10.9091667,2.4 9.0736,1 8.00006667,1 C6.92656667,1 5.09096667,2.49434 5.09096667,8 C5.09096667,13.5056667 6.92656667,15 8.00006667,15 Z" id="路径" stroke="#94979B" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M1.70166667,11.6666667 C2.23843333,12.6041 4.4159,13.4736667 9.4546,10.5403333 C14.4932667,7.607 14.8351667,5.27076667 14.2984,4.33333333 C13.7616333,3.3959 11.4993,2.57574 6.5455,5.45966667 C1.59168667,8.34356667 1.16491333,10.7292333 1.70166667,11.6666667 Z" id="路径" stroke="#94979B" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M1.70163,4.33333333 C1.16487667,5.27076667 1.50676333,7.607 6.54546667,10.5403333 C11.5841667,13.4736667 13.7616,12.6041 14.2983667,11.6666667 C14.8351333,10.7292333 14.4083667,8.34356667 9.45453333,5.45966667 C4.50073333,2.57574 2.2384,3.3959 1.70163,4.33333333 Z" id="路径" stroke="#94979B" stroke-linecap="round" stroke-linejoin="round"></path>
+        </g>
+    </g>
+</svg>

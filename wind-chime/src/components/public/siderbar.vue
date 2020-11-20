@@ -2,6 +2,7 @@
   <el-menu :default-active="activeName" class="sidebar" @select="pageTo">
     <el-submenu v-for="(item, index) in menu" :index="`/${item.page}`" :key="`/${item.page}`">
       <template slot="title">
+        <i class="icon-img icon-main" :class="`icon-${item.imgName}`"></i>
         <span>{{ item.name }}</span>
       </template>
       <el-menu-item
@@ -9,9 +10,24 @@
         :index="`/${item.page}/${child.page}`"
         :key="`/${item.page}/${child.page}`"
       >
+        <i
+          class="icon-img icon-sub"
+          :class="`icon-${child.page} ${$route.path === '/' + item.page + '/' + child.page ? 'active' : ''}`"
+        ></i>
         {{ child.name }}
       </el-menu-item>
     </el-submenu>
+
+    <div class="tool-main">
+      <div class="item" @click="pageTo('/stockCustom/all', '_blank')">
+        <i class="icon-img icon-all"></i>
+        全行客户
+      </div>
+      <div class="item" @click="pageTo('/stockCustom/index', '_blank')">
+        <i class="icon-img icon-pillar"></i>
+        支柱产业
+      </div>
+    </div>
   </el-menu>
 </template>
 <script>
@@ -23,6 +39,7 @@ export default {
       menu: [
         {
           name: '行业分析',
+          imgName: 'analysisMain',
           page: 'analysis',
           children: [
             {
@@ -57,6 +74,7 @@ export default {
         },
         {
           name: '行业基准',
+          imgName: 'baseMain',
           page: 'base',
           children: [
             {
@@ -76,13 +94,14 @@ export default {
               name: '运营能力'
             },
             {
-              page: 'contrast',
-              name: '对比工具'
+              page: 'finance',
+              name: '龙头财务'
             }
           ]
         },
         {
-          name: '产业分析',
+          name: '产业链图谱',
+          imgName: 'industrialMain',
           page: 'industrial',
           children: [
             {
@@ -97,6 +116,7 @@ export default {
         },
         {
           name: '存量客户',
+          imgName: 'stockMain',
           page: 'stockCustom',
           children: [
             {
@@ -109,13 +129,185 @@ export default {
     }
   },
   methods: {
-    pageTo(path) {
+    pageTo(path, type = '_self') {
       if (path === this.$route.path) return
-      this.$router.push(path)
+      if (type === '_blank') {
+        let url = this.$router.resolve({
+          path: path
+        })
+        window.open(url.href)
+      } else {
+        this.$router.push(path)
+      }
     }
   }
 }
 </script>
+<style lang="scss" scoped>
+.icon-main {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  &.icon-analysisMain {
+    background-image: url(~@/assets/imgs/siderbar/analysisMain.svg);
+  }
+  &.icon-baseMain {
+    background-image: url(~@/assets/imgs/siderbar/baseMain.svg);
+  }
+  &.icon-industrialMain {
+    background-image: url(~@/assets/imgs/siderbar/baseMain.svg);
+  }
+  &.icon-stockMain {
+    background-image: url(~@/assets/imgs/siderbar/stockMain.svg);
+  }
+}
+
+.icon-sub {
+  width: 16px;
+  height: 18px;
+  margin-right: 8px;
+
+  &.icon-env {
+    background-image: url(~@/assets/imgs/siderbar/env.svg);
+
+    &.active {
+      background-image: url(~@/assets/imgs/siderbar/env-active.svg);
+    }
+  }
+  &.icon-prospect {
+    background-image: url(~@/assets/imgs/siderbar/prospect.svg);
+
+    &.active {
+      background-image: url(~@/assets/imgs/siderbar/prospect-active.svg);
+    }
+  }
+  &.icon-policy {
+    background-image: url(~@/assets/imgs/siderbar/policy.svg);
+
+    &.active {
+      background-image: url(~@/assets/imgs/siderbar/policy-active.svg);
+    }
+  }
+  &.icon-compete {
+    background-image: url(~@/assets/imgs/siderbar/compete.svg);
+
+    &.active {
+      background-image: url(~@/assets/imgs/siderbar/compete-active.svg);
+    }
+  }
+  &.icon-risk {
+    background-image: url(~@/assets/imgs/siderbar/risk.svg);
+
+    &.active {
+      background-image: url(~@/assets/imgs/siderbar/risk-active.svg);
+    }
+  }
+  &.icon-customer {
+    background-image: url(~@/assets/imgs/siderbar/customer.svg);
+
+    &.active {
+      background-image: url(~@/assets/imgs/siderbar/customer-active.svg);
+    }
+  }
+  &.icon-information {
+    background-image: url(~@/assets/imgs/siderbar/information.svg);
+
+    &.active {
+      background-image: url(~@/assets/imgs/siderbar/information-active.svg);
+    }
+  }
+  &.icon-grow {
+    background-image: url(~@/assets/imgs/siderbar/grow.svg);
+
+    &.active {
+      background-image: url(~@/assets/imgs/siderbar/grow-active.svg);
+    }
+  }
+  &.icon-profit {
+    background-image: url(~@/assets/imgs/siderbar/profit.svg);
+
+    &.active {
+      background-image: url(~@/assets/imgs/siderbar/profit-active.svg);
+    }
+  }
+  &.icon-repay {
+    background-image: url(~@/assets/imgs/siderbar/repay.svg);
+
+    &.active {
+      background-image: url(~@/assets/imgs/siderbar/repay-active.svg);
+    }
+  }
+  &.icon-business {
+    background-image: url(~@/assets/imgs/siderbar/business.svg);
+
+    &.active {
+      background-image: url(~@/assets/imgs/siderbar/business-active.svg);
+    }
+  }
+  &.icon-finance {
+    background-image: url(~@/assets/imgs/siderbar/finance.svg);
+
+    &.active {
+      background-image: url(~@/assets/imgs/siderbar/finance-active.svg);
+    }
+  }
+  &.icon-boom {
+    background-image: url(~@/assets/imgs/siderbar/boomChart.svg);
+
+    &.active {
+      background-image: url(~@/assets/imgs/siderbar/boomChart-active.svg);
+    }
+  }
+  &.icon-risk {
+    background-image: url(~@/assets/imgs/siderbar/riskChart.svg);
+
+    &.active {
+      background-image: url(~@/assets/imgs/siderbar/riskChart-active.svg);
+    }
+  }
+  &.icon-index {
+    background-image: url(~@/assets/imgs/siderbar/stockCustom.svg);
+
+    &.active {
+      background-image: url(~@/assets/imgs/siderbar/stockCustom-active.svg);
+    }
+  }
+}
+
+.tool-main {
+  position: absolute;
+  top: calc(100vh - 120px);
+  height: 20px;
+  width: 200px;
+
+  .item {
+    font-size: 14px;
+    display: inline-block;
+    width: 50%;
+    height: 20px;
+    line-height: 20px;
+    cursor: pointer;
+  }
+
+  .icon-pillar {
+    vertical-align: top;
+    width: 16px;
+    height: 20px;
+    background-position-y: 2px;
+    margin: 0 4px 0 8px;
+    background-image: url(~@/assets/imgs/siderbar/main.svg);
+  }
+
+  .icon-all {
+    vertical-align: top;
+    width: 16px;
+    height: 20px;
+    background-position-y: 2px;
+    margin: 0 4px 0 8px;
+    background-image: url(~@/assets/imgs/siderbar/all.svg);
+  }
+}
+</style>
 <style lang="scss">
 .sidebar {
   height: 100%;

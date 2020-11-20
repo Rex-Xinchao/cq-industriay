@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>导航/大icon/行业分析</title>
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#0097E0" offset="0%"></stop>
+            <stop stop-color="#0060B0" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="28.6503152%" y1="0%" x2="28.6503152%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#70EFC9" offset="0%"></stop>
+            <stop stop-color="#79E1E6" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="导航/大icon/行业分析" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="编组-18备份-4">
+            <rect id="矩形" fill-opacity="0" fill="#D8D8D8" x="0" y="0" width="30" height="30"></rect>
+            <g id="编组-17" transform="translate(5.675676, 4.864865)">
+                <circle id="椭圆形" fill="url(#linearGradient-1)" cx="4.32432432" cy="4.32432432" r="4.32432432"></circle>
+                <rect id="矩形" fill="url(#linearGradient-1)" x="-6.29118379e-13" y="10.8108108" width="8.64864865" height="8.64864865" rx="0.778378378"></rect>
+                <rect id="矩形备份" fill="url(#linearGradient-1)" x="10.8108108" y="10.8108108" width="8.64864865" height="8.64864865" rx="0.778378378"></rect>
+                <path d="M11.4751983,0.664387504 L18.795072,7.98426114 C18.9470598,8.13624898 18.9470598,8.38266994 18.795072,8.53465777 C18.7220848,8.60764491 18.623093,8.64864865 18.5198736,8.64864865 L11.2,8.64864865 C10.9850567,8.64864865 10.8108108,8.47440271 10.8108108,8.25945946 L10.8108108,0.939585819 C10.8108108,0.724642565 10.9850567,0.55039663 11.2,0.55039663 C11.3032194,0.55039663 11.4022112,0.591400373 11.4751983,0.664387504 Z" id="矩形备份-5" fill="url(#linearGradient-2)"></path>
+            </g>
+        </g>
+    </g>
+</svg>

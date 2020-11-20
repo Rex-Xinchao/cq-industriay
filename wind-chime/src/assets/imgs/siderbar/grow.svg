@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>导航/小icon/成长能力/未选中</title>
+    <g id="导航/小icon/成长能力/未选中" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="positive-dynamics">
+            <rect id="矩形" fill-opacity="0.01" fill="#FFFFFF" fill-rule="nonzero" x="0" y="0" width="16" height="16"></rect>
+            <line x1="5.66666667" y1="11.3167333" x2="5.66666667" y2="14.0367333" id="路径" stroke="#94979B" stroke-linecap="round"></line>
+            <line x1="3" y1="13.3333333" x2="3" y2="14.0185333" id="路径" stroke="#94979B" stroke-linecap="round"></line>
+            <line x1="8.33333333" y1="9" x2="8.33333333" y2="14.0238" id="路径" stroke="#94979B" stroke-linecap="round"></line>
+            <line x1="11" y1="6.32046667" x2="11" y2="14.0292667" id="路径" stroke="#94979B" stroke-linecap="round"></line>
+            <line x1="13.6666667" y1="3.6569" x2="13.6666667" y2="14.0277667" id="路径" stroke="#94979B" stroke-linecap="round"></line>
+            <line x1="2.33333333" y1="11" x2="11.3333333" y2="2" id="路径" stroke="#94979B" stroke-linecap="round"></line>
+            <line x1="7.83333333" y1="2" x2="11.3333333" y2="2" id="路径" stroke="#94979B" stroke-linecap="round"></line>
+        </g>
+    </g>
+</svg>

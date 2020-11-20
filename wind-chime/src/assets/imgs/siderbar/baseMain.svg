@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>导航/大icon/行业基准</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="30" height="30"></rect>
+        <linearGradient x1="27.7777778%" y1="0%" x2="72.2222222%" y2="100%" id="linearGradient-3">
+            <stop stop-color="#0097E0" offset="0%"></stop>
+            <stop stop-color="#0060B0" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="40.1234568%" y1="0%" x2="59.8765432%" y2="100%" id="linearGradient-4">
+            <stop stop-color="#0097E0" offset="0%"></stop>
+            <stop stop-color="#0060B0" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="43.9508507%" y1="0%" x2="56.0491493%" y2="100%" id="linearGradient-5">
+            <stop stop-color="#0097E0" offset="0%"></stop>
+            <stop stop-color="#0060B0" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="94.1152068%" id="linearGradient-6">
+            <stop stop-color="#90FADB" offset="0%"></stop>
+            <stop stop-color="#60D4E4" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="28.6503152%" y1="0%" x2="28.6503152%" y2="100%" id="linearGradient-7">
+            <stop stop-color="#70EFC9" offset="0%"></stop>
+            <stop stop-color="#79E1E6" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="导航/大icon/行业基准" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="编组-82">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="蒙版" fill="#D8D8D8" opacity="0" xlink:href="#path-1"></use>
+            <g mask="url(#mask-2)">
+                <g transform="translate(4.500000, 5.542857)">
+                    <rect id="矩形备份-14" stroke="none" fill="url(#linearGradient-3)" fill-rule="evenodd" x="-4.4408921e-14" y="8.25825826" width="6.00600601" height="9.00900901" rx="0.750750751"></rect>
+                    <rect id="矩形备份-15" stroke="none" fill="url(#linearGradient-4)" fill-rule="evenodd" x="7.13213213" y="3.75375375" width="6.00600601" height="13.5135135" rx="0.750750751"></rect>
+                    <rect id="矩形备份-16" stroke="none" fill="url(#linearGradient-5)" fill-rule="evenodd" x="14.2642643" y="-1.26121336e-13" width="6.00600601" height="17.2672673" rx="0.750750751"></rect>
+                    <polyline id="路径-11" stroke="url(#linearGradient-6)" stroke-width="1.5015015" fill="none" points="0.750750751 13.5545013 7.88288288 8.67462144 10.8858859 12.3410246 17.2818974 7.69124602"></polyline>
+                    <path d="M14.9050701,6.31242429 L18.8787137,10.2860678 C19.0253069,10.432661 19.0253069,10.6703356 18.8787137,10.8169288 C18.8083171,10.8873253 18.7128389,10.9268737 18.6132832,10.9268737 L14.6396396,10.9268737 C14.4323255,10.9268737 14.2642643,10.7588124 14.2642643,10.5514983 L14.2642643,6.57785476 C14.2642643,6.37054066 14.4323255,6.20247938 14.6396396,6.20247938 C14.7391954,6.20247938 14.8346736,6.24202775 14.9050701,6.31242429 Z" id="矩形备份-17" stroke="none" fill="url(#linearGradient-7)" fill-rule="evenodd" transform="translate(16.891892, 8.299246) rotate(-170.000000) translate(-16.891892, -8.299246) "></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
