@@ -6,6 +6,7 @@ const StockCustom_All = () => import('@/views/stockCustom/all')
 const Boom = () => import('@/views/industrial/boom')
 const Risk = () => import('@/views/industrial/risk')
 const IndustryEnv = () => import('@/views/analysis/env')
+const IndustryProspect = () => import('@/views/analysis/prospect')
 
 Vue.use(VueRouter)
 
@@ -23,6 +24,11 @@ const routes = [
         path: 'analysis/env',
         name: 'IndustryEnv',
         component: IndustryEnv
+      },
+      {
+        path: 'analysis/prospect',
+        name: 'IndustryProspect',
+        component: IndustryProspect
       },
       {
         path: 'industrial/boom',

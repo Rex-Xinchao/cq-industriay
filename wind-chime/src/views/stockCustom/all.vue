@@ -34,5 +34,6 @@ export default {
 @import '~@/assets/styles/view';
 .main {
   padding: 40px 120px;
+  height: auto;
 }
 </style>

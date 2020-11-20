@@ -1,5 +1,11 @@
 <template>
-  <el-menu :default-active="activeName" class="sidebar" @select="pageTo">
+  <el-menu
+    ref="menu"
+    :default-active="activeName"
+    class="sidebar"
+    @select="pageTo"
+    :default-openeds="['/analysis', '/base', '/industrial', '/stockCustom']"
+  >
     <el-submenu v-for="(item, index) in menu" :index="`/${item.page}`" :key="`/${item.page}`">
       <template slot="title">
         <i class="icon-img icon-main" :class="`icon-${item.imgName}`"></i>
@@ -17,17 +23,6 @@
         {{ child.name }}
       </el-menu-item>
     </el-submenu>
-
-    <div class="tool-main">
-      <div class="item" @click="pageTo('/stockCustom/all', '_blank')">
-        <i class="icon-img icon-all"></i>
-        全行客户
-      </div>
-      <div class="item" @click="pageTo('/stockCustom/index', '_blank')">
-        <i class="icon-img icon-pillar"></i>
-        支柱产业
-      </div>
-    </div>
   </el-menu>
 </template>
 <script>
@@ -140,6 +135,11 @@ export default {
         this.$router.push(path)
       }
     }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      console.log(this.$refs.menu)
+    })
   }
 }
 </script>
@@ -273,44 +273,15 @@ export default {
     }
   }
 }
-
-.tool-main {
-  position: absolute;
-  top: calc(100vh - 120px);
-  height: 20px;
-  width: 200px;
-
-  .item {
-    font-size: 14px;
-    display: inline-block;
-    width: 50%;
-    height: 20px;
-    line-height: 20px;
-    cursor: pointer;
-  }
-
-  .icon-pillar {
-    vertical-align: top;
-    width: 16px;
-    height: 20px;
-    background-position-y: 2px;
-    margin: 0 4px 0 8px;
-    background-image: url(~@/assets/imgs/siderbar/main.svg);
-  }
-
-  .icon-all {
-    vertical-align: top;
-    width: 16px;
-    height: 20px;
-    background-position-y: 2px;
-    margin: 0 4px 0 8px;
-    background-image: url(~@/assets/imgs/siderbar/all.svg);
-  }
-}
 </style>
 <style lang="scss">
 .sidebar {
-  height: 100%;
+  height: calc(100% - 40px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.el-menu {
+  border: none;
 }
 .el-menu-item {
   a {

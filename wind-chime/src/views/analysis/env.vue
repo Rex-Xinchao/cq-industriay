@@ -18,8 +18,9 @@
             :default-active="activeMenu"
             class="menu"
             @select="getHead"
+            :default-openeds="['up', 'mid', 'down']"
           >
-            <el-submenu v-for="(item, index) in menu" :index="item.code" :key="`${index}_father`">
+            <el-submenu v-for="(item, index) in menu" :index="item.code" :key="`${item.code}`">
               <template slot="title">
                 <span>{{ item.name }}</span>
               </template>
