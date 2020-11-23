@@ -48,6 +48,24 @@
             box-sizing: border-box;
         }
 
+        .item_60 {
+            display: flex;
+            width: calc(60% - 10px);
+            height: 224px;
+            background-color: white;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        .item_40 {
+            display: flex;
+            width: calc(40% - 10px);
+            height: 224px;
+            background-color: white;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
         .item_50 {
             display: flex;
             width: calc(50% - 10px);
