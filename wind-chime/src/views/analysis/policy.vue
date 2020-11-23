@@ -24,16 +24,41 @@
           <div class="nagetive"><span>正面导向</span></div>
         </div>
       </el-form>
-      <div class="information-main"></div>
+      <ul class="information-main">
+        <li class="line" v-for="item in infos" :key="item.name">
+          <div class="line-time">
+            <span class="time" v-if="item.time" v-html="item.time"></span>
+          </div>
+          <div class="line-main">
+            <p class="name">
+              <span class="area-tag">{{ item.area }}</span>
+              {{ item.title }}
+            </p>
+            <p class="summary">{{ item.summary }}</p>
+            <div class="news" v-for="news in item.newsList">
+              <span class="type-tag" :class="news.type > 0 ? 'positive' : 'nagetive'">{{ news.typeName }}</span>
+              <span class="product-tag">{{ news.product }}</span>
+              <p class="content">
+                {{ news.content }}
+              </p>
+            </div>
+            <p class="url">
+              URL：
+              <a :href="item.url" target="_blank">{{ item.url }}</a>
+            </p>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 <script>
-import { cards } from '@/mockData/prospect'
+import { infos } from '@/mockData/policy'
+import { formatDate } from '@/libs/utils'
 export default {
   data() {
     return {
-      cards,
+      infos,
       form: {
         dateTime: [],
         region: null
@@ -41,7 +66,8 @@ export default {
       regions: [],
       orgs: []
     }
-  }
+  },
+  methods: {}
 }
 </script>
 <style lang="scss" scoped>
@@ -51,6 +77,8 @@ export default {
   padding: 20px;
   box-sizing: border-box;
   background-color: white;
+  height: auto !important;
+  min-height: calc(100% - 48px);
 
   .legend {
     font-size: 14px;
@@ -85,6 +113,142 @@ export default {
 
     .nagetive::before {
       background: linear-gradient(130deg, #64e163 0%, #08a24c 100%);
+    }
+  }
+
+  .information-main {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-top: 30px;
+
+    .line {
+      display: block;
+      height: auto;
+      text-align: left;
+      margin-bottom: 4px;
+
+      .line-time {
+        display: inline-block;
+        vertical-align: top;
+        width: 120px;
+        height: 100%;
+        color: #909090;
+        box-sizing: border-box;
+        position: relative;
+        text-align: center;
+
+        .time {
+          font-size: 14px;
+        }
+
+        &::after {
+          display: block;
+          content: '';
+          position: absolute;
+          width: 6px;
+          height: 6px;
+          border-radius: 6px;
+          background-color: #999999;
+          top: 8px;
+          right: -3px;
+        }
+      }
+
+      .line-main {
+        display: inline-block;
+        width: calc(100% - 120px);
+        border-left: 1px dashed #eeeeee;
+        padding-left: 10px;
+        box-sizing: border-box;
+
+        p {
+          margin: 0;
+        }
+
+        .name {
+          font-size: 16px;
+          font-weight: 600;
+          color: #333333;
+          line-height: 22px;
+          margin-bottom: 6px;
+
+          .area-tag {
+            display: inline-block;
+            background: linear-gradient(50deg, #6bace6 0%, #4487ea 100%);
+            border-radius: 2px;
+            line-height: 22px;
+            color: white;
+            padding: 0 8px;
+            margin-right: 10px;
+          }
+        }
+
+        .summary {
+          display: block;
+          font-size: 14px;
+          font-weight: 400;
+          color: #333333;
+          line-height: 20px;
+          box-sizing: border-box;
+          margin-bottom: 8px;
+          margin-left: 64px;
+        }
+
+        .url {
+          display: block;
+          font-size: 14px;
+          font-weight: 400;
+          color: #1f263e;
+          line-height: 20px;
+          box-sizing: border-box;
+          margin: 6px 0 24px 64px;
+        }
+
+        .news {
+          display: block;
+          padding: 12px;
+          box-sizing: border-box;
+          background: #f4f6f9;
+          border-radius: 2px;
+          margin-left: 64px;
+
+          .type-tag {
+            display: inline-block;
+            border-radius: 1px;
+            padding: 2px 8px;
+            font-size: 14px;
+            color: white;
+            margin-right: 8px;
+
+            &.positive {
+              background: linear-gradient(135deg, #f17c78 0%, #ea444e 100%);
+            }
+
+            &.nagetive {
+              background: linear-gradient(127deg, #62b969 0%, #08a24c 100%);
+            }
+          }
+
+          .product-tag {
+            display: inline-block;
+            font-size: 14px;
+            border-radius: 1px;
+            padding: 2px 8px;
+            border: 1px solid #d9d9d9;
+            margin-right: 8px;
+            color: #333333;
+          }
+
+          .content {
+            margin-top: 4px;
+            font-size: 14px;
+            font-weight: 400;
+            color: #94979b;
+            line-height: 20px;
+          }
+        }
+      }
     }
   }
 }
