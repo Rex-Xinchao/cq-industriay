@@ -178,6 +178,7 @@ export default {
   width: 1px;
   overflow: hidden;
   top: 0;
+  border: none;
 }
 .time-select {
   width: 220px;

@@ -1,12 +1,22 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 const Layout = () => import('@/views/Layout')
-const StockCustom = () => import('@/views/stockCustom/index')
-const StockCustom_All = () => import('@/views/stockCustom/all')
-const Boom = () => import('@/views/industrial/boom')
-const Risk = () => import('@/views/industrial/risk')
 const IndustryEnv = () => import('@/views/analysis/env')
 const IndustryProspect = () => import('@/views/analysis/prospect')
+const IndustryPolicy = () => import('@/views/analysis/policy')
+const IndustryCompete = () => import('@/views/analysis/competition')
+const IndustryRisk = () => import('@/views/analysis/risk')
+const IndustryCustomer = () => import('@/views/analysis/customer')
+const IndustryInformation = () => import('@/views/analysis/information')
+const BaseGrow = () => import('@/views/base/grow')
+const BaseProfit = () => import('@/views/base/profit')
+const BaseRepay = () => import('@/views/base/repay')
+const BaseBusiness = () => import('@/views/base/business')
+const BaseFinance = () => import('@/views/base/finance')
+const Boom = () => import('@/views/industrial/boom')
+const Risk = () => import('@/views/industrial/risk')
+const StockCustom = () => import('@/views/stockCustom/index')
+const StockCustom_All = () => import('@/views/stockCustom/all')
 
 Vue.use(VueRouter)
 
@@ -18,7 +28,7 @@ const routes = [
     children: [
       {
         path: '',
-        redirect: '/stockCustom/index'
+        redirect: '/analysis/env'
       },
       {
         path: 'analysis/env',
@@ -29,6 +39,56 @@ const routes = [
         path: 'analysis/prospect',
         name: 'IndustryProspect',
         component: IndustryProspect
+      },
+      {
+        path: 'analysis/policy',
+        name: 'IndustryPolicy',
+        component: IndustryPolicy
+      },
+      {
+        path: 'analysis/compete',
+        name: 'IndustryCompete',
+        component: IndustryCompete
+      },
+      {
+        path: 'analysis/risk',
+        name: 'IndustryRisk',
+        component: IndustryRisk
+      },
+      {
+        path: 'analysis/customer',
+        name: 'IndustryCustomer',
+        component: IndustryCustomer
+      },
+      {
+        path: 'analysis/information',
+        name: 'IndustryInformation',
+        component: IndustryInformation
+      },
+      {
+        path: 'base/grow',
+        name: 'BaseGrow',
+        component: BaseGrow
+      },
+      {
+        path: 'base/profit',
+        name: 'BaseProfit',
+        component: BaseProfit
+      },
+      {
+        path: 'base/repay',
+        name: 'BaseRepay',
+        component: BaseRepay
+      },
+      {
+        path: 'base/business',
+        name: 'BaseBusiness',
+        component: BaseBusiness
+      },
+      {
+        path: 'base/finance',
+        name: 'BaseFinance',
+        component: BaseFinance
       },
       {
         path: 'industrial/boom',

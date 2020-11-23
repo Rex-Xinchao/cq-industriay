@@ -52,7 +52,7 @@ export default {
 <style lang="scss" scoped>
 .tool-main {
   width: 200px;
-  height: 40px;
+  height: 80px;
   padding-top: 10px;
   box-sizing: border-box;
   border-top: 1px solid #eeeeee;

@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <h1 class="main-title">竞争格局</h1>
+    <h1 class="main-title">龙头财务</h1>
     <div class="main-body"></div>
   </div>
 </template>
