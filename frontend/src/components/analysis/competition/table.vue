@@ -32,93 +32,115 @@
       </el-popover>
     </div>
     <div v-loading="loading">
-      <el-table v-show="type === 1" class="table-main" :data="tableData_1" style="width: 100%">
+      <el-table v-show="type === 1" class="table-main" :data="tableData" style="width: 100%">
         <el-table-column type="index" width="50" label="排名" align="center"></el-table-column>
         <el-table-column label="公司名称" width="280" align="left">
           <template slot-scope="scope">
-            <span class="type-tag" :class="`type_${scope.row.type}`">{{ typeMap[scope.row.type] }}</span>
-            <span class="name" :title="scope.row.name">{{ scope.row.name }}</span>
+            <span class="type-tag" :class="`type_${scope.row.comType}`">{{ typeMap[scope.row.comType] }}</span>
+            <span class="name" :title="scope.row.comName">{{ scope.row.comName }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="per" label="省份" width="80" align="center"></el-table-column>
-        <el-table-column prop="area" label="地区" width="80" align="center"></el-table-column>
-        <el-table-column prop="market" label="市场" width="80" align="center"></el-table-column>
-        <el-table-column label="业务收入" width="180" sortable align="left">
+        <el-table-column prop="province" label="省份" width="80" align="center"></el-table-column>
+        <el-table-column prop="region" label="地区" width="80" align="center"></el-table-column>
+        <el-table-column label="市场" width="80" align="center">
           <template slot-scope="scope">
-            <span class="bar" :style="{ width: 100 * (scope.row.amount / sum) + 'px' }"></span>
-            <span class="amount">{{ scope.row.amount }}</span>
+            {{ mktType[scope.row.mkt] || '--' }}
           </template>
         </el-table-column>
-        <el-table-column label="业务线毛利" width="180" sortable align="left">
+        <el-table-column prop="leading.income" label="业务收入" width="180" sortable align="left">
           <template slot-scope="scope">
-            <span class="bar" :style="{ width: 100 * (scope.row.amount / sum) + 'px' }"></span>
-            <span class="amount">{{ scope.row.amount }}</span>
+            <span class="bar" :style="{ width: 100 * (scope.row.leading.income / sum.income) + 'px' }"></span>
+            <span class="amount">{{ scope.row.leading.income }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="a" label="业务线毛利增速" sortable align="center"></el-table-column>
-        <el-table-column prop="b" label="业务线毛利率" sortable align="center"></el-table-column>
+        <el-table-column prop="leading.grossMargin" label="业务线毛利" width="180" sortable align="left">
+          <template slot-scope="scope">
+            <span class="bar" :style="{ width: 100 * (scope.row.leading.grossMargin / sum.grossMargin) + 'px' }"></span>
+            <span class="amount">{{ scope.row.leading.grossMargin }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="leading.growth" label="业务线毛利增速" sortable align="center">
+          <template slot-scope="scope">
+            {{ scope.row.leading.growth ? `${scope.row.leading.growth}%` : '--' }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="leading.gpr" label="业务线毛利率" sortable align="center">
+          <template slot-scope="scope">
+            {{ scope.row.leading.gpr ? `${scope.row.leading.gpr}%` : '--' }}
+          </template>
+        </el-table-column>
       </el-table>
-      <el-table v-show="type === 2" class="table-main" :data="tableData_2" style="width: 100%">
+      <el-table v-show="type === 2" class="table-main" :data="tableData" style="width: 100%">
         <el-table-column label="公司名称" width="280" align="left">
           <template slot-scope="scope">
-            <span class="type-tag" :class="`type_${scope.row.type}`">{{ typeMap[scope.row.type] }}</span>
-            <span class="name" :title="scope.row.name">{{ scope.row.name }}</span>
+            <span class="type-tag" :class="`type_${scope.row.comType}`">{{ typeMap[scope.row.comType] }}</span>
+            <span class="name" :title="scope.row.comName">{{ scope.row.comName }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="per" label="省份" align="center"></el-table-column>
-        <el-table-column prop="area" label="地区" align="center"></el-table-column>
+        <el-table-column prop="province" label="省份" width="80" align="center"></el-table-column>
+        <el-table-column prop="region" label="地区" width="80" align="center"></el-table-column>
         <el-table-column label="高新技术" align="center">
           <template slot-scope="scope">
-            <span class="el-icon-circle-check" v-if="scope.row.isScope"></span>
+            <span class="el-icon-circle-check" v-if="scope.row.qualificationCodes.includes('Code1')"></span>
             <span v-else>--</span>
           </template>
         </el-table-column>
         <el-table-column label="专精特新企业" align="center">
           <template slot-scope="scope">
-            <span>--</span>
+            <span class="el-icon-circle-check" v-if="scope.row.qualificationCodes.includes('Code2')"></span>
+            <span v-else>--</span>
           </template>
         </el-table-column>
         <el-table-column label="科技型中小" align="center">
           <template slot-scope="scope">
-            <span>--</span>
+            <span class="el-icon-circle-check" v-if="scope.row.qualificationCodes.includes('Code3')"></span>
+            <span v-else>--</span>
           </template>
         </el-table-column>
         <el-table-column label="示范认证企业" align="center">
           <template slot-scope="scope">
-            <span>--</span>
+            <span class="el-icon-circle-check" v-if="scope.row.qualificationCodes.includes('Code4')"></span>
+            <span v-else>--</span>
           </template>
         </el-table-column>
         <el-table-column label="参与起草标准" align="center">
           <template slot-scope="scope">
-            <span>--</span>
+            <span class="el-icon-circle-check" v-if="scope.row.qualificationCodes.includes('Code5')"></span>
+            <span v-else>--</span>
           </template>
         </el-table-column>
         <el-table-column label="创新大赛获奖" align="center">
           <template slot-scope="scope">
-            <span>--</span>
+            <span class="el-icon-circle-check" v-if="scope.row.qualificationCodes.includes('Code6')"></span>
+            <span v-else>--</span>
           </template>
         </el-table-column>
         <el-table-column label="企业技术中心" align="center">
           <template slot-scope="scope">
-            <span>--</span>
+            <span class="el-icon-circle-check" v-if="scope.row.qualificationCodes.includes('Code7')"></span>
+            <span v-else>--</span>
           </template>
         </el-table-column>
       </el-table>
-      <el-table v-show="type === 3" class="table-main" :data="tableData_3" style="width: 100%">
+      <el-table v-show="type === 3" class="table-main" :data="tableData" style="width: 100%">
         <el-table-column type="index" width="50" label="排名" align="center"></el-table-column>
         <el-table-column label="公司名称" width="280" align="left">
           <template slot-scope="scope">
-            <span class="type-tag" :class="`type_${scope.row.type}`">{{ typeMap[scope.row.type] }}</span>
-            <span class="name" :title="scope.row.name">{{ scope.row.name }}</span>
+            <span class="type-tag" :class="`type_${scope.row.comType}`">{{ typeMap[scope.row.comType] }}</span>
+            <span class="name" :title="scope.row.comName">{{ scope.row.comName }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="per" label="省份" align="center"></el-table-column>
-        <el-table-column prop="area" label="地区" align="center"></el-table-column>
-        <el-table-column prop="market" label="市场" align="center"></el-table-column>
-        <el-table-column label="注册资本" sortable align="left">
+        <el-table-column prop="province" label="省份" align="center"></el-table-column>
+        <el-table-column prop="region" label="地区" align="center"></el-table-column>
+        <el-table-column label="市场" align="center">
           <template slot-scope="scope">
-            <span class="bar" :style="{ width: 100 * (scope.row.amount / sum) + 'px' }"></span>
-            <span class="amount">{{ scope.row.amount }}</span>
+            {{ mktType[scope.row.mkt] || '--' }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="gs.registered" label="注册资本" sortable align="left">
+          <template slot-scope="scope">
+            <span class="bar" :style="{ width: 100 * (scope.row.gs.registered / sum.registered) + 'px' }"></span>
+            <span class="amount">{{ scope.row.gs.registered }}</span>
           </template>
         </el-table-column>
       </el-table>
@@ -129,12 +151,13 @@
 <script>
 const echarts = require('echarts')
 import { numberFormat } from '@/libs/utils'
+import { tableData } from '@/mockData/competition'
 export default {
   name: '',
   data() {
     let vm = this
     return {
-      sum: 0,
+      sum: {},
       amountRange: [0, 500],
       timeRange: [0, 30],
       radio: 1,
@@ -142,13 +165,17 @@ export default {
       number_1: 6,
       number_2: 6,
       number_3: 120,
-      tableData_1: [],
-      tableData_2: [],
-      tableData_3: [],
+      tableData: [],
       loading: false,
       typeMap: {
         1: '授信客户',
         2: '行内客户'
+      },
+      mktType: {
+        0: '非上市',
+        1: '上市',
+        2: '三板',
+        3: '发债'
       }
     }
   },
@@ -183,50 +210,23 @@ export default {
       this.init()
     },
     init() {
-      console.log(this.type)
       this.loading = true
-      this.tableData_1 = []
-      this.tableData_2 = []
-      this.tableData_3 = []
+      this.tableData = []
       setTimeout(() => {
         this.loading = false
-        this.sum = 5682
-        let tablItem = `tableData_${this.type}`
-        if (this.type === 1) {
-          this[tablItem] = [
-            {
-              type: 1,
-              name: 'XXXX公司名称',
-              a: '10%',
-              b: '10%',
-              per: '1',
-              area: '1',
-              market: '1',
-              amount: 5682
-            }
-          ]
-        } else if (this.type === 2) {
-          this[tablItem] = [
-            {
-              type: 1,
-              name: 'XXXX公司名称',
-              per: '1',
-              area: '1',
-              isScope: true
-            }
-          ]
-        } else {
-          this[tablItem] = [
-            {
-              type: 1,
-              name: 'XXXX公司名称',
-              per: '1',
-              area: '1',
-              market: '1',
-              amount: 5682
-            }
-          ]
-        }
+        this.tableData = tableData
+        this.sum = {}
+        tableData.forEach((item) => {
+          if (this.type === 1) {
+            this.sum.income = this.sum.income || 0
+            this.sum.grossMargin = this.sum.grossMargin || 0
+            this.sum.income += item.leading.income
+            this.sum.grossMargin += item.leading.grossMargin
+          } else if (this.type === 3) {
+            this.sum.registered = this.sum.registered || 0
+            this.sum.registered += item.gs.registered
+          }
+        })
       }, 1000)
     }
   }
