@@ -6,7 +6,7 @@
     </h1>
     <div class="item-box">
       <multiple-chart title="行业集中度指数" class="item_60" style="height: 280px"></multiple-chart>
-      <bar-chart class="item_40" style="height: 280px"></bar-chart>
+      <toggle-chart class="item_40" style="height: 280px"></toggle-chart>
       <el-tabs class="item_100 item-tab" style="height: 60px; line-height: 60px; padding: 0 20px" v-model="activeType">
         <el-tab-pane label="全部" name="all"></el-tab-pane>
         <el-tab-pane label="重庆市" name="cq"></el-tab-pane>
@@ -20,7 +20,7 @@
 </template>
 <script>
 import multipleChart from '@components/analysis/competition/multiple'
-import barChart from '@components/analysis/competition/bar'
+import toggleChart from '@components/analysis/competition/toggle'
 import tableCom from '@components/analysis/competition/table'
 export default {
   data() {
@@ -28,7 +28,7 @@ export default {
       activeType: 'all'
     }
   },
-  components: { barChart, multipleChart, tableCom }
+  components: { toggleChart, multipleChart, tableCom }
 }
 </script>
 <style lang="scss" scoped>

@@ -37,7 +37,7 @@
       </div>
       <bar-table
         title="行业司法诉讼风险"
-        titleOne="行业司法诉讼风险"
+        :legends="['行业司法诉讼风险']"
         class="bar-chart-main item_50"
         style="height: 250px"
       ></bar-table>

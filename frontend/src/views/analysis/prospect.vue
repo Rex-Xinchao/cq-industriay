@@ -18,13 +18,8 @@
         </div>
       </div>
       <mutiple-chart class="main-chart" title="成长前景" lineTitle="行业规模增速" barTitle="行业规模"></mutiple-chart>
-      <bar-chart class="main-chart" title="盈利前景" titleOne="行业毛利率" titleTwo="行业净利率"></bar-chart>
-      <mutiple-chart
-        class="main-chart"
-        title="市场前景"
-        lineTitle="龙头企业数量"
-        barTitle="龙头企业营收总规模"
-      ></mutiple-chart>
+      <bar-chart class="main-chart" title="盈利前景" :legends="['行业毛利率', '行业净利率']"></bar-chart>
+      <mutiple-chart class="main-chart" title="市场前景" lineTitle="" barTitle="龙头企业营收总规模"></mutiple-chart>
     </div>
   </div>
 </template>
