@@ -35,7 +35,7 @@
               {{ item.title }}
             </p>
             <p class="summary">{{ item.summary }}</p>
-            <div class="news" v-for="news in item.newsList">
+            <div class="news" v-for="(news, index) in item.newsList" :key="index">
               <span class="type-tag" :class="news.type > 0 ? 'positive' : 'nagetive'">{{ news.typeName }}</span>
               <span class="product-tag">{{ news.product }}</span>
               <p class="content">

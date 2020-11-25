@@ -77,10 +77,7 @@
 <script>
 const echarts = require('echarts')
 import { numberFormat } from '@/libs/utils'
-import timeSelect from '../public/time-select.vue'
 export default {
-  components: { timeSelect },
-  name: '',
   data() {
     let vm = this
     return {

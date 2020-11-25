@@ -16,7 +16,7 @@
               <s class="unit">违约企业</s>
               <el-popover ref="popover" placement="bottom" width="108" trigger="click">
                 <div class="popover-main">
-                  <p style="text-align: center" v-for="item in bond.list">{{ item }}</p>
+                  <p style="text-align: center" v-for="(item, index) in bond.list" :key="index">{{ item }}</p>
                 </div>
                 <s class="link" slot="reference">查看</s>
               </el-popover>
@@ -33,7 +33,7 @@
               <s class="unit">ST企业</s>
               <el-popover ref="popover" placement="bottom" width="108" trigger="click">
                 <div class="popover-main">
-                  <p style="text-align: center" v-for="item in stock.list">{{ item }}</p>
+                  <p style="text-align: center" v-for="(item, index) in stock.list" :key="index">{{ item }}</p>
                 </div>
                 <s class="link" slot="reference">查看</s>
               </el-popover>

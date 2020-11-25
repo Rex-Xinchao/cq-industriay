@@ -5,9 +5,9 @@
       <el-popover placement="bottom" width="240" trigger="hover">
         <div>
           <p>HHI指数 （赫希芬达尔--赫希曼指数）</p>
-          <p>低集中度市场：<1000</p>
+          <p>低集中度市场：&lt;1000</p>
           <p>中集中度市场：1000~1800</p>
-          <p>低集中度市场：>1800</p>
+          <p>高集中度市场：>1800</p>
         </div>
         <i class="icon-tip" slot="reference"></i>
       </el-popover>
