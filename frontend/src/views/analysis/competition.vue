@@ -2,7 +2,7 @@
   <div class="main competition-main">
     <h1 class="main-title">
       竞争格局
-      <span class="sign">汽车行业</span>
+      <span class="sign">{{ industry }}</span>
     </h1>
     <div class="item-box">
       <multiple-chart title="行业集中度指数" class="item_60" style="height: 280px"></multiple-chart>
@@ -22,11 +22,15 @@
 import multipleChart from '@components/analysis/competition/multiple'
 import toggleChart from '@components/analysis/competition/toggle'
 import tableCom from '@components/analysis/competition/table'
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
       activeType: 'all'
     }
+  },
+  computed: {
+    ...mapGetters(['industry'])
   },
   components: { toggleChart, multipleChart, tableCom }
 }

@@ -2,7 +2,7 @@
   <div class="chartMain">
     <h1 class="chart-title">
       {{ title }}
-      <i class="el-icon-warning icon-tip" title="这是一个提示"></i>
+      <i class="icon-tip" title="这是一个提示"></i>
     </h1>
     <div v-loading="loading" v-if="!noData" id="lineChart"></div>
     <no-data-show v-loading="loading" class="chart-nodata" :show="noData"></no-data-show>

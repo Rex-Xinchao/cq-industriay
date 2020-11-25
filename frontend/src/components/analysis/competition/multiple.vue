@@ -2,7 +2,15 @@
   <div class="chartMain">
     <h1 class="chart-title">
       {{ title }}
-      <i class="el-icon-warning icon-tip" title="这是一个提示"></i>
+      <el-popover placement="bottom" width="240" trigger="hover">
+        <div>
+          <p>HHI指数 （赫希芬达尔--赫希曼指数）</p>
+          <p>低集中度市场：<1000</p>
+          <p>中集中度市场：1000~1800</p>
+          <p>低集中度市场：>1800</p>
+        </div>
+        <i class="icon-tip" slot="reference"></i>
+      </el-popover>
     </h1>
     <div class="chart-body" v-loading="loading">
       <div class="progress-main">
@@ -16,8 +24,8 @@
 </template>
 
 <script>
-const echarts = require('echarts')
 import resize from '@/mixins/resize'
+import line from '@/mixins/line'
 export default {
   name: '',
   data() {
@@ -25,114 +33,57 @@ export default {
     return {
       noData: false,
       loading: false,
-      chartOption: {
-        grid: {
-          left: '80px',
-          right: '20px',
-          bottom: '20px',
-          top: '60px'
-        },
-        xAxis: {
-          data: [],
-          axisLine: {
-            lineStyle: {
-              color: '#ddd'
-            }
+      tooltip: {
+        trigger: 'axis',
+        formatter: `{a}<br/>${vm.title}：{c}`
+      },
+      grid: {
+        left: '100px',
+        right: '20px',
+        bottom: '30px',
+        top: '60px'
+      },
+      visualMap: {
+        orient: 'horizontal',
+        top: 10,
+        right: 10,
+        pieces: [
+          {
+            lte: 1000,
+            color: '#69EFAE'
           },
-          axisTick: {
-            alignWithLabel: true,
-            lineStyle: {
-              color: '#ddd'
-            }
+          {
+            gt: 1000,
+            lte: 1800,
+            color: '#4E6AFD'
           },
-          axisLabel: {
-            formatter: '{value}',
-            color: '#999999'
-          },
-          splitLine: {
-            lineStyle: {
-              type: 'dashed',
-              color: '#F2F2F2'
-            }
+          {
+            gt: 1800,
+            color: '#FF2EEF'
           }
-        },
-        yAxis: {
-          type: 'value',
-          gridIndex: 0,
-          axisLine: {
-            show: false,
-            lineStyle: {
-              color: '#ddd'
-            }
-          },
-          axisTick: {
-            alignWithLabel: true,
-            lineStyle: {
-              color: '#ddd'
-            }
-          },
-          axisLabel: {
-            formatter: '{value}',
-            color: '#999999'
-          },
-          splitLine: {
-            lineStyle: {
-              type: 'dashed',
-              color: '#F2F2F2'
-            }
-          },
-          minInterval: 10,
-          min: 0
-        },
-        visualMap: {
-          orient: 'horizontal',
-          top: 10,
-          right: 10,
-          pieces: [
-            {
-              lte: 1000,
-              color: '#69EFAE'
-            },
-            {
-              gt: 1000,
-              lte: 1800,
-              color: '#4E6AFD'
-            },
-            {
-              gt: 1800,
-              color: '#FF2EEF'
-            }
-          ],
-          itemWidth: 14
-        },
-        series: {
-          name: 'Beijing AQI',
-          type: 'line',
-          data: []
-        }
+        ],
+        itemWidth: 14
+      },
+      series: {
+        type: 'line',
+        data: []
       }
     }
   },
-  mixins: [resize],
+  mixins: [resize, line],
   props: {
     title: String
   },
-  watch: {
-    isScale() {
-      this.init()
-    }
-  },
   methods: {
-    init() {
-      this.loading = true
-      setTimeout(() => {
-        this.loading = false
-        this.noData = false
-        this.chartOption.xAxis.data = ['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020']
-        this.chartOption.series.data = [50, 10, 1058, 1058, 30, 2018, 1582, 5, 8]
-        this.myChart = echarts.init(document.getElementById('lineChart_M'))
-        this.myChart.setOption(this.chartOption, true)
-      }, 1000)
+    setChartOption() {
+      this.chartId_line = 'lineChart_M'
+      this.chartOption_line.tooltip = Object.assign({}, this.chartOption_line.tooltip, this.tooltip)
+      this.chartOption_line.grid = this.grid
+      this.chartOption_line.visualMap = this.visualMap
+      this.chartOption_line.series = this.series
+      this.chartOption_line.xAxis.data = ['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020']
+      this.chartOption_line.series.data = [50, 10, 1058, 1058, 30, 2018, 1582, 5, 8]
+      return this.chartOption_line
     },
     getRoute(num) {
       let current = -70
@@ -153,7 +104,7 @@ export default {
     }
   },
   mounted() {
-    this.init()
+    this.drawChart()
   }
 }
 </script>
@@ -162,6 +113,7 @@ export default {
 .chart-body {
   width: 100%;
   flex: 1;
+  padding: 0 0 0 10px;
 }
 .progress-main {
   display: inline-block;

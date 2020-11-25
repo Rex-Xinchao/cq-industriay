@@ -3,7 +3,7 @@
     <h1 class="chart-title">
       {{ title }}
       <span class="chart-title_sub">{{ subTitle }}</span>
-      <i class="el-icon-warning icon-tip" title="这是一个提示"></i>
+      <i class="icon-tip" title="这是一个提示"></i>
     </h1>
     <div v-if="!noData" class="complexChart" :id="`complexChart_${timeStamp}`"></div>
     <no-data-show class="chart-nodata" :show="noData"></no-data-show>

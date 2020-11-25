@@ -3,7 +3,7 @@
     <div class="operation-bar">
       <span class="bar-item" :class="{ active: isBar }" @click="isBar = true">注册资本</span>
       <span class="bar-item" :class="{ active: !isBar }" @click="isBar = false">成立时间</span>
-      <i class="el-icon-warning icon-tip" title="这是一个提示"></i>
+      <i class="icon-tip" title="这是一个提示"></i>
     </div>
     <div v-loading="loading" v-if="!noData" id="chart"></div>
     <no-data-show v-loading="loading" class="chart-nodata" :show="noData"></no-data-show>
@@ -92,6 +92,9 @@ export default {
           }
         })
         this.chartOption_pie.series[0].data = this.data
+        if (window && window.innerWidth && window.innerWidth <= 1440) {
+          this.chartOption_pie.legend.right = 0
+        }
         return this.chartOption_pie
       }
     }

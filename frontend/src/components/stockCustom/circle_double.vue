@@ -3,7 +3,7 @@
     <h1 class="chart-title">
       {{ title }}
       <span class="chart-title_sub">{{ subTitle }}</span>
-      <i class="el-icon-warning icon-tip" title="这是一个提示"></i>
+      <i class="icon-tip" title="这是一个提示"></i>
       <div class="operation-bar fr">
         <span class="bar-item" :class="{ active: type === 1 }" @click="type = 1">近三月</span>
         <span class="bar-item" :class="{ active: type === 2 }" @click="type = 2">近半年</span>

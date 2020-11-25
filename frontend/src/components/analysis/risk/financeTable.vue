@@ -2,7 +2,7 @@
   <div class="com-main finance-table-main">
     <h1 class="main-title">
       {{ title }}
-      <i class="el-icon-warning icon-tip" title="这是一个提示"></i>
+      <i class="icon-tip" title="这是一个提示"></i>
     </h1>
     <el-table v-loading="loading" class="table" :data="tableData" height="200px">
       <el-table-column prop="name" label=""></el-table-column>

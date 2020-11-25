@@ -8,26 +8,19 @@
         <el-radio :label="1">全部</el-radio>
         <el-radio :label="2">2年以上</el-radio>
       </el-radio-group>
-      <span class="button-cfg fr">
+      <span class="button-export fr" @click="exportFile">
         <i class="icon-img"></i>
         导出
       </span>
-      <el-popover ref="popover" placement="bottom" width="220" trigger="click">
+      <el-popover ref="popover" placement="bottom" width="108" trigger="click">
         <div class="popover-main">
-          <p>逾期客户筛选</p>
-          <div class="block">
-            <span class="demonstration">金额</span>
-            <el-slider class="slider" style="margin-left: 46px" v-model="amountRange" range :max="3000"></el-slider>
-          </div>
-          <div class="block">
-            <span class="demonstration">逾期天数</span>
-            <el-slider class="slider" style="margin-left: 18px" v-model="timeRange" range :max="100"></el-slider>
-          </div>
-          <el-button class="save-btn fr" type="primary" @click="save">保存</el-button>
+          <el-checkbox-group v-model="checkList">
+            <el-checkbox v-for="item in filters" :label="item" :key="item">{{ item }}</el-checkbox>
+          </el-checkbox-group>
         </div>
-        <span class="button-cfg fr" slot="reference">
+        <span class="button-cfg fr" slot="reference" v-show="type === 2">
           <i class="icon-img"></i>
-          筛选
+          筛选资质
         </span>
       </el-popover>
     </div>
@@ -81,41 +74,45 @@
         <el-table-column prop="region" label="地区" width="80" align="center"></el-table-column>
         <el-table-column label="高新技术" align="center">
           <template slot-scope="scope">
-            <span class="el-icon-circle-check" v-if="scope.row.qualificationCodes.includes('Code1')"></span>
+            <span
+              class="el-icon-circle-check"
+              style="color: #00b362"
+              v-if="scope.row.qualificationCodes.includes('Code1')"
+            ></span>
             <span v-else>--</span>
           </template>
         </el-table-column>
-        <el-table-column label="专精特新企业" align="center">
+        <el-table-column label="专精特新企业" style="color: #00b362" align="center">
           <template slot-scope="scope">
             <span class="el-icon-circle-check" v-if="scope.row.qualificationCodes.includes('Code2')"></span>
             <span v-else>--</span>
           </template>
         </el-table-column>
-        <el-table-column label="科技型中小" align="center">
+        <el-table-column label="科技型中小" style="color: #00b362" align="center">
           <template slot-scope="scope">
             <span class="el-icon-circle-check" v-if="scope.row.qualificationCodes.includes('Code3')"></span>
             <span v-else>--</span>
           </template>
         </el-table-column>
-        <el-table-column label="示范认证企业" align="center">
+        <el-table-column label="示范认证企业" style="color: #00b362" align="center">
           <template slot-scope="scope">
             <span class="el-icon-circle-check" v-if="scope.row.qualificationCodes.includes('Code4')"></span>
             <span v-else>--</span>
           </template>
         </el-table-column>
-        <el-table-column label="参与起草标准" align="center">
+        <el-table-column label="参与起草标准" style="color: #00b362" align="center">
           <template slot-scope="scope">
             <span class="el-icon-circle-check" v-if="scope.row.qualificationCodes.includes('Code5')"></span>
             <span v-else>--</span>
           </template>
         </el-table-column>
-        <el-table-column label="创新大赛获奖" align="center">
+        <el-table-column label="创新大赛获奖" style="color: #00b362" align="center">
           <template slot-scope="scope">
             <span class="el-icon-circle-check" v-if="scope.row.qualificationCodes.includes('Code6')"></span>
             <span v-else>--</span>
           </template>
         </el-table-column>
-        <el-table-column label="企业技术中心" align="center">
+        <el-table-column label="企业技术中心" style="color: #00b362" align="center">
           <template slot-scope="scope">
             <span class="el-icon-circle-check" v-if="scope.row.qualificationCodes.includes('Code7')"></span>
             <span v-else>--</span>
@@ -176,7 +173,17 @@ export default {
         1: '上市',
         2: '三板',
         3: '发债'
-      }
+      },
+      checkList: [],
+      filters: [
+        '高新技术',
+        '专精特新企业',
+        '科技型中小',
+        '示范认证企业',
+        '参与起草标准',
+        '创新大赛获奖',
+        '企业技术中心'
+      ]
     }
   },
   props: {
@@ -200,6 +207,9 @@ export default {
       this.init()
     },
     radio() {
+      this.init()
+    },
+    checkList() {
       this.init()
     }
   },
@@ -228,6 +238,9 @@ export default {
           }
         })
       }, 1000)
+    },
+    exportFile() {
+      this.$message.info('功能开发中')
     }
   }
 }
@@ -300,6 +313,14 @@ export default {
 .last {
   border-radius: 0px 4px 4px 0px;
   border-right: 1px solid #d9d9d9;
+}
+.button-export,
+.button-cfg {
+  font-size: 14px;
+  font-weight: 400;
+  color: #666666;
+  line-height: 20px;
+  cursor: pointer;
 }
 </style>
 <style lang="scss">

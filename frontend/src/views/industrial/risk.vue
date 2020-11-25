@@ -9,7 +9,7 @@
       <div ref="tooltip" class="chart-tooltip">
         <h1 class="tooltip-title">
           异动指标
-          <i class="el-icon-warning icon-tip" title="这是一个提示"></i>
+          <i class="icon-tip" title="这是一个提示"></i>
         </h1>
         <el-table v-loading="loading" class="table" :data="tableData" height="108px">
           <el-table-column prop="name" label=""></el-table-column>
@@ -24,7 +24,7 @@
         </el-table>
         <h1 class="tooltip-title" style="margin-top: 12px">
           高发事件
-          <i class="el-icon-warning icon-tip" title="这是一个提示"></i>
+          <i class="icon-tip" title="这是一个提示"></i>
         </h1>
         <div class="tag-list">
           <div class="tag">调查立案</div>

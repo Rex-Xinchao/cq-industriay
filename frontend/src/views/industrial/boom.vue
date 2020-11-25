@@ -9,7 +9,7 @@
       <div ref="tooltip" class="chart-tooltip">
         <h1 class="tooltip-title">
           景气指数
-          <i class="el-icon-warning icon-tip" title="这是一个提示"></i>
+          <i class="icon-tip" title="这是一个提示"></i>
         </h1>
         <div class="tooltip-main">
           <div id="tooltipChart" class="chart" v-loading="loading"></div>

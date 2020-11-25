@@ -57,3 +57,5 @@ export const tableData = [
     }
   }
 ]
+
+export const multipleData = []
