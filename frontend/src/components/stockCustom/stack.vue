@@ -22,11 +22,10 @@ export default {
       tooltip: {
         formatter: function (data) {
           let time = data[0].axisValue
-          let text = vm.isScale ? '非正常贷款规模' : '非正常贷款企业数量'
           let unit = vm.isScale ? '元' : '个'
           let result = `${time}<br/>`
           data.forEach((item) => {
-            result += `${text}：${item.value} ${unit}<br/>`
+            result += `${item.seriesName}：${item.value} ${unit}<br/>`
           })
           return result
         }

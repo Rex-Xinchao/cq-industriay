@@ -26,6 +26,7 @@ export default {
   box-sizing: border-box;
   background-color: white;
   box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid #ddd;
   z-index: 1000;
 
   .log_main {

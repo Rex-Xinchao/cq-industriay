@@ -7,6 +7,10 @@ export default {
       myChart: null,
       chartId_pie: 'pieChart',
       chartOption_pie: {
+        tooltip: {
+          trigger: 'item',
+          formatter: '{b} : {c} ({d}%)'
+        },
         legend: {
           show: true,
           icon: 'circle',

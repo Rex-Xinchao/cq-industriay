@@ -1,9 +1,6 @@
 <template>
   <div class="main">
-    <h1 class="main-title">
-      全行客户画像
-      <span class="sign">汽车行业</span>
-    </h1>
+    <h1 class="main-title">全行客户画像</h1>
     <div class="item-box">
       <bar-chart class="item_50"></bar-chart>
       <circle-chart class="item_50" title="总投放规模"></circle-chart>

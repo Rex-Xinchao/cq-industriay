@@ -4,14 +4,16 @@ export const cards = [
     name: '龙头企业数量',
     value: 2,
     change: '1',
-    type: 'up'
+    type: 'up',
+    unit: '家'
   },
   {
     code: 2,
-    name: '龙头企业营收规模（万元）',
+    name: '龙头企业营收规模',
     value: 2,
     change: '1',
-    type: 'down'
+    type: 'down',
+    unit: '万元'
   },
   {
     code: 3,
@@ -22,10 +24,11 @@ export const cards = [
   },
   {
     code: 4,
-    name: '龙头企业资产规模(万元)',
+    name: '龙头企业资产规模',
     value: 2,
     change: '1',
-    type: 'down'
+    type: 'down',
+    unit: '万元'
   }
 ]
 

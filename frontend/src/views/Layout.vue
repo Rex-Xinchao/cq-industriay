@@ -4,7 +4,7 @@
       <head-com></head-com>
     </el-header>
     <el-container style="height: calc(100% - 60px)">
-      <el-aside width="200px">
+      <el-aside width="200px" v-if="showSiderbar">
         <sider-com></sider-com>
         <div class="tool-main">
           <div class="item" @click="pageTo('/stockCustom/all', '_blank')">
@@ -29,6 +29,11 @@ import siderCom from '@components/public/siderbar'
 export default {
   data() {
     return {}
+  },
+  computed: {
+    showSiderbar() {
+      return !['/stockCustom/all'].includes(this.$route.path)
+    }
   },
   components: {
     headCom,

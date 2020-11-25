@@ -9,7 +9,10 @@
         <div class="card" v-for="item in cards" :key="item.code" v-loading="loading">
           <i class="icon-img icon-card"></i>
           <span class="title" :title="item.name">{{ item.name }}</span>
-          <span class="num">{{ item.value }}</span>
+          <span class="num">
+            {{ item.value }}
+            <span class="unit">{{ item.unit }}</span>
+          </span>
           <span class="tip">
             {{ item.type === 'up' ? '较去年增加' : '较去年减少' }}
             <strong>{{ item.change }}</strong>
@@ -135,6 +138,10 @@ export default {
       color: #1b253a;
       line-height: 44px;
       margin-bottom: 6px;
+
+      .unit {
+        font-size: 16px;
+      }
     }
 
     .tip {

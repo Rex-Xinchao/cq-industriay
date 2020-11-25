@@ -104,13 +104,13 @@ const routes = [
         path: 'stockCustom/index',
         name: 'StockCustom',
         component: StockCustom
+      },
+      {
+        path: '/stockCustom/all',
+        name: 'StockCustom_All',
+        component: StockCustom_All
       }
     ]
-  },
-  {
-    path: '/stockCustom/all',
-    name: 'StockCustom_All',
-    component: StockCustom_All
   }
 ]
 
