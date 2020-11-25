@@ -28,3 +28,21 @@ export const cards = [
     type: 'down'
   }
 ]
+
+export const chartData = [
+  { year: '2018', value1: 10, value2: 50 },
+  { year: '2018', value1: 45, value2: 54 },
+  { year: '2018', value1: 85, value2: 68 },
+  { year: '2018', value1: 68, value2: 85 },
+  { year: '2018', value1: 54, value2: 45 },
+  { year: '2018', value1: 50, value2: 10 }
+]
+
+export const chartData2 = [
+  { year: '2018', value1: 100, value2: 50 },
+  { year: '2018', value1: 158, value2: 54 },
+  { year: '2018', value1: 251, value2: 68 },
+  { year: '2018', value1: 333, value2: 85 },
+  { year: '2018', value1: 256, value2: 45 },
+  { year: '2018', value1: 85, value2: 10 }
+]
