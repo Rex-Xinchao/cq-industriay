@@ -19,11 +19,11 @@ export default {
           {
             type: 'pie',
             center: ['22%', '50%'],
-            radius: ['40%', '70%'],
             avoidLabelOverlap: false,
             hoverOffset: 3,
             label: {
-              show: false
+              position: 'inner',
+              formatter: '{d}%'
             },
             labelLine: {
               show: false

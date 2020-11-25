@@ -10,17 +10,20 @@
         <span class="bar-item" :class="{ active: type === 3 }" @click="type = 3">近一年</span>
       </div>
     </h1>
-    <div v-loading="loading" v-if="!noData" class="circleChart" :id="`pieChart_${timeStamp}`"></div>
+    <div v-loading="loading" v-if="!noData" class="circleChart">
+      <div class="half" :id="`pieChart_${timeStamp}`"></div>
+      <div class="half">
+        <span class="table-title">{{ dialogTitle }}</span>
+        <el-table height="300" :data="dialogData" v-loading="dialogLoading">
+          <el-table-column property="name" label="公司名称" width="150"></el-table-column>
+          <el-table-column property="org" label="管护机构" width="200"></el-table-column>
+          <el-table-column label="贷款余额（万元）">
+            <template slot-scope="scope">{{ numberFormat(scope.row.amount, 0) }}</template>
+          </el-table-column>
+        </el-table>
+      </div>
+    </div>
     <no-data-show v-loading="loading" class="chart-nodata" :show="noData"></no-data-show>
-    <el-dialog :title="dialogTitle" :visible.sync="dialogVisible" :before-close="handleClose">
-      <el-table height="200" :data="dialogData" v-loading="dialogLoading">
-        <el-table-column property="name" label="公司名称" width="150"></el-table-column>
-        <el-table-column property="org" label="管护机构" width="200"></el-table-column>
-        <el-table-column label="贷款余额（万元）">
-          <template slot-scope="scope">{{ numberFormat(scope.row.amount, 0) }}</template>
-        </el-table-column>
-      </el-table>
-    </el-dialog>
   </div>
 </template>
 
@@ -112,9 +115,6 @@ export default {
         ]
       }, 1000)
     },
-    handleClose() {
-      this.dialogVisible = false
-    },
     setChartEvent() {
       this.myChart.on('click', (params) => {
         if (params.componentSubType === 'pie') {
@@ -155,6 +155,12 @@ export default {
           value: 75
         }
       ]
+      this.handleOpen({
+        seriesIndex: 1,
+        data: {
+          name: '楼市降温'
+        }
+      })
       return this.chartOption_pie
     }
   },
@@ -168,10 +174,33 @@ export default {
 .circleChart {
   width: 100%;
   flex: 1;
+
+  .half {
+    width: 50%;
+    height: 100%;
+    display: inline-block;
+
+    &:nth-of-type(2) {
+      padding: 0 0 0 20px;
+      box-sizing: border-box;
+    }
+  }
+}
+
+.table {
+  width: 50%;
+  flex: 1;
 }
 .chartMain {
   .operation-bar {
     width: auto;
   }
+}
+.table-title {
+  width: 61px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #94979b;
+  line-height: 20px;
 }
 </style>

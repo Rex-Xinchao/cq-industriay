@@ -484,14 +484,15 @@ export default {
         })
     },
     setHighLight(isHighLight, data, $pos) {
-      if (data.root) return
-      const direction = $pos ? 'up' : 'down'
-      const nodes = this.visInstance.selectAll(`g.${direction}.${data.productCode}`)
-      if (isHighLight) {
-        nodes.selectAll('rect').attr('style', (d) => `stroke: red`)
-      } else {
-        nodes.selectAll('rect').attr('style', (d) => `stroke: #5DB7FE`)
-      }
+      return
+      // if (data.root) return
+      // const direction = $pos ? 'up' : 'down'
+      // const nodes = this.visInstance.selectAll(`g.${direction}.${data.productCode}`)
+      // if (isHighLight) {
+      //   nodes.selectAll('rect').attr('style', (d) => `stroke: red`)
+      // } else {
+      //   nodes.selectAll('rect').attr('style', (d) => `stroke: #5DB7FE`)
+      // }
     },
     _substring(str, n, $dot) {
       let r = /[^\x00-\xff]/g

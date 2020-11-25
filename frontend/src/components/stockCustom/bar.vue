@@ -3,6 +3,7 @@
     <div class="operation-bar">
       <span class="bar-item" :class="{ active: isScale }" @click="isScale = true">贷款余额规模</span>
       <span class="bar-item" :class="{ active: !isScale }" @click="isScale = false">贷款企业数量</span>
+      <i class="icon-tip" title="这是一个提示"></i>
     </div>
     <div v-loading="loading" v-if="!noData" id="barChart"></div>
     <no-data-show v-loading="loading" class="chart-nodata" :show="noData"></no-data-show>

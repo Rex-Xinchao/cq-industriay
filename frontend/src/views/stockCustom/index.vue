@@ -14,8 +14,9 @@
       <stack-chart class="item_50"></stack-chart>
       <circle-chart class="item_50" title="非正常贷款投放规模"></circle-chart>
       <table-com class="item_50" style="height: 385px"></table-com>
+      <table-com title="行内客户" class="item_50" style="height: 385px"></table-com>
       <doucle-circle-chart
-        class="item_50"
+        class="item_100"
         style="height: 385px"
         title="存量客户近期负面事件"
         subTitle="汽车行业"
