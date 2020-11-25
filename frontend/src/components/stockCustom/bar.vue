@@ -10,13 +10,10 @@
 </template>
 
 <script>
-const echarts = require('echarts')
 import resize from '@/mixins/resize'
 import bar from '@/mixins/bar'
 export default {
-  name: '',
   data() {
-    let vm = this
     return {
       isScale: true,
       color: ['#3398DB']

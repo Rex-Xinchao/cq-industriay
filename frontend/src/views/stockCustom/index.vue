@@ -5,8 +5,8 @@
       <span class="sign">汽车行业</span>
     </h1>
     <div class="item-box">
-      <multiple-chart class="item_25" title="汽车产量及同比变化" subTitle="近12月"></multiple-chart>
-      <multiple-chart class="item_25" title="汽车销量及同比变化" subTitle="近12月"></multiple-chart>
+      <complex-chart class="item_25" title="汽车产量及同比变化" subTitle="近12月"></complex-chart>
+      <complex-chart class="item_25" title="汽车销量及同比变化" subTitle="近12月"></complex-chart>
       <line-chart class="item_25" title="行业资产负债率" name="负债率" color="#344CE9"></line-chart>
       <line-chart class="item_25" title="行业亏损企业数同比变化" name="企业数同比" color="#FF6D02"></line-chart>
       <bar-chart class="item_50"></bar-chart>
@@ -27,7 +27,7 @@
 import barChart from '@components/stockCustom/bar'
 import stackChart from '@components/stockCustom/stack'
 import circleChart from '@components/stockCustom/circle'
-import multipleChart from '@components/stockCustom/multiple'
+import complexChart from '@components/stockCustom/complex'
 import lineChart from '@components/stockCustom/line'
 import tableCom from '@components/stockCustom/table'
 import doucleCircleChart from '@components/stockCustom/circle_double'
@@ -36,7 +36,7 @@ export default {
     barChart,
     stackChart,
     circleChart,
-    multipleChart,
+    complexChart,
     lineChart,
     tableCom,
     doucleCircleChart

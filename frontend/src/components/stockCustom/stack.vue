@@ -10,173 +10,106 @@
 </template>
 
 <script>
-const echarts = require('echarts')
 import resize from '@/mixins/resize'
+import bar from '@/mixins/bar'
 export default {
-  name: '',
   data() {
     let vm = this
     return {
       isScale: true,
-      noData: false,
-      loading: false,
-      chartOption: {
-        color: ['#4A84FF', '#79D2DE', '#FFD37A', '#F57E4A'],
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: {
-            type: 'shadow'
-          },
-          formatter: function (data) {
-            let time = data[0].axisValue
-            let text = vm.isScale ? '非正常贷款规模' : '非正常贷款企业数量'
-            let unit = vm.isScale ? '元' : '个'
-            let result = `${time}<br/>`
-            data.forEach((item) => {
-              result += `${text}：${item.value} ${unit}<br/>`
-            })
-            return result
-          }
-        },
-        legend: {
-          show: true,
-          icon: 'square',
-          itemWidth: 16,
-          bottom: 0,
-          data: ['关注类', '次级类', '可疑类', '损失类']
-        },
-        grid: {
-          left: '30px',
-          right: '20px',
-          bottom: '50px',
-          top: '20px'
-        },
-        xAxis: {
-          type: 'category',
-          data: [],
-          axisLine: {
-            lineStyle: {
-              color: '#ddd'
-            }
-          },
-          axisTick: {
-            alignWithLabel: true,
-            lineStyle: {
-              color: '#ddd'
-            }
-          },
-          axisLabel: {
-            formatter: '{value}',
-            color: '#999999'
-          },
-          splitLine: {
-            lineStyle: {
-              type: 'dashed',
-              color: '#F2F2F2'
-            }
-          }
-        },
-        yAxis: {
-          type: 'value',
-          gridIndex: 0,
-          axisLine: {
-            show: false,
-            lineStyle: {
-              color: '#ddd'
-            }
-          },
-          axisTick: {
-            alignWithLabel: true,
-            lineStyle: {
-              color: '#ddd'
-            }
-          },
-          axisLabel: {
-            formatter: '{value}',
-            color: '#999999'
-          },
-          splitLine: {
-            lineStyle: {
-              type: 'dashed',
-              color: '#F2F2F2'
-            }
-          },
-          minInterval: 10,
-          splitNumber: 4,
-          min: 0
-        },
-        series: []
+      color: ['#4A84FF', '#79D2DE', '#FFD37A', '#F57E4A'],
+      tooltip: {
+        formatter: function (data) {
+          let time = data[0].axisValue
+          let text = vm.isScale ? '非正常贷款规模' : '非正常贷款企业数量'
+          let unit = vm.isScale ? '元' : '个'
+          let result = `${time}<br/>`
+          data.forEach((item) => {
+            result += `${text}：${item.value} ${unit}<br/>`
+          })
+          return result
+        }
+      },
+      legend: {
+        show: true,
+        icon: 'square',
+        itemWidth: 16,
+        bottom: 0,
+        data: ['关注类', '次级类', '可疑类', '损失类']
+      },
+      grid: {
+        bottom: '50px',
+        top: '20px'
       }
     }
   },
-  mixins: [resize],
+  mixins: [resize, bar],
   watch: {
     isScale() {
-      this.init()
+      this.drawChart()
     }
   },
   methods: {
-    init() {
-      this.loading = true
-      setTimeout(() => {
-        this.loading = false
-        this.noData = false
-        // this.chartOption.yAxis.minInterval = max < 10 ? 1 : 10
-        // this.chartOption.yAxis.max = max ? max : 10
-        this.chartOption.xAxis.data = ['2020 Q1', '2020 Q2', '2020 Q3', '2020 Q4']
-        this.chartOption.series = [
-          {
-            name: '关注类',
-            type: 'bar',
-            barWidth: '36%',
-            stack: '总量',
-            label: {
-              show: false,
-              position: 'insideRight'
-            },
-            data: [320, 302, 301, 34]
+    setChartOption() {
+      this.chartId_bar = 'stackChart'
+      this.chartOption_bar.color = this.color
+      this.chartOption_bar.legend = this.legend
+      this.chartOption_bar.tooltip = Object.assign({}, this.chartOption_bar.tooltip, this.tooltip)
+      this.chartOption_bar.grid = Object.assign({}, this.chartOption_bar.grid, this.grid)
+      // this.chartOption.yAxis.minInterval = max < 10 ? 1 : 10
+      // this.chartOption.yAxis.max = max ? max : 10
+      this.chartOption_bar.xAxis.data = ['2020 Q1', '2020 Q2', '2020 Q3', '2020 Q4']
+      this.chartOption_bar.series = [
+        {
+          name: '关注类',
+          type: 'bar',
+          barWidth: '36%',
+          stack: '总量',
+          label: {
+            show: false,
+            position: 'insideRight'
           },
-          {
-            name: '次级类',
-            type: 'bar',
-            barWidth: '36%',
-            stack: '总量',
-            label: {
-              show: false,
-              position: 'insideRight'
-            },
-            data: [20, 132, 101, 134]
+          data: [320, 302, 301, 34]
+        },
+        {
+          name: '次级类',
+          type: 'bar',
+          barWidth: '36%',
+          stack: '总量',
+          label: {
+            show: false,
+            position: 'insideRight'
           },
-          {
-            name: '可疑类',
-            type: 'bar',
-            barWidth: '36%',
-            stack: '总量',
-            label: {
-              show: false,
-              position: 'insideRight'
-            },
-            data: [220, 182, 91, 234]
+          data: [20, 132, 101, 134]
+        },
+        {
+          name: '可疑类',
+          type: 'bar',
+          barWidth: '36%',
+          stack: '总量',
+          label: {
+            show: false,
+            position: 'insideRight'
           },
-          {
-            name: '损失类',
-            type: 'bar',
-            barWidth: '36%',
-            stack: '总量',
-            label: {
-              show: false,
-              position: 'insideRight'
-            },
-            data: [150, 12, 201, 154]
-          }
-        ]
-        this.myChart = echarts.init(document.getElementById('stackChart'))
-        this.myChart.setOption(this.chartOption, true)
-      }, 1000)
+          data: [220, 182, 91, 234]
+        },
+        {
+          name: '损失类',
+          type: 'bar',
+          barWidth: '36%',
+          stack: '总量',
+          label: {
+            show: false,
+            position: 'insideRight'
+          },
+          data: [150, 12, 201, 154]
+        }
+      ]
+      return this.chartOption_bar
     }
   },
   mounted() {
-    this.init()
+    this.drawChart()
   }
 }
 </script>

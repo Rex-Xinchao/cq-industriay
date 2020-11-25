@@ -10,134 +10,41 @@
 </template>
 
 <script>
-const echarts = require('echarts')
 import resize from '@/mixins/resize'
+import line from '@/mixins/line'
 export default {
-  name: '',
   data() {
-    let vm = this
     return {
-      myChart: null,
-      isScale: true,
-      noData: false,
-      loading: false,
-      chartOption: {
-        color: ['#3398DB', '#79D2DE'],
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: {
-            type: 'shadow'
-          }
-        },
-        legend: {
-          show: true,
-          itemWidth: 16,
-          top: 10,
-          right: 0
-        },
-        grid: {
-          left: '30px',
-          right: '20px',
-          bottom: '20px',
-          top: '60px'
-        },
-        xAxis: {
-          type: 'category',
-          data: [],
-          axisLine: {
-            lineStyle: {
-              color: '#ddd'
-            }
-          },
-          axisTick: {
-            alignWithLabel: true,
-            lineStyle: {
-              color: '#ddd'
-            }
-          },
-          axisLabel: {
-            formatter: '{value}',
-            color: '#999999'
-          },
-          splitLine: {
-            lineStyle: {
-              type: 'dashed',
-              color: '#F2F2F2'
-            }
-          }
-        },
-        yAxis: {
-          type: 'value',
-          gridIndex: 0,
-          axisLine: {
-            show: false,
-            lineStyle: {
-              color: '#ddd'
-            }
-          },
-          axisTick: {
-            alignWithLabel: true,
-            lineStyle: {
-              color: '#ddd'
-            }
-          },
-          axisLabel: {
-            formatter: '{value}',
-            color: '#999999'
-          },
-          splitLine: {
-            lineStyle: {
-              type: 'dashed',
-              color: '#F2F2F2'
-            }
-          },
-          minInterval: 10,
-          min: 0
-        },
-        series: [
-          {
-            name: vm.titleOne,
-            type: 'line',
-            data: []
-          },
-          {
-            name: vm.titleTwo,
-            type: 'line',
-            data: []
-          }
-        ]
-      }
+      color: ['#3398DB', '#79D2DE']
     }
   },
-  mixins: [resize],
+  mixins: [resize, line],
   props: {
     title: String,
-    titleOne: String,
-    titleTwo: String
-  },
-  watch: {
-    isScale() {
-      this.init()
-    }
+    legends: Array
   },
   methods: {
-    init() {
-      this.loading = true
-      setTimeout(() => {
-        this.loading = false
-        this.noData = false
-        // this.chartOption.yAxis[0].minInterval = max < 10 ? 1 : 10
-        // this.chartOption.yAxis[0].max = max ? max : 10
-        this.chartOption.xAxis.data = ['2020 Q1', '2020 Q2', '2020 Q3', '2020 Q4']
-        this.chartOption.series[0].data = ['100', '200', '80', '99']
-        this.chartOption.series[1].data = ['50', '100', '10', '80']
-        this.myChart = echarts.init(document.getElementById('lineChart'))
-        this.myChart.setOption(this.chartOption, true)
-      }, 1000)
+    setChartOption() {
+      const series = []
+      this.chartOption_line.color = this.color
+      this.legends.forEach((item) => {
+        series.push({
+          name: item,
+          type: 'line',
+          data: []
+        })
+      })
+      this.chartOption_line.series = series
+      this.chartOption_line.xAxis.data = ['2020 Q1', '2020 Q2', '2020 Q3', '2020 Q4']
+      this.chartOption_line.series[0].data = ['100', '200', '80', '99']
+      this.chartOption_line.series[1].data = ['50', '100', '10', '80']
+      // this.chartOption.yAxis[0].minInterval = max < 10 ? 1 : 10
+      // this.chartOption.yAxis[0].max = max ? max : 10
+      return this.chartOption_line
     }
   },
   mounted() {
-    this.init()
+    this.drawChart()
   }
 }
 </script>

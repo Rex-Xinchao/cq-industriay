@@ -8,10 +8,10 @@
       <div class="left" :style="{ width: showSiderbar ? '262px' : '44px' }">
         <div class="siderbar" v-if="showSiderbar">
           <h1>
-            一级层级标题
+            &nbsp;
             <i class="icon el-icon-s-fold fr" @click="showSiderbar = false"></i>
           </h1>
-          <el-input class="search-main radius_sm" placeholder="请输入关键词" v-model="keyword" clearable></el-input>
+          <el-input class="search-main radius_sm" placeholder="请输入指标关键词" v-model="keyword" clearable></el-input>
           <el-menu
             text-color="#94979B"
             active-text-color="#25211F"
@@ -59,8 +59,8 @@
             <span class="icon-box">
               <i class="icon-img icon-line" :class="{ active: chartType === 'line' }" @click="chartType = 'line'"></i>
               <i class="icon-img icon-bar" :class="{ active: chartType === 'bar' }" @click="chartType = 'bar'"></i>
+              <time-select v-model="dateTime"></time-select>
             </span>
-            <time-select v-model="dateTime"></time-select>
           </h1>
           <p class="right-main-tip">
             来源：国家统计局&nbsp;&nbsp;&nbsp;&nbsp;频率：月&nbsp;&nbsp;&nbsp;&nbsp;单位：万辆
@@ -352,7 +352,7 @@ export default {
       span {
         display: inline-block;
         vertical-align: top;
-        width: 140px;
+        width: 240px;
         height: 22px;
         line-height: 22px;
         border-radius: 4px;

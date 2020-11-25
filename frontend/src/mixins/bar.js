@@ -4,7 +4,7 @@ export default {
     return {
       loading: false,
       noData: false,
-      myBarChart: null,
+      myChart: null,
       chartId_bar: 'barChart',
       chartOption_bar: {
         tooltip: {
@@ -96,18 +96,12 @@ export default {
       this.loading = false
       this.noData = false
       const chartOption = await this.setChartOption()
-      if (!this.myBarChart) this.initChart()
-      this.myBarChart.setOption(chartOption, true)
+      if (!this.myChart) this.initChart()
+      this.myChart.setOption(chartOption, true)
     },
     initChart() {
-      this.myBarChart = echarts.init(document.getElementById(this.chartId_bar))
+      this.myChart = echarts.init(document.getElementById(this.chartId_bar))
       this.setChartEvent()
     }
-  },
-  mounted() {
-    window.addEventListener('resize', this.reseize, true) // 监听（绑定）滚轮滚动事件
-  },
-  destroyed() {
-    window.removeEventListener('resize', this.reseize, true) //  离开页面清除（移除）滚轮滚动事件
   }
 }

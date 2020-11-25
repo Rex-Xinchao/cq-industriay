@@ -10,7 +10,7 @@
         <span class="bar-item" :class="{ active: type === 3 }" @click="type = 3">近一年</span>
       </div>
     </h1>
-    <div v-loading="loading" v-if="!noData" class="circleChart" :id="`circleChart_${timeStamp}`"></div>
+    <div v-loading="loading" v-if="!noData" class="circleChart" :id="`pieChart_${timeStamp}`"></div>
     <no-data-show v-loading="loading" class="chart-nodata" :show="noData"></no-data-show>
     <el-dialog :title="dialogTitle" :visible.sync="dialogVisible" :before-close="handleClose">
       <el-table height="200" :data="dialogData" v-loading="dialogLoading">
@@ -25,82 +25,72 @@
 </template>
 
 <script>
-const echarts = require('echarts')
 import { numberFormat } from '@/libs/utils'
 import resize from '@/mixins/resize'
+import pie from '@/mixins/pie'
 export default {
-  name: '',
   data() {
-    let vm = this
     return {
       dialogTitle: null,
-      dialogData: [],
       dialogLoading: false,
       dialogVisible: false,
-      noData: false,
-      loading: false,
+      dialogData: [],
       type: 1,
       timeStamp: new Date().getTime(),
       data: [],
       legend: ['500万以下', '500~3000万', '3000万以上'],
-      chartOption: {
-        tooltip: {
-          trigger: 'item',
-          formatter: '{b}: {c} ({d}%)'
-        },
-        legend: {
-          show: false
-        },
-        series: [
-          {
-            type: 'pie',
-            name: '事件',
-            selectedMode: 'single',
-            color: ['#5941E0', '#3D70ED', '#72DC7B', '#BFD2DB', '#657798'],
-            radius: [0, '40%'],
-            label: {
-              position: 'inner'
-            },
-            labelLine: {
-              show: false
-            },
-            data: []
+      tooltip: {
+        trigger: 'item',
+        formatter: '{b}: {c} ({d}%)'
+      },
+      series: [
+        {
+          type: 'pie',
+          selectedMode: 'single',
+          color: ['#5941E0', '#3D70ED', '#72DC7B', '#BFD2DB', '#657798'],
+          radius: [0, '40%'],
+          label: {
+            position: 'inner'
           },
-          {
-            type: 'pie',
-            radius: ['55%', '70%'],
-            color: [
-              '#EC6666',
-              '#F14444',
-              '#4A84F9',
-              '#73A1FF',
-              '#FDD14C',
-              '#FFA805',
-              '#FEA806',
-              '#72EBBC',
-              '#37CF93',
-              '#5BCEDD',
-              '#79D2DE'
-            ],
-            label: {
-              formatter: '{b}: {c}家 ({d}%)',
-              borderWidth: 1,
-              borderRadius: 4
-            },
-            data: []
-          }
-        ]
-      }
+          labelLine: {
+            show: false
+          },
+          data: []
+        },
+        {
+          type: 'pie',
+          radius: ['55%', '70%'],
+          color: [
+            '#EC6666',
+            '#F14444',
+            '#4A84F9',
+            '#73A1FF',
+            '#FDD14C',
+            '#FFA805',
+            '#FEA806',
+            '#72EBBC',
+            '#37CF93',
+            '#5BCEDD',
+            '#79D2DE'
+          ],
+          label: {
+            formatter: '{b}: {c}家 ({d}%)',
+            borderWidth: 1,
+            borderRadius: 4
+          },
+          data: []
+        }
+      ]
     }
   },
-  mixins: [resize],
+  mixins: [resize, pie],
   props: {
     title: String,
     subTitle: String
   },
   watch: {
     type() {
-      this.init()
+      this.drawChart()
     }
   },
   methods: {
@@ -125,53 +115,51 @@ export default {
     handleClose() {
       this.dialogVisible = false
     },
-    init() {
-      this.loading = true
-      setTimeout(() => {
-        this.loading = false
-        this.noData = false
-        this.chartOption.series[1].data = [
-          {
-            name: '业绩亏损',
-            value: 100
-          },
-          {
-            name: 'xx风险',
-            value: 25
-          },
-          {
-            name: '楼市降温',
-            value: 50
-          },
-          {
-            name: '基础设施',
-            value: 25
-          }
-        ]
-        this.chartOption.series[0].data = [
-          {
-            name: '公告事件',
-            value: 125
-          },
-          {
-            name: '宏观事件',
-            value: 75
-          }
-        ]
-        if (!this.myChart) {
-          this.myChart = echarts.init(document.getElementById(`circleChart_${this.timeStamp}`))
-          this.myChart.on('click', (params) => {
-            if (params.componentSubType === 'pie') {
-              this.handleOpen(params)
-            }
-          })
+    setChartEvent() {
+      this.myChart.on('click', (params) => {
+        if (params.componentSubType === 'pie') {
+          this.handleOpen(params)
         }
-        this.myChart.setOption(this.chartOption, true)
-      }, 1000)
+      })
+    },
+    setChartOption() {
+      this.chartId_pie = `pieChart_${this.timeStamp}`
+      this.chartOption_pie.legend.show = false
+      this.chartOption_pie.tooltip = this.tooltip
+      this.chartOption_pie.series = this.series
+      this.chartOption_pie.series[1].data = [
+        {
+          name: '业绩亏损',
+          value: 100
+        },
+        {
+          name: 'xx风险',
+          value: 25
+        },
+        {
+          name: '楼市降温',
+          value: 50
+        },
+        {
+          name: '基础设施',
+          value: 25
+        }
+      ]
+      this.chartOption_pie.series[0].data = [
+        {
+          name: '公告事件',
+          value: 125
+        },
+        {
+          name: '宏观事件',
+          value: 75
+        }
+      ]
+      return this.chartOption_pie
     }
   },
   mounted() {
-    this.init()
+    this.drawChart()
   }
 }
 </script>

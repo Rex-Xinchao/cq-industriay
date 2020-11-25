@@ -43,8 +43,7 @@
       ></bar-table>
       <line-table
         title="行业不良率/违约率"
-        titleOne="行业不良率"
-        titleTwo="行业违约率"
+        :legends="['行业不良率', '行业违约率']"
         class="line-chart-main item_50"
         style="height: 250px"
       ></line-table>
@@ -87,7 +86,7 @@ export default {
       display: inline-block;
       width: calc(50% - 10px);
       height: 100%;
-      padding: 20px 30px 20px 20px;
+      padding: 20px 0 20px 20px;
       background-color: #ffffff;
       margin-right: 20px;
       box-sizing: border-box;
@@ -106,7 +105,7 @@ export default {
 
       .title {
         display: block;
-        width: calc(100% - 50px);
+        width: calc(100%);
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -119,7 +118,7 @@ export default {
 
       .num {
         display: block;
-        width: calc(100% - 60px);
+        width: calc(100%);
         font-size: 35px;
         font-weight: bold;
         color: #1b253a;

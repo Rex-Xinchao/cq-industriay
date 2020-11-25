@@ -11,7 +11,8 @@ export const menuData = [
     ]
   },
   {
-    name: '中游',
+    // todo 取页面当前行业
+    name: '汽车行业',
     code: 'mid',
     children: [
       {
