@@ -2,11 +2,11 @@
   <div class="main">
     <h1 class="main-title">
       政策导向
-      <span class="sign">汽车行业</span>
+      <span class="sign">{{ industry }}</span>
     </h1>
     <div class="main-body">
       <el-form :inline="true" :model="form" class="filter-bar">
-        <el-form-item label="">
+        <el-form-item label="时间：">
           <time-select v-model="form.dateTime"></time-select>
         </el-form-item>
         <el-form-item label="区域：">
@@ -24,7 +24,7 @@
           <div class="nagetive"><span>正面导向</span></div>
         </div>
       </el-form>
-      <ul class="information-main">
+      <ul class="information-main" v-loading="loading">
         <li class="line" v-for="item in infos" :key="item.name">
           <div class="line-time">
             <span class="time" v-if="item.time" v-html="item.time"></span>
@@ -44,7 +44,7 @@
             </div>
             <p class="url">
               URL：
-              <a :href="item.url" target="_blank">{{ item.url }}</a>
+              <a @click="copy(item.url)">{{ item.url }}</a>
             </p>
           </div>
         </li>
@@ -55,19 +55,56 @@
 <script>
 import { infos } from '@/mockData/policy'
 import { formatDate } from '@/libs/utils'
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      infos,
+      loading: false,
+      infos: [],
       form: {
         dateTime: [],
-        region: null
+        region: null,
+        org: null
       },
-      regions: [],
+      regions: [
+        { label: '重庆', value: 1 },
+        { label: '四川', value: 2 },
+        { label: '陕西', value: 3 },
+        { label: '成都', value: 4 }
+      ],
       orgs: []
     }
   },
-  methods: {}
+  computed: {
+    ...mapGetters(['industry'])
+  },
+  watch: {
+    form: {
+      immediate: true,
+      deep: true,
+      handler() {
+        this.getData()
+      }
+    }
+  },
+  methods: {
+    getData() {
+      this.loading = true
+      setTimeout(() => {
+        this.loading = false
+        this.infos = infos
+      }, 1000)
+    },
+    copy(url) {
+      const oInput = document.createElement('input')
+      oInput.value = url
+      document.body.appendChild(oInput)
+      oInput.select() // 选择对象
+      document.execCommand('Copy') // 执行浏览器复制命令
+      this.$message.success('复制成功')
+      oInput.remove()
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -119,6 +156,7 @@ export default {
   .information-main {
     width: 100%;
     height: auto;
+    min-height: 300px;
     display: block;
     margin-top: 30px;
 
@@ -203,6 +241,11 @@ export default {
           line-height: 20px;
           box-sizing: border-box;
           margin: 6px 0 24px 64px;
+
+          a {
+            color: #3a84ff;
+            cursor: pointer;
+          }
         }
 
         .news {
