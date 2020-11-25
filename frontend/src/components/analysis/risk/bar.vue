@@ -17,13 +17,14 @@
 
 <script>
 const echarts = require('echarts')
+import { barData } from '@/mockData/risk'
 import resize from '@/mixins/resize'
 import bar from '@/mixins/bar'
 export default {
   data() {
     return {
-      typeSelect: null,
-      typeOptions: [],
+      typeSelect: 1,
+      typeOptions: [{ label: '全国', value: 1 }],
       dateTime: [],
       color: ['#3398DB', '#79D2DE']
     }
@@ -32,6 +33,14 @@ export default {
   props: {
     title: String,
     legends: Array
+  },
+  watch: {
+    dateTime() {
+      this.drawChart()
+    },
+    typeSelect() {
+      this.drawChart()
+    }
   },
   methods: {
     setChartOption() {
@@ -47,11 +56,17 @@ export default {
       this.chartOption_bar.color = this.color
       this.chartOption_bar.series = series
       this.chartOption_bar.legend.show = false
+      this.chartOption_bar.grid.left = '40px'
       this.chartOption_bar.grid.top = '40px'
       this.chartOption_bar.color = this.color
-      this.chartOption_bar.xAxis.data = ['2020 Q1', '2020 Q2', '2020 Q3', '2020 Q4']
-      this.chartOption_bar.series[0].data = [100, 200, 80, 99]
-      const max = 200
+      let max = 0
+      this.chartOption_bar.xAxis.data = []
+      this.chartOption_bar.series[0].data = []
+      barData.forEach((item) => {
+        max = Math.max(max, item.value)
+        this.chartOption_bar.xAxis.data.push(item.time)
+        this.chartOption_bar.series[0].data.push(item.value)
+      })
       this.chartOption_bar.yAxis.minInterval = max < 10 ? 1 : 10
       this.chartOption_bar.yAxis.max = max ? max : 10
       return this.chartOption_bar
@@ -64,6 +79,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '~@/assets/styles/chartMain';
+.select:first-of-type {
+  width: 120px;
+}
 #barChart {
   width: 100%;
   flex: 1;

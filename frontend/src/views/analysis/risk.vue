@@ -9,28 +9,38 @@
       <div class="item_40" style="height: 460px; background-color: #f4f6f9; flex-direction: column">
         <finance-table class="finance-table-main" title="财务及经济指标异动"></finance-table>
         <div class="market-info-main">
-          <div class="card">
+          <div class="card" v-loading="loading">
             <span class="title">债券市场</span>
             <span class="num">
-              16
-              <s class="unit">违规企业</s>
-              <s class="link">查看</s>
+              {{ bond.value }}
+              <s class="unit">违约企业</s>
+              <el-popover ref="popover" placement="bottom" width="108" trigger="click">
+                <div class="popover-main">
+                  <p style="text-align: center" v-for="item in bond.list">{{ item }}</p>
+                </div>
+                <s class="link" slot="reference">查看</s>
+              </el-popover>
             </span>
             <span class="tip">
               占总企业
-              <strong>50</strong>
+              <strong>{{ bond.ratio }}%</strong>
             </span>
           </div>
-          <div class="card">
-            <span class="title">债券市场</span>
+          <div class="card" v-loading="loading">
+            <span class="title">股票市场</span>
             <span class="num">
-              16
-              <s class="unit">违规企业</s>
-              <s class="link">查看</s>
+              {{ stock.value }}
+              <s class="unit">ST企业</s>
+              <el-popover ref="popover" placement="bottom" width="108" trigger="click">
+                <div class="popover-main">
+                  <p style="text-align: center" v-for="item in stock.list">{{ item }}</p>
+                </div>
+                <s class="link" slot="reference">查看</s>
+              </el-popover>
             </span>
             <span class="tip">
               占总企业
-              <strong>50%</strong>
+              <strong>{{ stock.ratio }}%</strong>
             </span>
           </div>
         </div>
@@ -52,17 +62,33 @@
 </template>
 <script>
 const echarts = require('echarts')
+import { bond, stock } from '@/mockData/risk'
 import packChart from '@/components/analysis/risk/pack.vue'
 import financeTable from '@/components/analysis/risk/financeTable.vue'
 import barTable from '@/components/analysis/risk/bar.vue'
 import lineTable from '@/components/analysis/risk/line.vue'
 export default {
   data() {
-    return {}
+    return {
+      loading: false,
+      bond: {},
+      stock: {}
+    }
   },
   components: { packChart, financeTable, barTable, lineTable },
-  methods: {},
-  mounted() {}
+  methods: {
+    getData() {
+      this.loading = true
+      setTimeout(() => {
+        this.loading = false
+        this.bond = bond
+        this.stock = stock
+      }, 1000)
+    }
+  },
+  mounted() {
+    this.getData()
+  }
 }
 </script>
 <style lang="scss" scoped>

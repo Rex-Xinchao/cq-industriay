@@ -6,9 +6,9 @@
     </h1>
     <el-table v-loading="loading" class="table" :data="tableData" height="200px">
       <el-table-column prop="name" label=""></el-table-column>
-      <el-table-column prop="last" label="最新值"></el-table-column>
-      <el-table-column prop="change" label="变动值"></el-table-column>
-      <el-table-column label="变动率">
+      <el-table-column prop="last" align="center" label="最新值"></el-table-column>
+      <el-table-column prop="change" align="center" label="变动值"></el-table-column>
+      <el-table-column label="变动率" align="center">
         <template slot-scope="scope">
           <span :class="scope.row.ratio && scope.row.ratio.indexOf('-') < 0 ? 'postive' : 'negative'">
             {{ scope.row.ratio }}
@@ -20,6 +20,7 @@
   </div>
 </template>
 <script>
+import { tableData } from '@/mockData/risk'
 export default {
   data() {
     return {
@@ -31,24 +32,16 @@ export default {
     title: String
   },
   methods: {
-    init() {
+    getData() {
       this.loading = true
       setTimeout(() => {
         this.loading = false
-        this.tableData = [
-          { ratio: '+10%' },
-          { ratio: '+10%' },
-          { ratio: '+10%' },
-          { ratio: '+10%' },
-          { ratio: '+10%' },
-          { ratio: '+10%' },
-          { ratio: '+10%' }
-        ]
+        this.tableData = tableData
       }, 1000)
     }
   },
   mounted() {
-    this.init()
+    this.getData()
   }
 }
 </script>

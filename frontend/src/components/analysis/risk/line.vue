@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { lineData } from '@/mockData/risk'
 import resize from '@/mixins/resize'
 import line from '@/mixins/line'
 export default {
@@ -35,11 +36,18 @@ export default {
         })
       })
       this.chartOption_line.series = series
-      this.chartOption_line.xAxis.data = ['2020 Q1', '2020 Q2', '2020 Q3', '2020 Q4']
-      this.chartOption_line.series[0].data = ['100', '200', '80', '99']
-      this.chartOption_line.series[1].data = ['50', '100', '10', '80']
-      // this.chartOption.yAxis[0].minInterval = max < 10 ? 1 : 10
-      // this.chartOption.yAxis[0].max = max ? max : 10
+
+      let max = 0
+      this.chartOption_line.xAxis.data = []
+      this.chartOption_line.series[0].data = []
+      lineData.forEach((item) => {
+        max = Math.max(max, item.value, item.value1)
+        this.chartOption_line.xAxis.data.push(item.time)
+        this.chartOption_line.series[0].data.push(item.value)
+        this.chartOption_line.series[1].data.push(item.value1)
+      })
+      this.chartOption_line.yAxis.minInterval = max < 10 ? 1 : 10
+      this.chartOption_line.yAxis.max = max ? max : 10
       return this.chartOption_line
     }
   },
