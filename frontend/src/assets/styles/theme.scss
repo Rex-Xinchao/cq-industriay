@@ -94,13 +94,17 @@ ul {
         position: absolute;
         width: 16px;
         height: 16px;
-        left: 12px;
+        left: 10px;
+        top: calc(50% - 8px);
+        background-image: url(~@/assets/imgs/icons/search.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
     }
 
     .el-input__inner {
         border-radius: 12px;
         background-color: #f8f9fb;
-        padding-left: 30px;
+        padding-left: 36px;
     }
 
     &.radius_sm {
@@ -108,4 +112,15 @@ ul {
             border-radius: 2px;
         }
     }
+}
+
+.icon-tip {
+    display: inline-block;
+    width: 16px;
+    height: 22px;
+    background-image: url(~@/assets/imgs/icons/tip.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-y: 2px;
+    vertical-align: middle;
 }

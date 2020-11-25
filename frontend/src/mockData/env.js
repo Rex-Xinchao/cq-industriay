@@ -1,35 +1,40 @@
 export const menuData = [
   {
-    name: '上游',
     code: 'up',
     children: [
       {
-        name: '测试',
-        code: 'test',
-        show: true
+        name: '测试_上游',
+        code: '1'
+      },
+      {
+        name: '测试_上游2',
+        code: '2'
       }
     ]
   },
   {
-    // todo 取页面当前行业
-    name: '汽车行业',
     code: 'mid',
     children: [
       {
-        name: '测试1',
-        code: 'test1',
-        show: true
+        name: '测试_中游',
+        code: '3'
+      },
+      {
+        name: '测试_中游2',
+        code: '4'
+      },
+      {
+        name: '测试_中游3',
+        code: '5'
       }
     ]
   },
   {
-    name: '下游',
     code: 'down',
     children: [
       {
-        name: '测试2',
-        code: 'test2',
-        show: true
+        name: '测试_下游',
+        code: '6'
       }
     ]
   }
@@ -330,14 +335,7 @@ export const chartData = [
   ['2001-03-21', 162],
   ['2001-03-22', 500],
   ['2001-03-24', 358],
-  ['2015-02-16', 153],
-  ['2015-02-18', 73],
-  ['2015-02-19', 267],
-  ['2015-02-20', 183],
-  ['2015-02-21', 394],
-  ['2015-02-22', 158],
-  ['2015-02-23', 86],
-  ['2015-02-24', 207]
+  ['2001-04-24', 207]
 ]
 
 export const tableData = [

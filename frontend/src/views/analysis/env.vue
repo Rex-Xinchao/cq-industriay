@@ -2,7 +2,7 @@
   <div class="main">
     <h1 class="main-title">
       行业环境
-      <span class="sign">汽车行业</span>
+      <span class="sign">{{ industry }}</span>
     </h1>
     <div class="main-body">
       <div class="left" :style="{ width: showSiderbar ? '262px' : '44px' }">
@@ -50,48 +50,20 @@
             {{ item.name }}
           </span>
         </div>
-        <div class="right-main">
-          <h1 class="right-main-title">
-            <span>
-              {{ activeHeadName }}
-              <i class="el-icon-warning icon-tip" title="这是一个提示"></i>
-            </span>
-            <span class="icon-box">
-              <i class="icon-img icon-line" :class="{ active: chartType === 'line' }" @click="chartType = 'line'"></i>
-              <i class="icon-img icon-bar" :class="{ active: chartType === 'bar' }" @click="chartType = 'bar'"></i>
-              <time-select v-model="dateTime"></time-select>
-            </span>
-          </h1>
-          <p class="right-main-tip">
-            来源：国家统计局&nbsp;&nbsp;&nbsp;&nbsp;频率：月&nbsp;&nbsp;&nbsp;&nbsp;单位：万辆
-          </p>
-          <div class="right-main-chart">
-            <div v-loading="loading" id="lineChart"></div>
-            <no-data-show v-loading="loading" class="chart-nodata" :show="noData"></no-data-show>
-          </div>
-          <el-table v-loading="loading" class="right-main-table" :data="tableData" style="width: 100%">
-            <el-table-column
-              v-for="item in tableHead"
-              :key="item"
-              :label="`${item}年`"
-              :prop="item"
-              align="center"
-            ></el-table-column>
-          </el-table>
-        </div>
+        <toggle-chart ref="chart" :activeName="activeHeadName"></toggle-chart>
       </div>
     </div>
   </div>
 </template>
 <script>
-const echarts = require('echarts')
 import resize from '@/mixins/resize'
-import { menuData, headData, chartData, tableData } from '@/mockData/env'
+import toggleChart from '@/components/analysis/env/toggle'
+import { menuData, headData } from '@/mockData/env'
+import { mapGetters } from 'vuex'
 export default {
   data() {
     const vm = this
     return {
-      noData: false,
       showSiderbar: true,
       keyword: null,
       menuLoding: false,
@@ -101,108 +73,17 @@ export default {
       activeHead: 1,
       heads: [],
       loading: false,
-      chartType: 'line',
       dateTime: [],
-      tableHead: [],
-      tableData: [],
-      chartOption: {
-        color: '#5B8FF9',
-        tooltip: {
-          trigger: 'axis',
-          formatter: (data) => {
-            return `${data[0].name}<br/>${vm.activeHeadName}：${data[0].value}万辆`
-          }
-        },
-        xAxis: {
-          data: [],
-          axisLine: {
-            lineStyle: {
-              color: '#ddd'
-            }
-          },
-          axisTick: {
-            alignWithLabel: true,
-            lineStyle: {
-              color: '#ddd'
-            }
-          },
-          axisLabel: {
-            formatter: '{value}',
-            color: '#999999'
-          },
-          splitLine: {
-            lineStyle: {
-              type: 'dashed',
-              color: '#F2F2F2'
-            }
-          }
-        },
-        yAxis: {
-          gridIndex: 0,
-          axisLine: {
-            show: false,
-            lineStyle: {
-              color: '#ddd'
-            }
-          },
-          axisTick: {
-            alignWithLabel: true,
-            lineStyle: {
-              color: '#ddd'
-            }
-          },
-          axisLabel: {
-            formatter: '{value}',
-            color: '#999999'
-          },
-          splitLine: {
-            lineStyle: {
-              type: 'dashed',
-              color: '#F2F2F2'
-            }
-          }
-        },
-        dataZoom: [
-          {
-            type: 'inside'
-          }
-        ],
-        grid: {
-          left: '38px',
-          right: '20px',
-          bottom: '80px',
-          top: '20px'
-        },
-        series: {
-          type: 'line',
-          data: [],
-          smooth: true,
-          areaStyle: {
-            color: {
-              type: 'linear',
-              x: 0,
-              y: 0,
-              x2: 0,
-              y2: 1,
-              colorStops: [
-                {
-                  offset: 0,
-                  color: '#5B8FF9'
-                },
-                {
-                  offset: 1,
-                  color: '#fff'
-                }
-              ],
-              global: false // 缺省为 false
-            }
-          }
-        }
+      nameMap: {
+        up: '上游',
+        down: '下游'
       }
     }
   },
   mixins: [resize],
+  components: { toggleChart },
   computed: {
+    ...mapGetters(['industry']),
     activeHeadName() {
       if (!this.activeHead) return null
       let obj = this.heads.find((item) => item.value === this.activeHead)
@@ -213,7 +94,7 @@ export default {
   watch: {
     showSiderbar() {
       this.$nextTick(() => {
-        this.reseize()
+        this.$refs.chart.reseize()
       })
     },
     keyword(data) {
@@ -221,15 +102,6 @@ export default {
     },
     activeMenu() {
       this.getHead()
-    },
-    activeHead() {
-      this.initChart()
-    },
-    chartType() {
-      this.initChart()
-    },
-    dateTime() {
-      this.initChart()
     }
   },
   methods: {
@@ -237,7 +109,11 @@ export default {
       this.menuLoding = false
       setTimeout(() => {
         this.menuLoding = false
-        this.menu = menuData
+        this.menu = menuData.map((item) => {
+          item.name = this.nameMap[item.code] || this.industry
+          item.children.forEach((child) => (child.show = true))
+          return item
+        })
         this.activeMenu = this.menu[0].children[0].code
       }, 100)
     },
@@ -259,24 +135,6 @@ export default {
         this.heads = headData
         this.activeHead = this.heads[0].value
       }, 500)
-    },
-    initChart() {
-      this.loading = true
-      setTimeout(() => {
-        this.loading = false
-        this.noData = chartData.length === 0
-        this.myChart = echarts.init(document.getElementById('lineChart'))
-        this.chartOption.xAxis.data = chartData.map((item) => item[0])
-        this.chartOption.series.type = this.chartType
-        this.chartOption.series.data = chartData.map((item) => item[1])
-        this.myChart.setOption(this.chartOption, true)
-        this.tableHead = tableData.map((item) => item.year)
-        let data = {}
-        tableData.forEach((item) => {
-          data[item.year] = item.value
-        })
-        this.tableData = [data]
-      }, 1000)
     }
   },
   mounted() {
@@ -357,11 +215,10 @@ export default {
         line-height: 22px;
         border-radius: 4px;
         box-sizing: border-box;
-        padding: 0 12px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        margin-right: 30px;
+        padding: 0 12px;
         margin-bottom: 16px;
         font-size: 12px;
         cursor: pointer;
@@ -369,6 +226,13 @@ export default {
         &.active {
           background: #3a84ff;
           color: white;
+        }
+      }
+
+      @media screen and (max-width: 1440px) {
+        span {
+          width: auto;
+          padding: 0 16px;
         }
       }
     }
@@ -380,67 +244,6 @@ export default {
       border-radius: 4px;
       padding: 20px;
       box-sizing: border-box;
-
-      .right-main-title {
-        margin: 0 0 8px 0;
-        padding: 0;
-        font-size: 16px;
-        font-weight: 400;
-        color: #000a12;
-        line-height: 22px;
-        display: flex;
-        justify-content: space-between;
-
-        .icon-img {
-          width: 16px;
-          height: 22px;
-          line-height: 22px;
-          margin-right: 16px;
-          cursor: pointer;
-
-          &.icon-line {
-            background-position-y: 5px;
-            background-image: url(~@/assets/imgs/icons/line.svg);
-
-            &.active {
-              background-image: url(~@/assets/imgs/icons/line-active.svg);
-            }
-          }
-
-          &.icon-bar {
-            background-position-y: 4px;
-            background-image: url(~@/assets/imgs/icons/bar.svg);
-
-            &.active {
-              background-image: url(~@/assets/imgs/icons/bar-active.svg);
-            }
-          }
-        }
-      }
-
-      .right-main-tip {
-        font-size: 12px;
-        font-weight: 400;
-        color: #94979b;
-        line-height: 18px;
-        margin: 0 0 8px 0;
-      }
-
-      .right-main-chart {
-        width: 100%;
-        height: calc(100% - 158px);
-        position: relative;
-
-        #lineChart {
-          width: 100%;
-          height: 100%;
-        }
-      }
-
-      .right-main-table {
-        width: 100%;
-        height: auto;
-      }
     }
   }
 }
