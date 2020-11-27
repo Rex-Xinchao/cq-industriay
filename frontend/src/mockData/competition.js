@@ -55,6 +55,25 @@ export const tableData = [
     gs: {
       registered: 5145
     }
+  },
+  {
+    comType: null,
+    comName: 'XXXXXX公司',
+    csfId: 'XXXXXXX',
+    comCode: 'XXXXXX',
+    province: '重庆',
+    region: '渝中',
+    mkt: 1,
+    leading: {
+      income: 5145,
+      grossMargin: 1211,
+      growth: 25.33,
+      gpr: 35.11
+    },
+    qualificationCodes: ['Code1', 'Code2', 'Code3'],
+    gs: {
+      registered: 5145
+    }
   }
 ]
 

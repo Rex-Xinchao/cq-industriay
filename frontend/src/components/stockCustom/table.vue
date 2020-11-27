@@ -58,7 +58,7 @@
         </span>
       </el-popover>
     </div>
-    <el-table v-loading="loading" class="table-main" :data="tableData" style="width: 100%">
+    <el-table v-loading="loading" class="table-main table-head-grey" :data="tableData" style="width: 100%">
       <el-table-column prop="name" label="名称"></el-table-column>
       <el-table-column prop="org" label="管护机构"></el-table-column>
       <el-table-column v-if="type === 2" prop="resean" label="黑名单原因"></el-table-column>
@@ -150,9 +150,6 @@ export default {
 }
 </style>
 <style lang="scss">
-.el-table thead th {
-  background: #eff0f3;
-}
 .popover-main {
   .demonstration {
     display: inline-block;

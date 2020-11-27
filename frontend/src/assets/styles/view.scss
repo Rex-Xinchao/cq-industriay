@@ -92,6 +92,33 @@
             margin-bottom: 20px;
             box-sizing: border-box;
         }
+
+        .item_75 {
+            display: flex;
+            width: calc(100% * 3 / 4 - 5px);
+            height: 224px;
+            background-color: white;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        .item_70 {
+            display: flex;
+            width: calc(70% - 10px);
+            height: 224px;
+            background-color: white;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        .item_30 {
+            display: flex;
+            width: calc(30% - 10px);
+            height: 224px;
+            background-color: white;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
     }
 
     .main-body {

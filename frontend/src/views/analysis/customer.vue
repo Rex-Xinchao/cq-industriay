@@ -1,13 +1,115 @@
 <template>
   <div class="main">
     <h1 class="main-title">行业获客</h1>
-    <div class="main-body"></div>
+    <div class="main-body">
+      <map-chart class="map-chart"></map-chart>
+      <div class="recommend-company-list">
+        <h1 class="title">推荐企业</h1>
+        <div class="operation-bar">
+          <span class="bar-item" :class="{ active: type === 1 }" @click="type = 1">区域资质企业</span>
+          <span class="bar-item" :class="{ active: type === 2 }" @click="type = 2">区域核心供应链</span>
+          <span class="bar-item" :class="{ active: type === 3 }" @click="type = 3">区域园区企业</span>
+        </div>
+        <template v-loading="loading">
+          <el-table v-show="type === 1" class="table-main table-head-grey" :data="tableData" height="calc(100% - 80px)">
+            <el-table-column prop="region" label="地域" align="center"></el-table-column>
+            <el-table-column width="200" label="名称" align="left">
+              <template slot-scope="scope">
+                <span class="type-tag" :class="`type_${scope.row.comType}`">{{ typeMap[scope.row.comType] }}</span>
+                <span class="name" :title="scope.row.comName">{{ scope.row.comName }}</span>
+              </template>
+            </el-table-column>
+            <el-table-column prop="num" label="资质数量" align="center">
+              <template slot-scope="scope">
+                <span class="icon-qualify">
+                  {{ scope.row.number }}
+                </span>
+              </template>
+            </el-table-column>
+          </el-table>
+          <el-table v-show="type === 2" class="table-main table-head-grey" :data="tableData" height="calc(100% - 80px)">
+            <el-table-column prop="region" label="地区" align="center"></el-table-column>
+            <el-table-column width="200" label="供应商" align="left">
+              <template slot-scope="scope">
+                <span class="type-tag" :class="`type_${scope.row.comType}`">{{ typeMap[scope.row.comType] }}</span>
+                <span class="name" :title="scope.row.comName">{{ scope.row.comName }}</span>
+              </template>
+            </el-table-column>
+            <el-table-column width="90" align="left">
+              <template slot="header" slot-scope="scope">
+                <span style="display: inline-block; margin-right: 2px">核心企业</span>
+                <el-popover ref="popover" placement="bottom" width="60" trigger="hover">
+                  <p class="popover-p">上市</p>
+                  <p class="popover-p">三板</p>
+                  <p class="popover-p">发债</p>
+                  <i class="icon-tip" slot="reference"></i>
+                </el-popover>
+              </template>
+              <template slot-scope="scope">
+                <span v-if="!scope.row.companys.length">--</span>
+                <template v-else>
+                  <p v-for="(item, index) in scope.row.companys" :key="index" class="company-line" :title="item.name">
+                    {{ item.name }}
+                  </p>
+                </template>
+              </template>
+            </el-table-column>
+          </el-table>
+          <el-table v-show="type === 3" class="table-main table-head-grey" :data="tableData" height="calc(100% - 80px)">
+            <el-table-column prop="region" label="地区" align="center"></el-table-column>
+            <el-table-column width="200" label="公司名称" align="left">
+              <template slot-scope="scope">
+                <span class="type-tag" :class="`type_${scope.row.comType}`">{{ typeMap[scope.row.comType] }}</span>
+                <span class="name" :title="scope.row.comName">{{ scope.row.comName }}</span>
+              </template>
+            </el-table-column>
+            <el-table-column prop="area" label="园区" align="center"></el-table-column>
+          </el-table>
+        </template>
+      </div>
+    </div>
   </div>
 </template>
 <script>
+import mapChart from '@/components/analysis/customer/map'
+import resize from '@/mixins/resize'
+import { tableData_1, tableData_2, tableData_3 } from '@/mockData/customer'
 export default {
   data() {
-    return {}
+    return {
+      type: 1,
+      loading: false,
+      tableData: [],
+      typeMap: {
+        1: '授信客户',
+        2: '行内客户'
+      }
+    }
+  },
+  components: { mapChart },
+  watch: {
+    type() {
+      this.getData()
+    }
+  },
+  methods: {
+    getData() {
+      this.loading = true
+      this.tableData = []
+      setTimeout(() => {
+        this.loading = false
+        if (this.type === 1) {
+          this.tableData = tableData_1
+        } else if (this.type === 2) {
+          this.tableData = tableData_2
+        } else {
+          this.tableData = tableData_3
+        }
+      }, 1000)
+    }
+  },
+  mounted() {
+    this.getData()
   }
 }
 </script>
@@ -15,7 +117,106 @@ export default {
 @import '~@/assets/styles/view';
 .main-body {
   width: 100%;
+  height: calc(100% - 48px);
   box-sizing: border-box;
-  background-color: white;
+
+  .map-chart {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 20px;
+    width: calc(100% - 420px);
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+  .recommend-company-list {
+    display: inline-block;
+    vertical-align: top;
+    box-sizing: border-box;
+    width: 400px;
+    height: 100%;
+    flex-direction: column;
+    padding: 20px;
+    background-color: white;
+
+    .title {
+      width: 100%;
+      font-size: 16px;
+      color: #000a12;
+      line-height: 22px;
+      font-weight: bold;
+      margin: 0;
+      margin-bottom: 12px;
+    }
+  }
+
+  .table-main {
+    width: 100%;
+    margin-top: 12px;
+
+    .type-tag {
+      display: inline-block;
+      border-radius: 2px;
+      width: 60px;
+      color: white;
+      box-sizing: border-box;
+      text-align: center;
+      height: 22px;
+      background: rgba(0, 0, 0, 0);
+      vertical-align: top;
+      &.type_1 {
+        background: linear-gradient(50deg, #eabc93 0%, #e2a570 100%);
+      }
+      &.type_2 {
+        background: linear-gradient(50deg, #b3b2c9 0%, #9b9dc4 100%);
+      }
+    }
+
+    .name {
+      display: inline-block;
+      width: 100px;
+      line-height: 22px;
+      box-sizing: border-box;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      vertical-align: top;
+      text-align: left;
+      text-indent: 1em;
+    }
+
+    .icon-qualify {
+      display: inline-block;
+      background-color: #22ca30;
+      padding: 0 4px;
+      color: white;
+      width: auto;
+      line-height: 22px;
+
+      &::before {
+        content: ' ';
+        display: inline-block;
+        vertical-align: sub;
+        width: 16px;
+        height: 16px;
+        background-color: #cccccc;
+        margin-right: 4px;
+      }
+    }
+
+    .company-line {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0;
+    }
+  }
+}
+</style>
+><style lang="scss">
+.popover-p {
+  margin: 0;
+  text-align: center;
+  margin-bottom: 4px;
 }
 </style>
