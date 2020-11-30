@@ -99,12 +99,16 @@ ul {
         background-image: url(~@/assets/imgs/icons/search.svg);
         background-size: contain;
         background-repeat: no-repeat;
+        z-index: 1001;
     }
 
     .el-input__inner {
         border-radius: 12px;
         background-color: #f8f9fb;
         padding-left: 36px;
+    }
+    .el-select__input {
+        padding-left: 20px;
     }
 
     &.radius_sm {

@@ -3,17 +3,17 @@
     <h1 class="main-title">行业获客</h1>
     <div class="main-body">
       <map-chart class="map-chart"></map-chart>
-      <div class="recommend-company-list">
-        <h1 class="title">推荐企业</h1>
+      <el-button @click="handleOpen" type="primary" class="btn-show-more">推荐企业</el-button>
+      <el-dialog title="推荐企业" :visible.sync="dialogVisible" width="80%" :before-close="handleClose">
         <div class="operation-bar">
           <span class="bar-item" :class="{ active: type === 1 }" @click="type = 1">区域资质企业</span>
           <span class="bar-item" :class="{ active: type === 2 }" @click="type = 2">区域核心供应链</span>
           <span class="bar-item" :class="{ active: type === 3 }" @click="type = 3">区域园区企业</span>
         </div>
-        <template v-loading="loading">
-          <el-table v-show="type === 1" class="table-main table-head-grey" :data="tableData" height="calc(100% - 80px)">
+        <div v-loading="loading">
+          <el-table v-show="type === 1" class="table-main table-head-grey" :data="tableData" height="396">
             <el-table-column prop="region" label="地域" align="center"></el-table-column>
-            <el-table-column width="200" label="名称" align="left">
+            <el-table-column label="名称" align="left">
               <template slot-scope="scope">
                 <span class="type-tag" :class="`type_${scope.row.comType}`">{{ typeMap[scope.row.comType] }}</span>
                 <span class="name" :title="scope.row.comName">{{ scope.row.comName }}</span>
@@ -21,24 +21,30 @@
             </el-table-column>
             <el-table-column prop="num" label="资质数量" align="center">
               <template slot-scope="scope">
-                <span class="icon-qualify">
-                  {{ scope.row.number }}
-                </span>
+                <el-popover ref="popover" style="width: 120px" placement="bottom" trigger="hover">
+                  <p class="popover-p">资质A</p>
+                  <p class="popover-p">资质B</p>
+                  <p class="popover-p">资质C</p>
+                  <span class="icon-qualify" slot="reference">
+                    <i class="el-icon-data-analysis"></i>
+                    {{ scope.row.number }}
+                  </span>
+                </el-popover>
               </template>
             </el-table-column>
           </el-table>
-          <el-table v-show="type === 2" class="table-main table-head-grey" :data="tableData" height="calc(100% - 80px)">
+          <el-table v-show="type === 2" class="table-main table-head-grey" :data="tableData" height="396">
             <el-table-column prop="region" label="地区" align="center"></el-table-column>
-            <el-table-column width="200" label="供应商" align="left">
+            <el-table-column label="供应商" align="left">
               <template slot-scope="scope">
                 <span class="type-tag" :class="`type_${scope.row.comType}`">{{ typeMap[scope.row.comType] }}</span>
                 <span class="name" :title="scope.row.comName">{{ scope.row.comName }}</span>
               </template>
             </el-table-column>
-            <el-table-column width="90" align="left">
+            <el-table-column align="left">
               <template slot="header" slot-scope="scope">
                 <span style="display: inline-block; margin-right: 2px">核心企业</span>
-                <el-popover ref="popover" placement="bottom" width="60" trigger="hover">
+                <el-popover ref="popover" style="width: 60px" placement="bottom" trigger="hover">
                   <p class="popover-p">上市</p>
                   <p class="popover-p">三板</p>
                   <p class="popover-p">发债</p>
@@ -55,9 +61,9 @@
               </template>
             </el-table-column>
           </el-table>
-          <el-table v-show="type === 3" class="table-main table-head-grey" :data="tableData" height="calc(100% - 80px)">
+          <el-table v-show="type === 3" class="table-main table-head-grey" :data="tableData" height="396">
             <el-table-column prop="region" label="地区" align="center"></el-table-column>
-            <el-table-column width="200" label="公司名称" align="left">
+            <el-table-column label="公司名称" align="left">
               <template slot-scope="scope">
                 <span class="type-tag" :class="`type_${scope.row.comType}`">{{ typeMap[scope.row.comType] }}</span>
                 <span class="name" :title="scope.row.comName">{{ scope.row.comName }}</span>
@@ -65,8 +71,8 @@
             </el-table-column>
             <el-table-column prop="area" label="园区" align="center"></el-table-column>
           </el-table>
-        </template>
-      </div>
+        </div>
+      </el-dialog>
     </div>
   </div>
 </template>
@@ -83,7 +89,8 @@ export default {
       typeMap: {
         1: '授信客户',
         2: '行内客户'
-      }
+      },
+      dialogVisible: false
     }
   },
   components: { mapChart },
@@ -106,6 +113,12 @@ export default {
           this.tableData = tableData_3
         }
       }, 1000)
+    },
+    handleOpen() {
+      this.dialogVisible = true
+    },
+    handleClose() {
+      this.dialogVisible = false
     }
   },
   mounted() {
@@ -119,35 +132,26 @@ export default {
   width: 100%;
   height: calc(100% - 48px);
   box-sizing: border-box;
+  position: relative;
 
   .map-chart {
     display: inline-block;
     vertical-align: top;
     margin-right: 20px;
-    width: calc(100% - 420px);
+    width: 100%;
     height: 100%;
     box-sizing: border-box;
   }
 
-  .recommend-company-list {
-    display: inline-block;
-    vertical-align: top;
-    box-sizing: border-box;
-    width: 400px;
-    height: 100%;
-    flex-direction: column;
-    padding: 20px;
-    background-color: white;
+  .operation-bar {
+    margin-bottom: 20px;
+  }
 
-    .title {
-      width: 100%;
-      font-size: 16px;
-      color: #000a12;
-      line-height: 22px;
-      font-weight: bold;
-      margin: 0;
-      margin-bottom: 12px;
-    }
+  .btn-show-more {
+    position: absolute;
+    top: 28px;
+    right: 8px;
+    z-index: 1001;
   }
 
   .table-main {
@@ -188,18 +192,12 @@ export default {
     .icon-qualify {
       display: inline-block;
       background-color: #22ca30;
-      padding: 0 4px;
+      padding: 0 6px;
+      border-radius: 4px;
       color: white;
       width: auto;
       line-height: 22px;
-
-      &::before {
-        content: ' ';
-        display: inline-block;
-        vertical-align: sub;
-        width: 16px;
-        height: 16px;
-        background-color: #cccccc;
+      i {
         margin-right: 4px;
       }
     }
@@ -218,5 +216,8 @@ export default {
   margin: 0;
   text-align: center;
   margin-bottom: 4px;
+}
+.el-popover {
+  min-width: 60px !important;
 }
 </style>

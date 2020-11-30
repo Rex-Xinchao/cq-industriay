@@ -1,10 +1,7 @@
 <template>
   <div class="item">
     <div class="map-main" id="map"></div>
-    <div class="search-box">
-      <el-input class="search-main" placeholder="请输入区域关键词" v-model="keyword" clearable></el-input>
-      <el-button class="search-btn" type="primary" @click="search">查询</el-button>
-    </div>
+    <area-search></area-search>
 
     <el-dialog :title="dialogTitle" :visible.sync="dialogVisible" width="1000px" :before-close="handleClose">
       <span>
@@ -32,9 +29,22 @@
           </el-form-item>
         </el-form>
         <div class="btn-box">
-          <el-button type="primary" style="float: right; margin-left: 12px">查询</el-button>
-          <el-button style="float: right">重置</el-button>
+          <el-button type="primary" class="fr" style="margin-left: 12px" @click="search">查询</el-button>
+          <el-button class="fr" @click="reset">重置</el-button>
         </div>
+        <el-table v-loading="dialogLoading" class="table-main table-head-grey" :data="dialogTable" height="396">
+          <el-table-column prop="name" label="公司名称" align="left"></el-table-column>
+          <el-table-column prop="year" label="经营年限" align="left"></el-table-column>
+          <el-table-column prop="money" label="注册资本" align="right"></el-table-column>
+          <el-table-column label="公司标记" align="right">
+            <template slot-scope="scope">
+              <span class="sign-tag_com">非上市</span>
+              <span class="sign-tag_com">发债</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="amount" label="经营规模" align="right"></el-table-column>
+          <el-table-column prop="report" label="报告期" align="right"></el-table-column>
+        </el-table>
       </span>
     </el-dialog>
   </div>
@@ -42,15 +52,23 @@
 <script>
 const echarts = require('echarts')
 import 'echarts/map/js/china.js'
+import qc from '@/libs/map/chongqing'
+import sc from '@/libs/map/sichuan'
+import gz from '@/libs/map/guizhou'
+import sx from '@/libs/map/shanxi'
 import resize from '@/mixins/resize'
 export default {
   data() {
     return {
+      activeType: 'all',
       keyword: null,
       mapOption: {
         tooltip: {
           trigger: 'item',
-          formatter: '{b}<br/>{c} 家'
+          formatter: (data) => {
+            if (!data.value) return
+            return `${data.name}<br/> ${data.value} 家`
+          }
         },
         visualMap: {
           orient: 'horizontal',
@@ -107,29 +125,89 @@ export default {
         { label: 'CCC', value: 3 },
         { label: 'DDD', value: 4 }
       ],
-      dialogTable: []
+      dialogLoading: false,
+      dialogTable: [{}]
     }
   },
   mixins: [resize],
   methods: {
     drawChart() {
+      if (this.activeType === 'all') {
+        this.mapOption.series[0].mapType = 'china'
+        this.mapOption.series[0].zoom = 3
+        this.mapOption.series[0].center = [106, 32]
+      } else {
+        switch (this.activeType) {
+          case 'qc':
+            echarts.registerMap('map', qc)
+            break
+          case 'sc':
+            echarts.registerMap('map', sc)
+            break
+          case 'gz':
+            echarts.registerMap('map', gz)
+            break
+          case 'sx':
+            echarts.registerMap('map', sx)
+            break
+        }
+        this.mapOption.series[0].map = 'map'
+        this.mapOption.series[0].zoom = null
+        this.mapOption.series[0].center = null
+      }
       if (!this.myChart) {
         this.myChart = echarts.init(document.getElementById('map'))
         this.myChart.on('click', (params) => {
-          if (['重庆', '陕西', '贵州', '四川'].includes(params.name)) {
+          if (this.activeType === 'all') {
+            if (['重庆', '陕西', '贵州', '四川'].includes(params.name)) {
+              switch (params.name) {
+                case '重庆':
+                  this.activeType = 'qc'
+                  break
+                case '陕西':
+                  this.activeType = 'sx'
+                  break
+                case '贵州':
+                  this.activeType = 'gz'
+                  break
+                case '四川':
+                  this.activeType = 'sc'
+                  break
+              }
+              this.drawChart()
+            }
+          } else {
             this.handleOpen(params.name)
           }
         })
       }
+      console.log(this.mapOption)
       this.myChart.setOption(this.mapOption, true)
       this.myChart.resize()
     },
     handleOpen(name) {
       this.dialogVisible = true
       this.dialogTitle = name
+      this.search()
     },
-    handleClose() {},
-    search() {}
+    handleClose() {
+      this.dialogVisible = false
+      this.dialogTitle = null
+      this.reset()
+    },
+    search() {
+      this.dialogLoading = true
+      setTimeout(() => {
+        this.dialogLoading = false
+      }, 1000)
+    },
+    reset() {
+      this.dialogForm.time = []
+      this.dialogForm.qualify = []
+      this.dialogForm.amountRange = [0, 100]
+      this.dialogForm.amountRange2 = [0, 100]
+      this.search()
+    }
   },
   mounted() {
     this.drawChart()
@@ -143,27 +221,27 @@ export default {
     width: calc(100% - 20px);
     height: 100%;
   }
-  .search-box {
+  .area-search {
     position: absolute;
     top: 28px;
     left: 20px;
+  }
+}
+.sign-tag_com {
+  line-height: 18px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #666666;
+  background: #f4f6fa;
+  border-radius: 3px;
+  padding: 2px 6px;
 
-    .search-btn {
-      margin-left: 6px;
-    }
+  & + .sign-tag_com {
+    margin-left: 8px;
   }
 }
 </style>
 <style lang="scss">
-.search-box {
-  .search-main {
-    width: 240px;
-    .el-input__inner {
-      border-radius: 2px;
-      background-color: white;
-    }
-  }
-}
 .dialog-form {
   display: inline-block;
   width: calc(100% - 200px);
