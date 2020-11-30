@@ -1,0 +1,184 @@
+$company: #207cff;
+$companyBorder: rgba(32, 124, 255, 0.5);
+
+$people: #c59001;
+$eopleBorder: rgba(197, 144, 1, 0.5);
+
+$product: #00b8a5;
+$productBorder: rgba(0, 184, 165, 0.5);
+
+$industry: #555fdc;
+$industryBorder: rgba(85, 95, 220, 0.5);
+
+$event: #ae4f2e;
+$eventBorder: rgba(174, 79, 46, 0.5);
+
+.news-main {
+    width: 100%;
+    height: auto;
+
+    .filter-main {
+        height: 68px;
+        padding: 20px;
+        border-bottom: 1px dashed #ccc;
+        box-sizing: border-box;
+
+        .labels-icon-title {
+            font-size: 14px;
+            font-weight: 400;
+            color: #666666;
+            line-height: 20px;
+        }
+    }
+}
+
+.news-list-main {
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+    li {
+        display: block;
+        list-style: none;
+        border-bottom: 1px dashed #eceff1;
+        padding: 6px 6px 12px 6px;
+        border-radius: 4px;
+        padding: 16px 20px;
+        box-sizing: border-box;
+        position: relative;
+
+        &:hover {
+            .delete-btn {
+                display: block !important;
+            }
+            background-color: #fafafa;
+        }
+
+        .title {
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(51, 51, 51, 1);
+            line-height: 20px;
+            height: 20px;
+            text-align: left;
+            text-indent: 0;
+            margin: 0;
+            a {
+                display: inline-block;
+                cursor: pointer;
+                text-decoration: none;
+                color: rgba(51, 51, 51, 1);
+                max-width: calc(100% - 200px);
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .icon {
+                display: inline-block;
+                width: 14px;
+                height: 18px;
+                background-repeat: no-repeat;
+                background-size: contain;
+                vertical-align: middle;
+            }
+
+            .negative-tag {
+                display: inline-block;
+                padding: 0 4px;
+                border-radius: 4px;
+                border: 1px solid #009b37;
+                color: #009b37;
+                margin-left: 12px;
+                line-height: 20px;
+                font-size: 12px;
+                cursor: auto;
+                vertical-align: top;
+                box-sizing: border-box;
+
+                .icon {
+                    background-image: url(~@/assets/imgs/icons/negative.png);
+                }
+            }
+
+            .neutral-tag {
+                display: inline-block;
+                padding: 0 4px;
+                border-radius: 4px;
+                margin-left: 12px;
+                line-height: 20px;
+                font-size: 12px;
+                cursor: auto;
+                vertical-align: top;
+                box-sizing: border-box;
+
+                .icon {
+                    background-image: url(~@/assets/imgs/icons/neutral.png);
+                }
+            }
+
+            .positive-tag {
+                display: inline-block;
+                padding: 0 4px;
+                border-radius: 4px;
+                border: 1px solid #ea444e;
+                color: #ea444e;
+                margin-left: 12px;
+                box-sizing: border-box;
+                line-height: 18px;
+                font-size: 12px;
+                cursor: auto;
+                vertical-align: top;
+
+                .icon {
+                    background-image: url(~@/assets/imgs/icons/positive.png);
+                }
+            }
+        }
+
+        .news-list_content {
+            margin-top: 0;
+            margin-block-start: 0;
+            margin-block-end: 0;
+            margin: 12px 0;
+            font-size: 14px;
+            font-weight: 400;
+            color: rgba(153, 153, 153, 1);
+            line-height: 22px;
+            text-align: left;
+            white-space: wrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+        }
+
+        .tag-list {
+            margin-bottom: 12px;
+        }
+
+        .msg-bottom {
+            width: 100%;
+            height: 22px;
+            line-height: 16px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 400;
+            color: rgba(153, 153, 153, 1);
+            line-height: 22px;
+
+            .time {
+                display: inline-block;
+                margin-right: 16px;
+            }
+
+            .source {
+                cursor: pointer;
+            }
+        }
+    }
+}
