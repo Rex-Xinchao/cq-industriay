@@ -30,7 +30,17 @@ export default {
       activeHead: 1,
       heads: [],
       color: ['#5B8FF9', '#5AD8A6', '#5D7092', '#F6BD16', '#E8684A'],
-      legends: ['优秀值', '良好值', '平均值', '较低值', '较差值']
+      legends: ['优秀值', '良好值', '平均值', '较低值', '较差值'],
+      tooltip: {
+        formatter: function (data) {
+          let time = data[0].axisValue
+          let result = `${time}<br/>`
+          data.forEach((item) => {
+            result += `${item.seriesName}：${item.value}%<br/>`
+          })
+          return result
+        }
+      }
     }
   },
   mixins: [line],
@@ -79,6 +89,7 @@ export default {
     },
 
     setChartOption() {
+      this.chartOption_line.tooltip = Object.assign({}, this.chartOption_line.tooltip, this.tooltip)
       this.chartOption_line.color = this.color
       this.chartOption_line.legend.left = 0
       this.chartOption_line.grid.left = '40px'
@@ -88,18 +99,20 @@ export default {
           name: item,
           type: 'line',
           data: [
-            Math.ceil(Math.random() * 1000),
-            Math.ceil(Math.random() * 1000),
-            Math.ceil(Math.random() * 1000),
-            Math.ceil(Math.random() * 1000),
-            Math.ceil(Math.random() * 1000),
-            Math.ceil(Math.random() * 1000),
-            Math.ceil(Math.random() * 1000),
-            Math.ceil(Math.random() * 1000),
-            Math.ceil(Math.random() * 1000)
+            Math.ceil(Math.random() * 100),
+            Math.ceil(Math.random() * 100),
+            Math.ceil(Math.random() * 100),
+            Math.ceil(Math.random() * 100),
+            Math.ceil(Math.random() * 100),
+            Math.ceil(Math.random() * 100),
+            Math.ceil(Math.random() * 100),
+            Math.ceil(Math.random() * 100),
+            Math.ceil(Math.random() * 100)
           ]
         })
       })
+
+      this.chartOption_line.yAxis.axisLabel.formatter = '{value}%'
       this.chartOption_line.series = series
       this.chartOption_line.xAxis.data = [2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020]
       return this.chartOption_line
