@@ -63,7 +63,7 @@
           </template>
         </el-table-column>
       </el-table>
-      <el-table v-show="type === 2" class="table-main" :data="tableData" style="width: 100%">
+      <el-table v-show="type === 2" class="table-main table-head-grey" :data="tableData" style="width: 100%">
         <el-table-column label="公司名称" width="280" align="left">
           <template slot-scope="scope">
             <span class="type-tag" :class="`type_${scope.row.comType}`">{{ typeMap[scope.row.comType] }}</span>
@@ -119,7 +119,7 @@
           </template>
         </el-table-column>
       </el-table>
-      <el-table v-show="type === 3" class="table-main" :data="tableData" style="width: 100%">
+      <el-table v-show="type === 3" class="table-main table-head-grey" :data="tableData" style="width: 100%">
         <el-table-column type="index" width="50" label="排名" align="center"></el-table-column>
         <el-table-column label="公司名称" width="280" align="left">
           <template slot-scope="scope">
