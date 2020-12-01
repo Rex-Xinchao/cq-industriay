@@ -2,6 +2,12 @@
   <div class="item">
     <div class="map-main" id="map"></div>
     <area-search></area-search>
+    <el-breadcrumb class="breadcrumb" v-show="activeType !== 'all'">
+      <el-breadcrumb-item><span style="cursor: pointer" @click="resetActive">三省一市</span></el-breadcrumb-item>
+      <el-breadcrumb-item style="font-size: 16px">
+        <strong>{{ activeName }}</strong>
+      </el-breadcrumb-item>
+    </el-breadcrumb>
 
     <el-dialog :title="dialogTitle" :visible.sync="dialogVisible" width="1000px" :before-close="handleClose">
       <span>
@@ -61,6 +67,7 @@ export default {
   data() {
     return {
       activeType: 'all',
+      activeName: null,
       keyword: null,
       mapOption: {
         tooltip: {
@@ -131,8 +138,14 @@ export default {
   },
   mixins: [resize],
   methods: {
+    resetActive() {
+      this.activeType = 'all'
+      this.activeName = null
+      this.drawChart()
+    },
     drawChart() {
       if (this.activeType === 'all') {
+        this.mapOption.series[0].map = null
         this.mapOption.series[0].mapType = 'china'
         this.mapOption.series[0].zoom = 3
         this.mapOption.series[0].center = [106, 32]
@@ -163,15 +176,19 @@ export default {
               switch (params.name) {
                 case '重庆':
                   this.activeType = 'qc'
+                  this.activeName = '重庆'
                   break
                 case '陕西':
                   this.activeType = 'sx'
+                  this.activeName = '陕西'
                   break
                 case '贵州':
                   this.activeType = 'gz'
+                  this.activeName = '贵州'
                   break
                 case '四川':
                   this.activeType = 'sc'
+                  this.activeName = '四川'
                   break
               }
               this.drawChart()
@@ -181,7 +198,6 @@ export default {
           }
         })
       }
-      console.log(this.mapOption)
       this.myChart.setOption(this.mapOption, true)
       this.myChart.resize()
     },
@@ -224,6 +240,12 @@ export default {
   .area-search {
     position: absolute;
     top: 28px;
+    left: 20px;
+  }
+
+  .breadcrumb {
+    position: absolute;
+    top: 68px;
     left: 20px;
   }
 }
