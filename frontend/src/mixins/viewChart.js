@@ -77,8 +77,8 @@ export default {
     },
     initSvg() {
       const $dialog = document.getElementById('chart-body')
-      this.treeBox.width = $dialog.parentElement.clientWidth
-      this.treeBox.height = $dialog.parentElement.clientHeight
+      this.treeBox.width = $dialog.clientWidth
+      this.treeBox.height = $dialog.clientHeight
       const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
       svg.id = 'tree-svg'
       svg.setAttribute('version', '1.1')
