@@ -9,7 +9,7 @@
       <div class="cq">
         <h1>重庆市</h1>
         <ul>
-          <li>汽车</li>
+          <li @click="pageTo">汽车</li>
           <li>电子制作</li>
           <li>机械制作</li>
           <li>新材料</li>
@@ -57,8 +57,13 @@
 </template>
 <script>
 const echarts = require('echarts')
-import all from '@/libs/map/all'
+import sum from '@/libs/map/all'
+import cq from '@/libs/map/chongqing'
+import gz from '@/libs/map/guizhou'
+import sx from '@/libs/map/shanxi'
+import sc from '@/libs/map/sichuan'
 import resize from '@/mixins/resize'
+// todo 地图背景色 颜色加上透明度
 export default {
   data() {
     return {
@@ -68,6 +73,7 @@ export default {
           {
             type: 'map',
             roam: false,
+            zoom: 1.2,
             emphasis: {
               label: {
                 show: false
@@ -77,7 +83,26 @@ export default {
               }
             },
             itemStyle: {
-              areaColor: 'white'
+              areaColor: 'white',
+              shadowColor: 'rgba(0, 0, 0, 0.5)',
+              shadowBlur: 10
+            }
+          },
+          {
+            type: 'map',
+            roam: false,
+            zoom: 1.2,
+            emphasis: {
+              label: {
+                show: false
+              },
+              itemStyle: {
+                areaColor: '#eee'
+              }
+            },
+            itemStyle: {
+              areaColor: 'white',
+              borderType: 'dashed'
             },
             markPoint: {
               symbol: 'rect',
@@ -171,9 +196,15 @@ export default {
   mixins: [resize],
   methods: {
     initMap() {
+      const all = {
+        type: 'FeatureCollection',
+        features: [...cq.features, ...gz.features, ...sx.features, ...sc.features]
+      }
+      echarts.registerMap('sum', sum)
       echarts.registerMap('map', all)
-      this.mapOption.series[0].map = 'map'
-      this.mapOption.series[0].markPoint.data = [
+      this.mapOption.series[0].map = 'sum'
+      this.mapOption.series[1].map = 'map'
+      this.mapOption.series[1].markPoint.data = [
         {
           type: 'sx',
           label: '陕',
@@ -199,11 +230,13 @@ export default {
           coord: [106.71, 26.57]
         }
       ]
-      console.log(this.mapOption)
       this.myChart = echarts.init(document.getElementById('map'))
       this.myChart.setOption(this.mapOption, true)
       this.myChart.resize()
       this.loading = false
+    },
+    pageTo() {
+      this.$router.push('/pillar/chart')
     }
   },
   mounted() {
@@ -265,6 +298,7 @@ export default {
         line-height: 40px;
         box-sizing: border-box;
         border-bottom: 1px solid #dcdee3;
+        cursor: pointer;
       }
     }
   }

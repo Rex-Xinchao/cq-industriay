@@ -18,6 +18,7 @@ const Risk = () => import('@/views/industrial/risk')
 const StockCustom = () => import('@/views/stockCustom/index')
 const StockCustom_All = () => import('@/views/stockCustom/all')
 const Pillar = () => import('@/views/pillar/index')
+const PillarChart = () => import('@/views/pillar/chart')
 
 Vue.use(VueRouter)
 
@@ -115,6 +116,11 @@ const routes = [
         path: '/pillar/index',
         name: 'Pillar',
         component: Pillar
+      },
+      {
+        path: '/pillar/chart',
+        name: 'PillarChart',
+        component: PillarChart
       }
     ]
   }

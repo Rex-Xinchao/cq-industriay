@@ -32,7 +32,7 @@ export default {
   },
   computed: {
     showSiderbar() {
-      return !['/stockCustom/all'].includes(this.$route.path)
+      return !['/stockCustom/all', '/pillar/index', '/pillar/chart'].includes(this.$route.path)
     }
   },
   components: {
