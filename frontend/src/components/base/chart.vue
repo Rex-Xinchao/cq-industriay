@@ -135,7 +135,7 @@ export default {
     span {
       display: inline-block;
       vertical-align: top;
-      width: 240px;
+      width: auto;
       height: 22px;
       line-height: 22px;
       border-radius: 4px;
@@ -143,7 +143,7 @@ export default {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      padding: 0 12px;
+      padding: 0 16px;
       margin-bottom: 16px;
       font-size: 12px;
       cursor: pointer;
@@ -151,13 +151,6 @@ export default {
       &.active {
         background: #3a84ff;
         color: white;
-      }
-    }
-
-    @media screen and (max-width: 1440px) {
-      span {
-        width: auto;
-        padding: 0 16px;
       }
     }
   }

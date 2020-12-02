@@ -32,7 +32,7 @@ export default {
   .log_main {
     display: inline-block;
     width: 122px;
-    height: 24px;
+    height: 32px;
     vertical-align: middle;
     background-image: url(~@/assets/imgs/logo_2.png);
     background-size: contain;
