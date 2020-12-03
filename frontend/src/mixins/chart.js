@@ -364,6 +364,7 @@ export default {
         .on('click', (d) => this.showMenu(d3.event, d.data))
         .on('mouseover', (d) => {
           vm.setHighLight(true, d.data, $pos)
+          vm.showTip(d3.event, d.data)
         })
         .on('mouseout', (d) => {
           vm.setHighLight(false, d.data, $pos)

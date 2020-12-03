@@ -5,12 +5,29 @@
       <span class="sign">汽车行业</span>
     </h1>
     <div class="chart">
-      <div class="graph-box" @click="hideMenu"></div>
-      <div ref="tooltip" class="chart-tooltip">
-        <h1 class="tooltip-title">
-          异动指标
-          <i class="icon-tip" title="这是一个提示"></i>
-        </h1>
+      <div class="graph-box" ></div>
+      
+      <div ref="tooltip" class="chart-tooltip" @mouseleave="hideTip">
+        <h1>行业分析</h1>
+        <span>行业环境</span>
+        <span>行业前景</span>
+        <span>政策导向</span>
+        <span>竞争格局</span>
+        <span>行业风险</span>
+        <span>行业获客</span>
+        <h1>行业基准</h1>
+        <span>成长能力</span>
+        <span>盈利能力</span>
+        <span>偿还能力</span>
+        <span>运营能力</span>
+        <h1>产业分析</h1>
+        <span>景气图谱</span>
+        <span>风险图谱</span>
+        <h1>存量客户</h1>
+        <span>存量客户画像</span>
+      </div>
+      <el-dialog title="异动指标" :visible.sync="dialogVisible" width="50%" :before-close="hideMenu">
+        <i class="icon-tip" title="这是一个提示"></i>
         <el-table v-loading="loading" class="table" :data="tableData" height="108px">
           <el-table-column prop="name" label=""></el-table-column>
           <el-table-column prop="last" label="最新值"></el-table-column>
@@ -37,7 +54,8 @@
           <div class="tag">调查立案</div>
         </div>
         <p class="tooltip-link"><a @click="pageTo">查看行业风险</a></p>
-      </div>
+      </el-dialog>
+    </div>
     </div>
   </div>
 </template>
@@ -46,6 +64,7 @@ import chart from '@/mixins/chart'
 export default {
   data() {
     return {
+      dialogVisible: false,
       noData: false,
       loading: false,
       type: 'risk',
@@ -62,34 +81,44 @@ export default {
         { name: '汽车销量', ratio: '+10%' },
         { name: '汽车销量', ratio: '+10%' },
         { name: '汽车销量', ratio: '+10%' }
-      ]
+      ],
+      interval: null
     }
   },
   mixins: [chart],
   methods: {
-    showMenu(event, data) {
-      this.hideMenu()
-      let top = 0
-      let left = 0
-      if (event.pageX < this.tooltip.width) {
-        left = this.treeNode.width / 2
-      } else if (event.pageX > this.d3TreeBox.width - this.tooltip.width / 2) {
-        left = this.d3TreeBox.width - this.tooltip.width - this.treeNode.width / 2
-      } else {
-        left = event.pageX - this.tooltip.width
-      }
-      if (event.pageY + this.tooltip.height > this.d3TreeBox.height) {
-        top = event.pageY - this.tooltip.height - this.treeNode.height - 100
-      } else {
-        top = event.pageY - this.tooltip.height / 2
-      }
-      setTimeout(() => {
-        this.$refs.tooltip.style.display = 'block'
-        this.$refs.tooltip.style.top = top + 'px'
-        this.$refs.tooltip.style.left = left + 'px'
-      }, 100)
-    },
     hideMenu() {
+      this.dialogVisible = false
+    },
+    showMenu(event, data) {
+      this.dialogVisible = true
+    },
+    showTip(event, data) {
+      this.interval && clearTimeout(this.interval)
+      this.interval = setTimeout(() => {
+        let top = 0
+        let left = 0
+        if (event.pageX < this.tooltip.width) {
+          left = this.treeNode.width / 2
+        } else if (event.pageX > this.d3TreeBox.width - this.tooltip.width / 2) {
+          left = this.d3TreeBox.width - this.tooltip.width - this.treeNode.width / 2
+        } else {
+          left = event.pageX - this.tooltip.width / 2
+        }
+        if (event.pageY + this.tooltip.height > this.d3TreeBox.height) {
+          top = event.pageY - this.tooltip.height - this.treeNode.height - 100
+        } else {
+          top = event.pageY - this.tooltip.height / 2
+        }
+        setTimeout(() => {
+          this.$refs.tooltip.style.display = 'block'
+          this.$refs.tooltip.style.top = top + 'px'
+          this.$refs.tooltip.style.left = left + 'px'
+        }, 100)
+      }, 500)
+    },
+    hideTip() {
+      this.interval && clearTimeout(this.interval)
       this.$refs.tooltip.style.display = 'none'
     },
     pageTo() {}
@@ -104,72 +133,59 @@ export default {
   height: calc(100% - 40px);
   background-color: white;
   position: relative;
-  .chart-tooltip {
-    display: none;
-    position: absolute;
-    width: 400px;
-    height: auto;
-    top: 0;
-    left: 0;
-    background: #ffffff;
-    border-radius: 4px;
-    box-shadow: 0px 9px 28px 8px rgba(0, 0, 0, 0.05), 0px 6px 16px 0px rgba(0, 0, 0, 0.08),
-      0px 3px 6px -4px rgba(0, 0, 0, 0.12);
-    padding: 14px 20px;
-    box-sizing: border-box;
-    h1 {
-      font-size: 12px;
-      font-weight: 500;
-      color: #444444;
-      padding: 0;
-      margin: 0 0 12px 0;
+}
+
+.icon-tip {
+  position: absolute;
+  top: 22px;
+  left: 100px;
+}
+
+.table {
+  height: 100%;
+  .negative {
+    color: #08a24c;
+  }
+  .postive {
+    color: #ea444e;
+  }
+  .icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 4px;
+    width: 8px;
+    height: 16px;
+    background-repeat: no-repeat;
+    &.negative {
+      background-image: url(~@/assets/imgs/icons/down.svg);
     }
-    .table {
-      height: 100%;
-      .negative {
-        color: #08a24c;
-      }
-      .postive {
-        color: #ea444e;
-      }
-      .icon {
-        display: inline-block;
-        vertical-align: middle;
-        margin-left: 4px;
-        width: 8px;
-        height: 16px;
-        background-repeat: no-repeat;
-        &.negative {
-          background-image: url(~@/assets/imgs/icons/down.svg);
-        }
-        &.postive {
-          background-image: url(~@/assets/imgs/icons/up.svg);
-        }
-      }
-    }
-    .tag-list {
-      width: 100%;
-      .tag {
-        display: inline-block;
-        vertical-align: top;
-        margin-right: 6px;
-        margin-bottom: 6px;
-        padding: 0 8px;
-        line-height: 22px;
-        border-radius: 2px;
-        border: 1px solid rgba(0, 0, 0, 0.15);
-        color: rgba(0, 0, 0, 0.65);
-        font-size: 12px;
-      }
-    }
-    .tooltip-link {
-      font-size: 12px;
-      font-weight: 400;
-      color: #3a84ff;
-      line-height: 18px;
-      text-align: center;
+    &.postive {
+      background-image: url(~@/assets/imgs/icons/up.svg);
     }
   }
+}
+.tag-list {
+  width: 100%;
+  .tag {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 6px;
+    margin-bottom: 6px;
+    padding: 0 8px;
+    line-height: 22px;
+    border-radius: 2px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 12px;
+  }
+}
+.tooltip-link {
+  font-size: 12px;
+  font-weight: 400;
+  color: #3a84ff;
+  line-height: 18px;
+  text-align: center;
+  cursor: pointer;
 }
 .graph-box {
   width: 100%;
@@ -177,6 +193,40 @@ export default {
   margin: 0;
   border-bottom-right-radius: 7px;
   border-bottom-left-radius: 7px;
+}
+
+.chart-tooltip {
+  display: none;
+  position: absolute;
+  width: 440px;
+  height: 280px;
+  top: 0;
+  left: 0;
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0px 9px 28px 8px rgba(0, 0, 0, 0.05), 0px 6px 16px 0px rgba(0, 0, 0, 0.08),
+    0px 3px 6px -4px rgba(0, 0, 0, 0.12);
+  padding: 14px 20px;
+  box-sizing: border-box;
+
+  h1 {
+    font-size: 14px;
+    font-weight: 400;
+    color: #25211f;
+    line-height: 20px;
+    margin: 0 0 16px 0;
+  }
+
+  span {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 12px;
+    font-weight: 400;
+    color: #94979b;
+    line-height: 18px;
+    margin: 0 16px 12px 0;
+    cursor: pointer;
+  }
 }
 </style>
 <style lang="scss">

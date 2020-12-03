@@ -23,7 +23,14 @@
       <div class="sider-sub" v-if="showSub">
         <i class="icon el-icon-s-fold fr" @click="showSub = false"></i>
         <ul>
-          <li v-for="item in subMenu" :key="item.page" @click="pageTo(`/${path_f}/${item.page}`)">{{ item.name }}</li>
+          <li
+            v-for="item in subMenu"
+            :key="item.page"
+            :class="{ active: `/${path_f}/${item.page}` === $route.path }"
+            @click="pageTo(`/${path_f}/${item.page}`)"
+          >
+            {{ item.name }}
+          </li>
         </ul>
       </div>
       <el-main>
@@ -162,7 +169,8 @@ export default {
     document.onclick = (e) => {
       let hide = true
       e.path.forEach((item) => {
-        let className = item.className || ''
+        let className = (item && item.className) || ''
+        if (typeof className !== 'string') className = ''
         if (className.includes('el-aside') || className.includes('sider-sub')) {
           hide = false
         }
@@ -291,6 +299,10 @@ export default {
       cursor: pointer;
 
       &:hover {
+        color: #25211f;
+      }
+
+      &.active {
         color: #25211f;
       }
     }
