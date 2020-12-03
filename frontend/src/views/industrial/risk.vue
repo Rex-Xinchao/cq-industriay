@@ -5,8 +5,8 @@
       <span class="sign">汽车行业</span>
     </h1>
     <div class="chart">
-      <div class="graph-box" ></div>
-      
+      <div class="graph-box"></div>
+
       <div ref="tooltip" class="chart-tooltip" @mouseleave="hideTip">
         <h1>行业分析</h1>
         <span>行业环境</span>
@@ -55,7 +55,6 @@
         </div>
         <p class="tooltip-link"><a @click="pageTo">查看行业风险</a></p>
       </el-dialog>
-    </div>
     </div>
   </div>
 </template>
