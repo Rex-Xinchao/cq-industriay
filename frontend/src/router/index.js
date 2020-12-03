@@ -19,10 +19,16 @@ const StockCustom = () => import('@/views/stockCustom/index')
 const StockCustom_All = () => import('@/views/stockCustom/all')
 const Pillar = () => import('@/views/pillar/index')
 const PillarChart = () => import('@/views/pillar/chart')
+const Login = () => import('@/views/login')
 
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
   {
     path: '/',
     name: 'Layout',
