@@ -183,6 +183,7 @@ export default {
     width: 50%;
     height: 100%;
     display: inline-block;
+    vertical-align: top;
 
     &:nth-of-type(2) {
       padding: 0 0 0 20px;

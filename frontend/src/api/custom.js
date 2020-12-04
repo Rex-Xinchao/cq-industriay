@@ -2,23 +2,23 @@ import http from '@/libs/axios'
 const sleep = (time) => new Promise((res) => setTimeout(() => res(), time))
 
 export const loan_balance = (data) => {
-  return http.post(`/api/loan_balance`, data)
+  return http.get(`/api/loan_balance`, data)
 }
 
 export const abnormal_loan = (data) => {
-  return http.post(`/api/abnormal_loan`, data)
+  return http.get(`/api/abnormal_loan`, data)
 }
 
 export const total_loan_balance = (data) => {
-  return http.post(`/api/total_loan_balance`, data)
+  return http.get(`/api/total_loan_balance`, data)
 }
 
 export const total_abnormal_loan = (data) => {
-  return http.post(`/api/total_abnormal_loan`, data)
+  return http.get(`/api/total_abnormal_loan`, data)
 }
 
 export const core_index = (data) => {
-  return http.post(`/api/${data.industryCode}/core_index`, data)
+  return http.get(`/api/${data.industryCode}/core_index`, data)
 }
 
 export const customer_statistics = async (data) => {
@@ -46,7 +46,7 @@ export const customer_statistics = async (data) => {
     ],
     blacklistCount: 100
   }
-  return http.post(`/api/${data.industryCode}/customer_statistics`, data)
+  return http.get(`/api/${data.industryCode}/customer_statistics`, data)
 }
 
 export const customer = async (data) => {
@@ -62,5 +62,5 @@ export const customer = async (data) => {
       }
     ]
   }
-  return http.post(`/api/${data.industryCode}/customer`, data)
+  return http.get(`/api/${data.industryCode}/customer`, data)
 }
