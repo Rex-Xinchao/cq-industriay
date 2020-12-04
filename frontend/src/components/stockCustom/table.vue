@@ -20,7 +20,7 @@
             <span class="demonstration">逾期天数</span>
             <el-slider class="slider" style="margin-left: 18px" v-model="timeRange" range :max="100"></el-slider>
           </div>
-          <el-button class="save-btn fr" type="primary" @click="save">保存</el-button>
+          <el-button class="save-btn fr" type="primary" @click="init">确认</el-button>
         </div>
         <span class="button-cfg filter fr" slot="reference">
           <i class="icon-img"></i>
@@ -50,7 +50,7 @@
             <span class="demonstration">逾期天数</span>
             <el-slider class="slider" style="margin-left: 18px" v-model="timeRange" range :max="100"></el-slider>
           </div>
-          <el-button class="save-btn fr" type="primary" @click="save">保存</el-button>
+          <el-button class="save-btn fr" type="primary" @click="init">确认</el-button>
         </div>
         <span class="button-cfg filter fr" slot="reference">
           <i class="icon-img"></i>
@@ -59,15 +59,19 @@
       </el-popover>
     </div>
     <el-table v-loading="loading" class="table-main table-head-grey" :data="tableData" style="width: 100%">
-      <el-table-column prop="name" label="名称"></el-table-column>
-      <el-table-column prop="org" label="管护机构"></el-table-column>
-      <el-table-column v-if="type === 2" prop="resean" label="黑名单原因"></el-table-column>
+      <el-table-column prop="comName" label="名称"></el-table-column>
+      <el-table-column prop="buName" label="管护机构"></el-table-column>
+      <el-table-column v-if="type === 2" label="黑名单原因">
+        <template slot-scope="scope">
+          {{ scope.row.reason || '--' }}
+        </template>
+      </el-table-column>
       <el-table-column v-if="type !== 2" label="贷款余额（万元）">
-        <template slot-scope="scope">{{ numberFormat(scope.row.amount, 0) }}</template>
+        <template slot-scope="scope">{{ numberFormat(scope.row.loanBalance, 0) }}</template>
       </el-table-column>
       <el-table-column v-if="type === 1 && !title" label="逾期天数">
         <template slot-scope="scope">
-          {{ scope.row.time + '天' }}
+          {{ scope.row.overdueDay + '天' }}
         </template>
       </el-table-column>
     </el-table>
@@ -89,9 +93,7 @@ export default {
       type: 1,
       number_1: 6,
       number_2: 6,
-      number_3: 120,
       tableData: [],
-      sum: 0,
       loading: false
     }
   },
@@ -99,7 +101,8 @@ export default {
     ...mapGetters(['industry'])
   },
   props: {
-    title: String
+    title: String,
+    request: Function
   },
   watch: {
     type() {
@@ -110,22 +113,38 @@ export default {
     numberFormat,
     save() {
       this.$refs.popover.doClose()
-      this.init()
+      this.getData()
     },
     init() {
       this.loading = true
-      setTimeout(() => {
-        this.loading = false
-        this.sum = 5146
-        this.tableData = [
-          {
-            name: '客户名称',
-            org: '分行名称',
-            amount: '5146',
-            time: '23'
-          }
-        ]
-      }, 1000)
+      this.request({
+        industryCode: null,
+        buCode: null,
+        amountLower: this.amountRange[0],
+        amountUpper: this.amountRange[1],
+        overdueLower: this.timeRange[0],
+        overdueUpper: this.timeRange[0]
+      })
+        .then((res) => {
+          this.loading = false
+          this.number_1 = res.overdueCount || 0
+          this.number_2 = res.blacklistCount || 0
+          this.response = res
+          this.getData()
+        })
+        .catch((e) => {
+          this.loading = false
+          this.number_1 = 0
+          this.number_2 = 0
+          this.tableData = []
+        })
+    },
+    getData() {
+      if (this.type === 1) {
+        this.tableData = this.response.overdueCustomers || this.response.result
+      } else {
+        this.tableData = this.response.blacklist
+      }
     }
   },
   mounted() {

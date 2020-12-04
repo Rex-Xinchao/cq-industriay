@@ -26,8 +26,8 @@
       <circle-chart class="item_50" title="总投放规模" :request="total_loan_balance"></circle-chart>
       <stack-chart class="item_50" :request="abnormal_loan"></stack-chart>
       <circle-chart class="item_50" title="非正常贷款投放规模" :request="total_abnormal_loan"></circle-chart>
-      <table-com class="item_50" style="height: 385px"></table-com>
-      <table-com title="行内客户" class="item_50" style="height: 385px"></table-com>
+      <table-com class="item_50" style="height: 385px" :request="customer_statistics"></table-com>
+      <table-com title="行内客户" class="item_50" style="height: 385px" :request="customer"></table-com>
       <doucle-circle-chart
         class="item_100"
         style="height: 385px"
@@ -38,7 +38,15 @@
   </div>
 </template>
 <script>
-import { loan_balance, abnormal_loan, total_loan_balance, total_abnormal_loan, core_index } from '@/api/custom'
+import {
+  loan_balance,
+  abnormal_loan,
+  total_loan_balance,
+  total_abnormal_loan,
+  core_index,
+  customer_statistics,
+  customer
+} from '@/api/custom'
 import barChart from '@components/stockCustom/bar'
 import stackChart from '@components/stockCustom/stack'
 import circleChart from '@components/stockCustom/circle'
@@ -67,15 +75,22 @@ export default {
     abnormal_loan,
     total_loan_balance,
     total_abnormal_loan,
+    customer_statistics,
+    customer,
     pageTo(path) {
       this.$router.push(path)
     },
     getData() {
       this.loading = true
-      core_index({}).then((res) => {
-        this.loading = false
-        this.dataList = res.result
-      })
+      core_index({})
+        .then((res) => {
+          this.loading = false
+          this.dataList = res.result
+        })
+        .catch((e) => {
+          this.loading = false
+          this.dataList = [{}, {}, {}, {}]
+        })
     }
   },
   mounted() {

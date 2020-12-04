@@ -17,36 +17,50 @@ export const total_abnormal_loan = (data) => {
   return http.post(`/api/total_abnormal_loan`, data)
 }
 
-export const core_index = async (data) => {
+export const core_index = (data) => {
+  return http.post(`/api/${data.industryCode}/core_index`, data)
+}
+
+export const customer_statistics = async (data) => {
+  await sleep(1000)
+  return {
+    overdueCustomers: [
+      {
+        comName: '客户名称',
+        csfId: 'XXXXXXXXX',
+        comCode: 'XXXXXXXXXXX',
+        buName: '分行名称',
+        loanBalance: 32300,
+        overdueDay: 41
+      }
+    ],
+    overdueCount: 12,
+    blacklist: [
+      {
+        comName: '客户名称',
+        csfId: 'XXXXXXXXX',
+        comCode: 'XXXXXXXXXXX',
+        buName: '分行名称',
+        reason: '1.xxxxxx，2.xxxxxxxx'
+      }
+    ],
+    blacklistCount: 100
+  }
+  return http.post(`/api/${data.industryCode}/customer_statistics`, data)
+}
+
+export const customer = async (data) => {
   await sleep(1000)
   return {
     result: [
       {
-        indexName: '汽车产业销量指标',
-        type: 1,
-        indexes: [
-          {
-            rpt: '202012',
-            latestIndex: '54',
-            indexRatio: 51.2
-          }
-        ]
-      },
-      {
-        indexName: '汽车产业销量指标',
-        name: '测试',
-        type: 2,
-        indexes: [
-          {
-            rpt: '202012',
-            latestIndex: '54',
-            indexRatio: 51.2
-          }
-        ]
-      },
-      {},
-      {}
+        comName: '客户名称',
+        csfId: 'XXXXXXXXX',
+        comCode: 'XXXXXXXXXXX',
+        buName: '分行名称',
+        loanBalance: 32300
+      }
     ]
   }
-  return http.post(`/api/${data.industryCode}/core_index`, data)
+  return http.post(`/api/${data.industryCode}/customer`, data)
 }
