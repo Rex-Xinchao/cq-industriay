@@ -276,7 +276,7 @@ export default {
 </style>
 <style lang="scss">
 .sidebar {
-  height: calc(100% - 50px);
+  height: calc(100% - 40px);
   overflow-y: auto;
   overflow-x: hidden;
 }

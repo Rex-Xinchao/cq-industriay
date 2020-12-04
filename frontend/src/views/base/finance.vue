@@ -116,6 +116,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '~@/assets/styles/view';
+.main {
+  height: calc(100% - 40px);
+}
 .main-body {
   width: 100%;
   box-sizing: border-box;

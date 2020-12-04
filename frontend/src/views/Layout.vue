@@ -33,8 +33,9 @@
           </li>
         </ul>
       </div>
-      <el-main>
+      <el-main style="overflow: auto; background-color: #f4f6f9">
         <router-view></router-view>
+        <div class="footer">@copyright 重庆银行互联网金融部｜登录IP：172.16.238.219 上次登录时间：2020-11-25</div>
       </el-main>
     </el-container>
   </el-container>
@@ -307,5 +308,12 @@ export default {
       }
     }
   }
+}
+
+.footer {
+  font-size: 12px;
+  text-align: center;
+  padding-bottom: 24px;
+  background-color: #f4f6f9;
 }
 </style>

@@ -127,9 +127,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '~@/assets/styles/view';
+.main {
+  height: calc(100% - 40px);
+}
 .chart {
   width: 100%;
-  height: calc(100% - 40px);
   background-color: white;
   position: relative;
 }

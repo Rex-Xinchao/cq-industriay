@@ -13,36 +13,20 @@
         <li :class="{ active: type === 4 }" @click="type = 4">区域经济</li>
       </ul>
       <div class="login-search">
-        <el-input class="input search-main" size="medium" placeholder="请输入关键词"></el-input>
+        <el-autocomplete
+          class="input search-main"
+          v-model="keyword"
+          :fetch-suggestions="querySearchAsync"
+          size="medium"
+          placeholder="请输入关键词"
+        ></el-autocomplete>
         <el-button class="btn" type="primary" size="medium">搜索</el-button>
+        <div class="advanced-search">高级搜索</div>
       </div>
-      <div class="login-history">
+      <div class="login-history" v-if="list.length">
         <div class="title">热点搜索：</div>
         <div class="list">
-          <span>有色冶炼加工</span>
-          <span>有色冶炼加工</span>
-          <span>有色冶炼加工</span>
-          <span>有色冶炼加工</span>
-          <span>有色冶炼加工</span>
-          <span>有色冶炼加工</span>
-          <span>有色冶炼加工</span>
-          <span>有色冶炼加工</span>
-          <span>有色冶炼加工</span>
-          <span>有色冶炼加工</span>
-          <span>有色冶炼加工</span>
-          <span>有色冶炼加工</span>
-          <span>有色冶炼加工</span>
-          <span>有色冶炼加工</span>
-          <span>有色冶炼加工</span>
-          <span>有色冶炼加工</span>
-          <span>有色冶炼加工</span>
-          <span>有色冶炼加工</span>
-          <span>有色冶炼加工</span>
-          <span>有色冶炼加工</span>
-          <span>有色冶炼加工</span>
-          <span>有色冶炼加工</span>
-          <span>有色冶炼加工</span>
-          <span>有色冶炼加工</span>
+          <span v-for="item in list" :key="item">{{ item }}</span>
         </div>
       </div>
       <div class="login-notice">
@@ -84,8 +68,8 @@
         <div class="item">找关系</div>
         <div class="item">预警中心</div>
 
-        <div class="item">支柱产业</div>
-        <div class="item">全行客户</div>
+        <div class="item" style="cursor: pointer" @click="pageTo('/pillar/index')">支柱产业</div>
+        <div class="item" style="cursor: pointer" @click="pageTo('/stockCustom/all')">全行客户</div>
         <div class="item">城投专题</div>
         <div class="item">
           <p>房地产专题</p>
@@ -99,8 +83,19 @@
 export default {
   data() {
     return {
-      type: 1,
-      index: 1
+      keyword: null,
+      type: 3,
+      index: 1,
+      list: ['新能源汽车', '电子芯片', '零售行业', '养殖业', '建筑装饰', '房地产开发', '医药', '有色冶炼加工']
+    }
+  },
+  watch: {
+    type(data) {
+      if (data === 3) {
+        this.list = ['新能源汽车', '电子芯片', '零售行业', '养殖业', '建筑装饰', '房地产开发', '医药', '有色冶炼加工']
+      } else {
+        this.list = []
+      }
     }
   },
   methods: {
@@ -125,6 +120,13 @@ export default {
         this.index += 1
       }
       this.$refs.notice.style.marginTop = marginTop + 'px'
+    },
+    pageTo(path) {
+      this.$router.push(path)
+    },
+    querySearchAsync(queryString, cb) {
+      if (!queryString) return cb([])
+      cb([{ value: '汽车' }])
     }
   },
   mounted() {}
@@ -161,6 +163,11 @@ export default {
       text-align: center;
       float: right;
       cursor: pointer;
+
+      &:hover {
+        background: #079cf1;
+        border: 1px solid #079cf1;
+      }
     }
   }
 
@@ -203,19 +210,34 @@ export default {
       margin: 0 auto;
 
       .input {
-        width: calc(100% - 116px);
+        width: calc(100% - 150px);
         margin-right: 20px;
       }
 
       .btn {
-        width: 96px;
-        letter-spacing: 4px;
+        width: 88px;
+      }
+
+      .advanced-search {
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 14px;
+        height: 36px;
+        width: 32px;
+        margin-left: 10px;
+        color: white;
+        letter-spacing: 2px;
+        cursor: pointer;
+
+        &:hover {
+          color: #079cf1;
+        }
       }
     }
 
     .login-history {
       width: 750px;
-      margin: 20px auto 30px auto;
+      margin: 20px auto 0 auto;
       color: white;
       font-size: 12px;
       overflow: hidden;
@@ -243,7 +265,7 @@ export default {
       line-height: 30px;
       background: rgba(1, 25, 61, 0.52);
       border-radius: 2px;
-      margin: 0 auto;
+      margin: 30px auto 0 auto;
       font-size: 14px;
       color: white;
       padding: 0 16px;

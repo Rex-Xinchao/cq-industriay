@@ -246,6 +246,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '~@/assets/styles/view';
+.main {
+  height: calc(100% - 40px);
+}
 .map,
 .rank {
   display: inline-block;
