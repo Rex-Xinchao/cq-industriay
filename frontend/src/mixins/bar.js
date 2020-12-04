@@ -116,6 +116,7 @@ export default {
       this.setChartEvent()
     },
     async updateChart() {
+      if (this.noData) return
       this.loading = false
       this.noData = false
       const chartOption = await this.setChartOption()
