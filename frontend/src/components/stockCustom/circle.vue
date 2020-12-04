@@ -44,6 +44,11 @@ export default {
             }
           }
         }
+      },
+      map: {
+        big: '3000万以上',
+        middle: '500~3000万',
+        small: '500万以下'
       }
     }
   },
@@ -52,26 +57,35 @@ export default {
   },
   mixins: [resize, pie],
   props: {
-    title: String
+    title: String,
+    request: {
+      require: true,
+      type: Function
+    }
   },
   methods: {
     setChartOption() {
+      const data = this.response.result || []
       this.chartId_pie = `circleChart_${this.timeStamp}`
       this.chartOption_pie.color = this.color
       this.chartOption_pie.legend = Object.assign({}, this.chartOption_pie.legend, this.legend)
-      let data = [335, 248, 368]
-      this.data = this.legend.data.map((item, index) => {
-        return {
-          name: item,
-          value: data[index],
-          amount: Math.ceil(Math.random() * 100000)
-        }
-      })
+      this.data = []
+      for (let key in data) {
+        this.data.push({
+          name: this.map[key],
+          value: data[key].comNum,
+          amount: data[key].amount
+        })
+      }
       this.chartOption_pie.series[0].data = this.data
       if (window && window.innerWidth && window.innerWidth <= 1440) {
         this.chartOption_pie.legend.right = 0
       }
       return this.chartOption_pie
+    },
+    async getChartData() {
+      this.response = await this.request(this.urlOptions)
+      return this.response
     }
   },
   mounted() {

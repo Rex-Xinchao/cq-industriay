@@ -20,7 +20,7 @@ export default {
           left: 0
         },
         grid: {
-          left: '30px',
+          left: '40px',
           right: '20px',
           bottom: '20px',
           top: '60px'
@@ -102,6 +102,13 @@ export default {
     initChart() {
       this.myChart = echarts.init(document.getElementById(this.chartId_bar))
       this.setChartEvent()
+    },
+    async updateChart() {
+      this.loading = false
+      this.noData = false
+      const chartOption = await this.setChartOption()
+      if (!this.myChart) this.initChart()
+      this.myChart.setOption(chartOption, true)
     }
   }
 }

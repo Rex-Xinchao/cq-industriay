@@ -10,10 +10,10 @@
       <complex-chart class="item_25" title="汽车销量及同比变化" subTitle="近12月"></complex-chart>
       <line-chart class="item_25" title="行业资产负债率" name="负债率" color="#344CE9"></line-chart>
       <line-chart class="item_25" title="行业亏损企业数同比变化" name="企业数同比" color="#FF6D02"></line-chart>
-      <bar-chart class="item_50"></bar-chart>
-      <circle-chart class="item_50" title="总投放规模"></circle-chart>
-      <stack-chart class="item_50"></stack-chart>
-      <circle-chart class="item_50" title="非正常贷款投放规模"></circle-chart>
+      <bar-chart class="item_50" :request="loan_balance"></bar-chart>
+      <circle-chart class="item_50" title="总投放规模" :request="total_loan_balance"></circle-chart>
+      <stack-chart class="item_50" :request="abnormal_loan"></stack-chart>
+      <circle-chart class="item_50" title="非正常贷款投放规模" :request="total_abnormal_loan"></circle-chart>
       <table-com class="item_50" style="height: 385px"></table-com>
       <table-com title="行内客户" class="item_50" style="height: 385px"></table-com>
       <doucle-circle-chart
@@ -26,6 +26,7 @@
   </div>
 </template>
 <script>
+import { loan_balance, abnormal_loan, total_loan_balance, total_abnormal_loan } from '@/api/custom'
 import barChart from '@components/stockCustom/bar'
 import stackChart from '@components/stockCustom/stack'
 import circleChart from '@components/stockCustom/circle'
@@ -44,6 +45,10 @@ export default {
     doucleCircleChart
   },
   methods: {
+    loan_balance,
+    abnormal_loan,
+    total_loan_balance,
+    total_abnormal_loan,
     pageTo(path) {
       this.$router.push(path)
     }

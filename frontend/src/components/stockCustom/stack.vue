@@ -23,7 +23,7 @@ export default {
       tooltip: {
         formatter: function (data) {
           let time = data[0].axisValue
-          let unit = vm.isScale ? '元' : '个'
+          let unit = vm.isScale ? '万元' : '个'
           let result = `${time}<br/>`
           data.forEach((item) => {
             result += `${item.seriesName}：${item.value} ${unit}<br/>`
@@ -44,28 +44,47 @@ export default {
       }
     }
   },
+  props: {
+    request: {
+      require: true,
+      type: Function
+    }
+  },
   computed: {
     ...mapGetters(['industry'])
   },
   mixins: [resize, bar],
   watch: {
     isScale() {
-      this.drawChart()
+      this.updateChart()
     }
   },
   methods: {
     setChartOption() {
+      const data = this.response.result || []
       this.chartId_bar = 'stackChart'
       this.chartOption_bar.color = this.color
       this.chartOption_bar.legend = this.legend
       this.chartOption_bar.tooltip = Object.assign({}, this.chartOption_bar.tooltip, this.tooltip)
       this.chartOption_bar.grid = Object.assign({}, this.chartOption_bar.grid, this.grid)
-      // this.chartOption.yAxis.minInterval = max < 10 ? 1 : 10
-      // this.chartOption.yAxis.max = max ? max : 10
-      this.chartOption_bar.xAxis.data = ['2020 Q1', '2020 Q2', '2020 Q3', '2020 Q4']
-      this.chartOption_bar.series = [
-        {
-          name: '关注类',
+      this.chartOption_bar.xAxis.data = []
+      this.chartOption_bar.series = []
+      let max = 0
+      let badMap = {}
+      data.forEach((item) => {
+        let key = this.isScale ? 'badloan' : 'comNum'
+        let sum = 0
+        item.badList.forEach((bad) => {
+          badMap[bad.badloanType] = badMap[bad.badloanType] || []
+          badMap[bad.badloanType].push(bad[key])
+          sum += bad[key]
+        })
+        max = Math.max(max, sum)
+        this.chartOption_bar.xAxis.data.push(item.rpt)
+      })
+      for (let key in badMap) {
+        this.chartOption_bar.series.push({
+          name: key,
           type: 'bar',
           barWidth: '36%',
           stack: '总量',
@@ -73,43 +92,16 @@ export default {
             show: false,
             position: 'insideRight'
           },
-          data: [320, 302, 301, 34]
-        },
-        {
-          name: '次级类',
-          type: 'bar',
-          barWidth: '36%',
-          stack: '总量',
-          label: {
-            show: false,
-            position: 'insideRight'
-          },
-          data: [20, 132, 101, 134]
-        },
-        {
-          name: '可疑类',
-          type: 'bar',
-          barWidth: '36%',
-          stack: '总量',
-          label: {
-            show: false,
-            position: 'insideRight'
-          },
-          data: [220, 182, 91, 234]
-        },
-        {
-          name: '损失类',
-          type: 'bar',
-          barWidth: '36%',
-          stack: '总量',
-          label: {
-            show: false,
-            position: 'insideRight'
-          },
-          data: [150, 12, 201, 154]
-        }
-      ]
+          data: badMap[key]
+        })
+      }
+      this.chartOption_bar.yAxis.minInterval = max < 10 ? 1 : 10
+      this.chartOption_bar.yAxis.max = max ? max : 10
       return this.chartOption_bar
+    },
+    async getChartData() {
+      this.response = await this.request(this.urlOptions)
+      return this.response
     }
   },
   mounted() {
