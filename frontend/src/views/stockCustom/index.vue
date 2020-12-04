@@ -6,10 +6,22 @@
       <el-button class="fr" @click="pageTo('/analysis/env')">查看更多指标</el-button>
     </h1>
     <div class="item-box">
-      <complex-chart class="item_25" title="汽车产量及同比变化" subTitle="近12月"></complex-chart>
-      <complex-chart class="item_25" title="汽车销量及同比变化" subTitle="近12月"></complex-chart>
-      <line-chart class="item_25" title="行业资产负债率" name="负债率" color="#344CE9"></line-chart>
-      <line-chart class="item_25" title="行业亏损企业数同比变化" name="企业数同比" color="#FF6D02"></line-chart>
+      <div v-loading="loading" class="item_25">
+        <complex-chart v-if="dataList[0].type === 1" class="fill" :chartData="dataList[0]"></complex-chart>
+        <line-chart v-else class="fill" :chartData="dataList[0]"></line-chart>
+      </div>
+      <div v-loading="loading" class="item_25">
+        <complex-chart v-if="dataList[1].type === 1" class="fill" :chartData="dataList[0]"></complex-chart>
+        <line-chart v-else class="fill" :chartData="dataList[1]"></line-chart>
+      </div>
+      <div v-loading="loading" class="item_25">
+        <complex-chart v-if="dataList[2].type === 1" class="fill" :chartData="dataList[0]"></complex-chart>
+        <line-chart v-else class="fill" :chartData="dataList[2]"></line-chart>
+      </div>
+      <div v-loading="loading" class="item_25">
+        <complex-chart v-if="dataList[3].type === 1" class="fill" :chartData="dataList[0]"></complex-chart>
+        <line-chart v-else class="fill" :chartData="dataList[3]"></line-chart>
+      </div>
       <bar-chart class="item_50" :request="loan_balance"></bar-chart>
       <circle-chart class="item_50" title="总投放规模" :request="total_loan_balance"></circle-chart>
       <stack-chart class="item_50" :request="abnormal_loan"></stack-chart>
@@ -26,7 +38,7 @@
   </div>
 </template>
 <script>
-import { loan_balance, abnormal_loan, total_loan_balance, total_abnormal_loan } from '@/api/custom'
+import { loan_balance, abnormal_loan, total_loan_balance, total_abnormal_loan, core_index } from '@/api/custom'
 import barChart from '@components/stockCustom/bar'
 import stackChart from '@components/stockCustom/stack'
 import circleChart from '@components/stockCustom/circle'
@@ -35,6 +47,12 @@ import lineChart from '@components/stockCustom/line'
 import tableCom from '@components/stockCustom/table'
 import doucleCircleChart from '@components/stockCustom/circle_double'
 export default {
+  data() {
+    return {
+      loading: false,
+      dataList: [{}, {}, {}, {}]
+    }
+  },
   components: {
     barChart,
     stackChart,
@@ -51,10 +69,25 @@ export default {
     total_abnormal_loan,
     pageTo(path) {
       this.$router.push(path)
+    },
+    getData() {
+      this.loading = true
+      core_index({}).then((res) => {
+        this.loading = false
+        this.dataList = res.result
+      })
     }
+  },
+  mounted() {
+    this.getData()
   }
 }
 </script>
 <style lang="scss" scoped>
 @import '~@/assets/styles/view';
+.fill {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
 </style>

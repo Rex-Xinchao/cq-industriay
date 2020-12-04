@@ -3,7 +3,7 @@
     <h1 class="chart-title">
       {{ title }}
       <span class="chart-title_sub">{{ subTitle }}</span>
-      <i class="icon-tip" title="这是一个提示"></i>
+      <i class="icon-tip" :title="tip"></i>
     </h1>
     <div v-if="!noData" class="complexChart" :id="`complexChart_${timeStamp}`"></div>
     <no-data-show class="chart-nodata" :show="noData"></no-data-show>
@@ -18,6 +18,9 @@ export default {
   data() {
     let vm = this
     return {
+      title: '',
+      tip: '',
+      subTitle: '近12月',
       timeStamp: new Date().getTime(),
       legend: {
         show: true,
@@ -50,7 +53,8 @@ export default {
         let time = data[0].axisValue + '月'
         let result = `${time}<br/>`
         data.forEach((item) => {
-          result += `${item.seriesName}：${item.value}<br/>`
+          let unit = item.seriesName === '产量' ? '个' : '%'
+          result += `${item.seriesName}：${item.value}${unit}<br/>`
         })
         return result
       }
@@ -58,21 +62,31 @@ export default {
   },
   mixins: [resize, complex],
   props: {
-    title: String,
-    subTitle: String
+    chartData: Object
   },
   methods: {
+    async getChartData() {
+      this.chartData = this.chartData || {}
+      this.chartData.indexes = this.chartData.indexes || []
+      this.noData = this.chartData.indexes.length === 0
+      this.title = this.chartData.indexName
+      this.tip = this.chartData.indexName
+      return this.chartData
+    },
     setChartOption() {
       this.chartId_c = `complexChart_${this.timeStamp}`
       this.chartOption_complex.tooltip.formatter = this.formatter
       this.chartOption_complex.legend = this.legend
       this.chartOption_complex.grid = this.grid
       this.chartOption_complex.series = this.series
-      let max = 12
-      this.chartOption_complex.yAxis[0].max = max ? max : 10
-      this.chartOption_complex.xAxis.data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-      this.chartOption_complex.series[0].data = [12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
-      this.chartOption_complex.series[1].data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      this.chartOption_complex.xAxis.data = []
+      this.chartOption_complex.series[0].data = []
+      this.chartOption_complex.series[1].data = []
+      this.complexData.indexes.forEach((item) => {
+        this.chartOption_complex.xAxis.data.push(item.rpt)
+        this.chartOption_complex.series[0].data.push(item.latestIndex)
+        this.chartOption_complex.series[1].data.push(item.indexRatio)
+      })
       return this.chartOption_complex
     }
   },

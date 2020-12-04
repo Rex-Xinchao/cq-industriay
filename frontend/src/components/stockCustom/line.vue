@@ -2,7 +2,7 @@
   <div class="chartMain" v-loading="loading">
     <h1 class="chart-title">
       {{ title }}
-      <i class="icon-tip" title="这是一个提示"></i>
+      <i class="icon-tip" :title="tip"></i>
     </h1>
     <div v-if="!noData" class="lineChart" :id="`lineChart_${timeStamp}`"></div>
     <no-data-show class="chart-nodata" :show="noData"></no-data-show>
@@ -17,6 +17,9 @@ export default {
   data() {
     const vm = this
     return {
+      title: '',
+      tip: '',
+      subTitle: '近12月',
       timeStamp: new Date().getTime(),
       tooltip: {
         trigger: 'axis',
@@ -24,7 +27,7 @@ export default {
           let time = data[0].axisValue + '月'
           let result = `${time}<br/>`
           data.forEach((item) => {
-            result += `${item.seriesName}：${item.value}%<br/>`
+            result += `${vm.name}：${item.value}%<br/>`
           })
           return result
         }
@@ -39,7 +42,7 @@ export default {
         top: '20px'
       },
       series: {
-        name: vm.name,
+        name: null,
         type: 'line',
         smooth: true,
         data: [],
@@ -47,7 +50,7 @@ export default {
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
             {
               offset: 0,
-              color: vm.color
+              color: '#344CE9'
             },
             {
               offset: 1,
@@ -60,26 +63,42 @@ export default {
   },
   mixins: [resize, line],
   props: {
-    title: String,
-    subTitle: String,
-    name: String,
-    color: String
+    chartData: Object
+  },
+  watch: {
+    chartData: {
+      immediate: true,
+      handler() {
+        this.drawChart()
+      }
+    }
   },
   methods: {
+    async getChartData() {
+      this.chartData = this.chartData || {}
+      this.chartData.indexes = this.chartData.indexes || []
+      this.noData = this.chartData.indexes.length === 0
+      this.title = this.chartData.indexName
+      this.tip = this.chartData.indexName
+      this.name = this.chartData.name
+      return this.chartData
+    },
     setChartOption() {
       this.chartId_line = `lineChart_${this.timeStamp}`
       this.chartOption_line.color = this.color
       this.chartOption_line.tooltip = Object.assign({}, this.chartOption_line.tooltip, this.tooltip)
       this.chartOption_line.grid = Object.assign({}, this.chartOption_line.grid, this.grid)
       this.chartOption_line.legend = this.legend
+      this.series.name = this.name
       this.chartOption_line.series = this.series
-      this.chartOption_line.xAxis.data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-      this.chartOption_line.series.data = [50, 10, 21, 9, 30, 12, 6, 5, 8, 3, 2, 1]
+      this.chartOption_line.xAxis.data = []
+      this.chartOption_line.series.data = []
+      this.lineData.indexes.forEach((item) => {
+        this.chartOption_line.xAxis.data.push(item.rpt)
+        this.chartOption_line.series.data.push(item.indexRatio)
+      })
       return this.chartOption_line
     }
-  },
-  mounted() {
-    this.drawChart()
   }
 }
 </script>

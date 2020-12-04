@@ -5,6 +5,7 @@ export default {
       loading: false,
       noData: false,
       myChart: null,
+      lineData: null,
       chartId_line: 'lineChart',
       chartOption_line: {
         tooltip: {
@@ -89,9 +90,9 @@ export default {
     },
     async drawChart() {
       this.loading = true
-      await this.getChartData()
+      this.lineData = await this.getChartData()
       this.loading = false
-      this.noData = false
+      if (this.noData) return
       const chartOption = await this.setChartOption()
       if (!this.myChart) this.initChart()
       this.myChart.setOption(chartOption, true)

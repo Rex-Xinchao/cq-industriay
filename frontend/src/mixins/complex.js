@@ -5,6 +5,7 @@ export default {
       loading: false,
       noData: false,
       myChart: null,
+      complexData: null,
       chartId_c: 'complexChart',
       chartOption_complex: {
         tooltip: {
@@ -116,9 +117,9 @@ export default {
     },
     async drawChart() {
       this.loading = true
-      await this.getChartData()
+      this.complexData = await this.getChartData()
       this.loading = false
-      this.noData = false
+      if (this.noData) return
       const chartOption = await this.setChartOption()
       if (!this.myChart) this.initChart()
       this.myChart.setOption(chartOption, true)
