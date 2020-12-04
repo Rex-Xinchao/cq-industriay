@@ -61,7 +61,7 @@ export default {
   },
   methods: {
     setChartOption() {
-      const data = this.response.result || []
+      const data = this.barData
       this.chartId_bar = 'stackChart'
       this.chartOption_bar.color = this.color
       this.chartOption_bar.legend = this.legend
@@ -98,10 +98,6 @@ export default {
       this.chartOption_bar.yAxis.minInterval = max < 10 ? 1 : 10
       this.chartOption_bar.yAxis.max = max ? max : 10
       return this.chartOption_bar
-    },
-    async getChartData() {
-      this.response = await this.request(this.urlOptions)
-      return this.response
     }
   },
   mounted() {

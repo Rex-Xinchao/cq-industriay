@@ -1,7 +1,8 @@
 import axios from 'axios'
 import router from '@/router/index'
 const CancelToken = axios.CancelToken
-axios.defaults.timeout = 50000
+axios.defaults.timeout = 5000
+// axios.defaults.timeout = 50000
 
 axios.interceptors.request.use(
   (config) => {
@@ -20,35 +21,11 @@ axios.interceptors.response.use((response) => {
   return response.data
 })
 
-class ajax {
-  constructor(option) {
-    this.source = CancelToken.source()
-    this.Pro = axios({ ...option, cancelToken: this.source.token })
-  }
-  then(func) {
-    this.Pro.then((request) => {
-      func(request)
-    })
-    return this
-  }
-  catch(func) {
-    this.Pro.catch((error) => {
-      if (error.__proto__.__CANCEL__) {
-      } else {
-        func(error)
-      }
-    })
-    return this
-  }
-  abort() {
-    this.source.cancel()
-  }
-}
-
 const http = {
   request(opts) {
     opts.headers = Object.assign({}, opts.headers || {})
-    return new ajax(opts)
+    let source = CancelToken.source()
+    return axios({ ...opts, cancelToken: source.token })
   },
   get(url, params, opts = {}) {
     opts.method = 'get'

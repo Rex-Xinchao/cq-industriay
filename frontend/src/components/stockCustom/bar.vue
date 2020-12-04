@@ -43,10 +43,10 @@ export default {
   },
   methods: {
     setChartOption() {
+      const data = this.barData
       const vm = this
       this.chartOption_bar.color = this.color
       this.chartOption_bar.grid.top = '20px'
-      const data = this.response.result || []
       this.chartOption_bar.series = {
         type: 'bar',
         barWidth: '36%',
@@ -74,10 +74,6 @@ export default {
       this.chartOption_bar.yAxis.minInterval = max < 10 ? 1 : 10
       this.chartOption_bar.yAxis.max = max ? max : 10
       return this.chartOption_bar
-    },
-    async getChartData() {
-      this.response = await this.request(this.urlOptions)
-      return this.response
     }
   },
   mounted() {

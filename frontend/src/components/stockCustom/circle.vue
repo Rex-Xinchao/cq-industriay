@@ -65,7 +65,7 @@ export default {
   },
   methods: {
     setChartOption() {
-      const data = this.response.result || []
+      const data = this.pieData
       this.chartId_pie = `circleChart_${this.timeStamp}`
       this.chartOption_pie.color = this.color
       this.chartOption_pie.legend = Object.assign({}, this.chartOption_pie.legend, this.legend)
@@ -82,10 +82,6 @@ export default {
         this.chartOption_pie.legend.right = 0
       }
       return this.chartOption_pie
-    },
-    async getChartData() {
-      this.response = await this.request(this.urlOptions)
-      return this.response
     }
   },
   mounted() {

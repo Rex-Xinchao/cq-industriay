@@ -5,6 +5,7 @@ export default {
       loading: false,
       noData: false,
       myChart: null,
+      barData: null,
       chartId_bar: 'barChart',
       chartOption_bar: {
         tooltip: {
@@ -88,18 +89,29 @@ export default {
     setChartEvent() {},
     async getChartData() {
       const sleep = (time) => new Promise((res) => setTimeout(() => res(), time))
-      await sleep(1000)
+      if (this.request) {
+        let result = []
+        this.response = await this.request(this.urlOptions)
+          .then((res) => res)
+          .catch((e) => {})
+        result = (this.response && this.response.result) || []
+        this.noData = result.length === 0
+      } else {
+        await sleep(1000)
+        return []
+      }
     },
     async drawChart() {
       this.loading = true
-      await this.getChartData()
+      this.barData = await this.getChartData()
       this.loading = false
-      this.noData = false
+      if (this.noData) return
       const chartOption = await this.setChartOption()
       if (!this.myChart) this.initChart()
       this.myChart.setOption(chartOption, true)
     },
     initChart() {
+      if (this.noData) return
       this.myChart = echarts.init(document.getElementById(this.chartId_bar))
       this.setChartEvent()
     },
