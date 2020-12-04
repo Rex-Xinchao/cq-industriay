@@ -222,6 +222,7 @@ export default {
 }
 .chart {
   width: 100%;
+  height: calc(100% - 40px);
   background-color: white;
   position: relative;
 }

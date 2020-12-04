@@ -170,7 +170,9 @@ export default {
       }
       if (!this.myChart) {
         this.myChart = echarts.init(document.getElementById('map'))
-        this.myChart.on('click', (params) => {
+        let timer = null
+        this.myChart.on('dblclick', (params) => {
+          timer && clearTimeout(timer)
           if (this.activeType === 'all') {
             if (['重庆', '陕西', '贵州', '四川'].includes(params.name)) {
               switch (params.name) {
@@ -193,9 +195,13 @@ export default {
               }
               this.drawChart()
             }
-          } else {
-            this.handleOpen(params.name)
           }
+        })
+        this.myChart.on('click', (params) => {
+          timer && clearTimeout(timer)
+          timer = setTimeout(() => {
+            this.handleOpen(params.name)
+          }, 500)
         })
       }
       this.myChart.setOption(this.mapOption, true)

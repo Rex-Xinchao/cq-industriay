@@ -2,7 +2,7 @@
   <div class="com-main finance-table-main">
     <h1 class="main-title">
       {{ title }}
-      <i class="icon-tip" title="这是一个提示"></i>
+      <i class="icon-tip" title="数据来源于行业宏观经济指标和龙头企业财务数据"></i>
     </h1>
     <el-table v-loading="loading" class="table" :data="tableData" height="200px">
       <el-table-column prop="name" label=""></el-table-column>

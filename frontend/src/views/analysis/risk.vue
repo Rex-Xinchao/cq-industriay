@@ -3,6 +3,7 @@
     <h1 class="main-title">
       行业风险
       <span class="sign">汽车行业</span>
+      <el-button class="fr" @click="pageTo('/industrial/risk')">查看上下游风险</el-button>
     </h1>
     <div class="main-body item-box">
       <pack-chart class="item_60" style="height: 460px; background-color: #f4f6f9"></pack-chart>
@@ -84,6 +85,9 @@ export default {
         this.bond = bond
         this.stock = stock
       }, 1000)
+    },
+    pageTo(path) {
+      this.$router.push(path)
     }
   },
   mounted() {

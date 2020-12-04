@@ -8,7 +8,7 @@
       <span class="icon-box">
         <i class="icon-img icon-line" :class="{ active: chartType === 'line' }" @click="chartType = 'line'"></i>
         <i class="icon-img icon-bar" :class="{ active: chartType === 'bar' }" @click="chartType = 'bar'"></i>
-        <time-select v-model="dateTime"></time-select>
+        <time-select v-model="dateTime" :options="options" startValue="1Y"></time-select>
       </span>
     </h1>
     <p class="right-main-tip">来源：国家统计局&nbsp;&nbsp;&nbsp;&nbsp;频率：月&nbsp;&nbsp;&nbsp;&nbsp;单位：万辆</p>
@@ -77,7 +77,29 @@ export default {
           }
         }
       },
-      dateTime: []
+      dateTime: [],
+      options: [
+        {
+          value: '1Y',
+          label: '最近1年'
+        },
+        {
+          value: '3Y',
+          label: '最近3年'
+        },
+        {
+          value: '5Y',
+          label: '最近5年'
+        },
+        {
+          value: 'udf',
+          label: '自定义'
+        },
+        {
+          value: 'udf_show',
+          label: '自定义'
+        }
+      ]
     }
   },
   mixins: [resize, bar, line],

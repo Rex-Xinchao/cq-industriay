@@ -3,7 +3,7 @@
     <div class="operation-bar">
       <span class="bar-item" :class="{ active: isScale }" @click="isScale = true">贷款余额规模</span>
       <span class="bar-item" :class="{ active: !isScale }" @click="isScale = false">贷款企业数量</span>
-      <i class="icon-tip" title="这是一个提示"></i>
+      <i class="icon-tip" :title="`样本来源于重庆银行${industry}授信客户`"></i>
     </div>
     <div v-loading="loading" v-if="!noData" id="barChart"></div>
     <no-data-show v-loading="loading" class="chart-nodata" :show="noData"></no-data-show>
@@ -13,12 +13,16 @@
 <script>
 import resize from '@/mixins/resize'
 import bar from '@/mixins/bar'
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
       isScale: true,
       color: ['#3398DB']
     }
+  },
+  computed: {
+    ...mapGetters(['industry'])
   },
   mixins: [resize, bar],
   watch: {

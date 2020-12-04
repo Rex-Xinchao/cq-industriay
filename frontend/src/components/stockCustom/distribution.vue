@@ -38,7 +38,7 @@
     <div v-loading="loading" style="width: 100%">
       <div v-if="distributionType === 1" class="information-main">
         <div class="chart-main" id="chart"></div>
-        <el-table class="table-main" :data="tableData">
+        <el-table v-loading="tableLoading" class="table-main" :data="tableData">
           <el-table-column prop="name" label="客户"></el-table-column>
           <el-table-column prop="org" label="所属行业"></el-table-column>
           <el-table-column label="投放规模（万元）">
@@ -53,7 +53,7 @@
       </div>
       <div v-else class="information-main">
         <div class="map-main" id="map"></div>
-        <div class="legend-main">
+        <div v-loading="tableLoading" class="legend-main">
           <p class="title">
             全部非正常客户数：
             <span class="info-num">700家</span>
@@ -103,7 +103,7 @@
             </span>
           </p>
         </div>
-        <el-table class="table-main_min" :data="tableData">
+        <el-table v-loading="tableLoading" class="table-main_min" :data="tableData">
           <el-table-column prop="name" label="客户"></el-table-column>
           <el-table-column prop="org" label="所属行业"></el-table-column>
           <el-table-column label="投放规模（万元）" width="180">
@@ -133,6 +133,7 @@ export default {
   data() {
     return {
       loading: false,
+      tableLoading: false,
       activeType: 'all',
       type: 1,
       typeSelect: '',
@@ -263,7 +264,15 @@ export default {
       }, 1000)
     },
     initChart() {
-      this.myChart = echarts.init(document.getElementById('chart'))
+      if (!this.myChart) {
+        this.myChart = echarts.init(document.getElementById('chart'))
+        this.myChart.on('click', (data) => {
+          this.tableLoading = true
+          setTimeout(() => {
+            this.tableLoading = false
+          }, 1000)
+        })
+      }
       this.myChart.setOption(this.chartOption, true)
       this.myChart.resize()
       this.loading = false
@@ -290,7 +299,15 @@ export default {
           break
       }
       this.mapOption.series[0].map = 'map'
-      this.mapChart = echarts.init(document.getElementById('map'))
+      if (!this.mapChart) {
+        this.mapChart = echarts.init(document.getElementById('map'))
+        this.mapChart.on('click', (data) => {
+          this.tableLoading = true
+          setTimeout(() => {
+            this.tableLoading = false
+          }, 1000)
+        })
+      }
       this.mapChart.setOption(this.mapOption, true)
       this.mapChart.resize()
       this.loading = false

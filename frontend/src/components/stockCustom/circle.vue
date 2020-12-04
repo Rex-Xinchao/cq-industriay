@@ -2,7 +2,7 @@
   <div class="chartMain" v-loading="loading">
     <h1 class="chart-title">
       {{ title }}
-      <i class="icon-tip" title="这是一个提示"></i>
+      <i class="icon-tip" :title="`样本来源于重庆银行${industry}授信客户`"></i>
     </h1>
     <div v-if="!noData" class="circleChart" :id="`circleChart_${timeStamp}`"></div>
     <no-data-show class="chart-nodata" :show="noData"></no-data-show>
@@ -13,6 +13,7 @@
 import { numberFormat } from '@/libs/utils'
 import resize from '@/mixins/resize'
 import pie from '@/mixins/pie'
+import { mapGetters } from 'vuex'
 export default {
   data() {
     let vm = this
@@ -45,6 +46,9 @@ export default {
         }
       }
     }
+  },
+  computed: {
+    ...mapGetters(['industry'])
   },
   mixins: [resize, pie],
   props: {

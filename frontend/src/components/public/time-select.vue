@@ -2,11 +2,11 @@
   <div class="time-select-main">
     <el-select class="time-select" v-model="selectValue" placeholder="请选择" @change="showMore" size="mini">
       <el-option
-        v-for="item in options"
+        v-for="(item, index) in options"
         :key="item.value"
         :label="item.label"
         :value="item.value"
-        v-show="item.value !== 6"
+        v-show="index !== options.length - 1"
       >
         <template>
           {{ item.label }}
@@ -39,32 +39,6 @@ export default {
     let vm = this
     return {
       selectValue: vm.startValue,
-      options: [
-        {
-          value: 1,
-          label: '今日'
-        },
-        {
-          value: 2,
-          label: '最近三天'
-        },
-        {
-          value: 3,
-          label: '最近一周'
-        },
-        {
-          value: 4,
-          label: '最近一月'
-        },
-        {
-          value: 5,
-          label: '自定义'
-        },
-        {
-          value: 6,
-          label: '自定义'
-        }
-      ],
       pickerMinDate: new Date().getTime() - 3600 * 1000 * 24 * 365,
       pickerMaxDate: new Date().getTime(),
       pickerOptions: {
@@ -88,7 +62,34 @@ export default {
     },
     startValue: {
       reuired: false,
-      default: 3
+      default: '7D'
+    },
+    options: {
+      reuired: false,
+      default: () => {
+        return [
+          {
+            value: '7D',
+            label: '最近7天'
+          },
+          {
+            value: '1M',
+            label: '最近1月'
+          },
+          {
+            value: '3M',
+            label: '最近3月'
+          },
+          {
+            value: 'udf',
+            label: '自定义'
+          },
+          {
+            value: 'udf_show',
+            label: '自定义'
+          }
+        ]
+      }
     }
   },
   model: {
@@ -106,63 +107,43 @@ export default {
         if (data === 5 || data === 6) return
         let end = new Date()
         let start = new Date()
-        if (data === 2) {
-          start.setDate(start.getDate() - 2)
-        } else if (data === 3) {
-          start.setDate(start.getDate() - 6)
-        } else if (data === 4) {
-          start.setMonth(start.getMonth() - 1)
+        switch (data) {
+          case '7D':
+            start.setDate(start.getDate() - 7)
+            break
+          case '1M':
+            start.setMonth(start.getMonth() - 1)
+            break
+          case '3M':
+            start.setMonth(start.getMonth() - 3)
+            break
+          case '1Y':
+            start.setFullYear(start.getFullYear() - 1)
+            break
+          case '3Y':
+            start.setFullYear(start.getFullYear() - 3)
+            break
+          case '5Y':
+            start.setFullYear(start.getFullYear() - 5)
+            break
         }
         this.dateTime = [formatDate(start, 'yyyy-MM-dd'), formatDate(end, 'yyyy-MM-dd')]
-        this.options[5].label = this.dateTime.join(' ~ ')
+        this.options[this.options.length - 1].label = this.dateTime.join(' ~ ')
         this.$emit('update', this.dateTime)
       }
     }
   },
   methods: {
     showMore(data) {
-      if (data === 5) {
+      if (data === this.options[this.options.length - 2].value) {
         this.$refs.timePicker.showPicker()
-        this.selectValue = 6
+        this.selectValue = this.options[this.options.length - 1].value
       }
     },
     defauleChange(data) {
-      this.options[5].label = data.join(' ~ ')
+      this.options[this.options.length - 1].label = data.join(' ~ ')
       this.$emit('update', data)
     }
-  },
-  mounted() {
-    if (this.$route.query.st && this.$route.query.et) {
-      if (this.$route.query.et === formatDate('yyyy-MM-dd', new Date())) {
-        let start = new Date()
-        if (this.$route.query.st === this.$route.query.et) {
-          this.selectValue = 1
-          return
-        } else if (this.$route.query.st === formatDate('yyyy-MM-dd', new Date().setDate(new Date().getDate() - 2))) {
-          this.selectValue = 2
-          return
-        } else if (this.$route.query.st === formatDate('yyyy-MM-dd', new Date().setDate(new Date().getDate() - 6))) {
-          this.selectValue = 3
-          return
-        } else if (this.$route.query.st === formatDate('yyyy-MM-dd', new Date().setMonth(new Date().getMonth() - 1))) {
-          this.selectValue = 4
-          return
-        }
-      }
-      this.selectValue = 6
-      this.dateTime = [formatDate('yyyy-MM-dd', this.$route.query.st), formatDate('yyyy-MM-dd', this.$route.query.et)]
-      this.options[5].label = this.dateTime.join(' ~ ')
-      this.$emit('update', this.dateTime)
-    }
-    this.$eventBus.$on('timeChange', (data) => {
-      this.selectValue = 6
-      this.dateTime = [formatDate('yyyy-MM-dd', data), formatDate('yyyy-MM-dd', data)]
-      this.options[5].label = this.dateTime.join(' ~ ')
-      this.$emit('update', this.dateTime)
-    })
-  },
-  beforeDestroy() {
-    this.$eventBus.$off('timeChange')
   }
 }
 </script>

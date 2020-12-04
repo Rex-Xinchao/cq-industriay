@@ -70,9 +70,13 @@ export default {
         { label: '重庆', value: 1 },
         { label: '四川', value: 2 },
         { label: '陕西', value: 3 },
-        { label: '成都', value: 4 }
+        { label: '贵州', value: 4 }
       ],
-      orgs: []
+      orgs: [
+        { label: '工信部', value: 1 },
+        { label: '发改委', value: 2 },
+        { label: '科技部', value: 3 }
+      ]
     }
   },
   computed: {

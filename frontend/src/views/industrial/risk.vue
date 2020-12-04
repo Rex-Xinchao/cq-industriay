@@ -41,7 +41,7 @@
         </el-table>
         <h1 class="tooltip-title" style="margin-top: 12px">
           高发事件
-          <i class="icon-tip" title="这是一个提示"></i>
+          <i class="icon-tip" title="异动指标范围是行业宏观经济数据和财务数据"></i>
         </h1>
         <div class="tag-list">
           <div class="tag">调查立案</div>
@@ -132,6 +132,7 @@ export default {
 }
 .chart {
   width: 100%;
+  height: calc(100% - 40px);
   background-color: white;
   position: relative;
 }

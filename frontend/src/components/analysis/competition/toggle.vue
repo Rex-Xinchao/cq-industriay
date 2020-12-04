@@ -3,7 +3,7 @@
     <div class="operation-bar">
       <span class="bar-item" :class="{ active: isBar }" @click="isBar = true">注册资本</span>
       <span class="bar-item" :class="{ active: !isBar }" @click="isBar = false">成立时间</span>
-      <i class="icon-tip" title="这是一个提示"></i>
+      <i class="icon-tip" title="样本数据来源于工商企业"></i>
     </div>
     <div v-loading="loading" v-if="!noData" id="chart"></div>
     <no-data-show v-loading="loading" class="chart-nodata" :show="noData"></no-data-show>

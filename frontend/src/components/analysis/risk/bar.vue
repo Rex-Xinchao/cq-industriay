@@ -2,7 +2,7 @@
   <div class="chartMain">
     <h1 class="chart-title">
       {{ title }}
-      <i class="icon-tip" title="这是一个提示"></i>
+      <i class="icon-tip" title="数据来源于裁判文书"></i>
       <div class="filter fr">
         <el-select class="select" v-model="typeSelect">
           <el-option v-for="item in typeOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>

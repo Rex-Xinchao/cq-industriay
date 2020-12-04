@@ -2,7 +2,7 @@
   <div class="chartMain">
     <h1 class="chart-title">
       {{ title }}
-      <i class="icon-tip" title="这是一个提示"></i>
+      <i class="icon-tip" :title="tip"></i>
     </h1>
     <div v-loading="loading" v-if="!noData" id="barChart"></div>
     <no-data-show v-loading="loading" class="chart-nodata" :show="noData"></no-data-show>
@@ -33,7 +33,8 @@ export default {
   props: {
     requestPath: String,
     title: String,
-    legends: Array
+    legends: Array,
+    tip: String
   },
   methods: {
     setChartOption() {

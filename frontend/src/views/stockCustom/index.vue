@@ -3,6 +3,7 @@
     <h1 class="main-title">
       存量客户画像
       <span class="sign">汽车行业</span>
+      <el-button class="fr" @click="pageTo('/analysis/env')">查看更多指标</el-button>
     </h1>
     <div class="item-box">
       <complex-chart class="item_25" title="汽车产量及同比变化" subTitle="近12月"></complex-chart>
@@ -41,6 +42,11 @@ export default {
     lineChart,
     tableCom,
     doucleCircleChart
+  },
+  methods: {
+    pageTo(path) {
+      this.$router.push(path)
+    }
   }
 }
 </script>

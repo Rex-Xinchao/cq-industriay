@@ -3,12 +3,10 @@
     <h1 class="main-title">
       {{ title }}
       <div class="fr">
-        <el-select class="select" v-model="timeSelect">
-          <el-option v-for="item in timeOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
-        </el-select>
         <el-select class="select" v-model="typeSelect">
           <el-option v-for="item in typeOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
         </el-select>
+        <time-select class="select" v-model="timeSelect"></time-select>
       </div>
     </h1>
     <ul class="tag-list">
@@ -84,7 +82,9 @@
   </div>
 </template>
 <script>
+import timeSelect from '../public/time-select.vue'
 export default {
+  components: { timeSelect },
   data() {
     return {
       timeSelect: 1,
@@ -121,13 +121,13 @@ export default {
 .risk-table-main {
   .select {
     margin-left: 12px;
-    width: 110px;
+    float: right;
   }
 
   .tag-list {
     width: 100%;
     margin-top: 12px;
-    border-bottom: 1px solid #EFF0F1;
+    border-bottom: 1px solid #eff0f1;
     padding: 8px 0;
   }
 

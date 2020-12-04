@@ -2,7 +2,7 @@
   <div class="com-main data-table-main">
     <h1 class="main-title" v-if="title">
       {{ title }}
-      <i class="icon-tip" title="这是一个提示"></i>
+      <i class="icon-tip" :title="`样本来源于重庆银行${industry}授信客户`"></i>
       <el-popover ref="popover" placement="bottom" width="220" trigger="click">
         <div class="popover-main">
           <p>逾期客户筛选</p>
@@ -77,6 +77,7 @@
 <script>
 const echarts = require('echarts')
 import { numberFormat } from '@/libs/utils'
+import { mapGetters } from 'vuex'
 export default {
   data() {
     let vm = this
@@ -93,6 +94,9 @@ export default {
       sum: 0,
       loading: false
     }
+  },
+  computed: {
+    ...mapGetters(['industry'])
   },
   props: {
     title: String

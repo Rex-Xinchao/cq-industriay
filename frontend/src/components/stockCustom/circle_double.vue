@@ -3,7 +3,7 @@
     <h1 class="chart-title">
       {{ title }}
       <span class="chart-title_sub">{{ subTitle }}</span>
-      <i class="icon-tip" title="这是一个提示"></i>
+      <i class="icon-tip" :title="`重庆银行${industry}授信客户的新闻舆情事件`"></i>
       <div class="operation-bar fr">
         <span class="bar-item" :class="{ active: type === 1 }" @click="type = 1">近三月</span>
         <span class="bar-item" :class="{ active: type === 2 }" @click="type = 2">近半年</span>
@@ -31,6 +31,7 @@
 import { numberFormat } from '@/libs/utils'
 import resize from '@/mixins/resize'
 import pie from '@/mixins/pie'
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -85,6 +86,9 @@ export default {
         }
       ]
     }
+  },
+  computed: {
+    ...mapGetters(['industry'])
   },
   mixins: [resize, pie],
   props: {

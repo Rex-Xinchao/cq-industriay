@@ -2,7 +2,7 @@
   <div class="chartMain" v-loading="loading">
     <h1 class="chart-title">
       {{ title }}
-      <i class="icon-tip" title="这是一个提示"></i>
+      <i class="icon-tip" :title="tip"></i>
     </h1>
     <div v-if="!noData" class="complexChart" :id="`complexChart_${timeStamp}`"></div>
     <no-data-show class="chart-nodata" :show="noData"></no-data-show>
@@ -56,6 +56,7 @@ export default {
     title: String,
     lineTitle: String,
     barTitle: String,
+    tip: String,
     types: {
       type: Array,
       default: () => ['number', 'number']
