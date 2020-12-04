@@ -71,6 +71,15 @@ function converUnit($num, $lang = 'zh', $point = 1) {
   return $num
 }
 
+function converUnit_w($num, $point = 1) {
+  let _num = Number($num)
+  if (!isNaN(_num)) {
+    _num = _num / 10000
+    return _num
+  }
+  return $num
+}
+
 function format(time) {
   let ymd = ''
   let mouth = time.getMonth() + 1 >= 10 ? time.getMonth() + 1 : '0' + (time.getMonth() + 1)
@@ -140,4 +149,15 @@ function getAxisMax(max) {
   return Math.ceil(max / index) * index
 }
 
-export { checkAddZone, isEmail, isUrl, converUnit, formatDate, getTimeLine, getAxisMax, getAllDate, numberFormat }
+export {
+  checkAddZone,
+  isEmail,
+  isUrl,
+  converUnit,
+  converUnit_w,
+  formatDate,
+  getTimeLine,
+  getAxisMax,
+  getAllDate,
+  numberFormat
+}

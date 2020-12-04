@@ -96,6 +96,7 @@ export default {
           .catch((e) => {})
         result = (this.response && this.response.result) || []
         this.noData = result.length === 0
+        return result
       } else {
         await sleep(1000)
         return []

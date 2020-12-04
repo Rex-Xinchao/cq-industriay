@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import { converUnit_w, numberFormat } from '@/libs/utils'
 import resize from '@/mixins/resize'
 import bar from '@/mixins/bar'
 import { mapGetters } from 'vuex'
@@ -58,7 +59,7 @@ export default {
         let unit = vm.isScale ? '万元' : '个'
         let result = `${time}<br/>`
         data.forEach((item) => {
-          result += `${text}：${item.value} ${unit}<br/>`
+          result += `${text}：${numberFormat(item.value)} ${unit}<br/>`
         })
         return result
       }
@@ -66,8 +67,10 @@ export default {
       this.chartOption_bar.series.data = []
       let max = 0
       data.forEach((item) => {
-        let value = this.isScale ? item.loanBalance : item.comNum
-        max = Math.max(max, value)
+        let value = this.isScale ? converUnit_w(item.loanBalance.amount) : item.comNum
+        max = Math.max(max, Number(value))
+        console.log(value)
+        console.log(max)
         this.chartOption_bar.series.data.push(value)
         this.chartOption_bar.xAxis.data.push(item.rpt)
       })

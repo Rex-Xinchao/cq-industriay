@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import { converUnit_w, numberFormat } from '@/libs/utils'
 import resize from '@/mixins/resize'
 import bar from '@/mixins/bar'
 import { mapGetters } from 'vuex'
@@ -26,7 +27,7 @@ export default {
           let unit = vm.isScale ? '万元' : '个'
           let result = `${time}<br/>`
           data.forEach((item) => {
-            result += `${item.seriesName}：${item.value} ${unit}<br/>`
+            result += `${item.seriesName}：${numberFormat(item.value)} ${unit}<br/>`
           })
           return result
         }
@@ -76,8 +77,9 @@ export default {
         let sum = 0
         item.badList.forEach((bad) => {
           badMap[bad.badloanType] = badMap[bad.badloanType] || []
-          badMap[bad.badloanType].push(bad[key])
-          sum += bad[key]
+          let value = this.isScale ? converUnit_w(bad[key].amount) : bad[key]
+          badMap[bad.badloanType].push(value)
+          sum += Number(value)
         })
         max = Math.max(max, sum)
         this.chartOption_bar.xAxis.data.push(item.rpt)

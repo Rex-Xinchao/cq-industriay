@@ -9,7 +9,7 @@ export const abnormal_loan = (data) => {
   return http.get(`/api/abnormal_loan`, data)
 }
 
-export const total_loan_balance = (data) => {
+export const total_loan_balance = async (data) => {
   return http.get(`/api/total_loan_balance`, data)
 }
 

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { numberFormat } from '@/libs/utils'
+import { numberFormat, converUnit_w } from '@/libs/utils'
 import resize from '@/mixins/resize'
 import pie from '@/mixins/pie'
 import { mapGetters } from 'vuex'
@@ -27,8 +27,7 @@ export default {
         data: ['500万以下', '500~3000万', '3000万以上'],
         formatter: function (name) {
           let { value, amount } = { ...vm.data.find((item) => item.name === name) }
-          amount = numberFormat(amount, 0)
-          return '{a|' + name + '}' + '{b|' + value + ' 家} ' + '{b|' + amount + ' 万元} '
+          return '{a|' + name + '}' + '{b|' + value + ' 家} ' + '{b|' + amount + '万元} '
         },
         textStyle: {
           rich: {
@@ -64,6 +63,25 @@ export default {
     }
   },
   methods: {
+    async getChartData() {
+      const sleep = (time) => new Promise((res) => setTimeout(() => res(), time))
+      if (this.request) {
+        let result = []
+        this.response = await this.request(this.urlOptions)
+          .then((res) => res)
+          .catch((e) => {})
+        result = this.response
+        if (result) {
+          this.noData = !result.big
+        } else {
+          this.noData = true
+        }
+        return result
+      } else {
+        await sleep(1000)
+        return []
+      }
+    },
     setChartOption() {
       const data = this.pieData
       this.chartId_pie = `circleChart_${this.timeStamp}`
@@ -74,10 +92,16 @@ export default {
         this.data.push({
           name: this.map[key],
           value: data[key].comNum,
-          amount: data[key].amount
+          amount: converUnit_w(data[key].amount.amount)
         })
       }
       this.chartOption_pie.series[0].data = this.data
+      const isOnly = this.data.filter((item) => item.amount).length > 1
+      if (isOnly) {
+        this.chartOption_pie.series[0].label.position = 'center'
+      } else {
+        this.chartOption_pie.series[0].label.position = 'inside'
+      }
       if (window && window.innerWidth && window.innerWidth <= 1440) {
         this.chartOption_pie.legend.right = 0
       }

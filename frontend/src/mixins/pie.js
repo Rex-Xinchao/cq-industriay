@@ -27,8 +27,15 @@ export default {
             avoidLabelOverlap: false,
             hoverOffset: 3,
             label: {
+              color: 'white',
               position: 'inner',
-              formatter: '{d}%'
+              formatter: (d) => {
+                if (d.percent) {
+                  return d.percent + '%'
+                } else {
+                  return ''
+                }
+              }
             },
             labelLine: {
               show: false
@@ -45,7 +52,6 @@ export default {
     setChartEvent() {},
     async getChartData() {
       const sleep = (time) => new Promise((res) => setTimeout(() => res(), time))
-
       if (this.request) {
         let result = []
         this.response = await this.request(this.urlOptions)
