@@ -69,13 +69,9 @@ export default {
       data.forEach((item) => {
         let value = this.isScale ? converUnit_w(item.loanBalance.amount) : item.comNum
         max = Math.max(max, Number(value))
-        console.log(value)
-        console.log(max)
         this.chartOption_bar.series.data.push(value)
         this.chartOption_bar.xAxis.data.push(item.rpt)
       })
-      this.chartOption_bar.yAxis.minInterval = max < 10 ? 1 : 10
-      this.chartOption_bar.yAxis.max = max ? max : 10
       return this.chartOption_bar
     }
   },

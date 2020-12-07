@@ -27,6 +27,7 @@ export default {
         data: ['500万以下', '500~3000万', '3000万以上'],
         formatter: function (name) {
           let { value, amount } = { ...vm.data.find((item) => item.name === name) }
+          amount = amount.toFixed(2)
           return '{a|' + name + '}' + '{b|' + value + ' 家} ' + '{b|' + amount + '万元} '
         },
         textStyle: {
@@ -96,7 +97,7 @@ export default {
         })
       }
       this.chartOption_pie.series[0].data = this.data
-      const isOnly = this.data.filter((item) => item.amount).length > 1
+      const isOnly = this.data.filter((item) => item.amount).length === 1
       if (isOnly) {
         this.chartOption_pie.series[0].label.position = 'center'
       } else {

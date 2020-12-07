@@ -97,8 +97,6 @@ export default {
           data: badMap[key]
         })
       }
-      this.chartOption_bar.yAxis.minInterval = max < 10 ? 1 : 10
-      this.chartOption_bar.yAxis.max = max ? max : 10
       return this.chartOption_bar
     }
   },
