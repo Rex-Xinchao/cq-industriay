@@ -117,6 +117,9 @@ export default {
   watch: {
     type() {
       this.drawChart()
+    },
+    dataTime() {
+      this.drawChart()
     }
   },
   methods: {

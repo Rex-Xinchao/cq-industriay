@@ -32,3 +32,271 @@ export const customer = (data) => {
 export const neg_events = (data) => {
   return http.get(`/api/${data.industryCode}/neg_events`, data)
 }
+
+export const risk_event = async (data) => {
+  await sleep(1000)
+  return {
+    eventList: [
+      {
+        eventCode: 'XXXX',
+        eventName: '调查立案',
+        eventGrade: 1,
+        eventLevel: 2,
+        eventParent: 'XXXX'
+      }
+    ],
+    comList: [
+      {
+        comName: '客户A',
+        csfId: 'XXXXXXXXX',
+        comCode: 'XXXXXXXXXXX',
+        loanBalance: {
+          amount: 5000000.0,
+          currency: 'CNY',
+          unit: 'UN'
+        },
+        overdueAmount: {
+          amount: 10.0,
+          currency: 'CNY',
+          unit: 'UN'
+        },
+        overdueDay: 2,
+        events: [
+          {
+            eventCode: 'XXXX',
+            eventName: '调查立案',
+            eventGrade: 1,
+            eventLevel: 2,
+            eventParent: 'XXXX'
+          }
+        ]
+      },
+      {
+        comName: '客户A',
+        csfId: 'XXXXXXXXX',
+        comCode: 'XXXXXXXXXXX',
+        loanBalance: {
+          amount: 5000000.0,
+          currency: 'CNY',
+          unit: 'UN'
+        },
+        overdueAmount: {
+          amount: 10.0,
+          currency: 'CNY',
+          unit: 'UN'
+        },
+        overdueDay: 2,
+        events: [
+          {
+            eventCode: 'XXXX',
+            eventName: '调查立案',
+            eventGrade: 1,
+            eventLevel: 2,
+            eventParent: 'XXXX'
+          }
+        ]
+      },
+      {
+        comName: '客户A',
+        csfId: 'XXXXXXXXX',
+        comCode: 'XXXXXXXXXXX',
+        loanBalance: {
+          amount: 5000000.0,
+          currency: 'CNY',
+          unit: 'UN'
+        },
+        overdueAmount: {
+          amount: 10.0,
+          currency: 'CNY',
+          unit: 'UN'
+        },
+        overdueDay: 2,
+        events: [
+          {
+            eventCode: 'XXXX',
+            eventName: '调查立案',
+            eventGrade: 1,
+            eventLevel: 2,
+            eventParent: 'XXXX'
+          }
+        ]
+      },
+      {
+        comName: '客户A',
+        csfId: 'XXXXXXXXX',
+        comCode: 'XXXXXXXXXXX',
+        loanBalance: {
+          amount: 5000000.0,
+          currency: 'CNY',
+          unit: 'UN'
+        },
+        overdueAmount: {
+          amount: 10.0,
+          currency: 'CNY',
+          unit: 'UN'
+        },
+        overdueDay: 2,
+        events: [
+          {
+            eventCode: 'XXXX',
+            eventName: '调查立案',
+            eventGrade: 1,
+            eventLevel: 2,
+            eventParent: 'XXXX'
+          }
+        ]
+      },
+      {
+        comName: '客户A',
+        csfId: 'XXXXXXXXX',
+        comCode: 'XXXXXXXXXXX',
+        loanBalance: {
+          amount: 5000000.0,
+          currency: 'CNY',
+          unit: 'UN'
+        },
+        overdueAmount: {
+          amount: 10.0,
+          currency: 'CNY',
+          unit: 'UN'
+        },
+        overdueDay: 2,
+        events: [
+          {
+            eventCode: 'XXXX',
+            eventName: '调查立案',
+            eventGrade: 1,
+            eventLevel: 2,
+            eventParent: 'XXXX'
+          }
+        ]
+      },
+      {
+        comName: '客户A',
+        csfId: 'XXXXXXXXX',
+        comCode: 'XXXXXXXXXXX',
+        loanBalance: {
+          amount: 5000000.0,
+          currency: 'CNY',
+          unit: 'UN'
+        },
+        overdueAmount: {
+          amount: 10.0,
+          currency: 'CNY',
+          unit: 'UN'
+        },
+        overdueDay: 2,
+        events: [
+          {
+            eventCode: 'XXXX',
+            eventName: '调查立案',
+            eventGrade: 1,
+            eventLevel: 2,
+            eventParent: 'XXXX'
+          }
+        ]
+      },
+      {
+        comName: '客户A',
+        csfId: 'XXXXXXXXX',
+        comCode: 'XXXXXXXXXXX',
+        loanBalance: {
+          amount: 5000000.0,
+          currency: 'CNY',
+          unit: 'UN'
+        },
+        overdueAmount: {
+          amount: 10.0,
+          currency: 'CNY',
+          unit: 'UN'
+        },
+        overdueDay: 2,
+        events: [
+          {
+            eventCode: 'XXXX',
+            eventName: '调查立案',
+            eventGrade: 1,
+            eventLevel: 2,
+            eventParent: 'XXXX'
+          }
+        ]
+      },
+      {
+        comName: '客户A',
+        csfId: 'XXXXXXXXX',
+        comCode: 'XXXXXXXXXXX',
+        loanBalance: {
+          amount: 5000000.0,
+          currency: 'CNY',
+          unit: 'UN'
+        },
+        overdueAmount: {
+          amount: 10.0,
+          currency: 'CNY',
+          unit: 'UN'
+        },
+        overdueDay: 2,
+        events: [
+          {
+            eventCode: 'XXXX',
+            eventName: '调查立案',
+            eventGrade: 1,
+            eventLevel: 2,
+            eventParent: 'XXXX'
+          }
+        ]
+      },
+      {
+        comName: '客户A',
+        csfId: 'XXXXXXXXX',
+        comCode: 'XXXXXXXXXXX',
+        loanBalance: {
+          amount: 5000000.0,
+          currency: 'CNY',
+          unit: 'UN'
+        },
+        overdueAmount: {
+          amount: 10.0,
+          currency: 'CNY',
+          unit: 'UN'
+        },
+        overdueDay: 2,
+        events: [
+          {
+            eventCode: 'XXXX',
+            eventName: '调查立案',
+            eventGrade: 1,
+            eventLevel: 2,
+            eventParent: 'XXXX'
+          }
+        ]
+      },
+      {
+        comName: '客户A',
+        csfId: 'XXXXXXXXX',
+        comCode: 'XXXXXXXXXXX',
+        loanBalance: {
+          amount: 5000000.0,
+          currency: 'CNY',
+          unit: 'UN'
+        },
+        overdueAmount: {
+          amount: 10.0,
+          currency: 'CNY',
+          unit: 'UN'
+        },
+        overdueDay: 2,
+        events: [
+          {
+            eventCode: 'XXXX',
+            eventName: '调查立案',
+            eventGrade: 1,
+            eventLevel: 2,
+            eventParent: 'XXXX'
+          }
+        ]
+      }
+    ]
+  }
+  return http.get(`/api/risk_event`, data)
+}

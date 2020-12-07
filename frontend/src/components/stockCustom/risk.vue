@@ -9,109 +9,119 @@
         <time-select class="select" v-model="timeSelect"></time-select>
       </div>
     </h1>
-    <ul class="tag-list">
-      <li
-        v-for="(item, index) in tags"
-        :key="index"
-        class="event-tag"
-        :class="`tag-grade_${item.grade}`"
-        @click="pageTo(item)"
-      >
-        {{ item.name }}
-      </li>
-    </ul>
-    <ul class="company-list">
-      <li class="company-main">
-        <p class="line info-line">
-          <span>客户A公司</span>
-          <span>投放规模：12亿</span>
-          <span>逾期金额：0</span>
-          <span>逾期天数：0</span>
-        </p>
-        <p class="line tag-line">
-          <span
-            v-for="(item, index) in tags"
-            :key="index"
-            class="event-tag"
-            :class="`tag-grade_${item.grade}`"
-            @click="pageTo(item)"
-          >
-            {{ item.name }}
-          </span>
-        </p>
-      </li>
-      <li class="company-main">
-        <p class="line info-line">
-          <span>客户A公司</span>
-          <span>投放规模：12亿</span>
-          <span>逾期金额：0</span>
-          <span>逾期天数：0</span>
-        </p>
-        <p class="line tag-line">
-          <span
-            v-for="(item, index) in tags"
-            :key="index"
-            class="event-tag"
-            :class="`tag-grade_${item.grade}`"
-            @click="pageTo(item)"
-          >
-            {{ item.name }}
-          </span>
-        </p>
-      </li>
-      <li class="company-main">
-        <p class="line info-line">
-          <span>客户A公司</span>
-          <span>投放规模：12亿</span>
-          <span>逾期金额：0</span>
-          <span>逾期天数：0</span>
-        </p>
-        <p class="line tag-line">
-          <span
-            v-for="(item, index) in tags"
-            :key="index"
-            class="event-tag"
-            :class="`tag-grade_${item.grade}`"
-            @click="pageTo(item)"
-          >
-            {{ item.name }}
-          </span>
-        </p>
-      </li>
-    </ul>
+    <div v-loading="loading">
+      <ul class="tag-list">
+        <li
+          v-for="(item, index) in tags"
+          :key="index"
+          class="event-tag"
+          :class="`tag-grade_${item.eventGrade}`"
+          @click="pageTo(item)"
+        >
+          {{ item.eventName }}
+        </li>
+      </ul>
+      <ul class="company-list" :id="tableId">
+        <li class="company-main" v-for="(item, index) in companys" :key="index">
+          <p class="line info-line">
+            <span>{{ item.comName }}</span>
+            <span>
+              投放规模：{{
+                item.loanBalance && item.loanBalance.amount
+                  ? `${converUnit(item.loanBalance.amount)} ${item.loanBalance.currency}`
+                  : '--'
+              }}
+            </span>
+            <span>
+              逾期金额：{{
+                item.overdueAmount && item.overdueAmount.amount
+                  ? `${converUnit(item.overdueAmount.amount)} ${item.overdueAmount.currency}`
+                  : '--'
+              }}
+            </span>
+            <span>逾期天数：{{ item.overdueDay }}</span>
+          </p>
+          <p class="line tag-line">
+            <span
+              v-for="(event, index) in item.events"
+              :key="index"
+              class="event-tag"
+              :class="`tag-grade_${event.eventGrade}`"
+              @click="pageTo(event)"
+            >
+              {{ event.eventName }}
+            </span>
+          </p>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 <script>
-import timeSelect from '../public/time-select.vue'
+import { converUnit } from '@/libs/utils'
+import { risk_event } from '@/api/custom'
+import scroll from '@/mixins/scroll'
 export default {
-  components: { timeSelect },
   data() {
     return {
-      timeSelect: 1,
-      timeOptions: [
-        { label: '近三月', value: 1 },
-        { label: '近半年', value: 2 },
-        { label: '近一年', value: 3 }
-      ],
+      tableId: 'riskTable',
+      loading: false,
+      timeSelect: [],
       typeSelect: 1,
       typeOptions: [{ label: '投资规模', value: 1 }],
-      tags: [
-        { name: '销户', grade: 1 },
-        { name: '面临困难', grade: 1 },
-        { name: '股东减持', grade: 2 },
-        { name: '其他消息', grade: 2 },
-        { name: '调查立案', grade: 3 }
-      ]
+      tags: [],
+      companys: []
     }
   },
   props: {
     title: String
   },
+  mixins: [scroll],
+  watch: {
+    typeSelect() {
+      this.tags = []
+      this.companys = []
+      this.search()
+    },
+    timeSelect() {
+      this.tags = []
+      this.companys = []
+      this.search()
+    }
+  },
   methods: {
+    converUnit,
+    search() {
+      this.loading = true
+      risk_event({
+        eventCode: this.typeSelect,
+        st: this.timeSelect[0],
+        et: this.timeSelect[1],
+        page: this.page.pageNo,
+        size: this.page.pageSize
+      })
+        .then((res) => {
+          this.loading = false
+          this.tags = res.eventList
+          if (res.comList.length === 0) {
+            this.end = true
+          } else {
+            this.companys.push(...res.comList)
+          }
+        })
+        .catch((e) => {
+          this.loading = false
+          this.tags = []
+          this.companys = []
+        })
+    },
     pageTo(item) {
       // let url = ''
       //   window.open('')
     }
+  },
+  mounted() {
+    this.search()
   }
 }
 </script>
@@ -134,6 +144,8 @@ export default {
   .company-list {
     width: 100%;
     padding: 12px 0;
+    height: 200px;
+    overflow: auto;
 
     .company-main {
       margin-bottom: 8px;

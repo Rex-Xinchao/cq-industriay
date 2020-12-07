@@ -14,11 +14,17 @@
           </div>
           <div class="block">
             <span class="demonstration">金额</span>
-            <el-slider class="slider" style="margin-left: 46px" v-model="amountRange" range :max="3000"></el-slider>
+            <el-slider
+              class="slider"
+              style="margin-left: 46px"
+              v-model="amountRange"
+              range
+              :max="100000000"
+            ></el-slider>
           </div>
           <div class="block">
             <span class="demonstration">逾期天数</span>
-            <el-slider class="slider" style="margin-left: 18px" v-model="timeRange" range :max="100"></el-slider>
+            <el-slider class="slider" style="margin-left: 18px" v-model="timeRange" range :max="365"></el-slider>
           </div>
           <el-button class="save-btn fr" type="primary" @click="init">确认</el-button>
         </div>
@@ -126,7 +132,7 @@ export default {
     converUnit,
     save() {
       this.$refs.popover.doClose()
-      this.getData()
+      this.init()
     },
     init() {
       this.loading = true

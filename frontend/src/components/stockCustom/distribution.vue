@@ -122,7 +122,7 @@
 
 <script>
 const echarts = require('echarts')
-import qc from '@/libs/map/chongqing'
+import cq from '@/libs/map/chongqing'
 import sc from '@/libs/map/sichuan'
 import gz from '@/libs/map/guizhou'
 import sx from '@/libs/map/shanxi'
@@ -213,6 +213,8 @@ export default {
           {
             type: 'map',
             roam: false,
+            left: 'center',
+            top: '10px',
             emphasis: {
               label: {
                 show: true
@@ -282,8 +284,8 @@ export default {
     },
     initMap() {
       switch (this.activeType) {
-        case 'qc':
-          echarts.registerMap('map', qc)
+        case 'cq':
+          echarts.registerMap('map', cq)
           break
         case 'sc':
           echarts.registerMap('map', sc)
