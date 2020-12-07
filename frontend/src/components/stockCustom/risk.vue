@@ -68,7 +68,14 @@ export default {
       loading: false,
       timeSelect: [],
       typeSelect: 1,
-      typeOptions: [{ label: '投资规模', value: 1 }],
+      typeOptions: [
+        { label: '贷款余额从高到低', value: 1 },
+        { label: '贷款余额从低到高', value: 2 },
+        { label: '逾期金额从高到低', value: 3 },
+        { label: '逾期金额从低到高', value: 4 },
+        { label: '逾期天数从高到低', value: 5 },
+        { label: '逾期天数从低到高', value: 6 }
+      ],
       tags: [],
       companys: []
     }

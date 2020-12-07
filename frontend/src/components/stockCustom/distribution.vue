@@ -8,13 +8,13 @@
       <el-tab-pane label="陕西省" name="sx"></el-tab-pane>
     </el-tabs>
     <div class="distribution-line operation-bar">
-      <span class="bar-item" :class="{ active: type === 1 }" @click="handleType(1)">投放产业</span>
-      <span class="bar-item" :class="{ active: type === 2 }" @click="handleType(2)">逾期贷款</span>
+      <span class="bar-item" :class="{ active: type === 1 }" @click="handleType(1)">行业分布</span>
+      <span class="bar-item" :class="{ active: type === 2 }" @click="handleType(2)">区域分布</span>
 
-      <el-select v-if="type === 1" class="select" v-model="typeSelect">
+      <el-select class="select" v-model="typeSelect">
         <el-option v-for="item in typeOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
       </el-select>
-      <el-select v-if="type === 1" class="select" v-model="classifySelect">
+      <el-select class="select" v-model="classifySelect">
         <el-option
           v-for="item in classifyOptions"
           :key="item.value"
@@ -25,28 +25,28 @@
     </div>
     <div class="distribution-line line-sub">
       <div class="radio">
-        <el-radio-group v-model="distributionType" @change="handledDistributionType">
-          <el-radio :label="1">客户分布</el-radio>
-          <el-radio :label="2">规模分布</el-radio>
+        <el-radio-group v-model="ratioSelect">
+          <el-radio :label="1">客户数量</el-radio>
+          <el-radio :label="2">贷款余额</el-radio>
+          <el-radio :label="3">逾期客户数量</el-radio>
+          <el-radio :label="4">逾期贷款余额</el-radio>
         </el-radio-group>
       </div>
-      <span v-if="distributionType === 1" class="text">投放规模：210亿</span>
-      <el-select v-if="distributionType === 1" class="select" v-model="ratioSelect">
-        <el-option v-for="item in ratioOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
-      </el-select>
+      <span v-if="ratioSelect === 1" class="text">投放规模：210亿</span>
     </div>
     <div v-loading="loading" style="width: 100%">
-      <div v-if="distributionType === 1" class="information-main">
+      <div v-if="type === 1" class="information-main">
         <div class="chart-main" id="chart"></div>
-        <el-table v-loading="tableLoading" class="table-main" :data="tableData">
-          <el-table-column prop="name" label="客户"></el-table-column>
-          <el-table-column prop="org" label="所属行业"></el-table-column>
-          <el-table-column label="投放规模（万元）">
-            <template slot-scope="scope">{{ numberFormat(scope.row.amount, 0) }}</template>
-          </el-table-column>
-          <el-table-column label="占比">
+        <el-table v-loading="tableLoading" class="table-main" :data="tableData" height="334">
+          <el-table-column prop="comName" label="客户"></el-table-column>
+          <el-table-column prop="buName" label="所属行业"></el-table-column>
+          <el-table-column prop="loanBalance.amount" label="投放规模" width="180" sortable>
             <template slot-scope="scope">
-              {{ scope.row.time + '天' }}
+              {{
+                scope.row.loanBalance && scope.row.loanBalance.amount
+                  ? `${converUnit(scope.row.loanBalance.amount)} ${scope.row.loanBalance.currency}`
+                  : '--'
+              }}
             </template>
           </el-table-column>
         </el-table>
@@ -56,65 +56,66 @@
         <div v-loading="tableLoading" class="legend-main">
           <p class="title">
             全部非正常客户数：
-            <span class="info-num">700家</span>
+            <span class="info-num">{{ total }}家</span>
           </p>
-          <p>
-            <span class="name">关注类</span>
+          <p v-for="(item, index) in badListData" :key="index">
+            <span class="name">{{ item.badloanType }}</span>
             <span class="progress">
-              <span
-                class="bar"
-                style="background-color: #4a84ff"
-                :style="{ width: `${numMap.one ? (numMap.one / numMap.total) * 100 : 0}%` }"
-              ></span>
-              {{ numMap.one }}家
-            </span>
-          </p>
-          <p>
-            <span class="name">次级类</span>
-            <span class="progress">
-              <span
-                class="bar"
-                style="background-color: #79d2de"
-                :style="{ width: `${numMap.two ? (numMap.two / numMap.total) * 100 : 0}%` }"
-              ></span>
-              {{ numMap.two }}家
-            </span>
-          </p>
-          <p>
-            <span class="name">可疑类</span>
-            <span class="progress">
-              <span
-                class="bar"
-                style="background-color: #ffd37a"
-                :style="{ width: `${numMap.three ? (numMap.three / numMap.total) * 100 : 0}%` }"
-              ></span>
-              {{ numMap.three }}家
-            </span>
-          </p>
-          <p>
-            <span class="name">损失类</span>
-            <span class="progress">
-              <span
-                class="bar"
-                style="background-color: #f57e4a"
-                :style="{ width: `${numMap.four ? (numMap.four / numMap.total) * 100 : 0}%` }"
-              ></span>
-              {{ numMap.four }}家
+              <span class="bar" style="background-color: #4a84ff" :style="getBarWidth(item)"></span>
+              {{ item.comNum }}家
             </span>
           </p>
         </div>
-        <el-table v-loading="tableLoading" class="table-main_min" :data="tableData">
-          <el-table-column prop="name" label="客户"></el-table-column>
-          <el-table-column prop="org" label="所属行业"></el-table-column>
-          <el-table-column label="投放规模（万元）" width="180">
-            <template slot-scope="scope">{{ numberFormat(scope.row.amount, 0) }}</template>
-          </el-table-column>
-          <el-table-column label="占比">
-            <template slot-scope="scope">
-              {{ scope.row.time + '天' }}
-            </template>
-          </el-table-column>
-        </el-table>
+        <div class="table-main_min">
+          <el-popover ref="popover" placement="bottom" width="220" trigger="click">
+            <div class="popover-main">
+              <p>逾期客户筛选</p>
+              <div class="block">
+                <span class="demonstration">管护机构</span>
+                <el-select class="select" v-model="orgSelect">
+                  <el-option v-for="item in orgs" :key="item.value" :label="item.label" :value="item.value"></el-option>
+                </el-select>
+              </div>
+              <div class="block">
+                <span class="demonstration">金额</span>
+                <el-slider
+                  class="slider"
+                  style="margin-left: 46px"
+                  v-model="amountRange"
+                  range
+                  :max="100000000"
+                ></el-slider>
+              </div>
+              <div class="block">
+                <span class="demonstration">逾期天数</span>
+                <el-slider class="slider" style="margin-left: 18px" v-model="timeRange" range :max="365"></el-slider>
+              </div>
+              <el-button class="save-btn fr" type="primary" @click="onFilterCheck">确认</el-button>
+            </div>
+            <span class="button-cfg filter fr" slot="reference">
+              <i class="icon-img icon-filter"></i>
+              筛选
+            </span>
+          </el-popover>
+          <el-table v-loading="tableLoading" :data="tableData" height="320">
+            <el-table-column prop="comName" label="客户"></el-table-column>
+            <el-table-column prop="buName" label="管护机构"></el-table-column>
+            <el-table-column prop="loanBalance.amount" label="投放规模" width="180" sortable>
+              <template slot-scope="scope">
+                {{
+                  scope.row.loanBalance && scope.row.loanBalance.amount
+                    ? `${converUnit(scope.row.loanBalance.amount)} ${scope.row.loanBalance.currency}`
+                    : '--'
+                }}
+              </template>
+            </el-table-column>
+            <el-table-column prop="overdueDay" label="逾期天数" sortable>
+              <template slot-scope="scope">
+                {{ scope.row.overdueDay + '天' }}
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
       </div>
     </div>
   </div>
@@ -127,11 +128,16 @@ import sc from '@/libs/map/sichuan'
 import gz from '@/libs/map/guizhou'
 import sx from '@/libs/map/shanxi'
 import all from '@/libs/map/all'
-import { numberFormat } from '@/libs/utils'
+import { converUnit } from '@/libs/utils'
 import resize from '@/mixins/resize'
+import { industry_map } from '@/api/custom'
 export default {
   data() {
     return {
+      orgSelect: null,
+      orgs: [],
+      amountRange: [0, 500],
+      timeRange: [0, 30],
       loading: false,
       tableLoading: false,
       activeType: 'all',
@@ -140,9 +146,8 @@ export default {
       typeOptions: [{ label: '全部产业', value: '' }],
       classifySelect: '',
       classifyOptions: [{ label: '全部分类', value: '' }],
-      ratioSelect: '',
+      ratioSelect: 1,
       ratioOptions: [{ label: '占行内全部投放', value: '' }],
-      distributionType: 1,
       chartOption: {
         color: ['#3FAAFF', '#B4CEDC', '#62DB9B', '#58CCF4', '#7D7CFF', '#FBB447', '#EC8B66'],
         tooltip: {
@@ -201,7 +206,7 @@ export default {
           right: '0',
           bottom: '10',
           itemWidth: '12',
-          min: 800,
+          min: 1,
           max: 500000,
           inRange: {
             color: ['#64EEFF', '#5E78FF', '#1121FF']
@@ -227,13 +232,9 @@ export default {
         ]
       },
       tableData: [],
-      numMap: {
-        total: 700,
-        one: 100,
-        two: 300,
-        three: 200,
-        four: 100
-      }
+      badListData: [],
+      total: null,
+      mapData: null
     }
   },
   mixins: [resize],
@@ -243,23 +244,22 @@ export default {
       handler() {
         this.handleType(this.type)
       }
+    },
+    ratioSelect() {
+      this.drawMap()
     }
   },
   methods: {
-    numberFormat,
+    converUnit,
     handleType(type) {
       this.type = type
-      this.handledDistributionType(this.distributionType)
-    },
-    handledDistributionType(distributionType) {
-      this.distributionType = distributionType
       this.loading = true
       setTimeout(() => {
         this.$nextTick(() => {
-          if (this.distributionType === 1) {
+          if (this.type === 1) {
             this.initChart()
           } else {
-            this.initMap()
+            this.getMapData()
           }
           this.initTable()
         })
@@ -282,7 +282,30 @@ export default {
     initTable() {
       this.tableData = []
     },
-    initMap() {
+    getMapData() {
+      let params = {
+        activeType: this.activeType,
+        typeSelect: this.typeSelect,
+        classifySelect: this.classifySelect
+      }
+      industry_map(params)
+        .then((res) => {
+          this.loading = false
+          this.mapData = res
+          this.drawMap()
+        })
+        .catch((e) => {
+          this.loading = false
+          this.mapData = {
+            regionLoan: [],
+            regionBadloan: [],
+            badList: [],
+            loanCom: []
+          }
+          this.drawMap()
+        })
+    },
+    drawMap() {
       switch (this.activeType) {
         case 'cq':
           echarts.registerMap('map', cq)
@@ -304,15 +327,113 @@ export default {
       if (!this.mapChart) {
         this.mapChart = echarts.init(document.getElementById('map'))
         this.mapChart.on('click', (data) => {
-          this.tableLoading = true
-          setTimeout(() => {
-            this.tableLoading = false
-          }, 1000)
+          switch (data.name) {
+            case '重庆市':
+              this.activeType = 'cq'
+              break
+            case '四川省':
+              this.activeType = 'sc'
+              break
+            case '贵州省':
+              this.activeType = 'gz'
+              break
+            case '陕西省':
+              this.activeType = 'sx'
+              break
+            default:
+              this.getMapTableData()
+              break
+          }
         })
       }
+      let data = this.getAreaList()
+      let max = 0
+      data.forEach((item) => {
+        max = Math.max(max, item.value)
+      })
+      this.mapOption.visualMap.max = max
+      this.mapOption.series[0].data = data
       this.mapChart.setOption(this.mapOption, true)
       this.mapChart.resize()
-      this.loading = false
+      this.setMapTable()
+    },
+    getAreaList() {
+      let data = []
+      switch (this.ratioSelect) {
+        case 1:
+          data = this.mapData.regionLoan.map((item) => {
+            return {
+              name: item.name,
+              value: item.comCount
+            }
+          })
+          break
+        case 2:
+          data = this.mapData.regionLoan.map((item) => {
+            return {
+              name: item.name,
+              value: item.amountCount.amount
+            }
+          })
+          break
+        case 3:
+          data = this.mapData.regionBadloan.map((item) => {
+            return {
+              name: item.name,
+              value: item.comCount
+            }
+          })
+          break
+        case 4:
+          data = this.mapData.regionBadloan.map((item) => {
+            return {
+              name: item.name,
+              value: item.amountCount.amount
+            }
+          })
+          break
+      }
+      return data
+    },
+    getMapTableData() {
+      console.log(123)
+      this.loading = true
+      let params = {
+        activeType: this.activeType,
+        typeSelect: this.typeSelect,
+        classifySelect: this.classifySelect
+      }
+      industry_map(params)
+        .then((res) => {
+          this.loading = false
+          this.mapData = res
+        })
+        .catch((e) => {
+          this.loading = false
+          this.mapData = {
+            regionLoan: [],
+            regionBadloan: [],
+            badList: [],
+            loanCom: []
+          }
+        })
+    },
+    setMapTable() {
+      this.tableData = this.mapData.loanCom
+      this.badListData = this.mapData.badList
+      this.total = 0
+      this.mapData.badList.forEach((item) => {
+        this.total += item.comNum
+      })
+    },
+    getBarWidth(item) {
+      if (!this.total) return { width: 0 }
+      let ratio = (item.comNum / this.total) * 100
+      return { width: `${ratio}%` }
+    },
+    onFilterCheck() {
+      this.$refs.popover.doClose()
+      this.getMapTableData()
     }
   }
 }
@@ -368,7 +489,7 @@ export default {
     vertical-align: top;
     width: 25%;
     height: 100%;
-    padding: 0 10px 10px 10px;
+    padding: 20px 10px 10px 10px;
     box-sizing: border-box;
 
     .title {
@@ -406,6 +527,7 @@ export default {
         height: 20px;
         background: #e9eaf0;
         line-height: 20px;
+        white-space: nowrap;
 
         .bar {
           display: inline-block;
@@ -435,12 +557,5 @@ export default {
 .select {
   width: 114px;
   margin-left: 12px;
-}
-.filter {
-  font-size: 14px;
-  font-weight: 400;
-  color: #666666;
-  line-height: 20px;
-  cursor: pointer;
 }
 </style>

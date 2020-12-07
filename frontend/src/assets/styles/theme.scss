@@ -146,3 +146,39 @@ ul {
 .el-header {
     padding: 0;
 }
+
+.popover-main {
+    .demonstration {
+        display: inline-block;
+        font-size: 14px;
+        color: #8492a6;
+        vertical-align: top;
+        line-height: 44px;
+    }
+
+    .slider {
+        display: inline-block;
+        width: calc(100% - 88px);
+    }
+    .select {
+        width: calc(100% - 88px);
+        margin-left: 4px;
+        margin-top: 8px;
+    }
+}
+
+.filter {
+    cursor: pointer;
+    font-size: 14px;
+    .icon-filter {
+        background-image: url(~@/assets/imgs/icons/filter.svg);
+    }
+
+    &:hover {
+        color: #3a84ff;
+
+        .icon-filter {
+            background-image: url(~@/assets/imgs/icons/filter_active.svg);
+        }
+    }
+}

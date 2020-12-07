@@ -29,7 +29,7 @@
           <el-button class="save-btn fr" type="primary" @click="init">确认</el-button>
         </div>
         <span class="button-cfg filter fr" slot="reference">
-          <i class="icon-img"></i>
+          <i class="icon-img icon-filter"></i>
           筛选
         </span>
       </el-popover>
@@ -59,7 +59,7 @@
           <el-button class="save-btn fr" type="primary" @click="init">确认</el-button>
         </div>
         <span class="button-cfg filter fr" slot="reference">
-          <i class="icon-img"></i>
+          <i class="icon-img icon-filter"></i>
           筛选
         </span>
       </el-popover>
@@ -98,7 +98,7 @@
 
 <script>
 const echarts = require('echarts')
-import { numberFormat, converUnit } from '@/libs/utils'
+import { converUnit } from '@/libs/utils'
 import { mapGetters } from 'vuex'
 export default {
   data() {
@@ -128,7 +128,6 @@ export default {
     }
   },
   methods: {
-    numberFormat,
     converUnit,
     save() {
       this.$refs.popover.doClose()
@@ -173,9 +172,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '~@/assets/styles/component';
-.filter {
-  cursor: pointer;
-}
 .data-table-main {
   .table-main {
     width: 100%;
@@ -188,26 +184,5 @@ export default {
 .last {
   border-radius: 0px 4px 4px 0px;
   border-right: 1px solid #d9d9d9;
-}
-</style>
-<style lang="scss">
-.popover-main {
-  .demonstration {
-    display: inline-block;
-    font-size: 14px;
-    color: #8492a6;
-    vertical-align: top;
-    line-height: 44px;
-  }
-
-  .slider {
-    display: inline-block;
-    width: calc(100% - 88px);
-  }
-  .select {
-    width: calc(100% - 88px);
-    margin-left: 4px;
-    margin-top: 8px;
-  }
 }
 </style>
