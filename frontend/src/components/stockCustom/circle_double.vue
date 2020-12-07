@@ -4,21 +4,23 @@
       {{ title }}
       <span class="chart-title_sub">{{ subTitle }}</span>
       <i class="icon-tip" :title="`重庆银行${industry}授信客户的新闻舆情事件`"></i>
-      <div class="operation-bar fr">
-        <span class="bar-item" :class="{ active: type === 1 }" @click="type = 1">近三月</span>
-        <span class="bar-item" :class="{ active: type === 2 }" @click="type = 2">近半年</span>
-        <span class="bar-item" :class="{ active: type === 3 }" @click="type = 3">近一年</span>
-      </div>
+      <time-select v-model="dataTime" :options="options" startValue="1Y"></time-select>
     </h1>
     <div v-loading="loading" v-if="!noData" class="circleChart">
       <div class="half" :id="`pieChart_${timeStamp}`"></div>
       <div class="half">
-        <span class="table-title">{{ dialogTitle }}</span>
-        <el-table height="300" :data="dialogData" v-loading="dialogLoading">
-          <el-table-column property="name" label="公司名称" width="150"></el-table-column>
-          <el-table-column property="org" label="管护机构" width="200"></el-table-column>
-          <el-table-column label="贷款余额（万元）">
-            <template slot-scope="scope">{{ numberFormat(scope.row.amount, 0) }}</template>
+        <span class="table-title">{{ tableTitle }}</span>
+        <el-table height="300" :data="tableData">
+          <el-table-column property="comName" label="公司名称" width="150"></el-table-column>
+          <el-table-column property="buName" label="管护机构" width="200"></el-table-column>
+          <el-table-column label="贷款余额">
+            <template slot-scope="scope">
+              {{
+                scope.row.loanBalance && scope.row.loanBalance.amount
+                  ? `${converUnit(scope.row.loanBalance.amount)} ${scope.row.loanBalance.currency}`
+                  : '--'
+              }}
+            </template>
           </el-table-column>
         </el-table>
       </div>
@@ -28,17 +30,71 @@
 </template>
 
 <script>
-import { numberFormat } from '@/libs/utils'
+import { numberFormat, converUnit } from '@/libs/utils'
 import resize from '@/mixins/resize'
 import pie from '@/mixins/pie'
 import { mapGetters } from 'vuex'
+import { neg_events } from '@/api/custom'
+import timeSelect from '../public/time-select.vue'
+const colors = [
+  {
+    color: '#3B6EEE',
+    children: ['#4A83F9', '#5B8FF9', '#719FFE']
+  },
+  {
+    color: '#5BDD75',
+    children: ['#36CF93', '#3EDA9D', '#71EABB']
+  },
+  {
+    color: '#F9F842',
+    children: ['#F2F998', '#EAF572', '#DDEE54']
+  },
+  {
+    color: '#FDB505',
+    children: ['#FFCB50', '#FFBC1B', '#FDB506']
+  },
+  {
+    color: '#FC6471',
+    children: ['#FEA0A0', '#FF9690', '#FE847D']
+  },
+  {
+    color: '#A93EED',
+    children: ['#F4C9F3', '#FBBFFC', '#F5A5F6']
+  },
+  {
+    color: '#5C44E1',
+    children: ['#9096F0', '#979CF0', '#858CF1']
+  }
+]
 export default {
+  components: { timeSelect },
   data() {
     return {
-      dialogTitle: null,
-      dialogLoading: false,
-      dialogVisible: false,
-      dialogData: [],
+      tableTitle: null,
+      tableData: [],
+      dataTime: [],
+      options: [
+        {
+          value: '1Y',
+          label: '最近1年'
+        },
+        {
+          value: '3Y',
+          label: '最近3年'
+        },
+        {
+          value: '5Y',
+          label: '最近5年'
+        },
+        {
+          value: 'udf',
+          label: '自定义'
+        },
+        {
+          value: 'udf_show',
+          label: '自定义'
+        }
+      ],
       type: 1,
       timeStamp: new Date().getTime(),
       data: [],
@@ -47,48 +103,11 @@ export default {
         trigger: 'item',
         formatter: '{b}: {c} ({d}%)'
       },
-      series: [
-        {
-          type: 'pie',
-          selectedMode: 'single',
-          color: ['#5941E0', '#3D70ED', '#72DC7B', '#BFD2DB', '#657798'],
-          radius: [0, '40%'],
-          label: {
-            position: 'inner'
-          },
-          labelLine: {
-            show: false
-          },
-          data: []
-        },
-        {
-          type: 'pie',
-          radius: ['55%', '70%'],
-          color: [
-            '#EC6666',
-            '#F14444',
-            '#4A84F9',
-            '#73A1FF',
-            '#FDD14C',
-            '#FFA805',
-            '#FEA806',
-            '#72EBBC',
-            '#37CF93',
-            '#5BCEDD',
-            '#79D2DE'
-          ],
-          label: {
-            formatter: '{b}: {c}家 ({d}%)',
-            borderWidth: 1,
-            borderRadius: 4
-          },
-          data: []
-        }
-      ]
+      series: []
     }
   },
   computed: {
-    ...mapGetters(['industry'])
+    ...mapGetters(['industry', 'industryCode'])
   },
   mixins: [resize, pie],
   props: {
@@ -102,27 +121,28 @@ export default {
   },
   methods: {
     numberFormat,
-    handleOpen(data) {
-      if (data.seriesIndex === 0) return
-      this.dialogTitle = data.data.name
-      this.dialogVisible = true
-      this.dialogLoading = true
-      setTimeout(() => {
-        this.dialogLoading = false
-        this.dialogData = [
-          {
-            name: '客户名称',
-            org: '分行名称',
-            amount: '5146',
-            time: '23'
-          }
-        ]
-      }, 1000)
+    converUnit,
+    async getChartData() {
+      let result = []
+      this.response = await neg_events({
+        industryCode: this.industryCode,
+        buCode: null,
+        st: this.dataTime[0],
+        et: this.dataTime[1]
+      })
+        .then((res) => res)
+        .catch((e) => {})
+      result = (this.response && this.response.events) || []
+      this.noData = result.length === 0
+      return result
     },
     setChartEvent() {
       this.myChart.on('click', (params) => {
         if (params.componentSubType === 'pie') {
-          this.handleOpen(params)
+          if (params.seriesIndex === 0) {
+            this.tableTitle = params.data.name
+            this.tableData = params.data.list
+          }
         }
       })
     },
@@ -131,40 +151,60 @@ export default {
       this.chartOption_pie.legend.show = false
       this.chartOption_pie.tooltip = this.tooltip
       this.chartOption_pie.series = this.series
-      this.chartOption_pie.series[1].data = [
-        {
-          name: '业绩亏损',
-          value: 100
+      let series_in = {
+        type: 'pie',
+        hoverAnimation: false,
+        selectedOffset: 0,
+        selectedMode: 'single',
+        radius: [0, '40%'],
+        label: {
+          position: 'inner',
+          color: 'white'
         },
-        {
-          name: 'xx风险',
-          value: 25
+        labelLine: {
+          show: false
         },
-        {
-          name: '楼市降温',
-          value: 50
+        color: [],
+        data: []
+      }
+      let series_out = {
+        type: 'pie',
+        radius: ['55%', '70%'],
+        label: {
+          formatter: '{b}: {c}家 ({d}%)',
+          borderWidth: 1,
+          borderRadius: 4
         },
-        {
-          name: '基础设施',
-          value: 25
-        }
-      ]
-      this.chartOption_pie.series[0].data = [
-        {
-          name: '公告事件',
-          value: 125
-        },
-        {
-          name: '宏观事件',
-          value: 75
-        }
-      ]
-      this.handleOpen({
-        seriesIndex: 1,
-        data: {
-          name: '楼市降温'
-        }
+        color: [],
+        data: []
+      }
+      this.pieData.forEach((item_p, i) => {
+        series_in.color.push(colors[i].color)
+        series_in.data.push({
+          name: item_p.eventName,
+          value: item_p.comCount
+        })
+        item_p.negEvents.forEach((item_c, j) => {
+          series_out.color.push(colors[i].children[j])
+          series_out.data.push({
+            name: item_c.eventName,
+            value: item_c.comCount,
+            list: item_c.comList
+          })
+          if (!this.tableData.length) {
+            this.tableTitle = item_c.eventName
+            this.tableData = item_c.comList
+          }
+        })
       })
+      const isOnly = series_in.data.length === 1
+      if (isOnly) {
+        series_in.label.position = 'center'
+      } else {
+        series_in.label.position = 'inside'
+      }
+      this.chartOption_pie.series[1] = series_in
+      this.chartOption_pie.series[0] = series_out
       return this.chartOption_pie
     }
   },

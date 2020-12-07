@@ -110,7 +110,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['industry'])
+    ...mapGetters(['industry', 'industryCode'])
   },
   props: {
     title: String,
@@ -131,7 +131,7 @@ export default {
     init() {
       this.loading = true
       this.request({
-        industryCode: null,
+        industryCode: this.industryCode,
         buCode: null,
         amountLower: this.amountRange[0],
         amountUpper: this.amountRange[1],
