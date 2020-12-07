@@ -58,7 +58,13 @@
         </span>
       </el-popover>
     </div>
-    <el-table v-loading="loading" class="table-main table-head-grey" :data="tableData" style="width: 100%">
+    <el-table
+      v-loading="loading"
+      class="table-main table-head-grey"
+      :data="tableData"
+      style="width: 100%"
+      height="324px"
+    >
       <el-table-column prop="comName" label="名称"></el-table-column>
       <el-table-column prop="buName" label="管护机构"></el-table-column>
       <el-table-column v-if="type === 2" label="黑名单原因">
@@ -66,8 +72,14 @@
           {{ scope.row.reason || '--' }}
         </template>
       </el-table-column>
-      <el-table-column v-if="type !== 2" label="贷款余额（万元）">
-        <template slot-scope="scope">{{ numberFormat(scope.row.loanBalance, 0) }}</template>
+      <el-table-column v-if="type !== 2" label="贷款余额">
+        <template slot-scope="scope">
+          {{
+            scope.row.loanBalance && scope.row.loanBalance.amount
+              ? `${converUnit(scope.row.loanBalance.amount)} ${scope.row.loanBalance.currency}`
+              : '--'
+          }}
+        </template>
       </el-table-column>
       <el-table-column v-if="type === 1 && !title" label="逾期天数">
         <template slot-scope="scope">
@@ -80,7 +92,7 @@
 
 <script>
 const echarts = require('echarts')
-import { numberFormat } from '@/libs/utils'
+import { numberFormat, converUnit } from '@/libs/utils'
 import { mapGetters } from 'vuex'
 export default {
   data() {
@@ -111,6 +123,7 @@ export default {
   },
   methods: {
     numberFormat,
+    converUnit,
     save() {
       this.$refs.popover.doClose()
       this.getData()
@@ -160,8 +173,7 @@ export default {
 .data-table-main {
   .table-main {
     width: 100%;
-    margin-top: 20px;
-    flex: 1;
+    margin-top: 6px;
   }
   .save-btn {
     margin-top: 12px;

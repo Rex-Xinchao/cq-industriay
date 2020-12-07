@@ -30,12 +30,64 @@ export const customer_statistics = async (data) => {
         csfId: 'XXXXXXXXX',
         comCode: 'XXXXXXXXXXX',
         buName: '分行名称',
-        loanBalance: 32300,
+        loanBalance: {
+          amount: 323,
+          currency: 'CNY'
+        },
         overdueDay: 41
       }
     ],
     overdueCount: 12,
     blacklist: [
+      {
+        comName: '客户名称',
+        csfId: 'XXXXXXXXX',
+        comCode: 'XXXXXXXXXXX',
+        buName: '分行名称',
+        reason: '1.xxxxxx，2.xxxxxxxx'
+      },
+      {
+        comName: '客户名称',
+        csfId: 'XXXXXXXXX',
+        comCode: 'XXXXXXXXXXX',
+        buName: '分行名称',
+        reason: '1.xxxxxx，2.xxxxxxxx'
+      },
+      {
+        comName: '客户名称',
+        csfId: 'XXXXXXXXX',
+        comCode: 'XXXXXXXXXXX',
+        buName: '分行名称',
+        reason: '1.xxxxxx，2.xxxxxxxx'
+      },
+      {
+        comName: '客户名称',
+        csfId: 'XXXXXXXXX',
+        comCode: 'XXXXXXXXXXX',
+        buName: '分行名称',
+        reason: '1.xxxxxx，2.xxxxxxxx'
+      },
+      {
+        comName: '客户名称',
+        csfId: 'XXXXXXXXX',
+        comCode: 'XXXXXXXXXXX',
+        buName: '分行名称',
+        reason: '1.xxxxxx，2.xxxxxxxx'
+      },
+      {
+        comName: '客户名称',
+        csfId: 'XXXXXXXXX',
+        comCode: 'XXXXXXXXXXX',
+        buName: '分行名称',
+        reason: '1.xxxxxx，2.xxxxxxxx'
+      },
+      {
+        comName: '客户名称',
+        csfId: 'XXXXXXXXX',
+        comCode: 'XXXXXXXXXXX',
+        buName: '分行名称',
+        reason: '1.xxxxxx，2.xxxxxxxx'
+      },
       {
         comName: '客户名称',
         csfId: 'XXXXXXXXX',
@@ -58,7 +110,10 @@ export const customer = async (data) => {
         csfId: 'XXXXXXXXX',
         comCode: 'XXXXXXXXXXX',
         buName: '分行名称',
-        loanBalance: 32300
+        loanBalance: {
+          amount: 32300,
+          currency: 'CNY'
+        }
       }
     ]
   }
