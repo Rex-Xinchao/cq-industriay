@@ -36,6 +36,99 @@ export const neg_events = (data) => {
 export const industry_map = async (data) => {
   await sleep(1000)
   return {
+    result: [
+      {
+        industryName: '汽车',
+        industryCode: 'FA00000301',
+        loanBalance: {
+          amount: 5000000.0,
+          currency: 'CNY',
+          unit: 'UN'
+        },
+        overdueAmount: {
+          amount: 5000000.0,
+          currency: 'CNY',
+          unit: 'UN'
+        },
+        loanComNum: 300,
+        overdueComNum: 20,
+        loanCom: [
+          {
+            comName: '客户A',
+            csfId: 'XXXXXXXXXXX',
+            comCode: 'XXXXXXXXX',
+            loanBalance: {
+              amount: 5000000.0,
+              currency: 'CNY',
+              unit: 'UN'
+            }
+          }
+        ]
+      },
+      {
+        industryName: '皮卡',
+        industryCode: 'FA00000301',
+        loanBalance: {
+          amount: 5000000.0,
+          currency: 'CNY',
+          unit: 'UN'
+        },
+        overdueAmount: {
+          amount: 5000000.0,
+          currency: 'CNY',
+          unit: 'UN'
+        },
+        loanComNum: 300,
+        overdueComNum: 20,
+        loanCom: [
+          {
+            comName: '客户C',
+            csfId: 'XXXXXXXXXXX',
+            comCode: 'XXXXXXXXX',
+            loanBalance: {
+              amount: 5000000.0,
+              currency: 'CNY',
+              unit: 'UN'
+            }
+          }
+        ]
+      },
+      {
+        industryName: '大卡',
+        industryCode: 'FA00000301',
+        loanBalance: {
+          amount: 5000000.0,
+          currency: 'CNY',
+          unit: 'UN'
+        },
+        overdueAmount: {
+          amount: 5000000.0,
+          currency: 'CNY',
+          unit: 'UN'
+        },
+        loanComNum: 300,
+        overdueComNum: 20,
+        loanCom: [
+          {
+            comName: '客户B',
+            csfId: 'XXXXXXXXXXX',
+            comCode: 'XXXXXXXXX',
+            loanBalance: {
+              amount: 5000000.0,
+              currency: 'CNY',
+              unit: 'UN'
+            }
+          }
+        ]
+      }
+    ]
+  }
+  return http.get(`/api/industry_map`, data)
+}
+
+export const region_map = async (data) => {
+  await sleep(1000)
+  return {
     regionLoan: [
       {
         amountCount: {
@@ -386,7 +479,7 @@ export const industry_map = async (data) => {
       }
     ]
   }
-  return http.get(`/api/industry_map`, data)
+  return http.get(`/api/region_map`, data)
 }
 
 export const risk_event = async (data) => {

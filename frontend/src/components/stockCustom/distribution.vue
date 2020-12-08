@@ -39,7 +39,7 @@
         <div class="chart-main" id="chart"></div>
         <el-table v-loading="tableLoading" class="table-main" :data="tableData" height="334">
           <el-table-column prop="comName" label="客户"></el-table-column>
-          <el-table-column prop="buName" label="所属行业"></el-table-column>
+          <el-table-column prop="industryName" label="所属行业"></el-table-column>
           <el-table-column prop="loanBalance.amount" label="投放规模" width="180" sortable>
             <template slot-scope="scope">
               {{
@@ -130,9 +130,10 @@ import sx from '@/libs/map/shanxi'
 import all from '@/libs/map/all'
 import { converUnit } from '@/libs/utils'
 import resize from '@/mixins/resize'
-import { industry_map } from '@/api/custom'
+import { region_map, industry_map } from '@/api/custom'
 export default {
   data() {
+    const vm = this
     return {
       orgSelect: null,
       orgs: [],
@@ -151,8 +152,9 @@ export default {
       chartOption: {
         color: ['#3FAAFF', '#B4CEDC', '#62DB9B', '#58CCF4', '#7D7CFF', '#FBB447', '#EC8B66'],
         tooltip: {
-          formatter: function (data) {
-            return `${data.name}：${data.value}`
+          formatter: function (params) {
+            let unit = vm.ratioSelect === 1 || vm.ratioSelect === 3 ? '个' : params.data.currency
+            return `${params.name}：${params.value}${unit}`
           }
         },
         series: [
@@ -165,42 +167,17 @@ export default {
             breadcrumb: {
               show: false
             },
-            data: [
-              {
-                name: 'nodeA',
-                value: 10,
-                children: [
-                  {
-                    name: 'nodeAa',
-                    value: 4
-                  },
-                  {
-                    name: 'nodeAb',
-                    value: 6
-                  }
-                ]
-              },
-              {
-                name: 'nodeB',
-                value: 20,
-                children: [
-                  {
-                    name: 'nodeBa',
-                    value: 20,
-                    children: [
-                      {
-                        name: 'nodeBa1',
-                        value: 20
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
+            data: []
           }
         ]
       },
       mapOption: {
+        tooltip: {
+          formatter: function (params) {
+            let unit = vm.ratioSelect === 1 || vm.ratioSelect === 3 ? '个' : params.data.currency
+            return `${params.name}：${params.value || 0}${unit}`
+          }
+        },
         visualMap: {
           orient: 'horizontal',
           right: '0',
@@ -246,7 +223,11 @@ export default {
       }
     },
     ratioSelect() {
-      this.drawMap()
+      if (this.type === 1) {
+        this.drawChart()
+      } else {
+        this.drawMap()
+      }
     }
   },
   methods: {
@@ -257,30 +238,90 @@ export default {
       setTimeout(() => {
         this.$nextTick(() => {
           if (this.type === 1) {
-            this.initChart()
+            this.getChartData()
           } else {
             this.getMapData()
           }
-          this.initTable()
         })
       }, 1000)
     },
-    initChart() {
+    getChartData() {
+      let params = {
+        activeType: this.activeType,
+        typeSelect: this.typeSelect,
+        classifySelect: this.classifySelect
+      }
+      industry_map(params)
+        .then((res) => {
+          this.loading = false
+          this.chartData = res.result
+          this.drawChart()
+        })
+        .catch((e) => {
+          this.loading = false
+          this.chartData = []
+          this.drawChart()
+        })
+    },
+    drawChart() {
       if (!this.myChart) {
         this.myChart = echarts.init(document.getElementById('chart'))
-        this.myChart.on('click', (data) => {
-          this.tableLoading = true
-          setTimeout(() => {
-            this.tableLoading = false
-          }, 1000)
+        this.myChart.on('click', (params) => {
+          this.setChartTable(params.data.list)
         })
       }
+      let data = []
+      switch (this.ratioSelect) {
+        case 1:
+          data = this.chartData.map((item) => {
+            return {
+              name: item.industryName,
+              value: item.loanComNum,
+              list: item.loanCom
+            }
+          })
+          break
+        case 2:
+          data = this.chartData.map((item) => {
+            return {
+              name: item.industryName,
+              value: item.loanBalance.amount,
+              currency: item.loanBalance.currency,
+              list: item.loanCom
+            }
+          })
+          break
+        case 3:
+          data = this.chartData.map((item) => {
+            return {
+              name: item.industryName,
+              value: item.overdueComNum,
+              list: item.loanCom
+            }
+          })
+          break
+        case 4:
+          data = this.chartData.map((item) => {
+            return {
+              name: item.industryName,
+              value: item.overdueAmount.amount,
+              currency: item.loanBalance.currency,
+              list: item.loanCom
+            }
+          })
+          break
+      }
+      this.chartOption.series[0].data = data
       this.myChart.setOption(this.chartOption, true)
       this.myChart.resize()
-      this.loading = false
+      let list = []
+      this.chartData.forEach((item) => {
+        list = list.concat(item.loanCom)
+      })
+      this.setChartTable(list)
     },
-    initTable() {
-      this.tableData = []
+    setChartTable(item = []) {
+      this.tableData = item
     },
     getMapData() {
       let params = {
@@ -288,7 +329,7 @@ export default {
         typeSelect: this.typeSelect,
         classifySelect: this.classifySelect
       }
-      industry_map(params)
+      region_map(params)
         .then((res) => {
           this.loading = false
           this.mapData = res
@@ -372,7 +413,8 @@ export default {
           data = this.mapData.regionLoan.map((item) => {
             return {
               name: item.name,
-              value: item.amountCount.amount
+              value: item.amountCount.amount,
+              currency: item.amountCount.currency
             }
           })
           break
@@ -388,7 +430,8 @@ export default {
           data = this.mapData.regionBadloan.map((item) => {
             return {
               name: item.name,
-              value: item.amountCount.amount
+              value: item.amountCount.amount,
+              currency: item.amountCount.currency
             }
           })
           break
@@ -396,14 +439,13 @@ export default {
       return data
     },
     getMapTableData() {
-      console.log(123)
       this.loading = true
       let params = {
         activeType: this.activeType,
         typeSelect: this.typeSelect,
         classifySelect: this.classifySelect
       }
-      industry_map(params)
+      region_map(params)
         .then((res) => {
           this.loading = false
           this.mapData = res
