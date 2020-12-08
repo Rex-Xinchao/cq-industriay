@@ -145,8 +145,11 @@ export default {
       type: 1,
       typeSelect: '',
       typeOptions: [{ label: '全部产业', value: '' }],
-      classifySelect: '',
-      classifyOptions: [{ label: '全部分类', value: '' }],
+      classifySelect: 1,
+      classifyOptions: [
+        { label: '国标三级', value: 1 },
+        { label: '国标四级', value: 2 }
+      ],
       ratioSelect: 1,
       ratioOptions: [{ label: '占行内全部投放', value: '' }],
       chartOption: {
