@@ -2,7 +2,7 @@
   <div class="com-main distribution-main">
     <el-tabs v-model="activeType">
       <el-tab-pane label="全部" name="all"></el-tab-pane>
-      <el-tab-pane label="重庆市" name="cq"></el-tab-pane>
+      <el-tab-pane label="重庆市" name="CSF"></el-tab-pane>
       <el-tab-pane label="四川省" name="sc"></el-tab-pane>
       <el-tab-pane label="贵州省" name="gz"></el-tab-pane>
       <el-tab-pane label="陕西省" name="sx"></el-tab-pane>
@@ -37,6 +37,7 @@
     <div v-loading="loading" style="width: 100%">
       <div v-if="type === 1" class="information-main">
         <div class="chart-main" id="chart"></div>
+        <no-data-show style="width: 50%" class="chart-nodata" :show="noData"></no-data-show>
         <el-table v-loading="tableLoading" class="table-main" :data="tableData" height="334">
           <el-table-column prop="comName" label="客户"></el-table-column>
           <el-table-column prop="industryName" label="所属行业"></el-table-column>
@@ -56,13 +57,15 @@
         <div v-loading="tableLoading" class="legend-main">
           <p class="title">
             全部非正常客户数：
-            <span class="info-num">{{ total }}家</span>
+            <span class="info-num">
+              {{ ratioSelect === 1 || ratioSelect === 3 ? totalCount : converUnit(totalCount) }}{{ unit }}
+            </span>
           </p>
           <p v-for="(item, index) in badListData" :key="index">
             <span class="name">{{ item.badloanType }}</span>
             <span class="progress">
               <span class="bar" style="background-color: #4a84ff" :style="getBarWidth(item)"></span>
-              {{ item.comNum }}家
+              {{ ratioSelect === 1 || ratioSelect === 3 ? item.value : converUnit(item.value) }}{{ unit }}
             </span>
           </p>
         </div>
@@ -131,10 +134,13 @@ import all from '@/libs/map/all'
 import { converUnit } from '@/libs/utils'
 import resize from '@/mixins/resize'
 import { region_map, industry_map } from '@/api/custom'
+import { mapGetters } from 'vuex'
 export default {
   data() {
     const vm = this
     return {
+      unit: '家',
+      noData: false,
       orgSelect: null,
       orgs: [],
       amountRange: [0, 500],
@@ -145,19 +151,18 @@ export default {
       type: 1,
       typeSelect: '',
       typeOptions: [{ label: '全部产业', value: '' }],
-      classifySelect: 1,
+      classifySelect: 3,
       classifyOptions: [
-        { label: '国标三级', value: 1 },
-        { label: '国标四级', value: 2 }
+        { label: '国标三级', value: 3 },
+        { label: '国标四级', value: 4 }
       ],
       ratioSelect: 1,
-      ratioOptions: [{ label: '占行内全部投放', value: '' }],
       chartOption: {
         color: ['#3FAAFF', '#B4CEDC', '#62DB9B', '#58CCF4', '#7D7CFF', '#FBB447', '#EC8B66'],
         tooltip: {
           formatter: function (params) {
-            let unit = vm.ratioSelect === 1 || vm.ratioSelect === 3 ? '个' : params.data.currency
-            return `${params.name}：${params.value}${unit}`
+            if (!params.data) return ''
+            return `${params.name}：${params.value}${vm.unit}`
           }
         },
         series: [
@@ -177,8 +182,8 @@ export default {
       mapOption: {
         tooltip: {
           formatter: function (params) {
-            let unit = vm.ratioSelect === 1 || vm.ratioSelect === 3 ? '个' : params.data.currency
-            return `${params.name}：${params.value || 0}${unit}`
+            if (!params.data) return ''
+            return `${params.name}：${params.value || 0}${vm.unit}`
           }
         },
         visualMap: {
@@ -213,11 +218,15 @@ export default {
       },
       tableData: [],
       badListData: [],
+      totalCount: null,
       total: null,
       mapData: null
     }
   },
   mixins: [resize],
+  computed: {
+    ...mapGetters(['industry', 'industryCode'])
+  },
   watch: {
     activeType: {
       immediate: true,
@@ -225,7 +234,8 @@ export default {
         this.handleType(this.type)
       }
     },
-    ratioSelect() {
+    ratioSelect(data) {
+      this.unit = data % 2 === 0 ? '元' : '家'
       if (this.type === 1) {
         this.drawChart()
       } else {
@@ -250,19 +260,21 @@ export default {
     },
     getChartData() {
       let params = {
-        activeType: this.activeType,
-        typeSelect: this.typeSelect,
-        classifySelect: this.classifySelect
+        provinceCode: this.getProvinceCode(),
+        level: this.classifySelect,
+        industryCode: this.industryCode
       }
       industry_map(params)
         .then((res) => {
           this.loading = false
           this.chartData = res.result
+          this.noData = res.result.length
           this.drawChart()
         })
         .catch((e) => {
           this.loading = false
           this.chartData = []
+          this.noData = true
           this.drawChart()
         })
     },
@@ -289,7 +301,6 @@ export default {
             return {
               name: item.industryName,
               value: item.loanBalance.amount,
-              currency: item.loanBalance.currency,
               list: item.loanCom
             }
           })
@@ -308,7 +319,6 @@ export default {
             return {
               name: item.industryName,
               value: item.overdueAmount.amount,
-              currency: item.loanBalance.currency,
               list: item.loanCom
             }
           })
@@ -326,11 +336,30 @@ export default {
     setChartTable(item = []) {
       this.tableData = item
     },
+    getProvinceCode() {
+      let provinceCode = ''
+      switch (this.activeType) {
+        case 'cq':
+          provinceCode = 'CSF_CN_500000'
+          break
+        case 'sx':
+          provinceCode = 'CSF_CN_610000'
+          break
+        case 'sc':
+          provinceCode = 'CSF_CN_510000'
+          break
+        case 'gz':
+          provinceCode = 'CSF_CN_520000'
+          break
+      }
+      return provinceCode
+    },
     getMapData() {
       let params = {
-        activeType: this.activeType,
-        typeSelect: this.typeSelect,
-        classifySelect: this.classifySelect
+        provinceCode: this.getProvinceCode(),
+        industryCode: this.industryCode,
+        cityCode: '',
+        level: this.classifySelect
       }
       region_map(params)
         .then((res) => {
@@ -416,8 +445,7 @@ export default {
           data = this.mapData.regionLoan.map((item) => {
             return {
               name: item.name,
-              value: item.amountCount.amount,
-              currency: item.amountCount.currency
+              value: item.amountCount.amount
             }
           })
           break
@@ -433,8 +461,7 @@ export default {
           data = this.mapData.regionBadloan.map((item) => {
             return {
               name: item.name,
-              value: item.amountCount.amount,
-              currency: item.amountCount.currency
+              value: item.amountCount.amount
             }
           })
           break
@@ -444,9 +471,10 @@ export default {
     getMapTableData() {
       this.loading = true
       let params = {
-        activeType: this.activeType,
-        typeSelect: this.typeSelect,
-        classifySelect: this.classifySelect
+        provinceCode: this.getProvinceCode(),
+        industryCode: this.industryCode,
+        cityCode: '',
+        level: this.classifySelect
       }
       region_map(params)
         .then((res) => {
@@ -465,15 +493,27 @@ export default {
     },
     setMapTable() {
       this.tableData = this.mapData.loanCom
-      this.badListData = this.mapData.badList
       this.total = 0
-      this.mapData.badList.forEach((item) => {
-        this.total += item.comNum
+      if (this.ratioSelect === 1 || this.ratioSelect === 3) {
+        this.badListData = this.mapData.badList.map((item) => {
+          item.value = item.comNum
+          return item
+        })
+        this.totalCount = this.mapData.comCount
+      } else {
+        this.badListData = this.mapData.badList.map((item) => {
+          item.value = item.badloan.amount
+          return item
+        })
+        this.totalCount = this.mapData.amountCount
+      }
+      this.badListData.forEach((item) => {
+        this.total += item.value
       })
     },
     getBarWidth(item) {
       if (!this.total) return { width: 0 }
-      let ratio = (item.comNum / this.total) * 100
+      let ratio = (item.value / this.total) * 100
       return { width: `${ratio}%` }
     },
     onFilterCheck() {

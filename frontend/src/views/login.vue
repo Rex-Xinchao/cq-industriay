@@ -200,7 +200,7 @@ export default {
         cursor: pointer;
 
         &.active {
-          border-bottom: 2px solid white;
+          border-bottom: 2px solid #62e9dd;
         }
       }
     }

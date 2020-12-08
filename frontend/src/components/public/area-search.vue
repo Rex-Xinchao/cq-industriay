@@ -16,7 +16,7 @@
       <el-tree
         ref="tree"
         @check="check"
-        :data="treeData"
+        :data="regions"
         show-checkbox
         check-strictly
         node-key="value"
@@ -28,6 +28,7 @@
   </div>
 </template>
 <script>
+import { Regions } from '@/mixins/base'
 export default {
   name: 'area-search',
   data() {
@@ -35,28 +36,13 @@ export default {
       loading: false,
       areas: null,
       options: [],
-      treeData: [
-        {
-          label: '上海',
-          value: 'shanghai',
-          children: [
-            {
-              label: '徐汇区',
-              value: 'xuhui'
-            }
-          ]
-        },
-        {
-          label: '北京',
-          value: 'beijing'
-        }
-      ],
       defaultProps: {
         children: 'children',
         label: 'label'
       }
     }
   },
+  mixins: [Regions],
   methods: {
     search() {},
     check(node, params) {

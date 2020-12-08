@@ -15,11 +15,13 @@
       <el-popover ref="popover" placement="bottom" width="108" trigger="click">
         <div class="popover-main">
           <el-checkbox-group v-model="checkList">
-            <el-checkbox v-for="item in filters" :label="item" :key="item">{{ item }}</el-checkbox>
+            <el-checkbox v-for="item in qualifications" :label="item.label" :key="item.value">
+              {{ item.label }}
+            </el-checkbox>
           </el-checkbox-group>
         </div>
-        <span class="button-cfg fr" slot="reference" v-show="type === 2">
-          <i class="icon-img"></i>
+        <span class="fr filter" slot="reference" v-show="type === 2">
+          <i class="icon-img icon-filter"></i>
           筛选资质
         </span>
       </el-popover>
@@ -149,8 +151,8 @@
 const echarts = require('echarts')
 import { numberFormat } from '@/libs/utils'
 import { tableData } from '@/mockData/competition'
+import { Qualifications } from '@/mixins/base'
 export default {
-  name: '',
   data() {
     let vm = this
     return {
@@ -174,18 +176,19 @@ export default {
         2: '三板',
         3: '发债'
       },
-      checkList: [],
-      filters: [
-        '高新技术',
-        '专精特新企业',
-        '科技型中小',
-        '示范认证企业',
-        '参与起草标准',
-        '创新大赛获奖',
-        '企业技术中心'
-      ]
+      checkList: []
+      // filters: [
+      //   '高新技术',
+      //   '专精特新企业',
+      //   '科技型中小',
+      //   '示范认证企业',
+      //   '参与起草标准',
+      //   '创新大赛获奖',
+      //   '企业技术中心'
+      // ]
     }
   },
+  mixins: [Qualifications],
   props: {
     area: String
   },
