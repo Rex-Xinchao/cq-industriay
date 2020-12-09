@@ -139,13 +139,13 @@ export default {
     const vm = this
     return {
       unit: '家',
-      loading: false,
       noData: false,
+      loading: false,
+      tableLoading: false,
       orgSelect: null,
       orgs: [],
       amountRange: [0, 500],
       timeRange: [0, 30],
-      tableLoading: false,
       activeType: 'all',
       type: 1,
       typeSelect: '',
@@ -178,6 +178,7 @@ export default {
           }
         ]
       },
+      chartData: null,
       mapOption: {
         tooltip: {
           formatter: function (params) {
@@ -215,11 +216,11 @@ export default {
           }
         ]
       },
+      mapData: null,
       tableData: [],
       badListData: [],
-      totalCount: null,
-      total: null,
-      mapData: null
+      sum: null,
+      totalCount: null
     }
   },
   mixins: [resize],
@@ -246,6 +247,7 @@ export default {
     converUnit,
     handleType(type) {
       this.type = type
+      this.loading = true
       this.$nextTick(() => {
         if (this.type === 1) {
           this.getChartData()
@@ -256,7 +258,6 @@ export default {
     },
     // 绘制树柱图
     getChartData() {
-      this.loading = true
       const params = {
         provinceCode: this.getProvinceCode(),
         level: this.classifySelect,
@@ -339,7 +340,6 @@ export default {
     // 绘制地图
     getMapData(init = true) {
       // init-->false 情况下无需更新地图，只更新表格
-      this.loading = true
       let params = {
         provinceCode: this.getProvinceCode(),
         industryCode: this.industryCode,
@@ -352,6 +352,7 @@ export default {
           init && this.drawMap()
           init || this.setMapTable()
           this.loading = false
+          this.tableLoading = false
         })
         .catch((e) => {
           this.mapData = {
@@ -363,6 +364,7 @@ export default {
           init && this.drawMap()
           init || this.setMapTable()
           this.loading = false
+          this.tableLoading = false
         })
     },
     drawMap() {
@@ -401,6 +403,7 @@ export default {
               this.activeType = 'sx'
               break
             default:
+              this.tableLoading = true
               this.getMapData(false)
               break
           }
@@ -470,9 +473,9 @@ export default {
         })
         this.totalCount = this.mapData.amountCount
       }
-      this.total = 0
+      this.sum = 0
       this.badListData.forEach((item) => {
-        this.total += item.value
+        this.sum += item.value
       })
     },
     // common
@@ -495,12 +498,13 @@ export default {
       return provinceCode
     },
     getBarWidth(item) {
-      if (!this.total) return { width: 0 }
-      let ratio = (item.value / this.total) * 100
+      if (!this.sum) return { width: 0 }
+      let ratio = (item.value / this.sum) * 100
       return { width: `${ratio}%` }
     },
     onFilterCheck() {
       this.$refs.popover.doClose()
+      this.tableLoading = true
       this.getMapData(false)
     }
   }
