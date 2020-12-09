@@ -135,6 +135,21 @@ export default {
               name: '存量客户图像'
             }
           ]
+        },
+        {
+          name: '区域经济',
+          imgName: 'stockMain',
+          page: 'finance',
+          children: [
+            {
+              page: 'status',
+              name: '区域经济状况'
+            },
+            {
+              page: 'incomes',
+              name: '财政收支及债务'
+            }
+          ]
         }
       ],
       subMenu: []
@@ -311,9 +326,10 @@ export default {
 }
 
 .footer {
+  box-sizing: border-box;
   font-size: 12px;
   text-align: center;
-  padding-bottom: 24px;
   background-color: #f4f6f9;
+  line-height: 40px;
 }
 </style>

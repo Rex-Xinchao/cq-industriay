@@ -14,7 +14,7 @@
         <el-tab-pane label="贵州省" name="gz"></el-tab-pane>
         <el-tab-pane label="陕西省" name="sx"></el-tab-pane>
       </el-tabs>
-      <table-com :area="activeType" class="item_100" style="height: 380px"></table-com>
+      <table-com :area="activeType" class="item_100 item_last" style="height: 380px"></table-com>
     </div>
   </div>
 </template>

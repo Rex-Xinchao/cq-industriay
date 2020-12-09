@@ -19,6 +19,8 @@ const StockCustom = () => import('@/views/stockCustom/index')
 const StockCustom_All = () => import('@/views/stockCustom/all')
 const Pillar = () => import('@/views/pillar/index')
 const PillarChart = () => import('@/views/pillar/chart')
+const FinanceStatus = () => import('@/views/finance/status')
+const FinanceIncomes = () => import('@/views/finance/incomes')
 const Login = () => import('@/views/login')
 
 Vue.use(VueRouter)
@@ -127,6 +129,16 @@ const routes = [
         path: '/pillar/chart',
         name: 'PillarChart',
         component: PillarChart
+      },
+      {
+        path: '/finance/status',
+        name: 'FinanceStatus',
+        component: FinanceStatus
+      },
+      {
+        path: '/finance/incomes',
+        name: 'FinanceIncomes',
+        component: FinanceIncomes
       }
     ]
   }

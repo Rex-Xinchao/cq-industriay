@@ -527,8 +527,8 @@ export default {
 @import '~@/assets/styles/component';
 .chart-nodata {
   width: 50%;
-  height: calc(100% - 120px);
-  top: 120px;
+  height: calc(100% - 150px);
+  top: 150px;
 }
 .distribution-line {
   width: 100%;

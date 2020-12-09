@@ -29,7 +29,7 @@
       <table-com class="item_50" style="height: 385px" :request="customer_statistics"></table-com>
       <table-com title="行内客户" class="item_50" style="height: 385px" :request="customer"></table-com>
       <doucle-circle-chart
-        class="item_100"
+        class="item_100 item_last"
         style="height: 385px"
         title="存量客户近期负面事件"
         subTitle="汽车行业"

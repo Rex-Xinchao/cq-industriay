@@ -17,6 +17,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '~@/assets/styles/view';
+.main {
+  min-height: calc(100% - 40px);
+}
 .main-body {
   width: 100%;
   height: auto !important;

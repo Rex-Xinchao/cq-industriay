@@ -184,5 +184,9 @@ export default {
   box-sizing: border-box;
   background-color: white;
   margin-bottom: 20px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 }
 </style>

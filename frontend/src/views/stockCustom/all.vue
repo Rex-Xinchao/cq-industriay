@@ -7,7 +7,7 @@
       <stack-chart class="item_50" :request="abnormal_loan"></stack-chart>
       <circle-chart class="item_50" title="非正常贷款投放规模" :request="total_abnormal_loan"></circle-chart>
       <distribution-main style="height: 520px" class="item_100"></distribution-main>
-      <risk-table style="height: 340px" class="item_100" title="近期重点风险"></risk-table>
+      <risk-table style="height: 340px" class="item_100 item_last" title="近期重点风险"></risk-table>
     </div>
   </div>
 </template>

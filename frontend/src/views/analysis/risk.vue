@@ -49,14 +49,12 @@
       <bar-table
         title="行业司法诉讼风险"
         :legends="['行业司法诉讼风险']"
-        class="bar-chart-main item_50"
-        style="height: 250px"
+        class="item_50 item_last bar-chart-main"
       ></bar-table>
       <line-table
         title="行业不良率/违约率"
         :legends="['行业不良率', '行业违约率']"
-        class="line-chart-main item_50"
-        style="height: 250px"
+        class="item_50 item_last line-chart-main"
       ></line-table>
     </div>
   </div>
@@ -97,6 +95,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '~@/assets/styles/view';
+.main {
+  height: calc(100% - 40px);
+}
 .main-body {
   width: 100%;
   box-sizing: border-box;
@@ -200,6 +201,12 @@ export default {
         }
       }
     }
+  }
+
+  .bar-chart-main,
+  .line-chart-main {
+    height: calc(100% - 480px) !important;
+    min-height: 250px;
   }
 }
 </style>

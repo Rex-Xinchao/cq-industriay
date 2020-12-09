@@ -7,7 +7,7 @@
         <el-tab-pane label="财务基准" name="2"></el-tab-pane>
       </el-tabs>
       <base-table :type="activeType" class="item_100" style="height: 430px"></base-table>
-      <line-chart :type="activeType" class="item_100" style="height: 430px"></line-chart>
+      <line-chart :type="activeType" class="item_100 item_last" style="height: 430px"></line-chart>
     </div>
   </div>
 </template>
