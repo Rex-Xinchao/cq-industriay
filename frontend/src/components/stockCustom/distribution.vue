@@ -2,7 +2,7 @@
   <div class="com-main distribution-main">
     <el-tabs v-model="activeType">
       <el-tab-pane label="全部" name="all"></el-tab-pane>
-      <el-tab-pane label="重庆市" name="CSF"></el-tab-pane>
+      <el-tab-pane label="重庆市" name="cq"></el-tab-pane>
       <el-tab-pane label="四川省" name="sc"></el-tab-pane>
       <el-tab-pane label="贵州省" name="gz"></el-tab-pane>
       <el-tab-pane label="陕西省" name="sx"></el-tab-pane>
@@ -10,7 +10,6 @@
     <div class="distribution-line operation-bar">
       <span class="bar-item" :class="{ active: type === 1 }" @click="handleType(1)">行业分布</span>
       <span class="bar-item" :class="{ active: type === 2 }" @click="handleType(2)">区域分布</span>
-
       <el-select class="select" v-model="typeSelect">
         <el-option v-for="item in typeOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
       </el-select>
@@ -34,7 +33,7 @@
       </div>
       <span v-if="ratioSelect === 1" class="text">投放规模：210亿</span>
     </div>
-    <div v-loading="loading" style="width: 100%">
+    <div class="distribution-line" v-loading="loading">
       <div v-if="type === 1" class="information-main">
         <div class="chart-main" id="chart"></div>
         <no-data-show class="chart-nodata" :show="noData"></no-data-show>
@@ -140,12 +139,12 @@ export default {
     const vm = this
     return {
       unit: '家',
+      loading: false,
       noData: false,
       orgSelect: null,
       orgs: [],
       amountRange: [0, 500],
       timeRange: [0, 30],
-      loading: false,
       tableLoading: false,
       activeType: 'all',
       type: 1,
@@ -247,44 +246,55 @@ export default {
     converUnit,
     handleType(type) {
       this.type = type
-      this.loading = true
-      setTimeout(() => {
-        this.$nextTick(() => {
-          if (this.type === 1) {
-            this.getChartData()
-          } else {
-            this.getMapData()
-          }
-        })
-      }, 1000)
+      this.$nextTick(() => {
+        if (this.type === 1) {
+          this.getChartData()
+        } else {
+          this.getMapData()
+        }
+      })
     },
+    // 绘制树柱图
     getChartData() {
-      let params = {
+      this.loading = true
+      const params = {
         provinceCode: this.getProvinceCode(),
         level: this.classifySelect,
         industryCode: this.industryCode
       }
       industry_map(params)
         .then((res) => {
-          this.loading = false
-          this.chartData = res.result
-          this.noData = res.result.length
+          this.chartData = res.result || []
+          this.noData = this.chartData.length === 0
           this.drawChart()
+          this.loading = false
         })
         .catch((e) => {
-          this.loading = false
           this.chartData = []
           this.noData = true
           this.drawChart()
+          this.loading = false
         })
     },
     drawChart() {
       if (!this.myChart) {
         this.myChart = echarts.init(document.getElementById('chart'))
         this.myChart.on('click', (params) => {
-          this.setChartTable(params.data.list)
+          if (params.data && params.data.list) {
+            this.tableData = params.data.list
+          }
         })
       }
+      this.chartOption.series[0].data = this.getAreaList_chart()
+      this.myChart.setOption(this.chartOption, true)
+      this.myChart.resize()
+      let list = []
+      this.chartData.forEach((item) => {
+        list = list.concat(item.loanCom)
+      })
+      this.tableData = list
+    },
+    getAreaList_chart() {
       let data = []
       switch (this.ratioSelect) {
         case 1:
@@ -324,37 +334,12 @@ export default {
           })
           break
       }
-      this.chartOption.series[0].data = data
-      this.myChart.setOption(this.chartOption, true)
-      this.myChart.resize()
-      let list = []
-      this.chartData.forEach((item) => {
-        list = list.concat(item.loanCom)
-      })
-      this.setChartTable(list)
+      return data
     },
-    setChartTable(item = []) {
-      this.tableData = item
-    },
-    getProvinceCode() {
-      let provinceCode = ''
-      switch (this.activeType) {
-        case 'cq':
-          provinceCode = 'CSF_CN_500000'
-          break
-        case 'sx':
-          provinceCode = 'CSF_CN_610000'
-          break
-        case 'sc':
-          provinceCode = 'CSF_CN_510000'
-          break
-        case 'gz':
-          provinceCode = 'CSF_CN_520000'
-          break
-      }
-      return provinceCode
-    },
-    getMapData() {
+    // 绘制地图
+    getMapData(init = true) {
+      // init-->false 情况下无需更新地图，只更新表格
+      this.loading = true
       let params = {
         provinceCode: this.getProvinceCode(),
         industryCode: this.industryCode,
@@ -363,19 +348,21 @@ export default {
       }
       region_map(params)
         .then((res) => {
-          this.loading = false
           this.mapData = res
-          this.drawMap()
+          init && this.drawMap()
+          init || this.setMapTable()
+          this.loading = false
         })
         .catch((e) => {
-          this.loading = false
           this.mapData = {
             regionLoan: [],
             regionBadloan: [],
             badList: [],
             loanCom: []
           }
-          this.drawMap()
+          init && this.drawMap()
+          init || this.setMapTable()
+          this.loading = false
         })
     },
     drawMap() {
@@ -414,12 +401,12 @@ export default {
               this.activeType = 'sx'
               break
             default:
-              this.getMapTableData()
+              this.getMapData(false)
               break
           }
         })
       }
-      let data = this.getAreaList()
+      const data = this.getAreaList_map()
       let max = 0
       data.forEach((item) => {
         max = Math.max(max, item.value)
@@ -430,7 +417,7 @@ export default {
       this.mapChart.resize()
       this.setMapTable()
     },
-    getAreaList() {
+    getAreaList_map() {
       let data = []
       switch (this.ratioSelect) {
         case 1:
@@ -468,32 +455,8 @@ export default {
       }
       return data
     },
-    getMapTableData() {
-      this.loading = true
-      let params = {
-        provinceCode: this.getProvinceCode(),
-        industryCode: this.industryCode,
-        cityCode: '',
-        level: this.classifySelect
-      }
-      region_map(params)
-        .then((res) => {
-          this.loading = false
-          this.mapData = res
-        })
-        .catch((e) => {
-          this.loading = false
-          this.mapData = {
-            regionLoan: [],
-            regionBadloan: [],
-            badList: [],
-            loanCom: []
-          }
-        })
-    },
     setMapTable() {
       this.tableData = this.mapData.loanCom
-      this.total = 0
       if (this.ratioSelect === 1 || this.ratioSelect === 3) {
         this.badListData = this.mapData.badList.map((item) => {
           item.value = item.comNum
@@ -507,9 +470,29 @@ export default {
         })
         this.totalCount = this.mapData.amountCount
       }
+      this.total = 0
       this.badListData.forEach((item) => {
         this.total += item.value
       })
+    },
+    // common
+    getProvinceCode() {
+      let provinceCode = ''
+      switch (this.activeType) {
+        case 'cq':
+          provinceCode = 'CSF_CN_500000'
+          break
+        case 'sx':
+          provinceCode = 'CSF_CN_610000'
+          break
+        case 'sc':
+          provinceCode = 'CSF_CN_510000'
+          break
+        case 'gz':
+          provinceCode = 'CSF_CN_520000'
+          break
+      }
+      return provinceCode
     },
     getBarWidth(item) {
       if (!this.total) return { width: 0 }
@@ -518,7 +501,7 @@ export default {
     },
     onFilterCheck() {
       this.$refs.popover.doClose()
-      this.getMapTableData()
+      this.getMapData(false)
     }
   }
 }
@@ -533,6 +516,10 @@ export default {
 .distribution-line {
   width: 100%;
   margin-bottom: 16px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 }
 .line-sub {
   display: flex;
