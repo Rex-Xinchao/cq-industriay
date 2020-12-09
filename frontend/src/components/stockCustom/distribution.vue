@@ -37,7 +37,7 @@
     <div v-loading="loading" style="width: 100%">
       <div v-if="type === 1" class="information-main">
         <div class="chart-main" id="chart"></div>
-        <no-data-show style="width: 50%" class="chart-nodata" :show="noData"></no-data-show>
+        <no-data-show class="chart-nodata" :show="noData"></no-data-show>
         <el-table v-loading="tableLoading" class="table-main" :data="tableData" height="334">
           <el-table-column prop="comName" label="客户"></el-table-column>
           <el-table-column prop="industryName" label="所属行业"></el-table-column>
@@ -525,6 +525,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '~@/assets/styles/component';
+.chart-nodata {
+  width: 50%;
+  height: calc(100% - 120px);
+  top: 120px;
+}
 .distribution-line {
   width: 100%;
   margin-bottom: 16px;
