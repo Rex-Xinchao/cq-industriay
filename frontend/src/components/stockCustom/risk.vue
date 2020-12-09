@@ -54,6 +54,7 @@
           </p>
         </li>
       </ul>
+      <no-data-show class="chart-nodata" :show="noData"></no-data-show>
     </div>
   </div>
 </template>
@@ -65,6 +66,7 @@ export default {
   data() {
     return {
       tableId: 'riskTable',
+      noData: false,
       loading: false,
       timeSelect: [],
       typeSelect: 1,
@@ -115,9 +117,11 @@ export default {
           } else {
             this.companys.push(...res.comList)
           }
+          this.noData = this.companys.length === 0
         })
         .catch((e) => {
           this.loading = false
+          this.noData = true
           this.tags = []
           this.companys = []
         })
@@ -174,6 +178,11 @@ export default {
         margin-right: 40px;
       }
     }
+  }
+
+  .chart-nodata {
+    height: calc(100% - 80px);
+    top: 80px;
   }
 }
 </style>

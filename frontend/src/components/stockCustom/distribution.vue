@@ -31,7 +31,7 @@
           <el-radio :label="4">逾期贷款余额</el-radio>
         </el-radio-group>
       </div>
-      <span v-if="ratioSelect === 1" class="text">投放规模：210亿</span>
+      <span v-if="ratioSelect === 1" class="text">投放规模：{{ scale_sum }}</span>
     </div>
     <div class="distribution-line" v-loading="loading">
       <div v-if="type === 1" class="information-main">
@@ -180,6 +180,7 @@ export default {
       },
       chartData: null,
       tableData_chart: [],
+      scale_sum: [],
       mapOption: {
         tooltip: {
           formatter: function (params) {
@@ -284,6 +285,7 @@ export default {
         this.myChart.on('click', (params) => {
           if (params.data && params.data.list) {
             this.tableData_chart = params.data.list
+            this.setScale_sum()
           }
         })
       }
@@ -295,6 +297,16 @@ export default {
         list = list.concat(item.loanCom)
       })
       this.tableData_chart = list
+      this.setScale_sum()
+    },
+    setScale_sum() {
+      let sum = 0
+      let unit = null
+      this.tableData_chart.forEach((item) => {
+        sum += item.loanBalance.amount
+        unit = item.loanBalance.currency
+      })
+      this.scale_sum = converUnit(sum) + unit
     },
     getAreaList_chart() {
       let data = []
@@ -521,6 +533,7 @@ export default {
 .distribution-line {
   width: 100%;
   margin-bottom: 16px;
+  clear: both;
 
   &:last-of-type {
     margin-bottom: 0;
