@@ -138,7 +138,7 @@ export default {
         },
         {
           name: '区域经济',
-          imgName: 'stockMain',
+          imgName: 'financeMain',
           page: 'finance',
           children: [
             {
@@ -244,6 +244,11 @@ export default {
   &:nth-of-type(4) {
     i {
       background-image: url(~@/assets/imgs/siderbar/stockMain.svg);
+    }
+  }
+  &:nth-of-type(5) {
+    i {
+      background-image: url(~@/assets/imgs/siderbar/area.png);
     }
   }
 }
