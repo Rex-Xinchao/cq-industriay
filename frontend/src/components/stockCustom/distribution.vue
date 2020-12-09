@@ -37,7 +37,7 @@
       <div v-if="type === 1" class="information-main">
         <div class="chart-main" id="chart"></div>
         <no-data-show class="chart-nodata" :show="noData"></no-data-show>
-        <el-table v-loading="tableLoading" class="table-main" :data="tableData" height="334">
+        <el-table v-loading="tableLoading" class="table-main" :data="tableData_chart" height="334">
           <el-table-column prop="comName" label="客户"></el-table-column>
           <el-table-column prop="industryName" label="所属行业"></el-table-column>
           <el-table-column prop="loanBalance.amount" label="投放规模" width="180" sortable>
@@ -99,7 +99,7 @@
               筛选
             </span>
           </el-popover>
-          <el-table v-loading="tableLoading" :data="tableData" height="320">
+          <el-table v-loading="tableLoading" :data="tableData_map" height="320">
             <el-table-column prop="comName" label="客户"></el-table-column>
             <el-table-column prop="buName" label="管护机构"></el-table-column>
             <el-table-column prop="loanBalance.amount" label="投放规模" width="180" sortable>
@@ -179,6 +179,7 @@ export default {
         ]
       },
       chartData: null,
+      tableData_chart: [],
       mapOption: {
         tooltip: {
           formatter: function (params) {
@@ -217,8 +218,8 @@ export default {
         ]
       },
       mapData: null,
-      tableData: [],
       badListData: [],
+      tableData_map: [],
       sum: null,
       totalCount: null
     }
@@ -282,7 +283,7 @@ export default {
         this.myChart = echarts.init(document.getElementById('chart'))
         this.myChart.on('click', (params) => {
           if (params.data && params.data.list) {
-            this.tableData = params.data.list
+            this.tableData_chart = params.data.list
           }
         })
       }
@@ -293,7 +294,7 @@ export default {
       this.chartData.forEach((item) => {
         list = list.concat(item.loanCom)
       })
-      this.tableData = list
+      this.tableData_chart = list
     },
     getAreaList_chart() {
       let data = []
@@ -459,7 +460,7 @@ export default {
       return data
     },
     setMapTable() {
-      this.tableData = this.mapData.loanCom
+      this.tableData_map = this.mapData.loanCom
       if (this.ratioSelect === 1 || this.ratioSelect === 3) {
         this.badListData = this.mapData.badList.map((item) => {
           item.value = item.comNum
