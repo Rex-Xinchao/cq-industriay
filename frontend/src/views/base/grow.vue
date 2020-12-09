@@ -7,7 +7,7 @@
         <el-tab-pane label="财务基准" name="2"></el-tab-pane>
       </el-tabs>
       <base-table :type="activeType" class="item_100" style="height: 430px"></base-table>
-      <line-chart :type="activeType" class="item_100 item_last" style="height: 430px"></line-chart>
+      <line-chart :heads="headers" :type="activeType" class="item_100 item_last" style="height: 430px"></line-chart>
     </div>
   </div>
 </template>
@@ -17,7 +17,29 @@ import lineChart from '@/components/base/chart'
 export default {
   data() {
     return {
-      activeType: '1'
+      activeType: '1',
+      headers: [
+        {
+          value: 1,
+          name: '营业收入增长率'
+        },
+        {
+          value: 2,
+          name: '毛利率增长率'
+        },
+        {
+          value: 3,
+          name: '净利润增长率'
+        },
+        {
+          value: 4,
+          name: '总资产增长率'
+        },
+        {
+          value: 5,
+          name: '所有者权益增长率'
+        }
+      ]
     }
   },
   components: { baseTable, lineChart }

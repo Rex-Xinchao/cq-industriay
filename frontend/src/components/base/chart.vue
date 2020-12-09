@@ -1,7 +1,7 @@
 <template>
   <div class="chartMain">
     <h1 class="chart-title">趋势分析</h1>
-    <div class="filter">
+    <div class="filter-bar">
       <span
         class="select-item"
         v-for="item in heads"
@@ -28,7 +28,6 @@ export default {
       noData: false,
       loading: false,
       activeHead: 1,
-      heads: [],
       color: ['#5B8FF9', '#5AD8A6', '#5D7092', '#F6BD16', '#E8684A'],
       legends: ['优秀值', '良好值', '平均值', '较低值', '较差值'],
       tooltip: {
@@ -43,9 +42,10 @@ export default {
       }
     }
   },
-  mixins: [line],
+  mixins: [resize, line],
   props: {
-    type: String
+    type: String,
+    heads: Array
   },
   watch: {
     activeHead() {
@@ -61,28 +61,6 @@ export default {
       setTimeout(() => {
         this.loading = false
         this.noData = false
-        this.heads = [
-          {
-            value: 1,
-            name: '营业收入增长率'
-          },
-          {
-            value: 2,
-            name: '毛利率增长率'
-          },
-          {
-            value: 3,
-            name: '净利润增长率'
-          },
-          {
-            value: 4,
-            name: '总资产增长率'
-          },
-          {
-            value: 5,
-            name: '所有者权益增长率'
-          }
-        ]
         this.activeHead = this.heads[0].value
         this.drawChart()
       })
@@ -126,12 +104,11 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/styles/chartMain';
 .chartMain {
-  .filter {
+  .filter-bar {
     width: 100%;
     height: 28px;
     line-height: 28px;
     margin: 20px 0 16px 0;
-
     span {
       display: inline-block;
       vertical-align: top;
@@ -147,6 +124,10 @@ export default {
       margin-bottom: 16px;
       font-size: 12px;
       cursor: pointer;
+
+      &:hover {
+        color: #3a84ff;
+      }
 
       &.active {
         background: #3a84ff;
