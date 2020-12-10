@@ -2,16 +2,13 @@
   <div class="main growth-main">
     <div class="item-box">
       <div class="item_100 item-menu">
-        <h1 class="main-title">地区经济状况：
+        <h1 class="main-title">
+          地区经济状况：
           <el-select v-model="region" placeholder="请选择">
             <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
         </h1>
-        <el-tabs
-          style="width: calc(100% - 40px); height: 60px; line-height: 60px; padding: 0 20px; background: white"
-          v-model="activeType"
-          @tab-click="scrollTo(activeType)"
-        >
+        <el-tabs class="crumbs" v-model="activeType" @tab-click="scrollTo(activeType)">
           <el-tab-pane label="GDP及产业结构" name="tag_1"></el-tab-pane>
           <el-tab-pane label="工业与投资" name="tag_2"></el-tab-pane>
           <el-tab-pane label="进出口" name="tag_3"></el-tab-pane>
@@ -178,47 +175,5 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/styles/common/view';
 @import '~@/assets/styles/common/component';
-.icon-bar {
-  width: 16px;
-  height: 14px;
-  background-position-y: 2px;
-  background-image: url(~@/assets/imgs/icons/bar.svg);
-  cursor: pointer;
-
-  &:hover {
-    background-image: url(~@/assets/imgs/icons/bar-active.svg);
-  }
-}
-.item-menu {
-  position: sticky;
-  top: 0;
-  z-index: 10000;
-  background-color: #f4f6f9 !important;
-  height: 108px !important;
-  flex-direction: column;
-  box-sizing: border-box;
-}
-.item-table {
-  width: 100%;
-  height: 480px !important;
-  padding: 20px;
-  box-sizing: border-box;
-  flex-direction: column;
-  .main-title {
-    height: 30px;
-    line-height: 30px;
-    padding: 0;
-    margin: 0 0 16px 0;
-    font-size: 16px;
-    font-weight: 400;
-    color: #000a12;
-  }
-}
-</style>
-<style lang="scss">
-.growth-main {
-  .el-tabs__nav-wrap::after {
-    background-color: white !important;
-  }
-}
+@import '~@/assets/styles/finance';
 </style>
