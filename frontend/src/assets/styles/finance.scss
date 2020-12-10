@@ -1,7 +1,7 @@
 .item-menu {
     position: sticky;
     top: 0;
-    z-index: 10000;
+    z-index: 1001;
     background-color: #f4f6f9 !important;
     height: 108px !important;
     flex-direction: column;
@@ -35,6 +35,11 @@
     &:hover {
         background-image: url(~@/assets/imgs/icons/bar-active.svg);
     }
+}
+
+.area-search {
+    width: 240px;
+    display: inline-block;
 }
 
 .crumbs {

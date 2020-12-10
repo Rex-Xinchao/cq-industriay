@@ -1,7 +1,7 @@
 <template>
   <div class="area-search">
     <el-select
-      v-model="areas"
+      v-model="area"
       filterable
       remote
       reserve-keyword
@@ -24,7 +24,7 @@
       ></el-tree>
       <i class="icon-more el-icon-more" slot="reference"></i>
     </el-popover>
-    <el-button class="search-btn fr" type="primary" @click="search">查询</el-button>
+    <el-button v-if="showBtn" class="search-btn fr" type="primary" @click="search">查询</el-button>
   </div>
 </template>
 <script>
@@ -33,8 +33,8 @@ export default {
   name: 'area-search',
   data() {
     return {
+      area: null,
       loading: false,
-      areas: null,
       options: [],
       defaultProps: {
         children: 'children',
@@ -42,12 +42,41 @@ export default {
       }
     }
   },
+  props: {
+    showBtn: {
+      type: Boolean,
+      default: () => {
+        return true
+      }
+    },
+    value: {
+      reuired: true
+    },
+    startCode: Object
+  },
+  watch: {
+    area(data) {
+      this.$emit('update', data)
+    },
+    startCode: {
+      immediate: true,
+      handler(data) {
+        if (!data) return
+        this.options = [data]
+        this.area = data.value
+      }
+    }
+  },
+  model: {
+    prop: 'value', //绑定的值，通过父组件传递
+    event: 'update' //自定义事件名
+  },
   mixins: [Regions],
   methods: {
     search() {},
     check(node, params) {
       this.options = [{ ...node }]
-      this.areas = node.value
+      this.area = node.value
       this.$refs.tree.setCheckedKeys([node.value], false)
     },
     remoteMethod(query) {
@@ -73,10 +102,13 @@ export default {
 <style lang="scss" scoped>
 .area-search {
   position: relative;
+  height: 28px;
+  line-height: 26px;
+  box-sizing: border-box;
   .icon-more {
     position: absolute;
     right: 74px;
-    top: 5px;
+    top: 6px;
     cursor: pointer;
     z-index: 1001;
   }

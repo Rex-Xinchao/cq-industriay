@@ -4,9 +4,7 @@
       <div class="item_100 item-menu">
         <h1 class="main-title">
           财政收支及债务：
-          <el-select v-model="region" placeholder="请选择">
-            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
-          </el-select>
+          <area-search v-model="area" class="area-search" :showBtn="false" :startCode="start"></area-search>
         </h1>
         <el-tabs class="crumbs" v-model="activeType" @tab-click="scrollTo(activeType)">
           <el-tab-pane label="一般公共预算收支" name="tag_1"></el-tab-pane>
@@ -17,7 +15,13 @@
       </div>
       <div id="tag_1" class="item_100 item-table">
         <h1 class="main-title">一般公共预算收支</h1>
-        <el-table class="table-main table-head-grey" :data="tableData" style="width: 100%" height="394px">
+        <el-table
+          v-loading="loading"
+          class="table-main table-head-grey"
+          :data="tableData"
+          style="width: 100%"
+          height="394px"
+        >
           <el-table-column prop="name" label="指标" align="center">
             <template slot-scope="scope">
               <ceil-subject>
@@ -33,7 +37,13 @@
       </div>
       <div id="tag_2" class="item_100 item-table">
         <h1 class="main-title">政府性基金收支</h1>
-        <el-table class="table-main table-head-grey" :data="tableData" style="width: 100%" height="394px">
+        <el-table
+          v-loading="loading"
+          class="table-main table-head-grey"
+          :data="tableData"
+          style="width: 100%"
+          height="394px"
+        >
           <el-table-column prop="name" label="指标" align="center">
             <template slot-scope="scope">
               <ceil-subject>
@@ -49,7 +59,13 @@
       </div>
       <div id="tag_3" class="item_100 item-table">
         <h1 class="main-title">国有资本经营收支</h1>
-        <el-table class="table-main table-head-grey" :data="tableData" style="width: 100%" height="394px">
+        <el-table
+          v-loading="loading"
+          class="table-main table-head-grey"
+          :data="tableData"
+          style="width: 100%"
+          height="394px"
+        >
           <el-table-column prop="name" label="指标" align="center">
             <template slot-scope="scope">
               <ceil-subject>
@@ -65,7 +81,13 @@
       </div>
       <div id="tag_4" class="item_100 item-table">
         <h1 class="main-title">地方债务</h1>
-        <el-table class="table-main table-head-grey" :data="tableData" style="width: 100%" height="394px">
+        <el-table
+          v-loading="loading"
+          class="table-main table-head-grey"
+          :data="tableData"
+          style="width: 100%"
+          height="394px"
+        >
           <el-table-column prop="name" label="指标" align="center">
             <template slot-scope="scope">
               <ceil-subject>
@@ -88,20 +110,32 @@ import baseTable from '@/components/base/table'
 export default {
   data() {
     return {
+      start: {
+        label: '重庆',
+        value: 'GS955525'
+      },
+      area: null,
       activeType: 'tag_1',
       loading: false,
       tableData: [],
-      idList: ['tag_1', 'tag_2', 'tag_3', 'tag_4'],
-      region: 1,
-      options: [
-        {
-          label: '重庆',
-          value: 1
-        }
-      ]
+      idList: ['tag_1', 'tag_2', 'tag_3', 'tag_4']
+    }
+  },
+  watch: {
+    area: {
+      immediate: true,
+      handler(data) {
+        this.getData()
+      }
     }
   },
   methods: {
+    getData() {
+      this.loading = true
+      setTimeout(() => {
+        this.loading = false
+      }, 3000)
+    },
     scrollTo(id) {
       let top = document.getElementById(id).offsetTop - 128
       const target = document.querySelector('.el-main')
