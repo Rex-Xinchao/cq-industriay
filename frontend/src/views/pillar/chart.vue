@@ -21,7 +21,7 @@
           </el-select>
         </div>
       </div>
-      <div id="chart"></div>
+      <div class="chart-main" id="chart"></div>
     </div>
   </div>
 </template>
@@ -27265,6 +27265,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '~@/assets/styles/common/view';
+.main {
+  height: calc(100% - 40px);
+}
 .backTo {
   font-size: 14px;
   font-weight: 400;
@@ -27275,6 +27278,7 @@ export default {
 }
 .chart {
   width: 100%;
+  height: 100%;
   background-color: white;
   box-sizing: border-box;
   position: relative;

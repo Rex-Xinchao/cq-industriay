@@ -25,11 +25,11 @@ export default {
         },
         {
           value: 2,
-          name: '应收周转率'
+          name: '应收账款周转率'
         },
         {
           value: 3,
-          name: '应付周转率'
+          name: '应付账款周转率'
         },
         {
           value: 4,
