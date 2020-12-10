@@ -1,13 +1,13 @@
 <template>
-  <div class="main growth-main">
+  <div class="main">
     <h1 class="main-title">偿还能力</h1>
     <div class="item-box">
-      <el-tabs class="item_100" style="height: 60px; line-height: 60px; padding: 0 20px" v-model="activeType">
+      <el-tabs class="item_100 crumbs" v-model="activeType">
         <el-tab-pane label="绩效评价（国资委）" name="1"></el-tab-pane>
         <el-tab-pane label="财务基准" name="2"></el-tab-pane>
       </el-tabs>
-      <base-table :type="activeType" class="item_100" style="height: 430px"></base-table>
-      <line-chart :heads="headers" :type="activeType" class="item_100 item_last" style="height: 430px"></line-chart>
+      <base-table :type="activeType" class="item_100 height_lg"></base-table>
+      <line-chart :heads="headers" :type="activeType" class="item_100 item_last height_lg"></line-chart>
     </div>
   </div>
 </template>
@@ -51,11 +51,4 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '~@/assets/styles/common/view';
-</style>
-<style lang="scss">
-.growth-main {
-  .el-tabs__nav-wrap::after {
-    background-color: white !important;
-  }
-}
 </style>

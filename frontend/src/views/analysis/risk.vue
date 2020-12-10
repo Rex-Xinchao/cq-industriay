@@ -6,8 +6,8 @@
       <el-button class="fr" @click="pageTo('/industrial/risk')">查看上下游风险</el-button>
     </h1>
     <div class="main-body item-box">
-      <pack-chart class="item_60" style="height: 460px; background-color: #f4f6f9"></pack-chart>
-      <div class="item_40" style="height: 460px; background-color: #f4f6f9; flex-direction: column">
+      <pack-chart class="item_60 height_lg"></pack-chart>
+      <div class="item_40 height_lg">
         <finance-table class="finance-table-main" title="财务及经济指标异动"></finance-table>
         <div class="market-info-main">
           <div class="card" v-loading="loading">
@@ -101,9 +101,14 @@ export default {
     width: 100%;
     box-sizing: border-box;
 
+    .height_lg {
+      background-color: #f4f6f9;
+      flex-direction: column;
+    }
+
     .finance-table-main {
       width: 100%;
-      height: 300px;
+      height: calc(100% - 155px);
       margin-bottom: 20px;
       box-sizing: border-box;
     }
@@ -204,7 +209,7 @@ export default {
 
     .bar-chart-main,
     .line-chart-main {
-      height: calc(100% - 480px) !important;
+      height: calc(100% - 500px) !important;
       min-height: 250px;
     }
   }

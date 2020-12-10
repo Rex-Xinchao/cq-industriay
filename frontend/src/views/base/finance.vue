@@ -17,7 +17,7 @@
         </span>
         <span class="filter-label fr">披露时间：{{ time || '--' }}</span>
       </div>
-      <el-table v-loading="loading" class="table-main table-head-grey" :data="tableData" height="calc(100% - 120px)">
+      <el-table v-loading="loading" class="table-head-grey" :data="tableData" height="calc(100% - 120px)">
         <el-table-column label="龙头企业" align="center"></el-table-column>
         <el-table-column label="市场" align="center"></el-table-column>
         <el-table-column label="业务线收入" align="center" sortable></el-table-column>
@@ -28,7 +28,7 @@
         <el-table-column label="净利润" align="center" sortable></el-table-column>
       </el-table>
       <el-pagination
-        class="fr pagination"
+        class="pagination fr"
         background
         layout="prev, pager, next"
         :total="page.total"
@@ -118,49 +118,49 @@ export default {
 @import '~@/assets/styles/common/view';
 .main {
   height: calc(100% - 40px);
-}
-.main-body {
-  width: 100%;
-  box-sizing: border-box;
-  background-color: white;
-  padding: 0 16px;
-
-  .filter {
+  .main-body {
     width: 100%;
-    height: 28px;
-    line-height: 28px;
-    padding: 16px 0;
+    box-sizing: border-box;
+    background-color: white;
+    padding: 0 16px;
 
-    .filter-label,
-    .filter-item {
-      display: inline-block;
-      vertical-align: top;
+    .filter {
+      width: 100%;
+      height: 28px;
+      line-height: 28px;
+      padding: 16px 0;
+
+      .filter-label,
+      .filter-item {
+        display: inline-block;
+        vertical-align: top;
+      }
+
+      .filter-item {
+        margin-right: 16px;
+        width: 160px;
+      }
+
+      .filter-label {
+        font-size: 14px;
+        font-weight: 400;
+        color: rgba(0, 0, 0, 0.85);
+      }
+
+      .fr {
+        font-size: 12px;
+        font-weight: 400;
+        color: #94979b;
+      }
     }
 
-    .filter-item {
-      margin-right: 16px;
-      width: 160px;
+    .table-main {
+      width: 100%;
     }
 
-    .filter-label {
-      font-size: 14px;
-      font-weight: 400;
-      color: rgba(0, 0, 0, 0.85);
+    .pagination {
+      margin-top: 16px;
     }
-
-    .fr {
-      font-size: 12px;
-      font-weight: 400;
-      color: #94979b;
-    }
-  }
-
-  .table-main {
-    width: 100%;
-  }
-
-  .pagination {
-    margin-top: 16px;
   }
 }
 </style>
