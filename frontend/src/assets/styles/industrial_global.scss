@@ -1,0 +1,43 @@
+$UP_COLOR: #a49fff;
+$DOWN_COLOR: #83bfff;
+.link.up {
+    stroke: $UP_COLOR;
+}
+.link.down {
+    stroke: $DOWN_COLOR;
+}
+path.link {
+    fill: none;
+    stroke-width: 1px;
+    stroke-dasharray: 3, 3;
+    .down {
+        stroke: $DOWN_COLOR;
+    }
+    .up {
+        stroke: $UP_COLOR;
+    }
+}
+.typeNode {
+    &.up {
+        text {
+            fill: #4c53ff;
+        }
+    }
+    &.down {
+        text {
+            fill: #2897ef;
+        }
+    }
+}
+.node {
+    circle {
+        fill: none;
+        stroke-width: 1.5px;
+    }
+    .down circle {
+        stroke: $DOWN_COLOR;
+    }
+    .up circle {
+        stroke: $UP_COLOR;
+    }
+}

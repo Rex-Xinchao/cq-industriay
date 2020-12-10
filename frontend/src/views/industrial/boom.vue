@@ -29,7 +29,7 @@
         <i class="icon-tip" title="这是一个提示"></i>
         <div class="tooltip-main">
           <div id="tooltipChart" class="chart" v-loading="loading"></div>
-          <el-table v-loading="loading" class="table" :data="tableData" height="200px">
+          <el-table v-loading="loading" class="boom-com_table" :data="tableData" height="380px">
             <el-table-column prop="name" label=""></el-table-column>
             <el-table-column prop="last" label="最新值"></el-table-column>
             <el-table-column prop="change" label="变动值"></el-table-column>
@@ -217,54 +217,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '~@/assets/styles/common/view';
-.main {
-  height: calc(100% - 40px);
-}
-.chart {
-  width: 100%;
-  height: calc(100% - 40px);
-  background-color: white;
-  position: relative;
-}
-
-.icon-tip {
-  position: absolute;
-  top: 22px;
-  left: 100px;
-}
-.chart-tooltip {
-  display: none;
-  position: absolute;
-  width: 440px;
-  height: 280px;
-  top: 0;
-  left: 0;
-  background: #ffffff;
-  border-radius: 4px;
-  box-shadow: 0px 9px 28px 8px rgba(0, 0, 0, 0.05), 0px 6px 16px 0px rgba(0, 0, 0, 0.08),
-    0px 3px 6px -4px rgba(0, 0, 0, 0.12);
-  padding: 14px 20px;
-  box-sizing: border-box;
-
-  h1 {
-    font-size: 14px;
-    font-weight: 400;
-    color: #25211f;
-    line-height: 20px;
-    margin: 0 0 16px 0;
-  }
-
-  span {
-    display: inline-block;
-    vertical-align: top;
-    font-size: 12px;
-    font-weight: 400;
-    color: #94979b;
-    line-height: 18px;
-    margin: 0 16px 12px 0;
-    cursor: pointer;
-  }
-}
+@import '~@/assets/styles/industrial';
 .tooltip-main {
   width: 100%;
   height: calc(100% - 16px);
@@ -272,11 +225,11 @@ export default {
   left: 50%;
 
   .chart,
-  .table {
+  .boom-com_table {
     display: inline-block;
     vertical-align: top;
     width: 45%;
-    height: 200px;
+    height: 380px;
 
     .negative {
       color: #08a24c;
@@ -302,69 +255,11 @@ export default {
     }
   }
 
-  .table {
+  .boom-com_table {
     width: 55%;
   }
 }
-.graph-box {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  border-bottom-right-radius: 7px;
-  border-bottom-left-radius: 7px;
-}
 </style>
 <style lang="scss">
-$UP_COLOR: #a49fff;
-$DOWN_COLOR: #83bfff;
-
-.link.up {
-  stroke: $UP_COLOR;
-}
-
-.link.down {
-  stroke: $DOWN_COLOR;
-}
-
-path.link {
-  fill: none;
-  stroke-width: 1px;
-  stroke-dasharray: 3, 3;
-
-  .down {
-    stroke: $DOWN_COLOR;
-  }
-
-  .up {
-    stroke: $UP_COLOR;
-  }
-}
-
-.typeNode {
-  &.up {
-    text {
-      fill: #4c53ff;
-    }
-  }
-  &.down {
-    text {
-      fill: #2897ef;
-    }
-  }
-}
-
-.node {
-  circle {
-    fill: none;
-    stroke-width: 1.5px;
-  }
-
-  .down circle {
-    stroke: $DOWN_COLOR;
-  }
-
-  .up circle {
-    stroke: $UP_COLOR;
-  }
-}
+@import '~@/assets/styles/industrial_global';
 </style>
