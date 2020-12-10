@@ -6,31 +6,30 @@
       <el-button class="fr" @click="pageTo('/analysis/env')">查看更多指标</el-button>
     </h1>
     <div class="item-box">
-      <div v-loading="loading" class="item_25">
+      <div v-loading="loading" class="item_25 height_sm">
         <complex-chart v-if="dataList[0].indexType === 1" class="fill" :chartData="dataList[0]"></complex-chart>
         <line-chart v-else class="fill" :chartData="dataList[0]"></line-chart>
       </div>
-      <div v-loading="loading" class="item_25">
+      <div v-loading="loading" class="item_25 height_sm">
         <complex-chart v-if="dataList[1].indexType === 1" class="fill" :chartData="dataList[1]"></complex-chart>
         <line-chart v-else class="fill" :chartData="dataList[1]"></line-chart>
       </div>
-      <div v-loading="loading" class="item_25">
+      <div v-loading="loading" class="item_25 height_sm">
         <complex-chart v-if="dataList[2].indexType === 1" class="fill" :chartData="dataList[2]"></complex-chart>
         <line-chart v-else class="fill" :chartData="dataList[2]"></line-chart>
       </div>
-      <div v-loading="loading" class="item_25">
+      <div v-loading="loading" class="item_25 height_sm">
         <complex-chart v-if="dataList[3].indexType === 1" class="fill" :chartData="dataList[3]"></complex-chart>
         <line-chart v-else class="fill" :chartData="dataList[3]"></line-chart>
       </div>
-      <bar-chart class="item_50" :request="loan_balance"></bar-chart>
-      <circle-chart class="item_50" title="总投放规模" :request="total_loan_balance"></circle-chart>
-      <stack-chart class="item_50" :request="abnormal_loan"></stack-chart>
-      <circle-chart class="item_50" title="非正常贷款投放规模" :request="total_abnormal_loan"></circle-chart>
-      <table-com class="item_50" style="height: 385px" :request="customer_statistics"></table-com>
-      <table-com title="行内客户" class="item_50" style="height: 385px" :request="customer"></table-com>
+      <bar-chart class="item_50 height_sm" :request="loan_balance"></bar-chart>
+      <circle-chart class="item_50 height_sm" title="总投放规模" :request="total_loan_balance"></circle-chart>
+      <stack-chart class="item_50 height_sm" :request="abnormal_loan"></stack-chart>
+      <circle-chart class="item_50 height_sm" title="非正常贷款投放规模" :request="total_abnormal_loan"></circle-chart>
+      <table-com class="item_50 height_mid" :request="customer_statistics"></table-com>
+      <table-com title="行内客户" class="item_50 height_mid" :request="customer"></table-com>
       <doucle-circle-chart
-        class="item_100 item_last"
-        style="height: 385px"
+        class="item_100 item_last height_mid"
         title="存量客户近期负面事件"
         subTitle="汽车行业"
       ></doucle-circle-chart>
