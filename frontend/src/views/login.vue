@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="login-notice">
-        <span class="notice-txt">公告</span>
+        <span class="notice-txt"></span>
         <ul ref="notice">
           <li>
             <span class="notice-main">风铃智评最新版本上线</span>
@@ -63,18 +63,14 @@
         </span>
       </div>
       <div class="login-tab">
-        <div class="item">行业洞察</div>
-        <div class="item">全行风险报告</div>
-        <div class="item">找关系</div>
-        <div class="item">预警中心</div>
-
-        <div class="item" style="cursor: pointer" @click="pageTo('/pillar/index')">支柱产业</div>
-        <div class="item" style="cursor: pointer" @click="pageTo('/stockCustom/all')">全行客户</div>
-        <div class="item">城投专题</div>
-        <div class="item">
-          <p>房地产专题</p>
-          <p>敬请期待</p>
-        </div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item" style="cursor: pointer" @click="pageTo('/pillar/index')"></div>
+        <div class="item" style="cursor: pointer" @click="pageTo('/stockCustom/all')"></div>
+        <div class="item"></div>
+        <div class="item"></div>
       </div>
     </div>
   </div>
