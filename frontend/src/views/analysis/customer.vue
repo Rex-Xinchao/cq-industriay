@@ -54,7 +54,7 @@
               <template slot-scope="scope">
                 <span v-if="!scope.row.companys.length">--</span>
                 <template v-else>
-                  <p v-for="(item, index) in scope.row.companys" :key="index" class="company-line" :title="item.name">
+                  <p v-for="(item, index) in scope.row.companys" :key="index" class="ceil-line" :title="item.name">
                     {{ item.name }}
                   </p>
                 </template>
@@ -127,100 +127,37 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/assets/styles/view';
+@import '~@/assets/styles/common/view';
+@import '~@/assets/styles/common/table';
 .main {
   height: calc(100% - 40px);
-}
-.main-body {
-  width: 100%;
-  height: calc(100% - 48px);
-  box-sizing: border-box;
-  position: relative;
-
-  .map-chart {
-    display: inline-block;
-    vertical-align: top;
-    margin-right: 20px;
-    width: 100%;
-    height: 100%;
+  .main-body {
     box-sizing: border-box;
-  }
+    position: relative;
 
-  .operation-bar {
-    margin-bottom: 20px;
-  }
-
-  .btn-show-more {
-    position: absolute;
-    top: 28px;
-    right: 8px;
-    z-index: 1001;
-  }
-
-  .table-main {
-    width: 100%;
-    margin-top: 12px;
-
-    .type-tag {
+    .map-chart {
       display: inline-block;
-      border-radius: 2px;
-      width: 60px;
-      color: white;
-      box-sizing: border-box;
-      text-align: center;
-      height: 22px;
-      background: rgba(0, 0, 0, 0);
       vertical-align: top;
-      &.type_1 {
-        background: linear-gradient(50deg, #eabc93 0%, #e2a570 100%);
-      }
-      &.type_2 {
-        background: linear-gradient(50deg, #b3b2c9 0%, #9b9dc4 100%);
-      }
-    }
-
-    .name {
-      display: inline-block;
-      width: 100px;
-      line-height: 22px;
+      margin-right: 20px;
+      width: 100%;
+      height: 100%;
       box-sizing: border-box;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      vertical-align: top;
-      text-align: left;
-      text-indent: 1em;
     }
 
-    .icon-qualify {
-      display: inline-block;
-      background-color: #22ca30;
-      padding: 0 6px;
-      border-radius: 4px;
-      color: white;
-      width: auto;
-      line-height: 22px;
-      i {
-        margin-right: 4px;
-      }
+    .operation-bar {
+      margin-bottom: 20px;
     }
 
-    .company-line {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      margin: 0;
+    .btn-show-more {
+      position: absolute;
+      top: 28px;
+      right: 8px;
+      z-index: 1001;
+    }
+
+    .table-main {
+      margin-top: 12px;
     }
   }
-}
-</style>
-><style lang="scss">
-.popover-p {
-  margin: 0;
-  text-align: center;
-  margin-bottom: 4px;
-}
-.el-popover {
-  min-width: 60px !important;
 }
 </style>

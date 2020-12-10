@@ -1,11 +1,11 @@
 <template>
-  <div class="chartMain">
+  <div class="com-main">
     <div class="operation-bar">
       <span class="bar-item" :class="{ active: isScale }" @click="isScale = true">非正常贷款规模</span>
       <span class="bar-item" :class="{ active: !isScale }" @click="isScale = false">非正常贷款企业数量</span>
       <i class="icon-tip" :title="`样本来源于重庆银行${industry}授信客户`"></i>
     </div>
-    <div v-loading="loading" v-if="!noData" id="stackChart"></div>
+    <div v-loading="loading" v-if="!noData" class="chart-main" id="stackChart"></div>
     <no-data-show v-loading="loading" class="chart-nodata" :show="noData"></no-data-show>
   </div>
 </template>
@@ -106,9 +106,5 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/assets/styles/chartMain';
-#stackChart {
-  width: 100%;
-  flex: 1;
-}
+@import '~@/assets/styles/common/component';
 </style>

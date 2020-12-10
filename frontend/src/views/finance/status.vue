@@ -1,7 +1,7 @@
 <template>
   <div class="main growth-main">
     <div class="item-box">
-      <div class="item_100 item-tab item-menu">
+      <div class="item_100 item-menu">
         <h1 class="main-title">地区经济状况：
           <el-select v-model="region" placeholder="请选择">
             <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
@@ -176,8 +176,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/assets/styles/view';
-@import '~@/assets/styles/component';
+@import '~@/assets/styles/common/view';
+@import '~@/assets/styles/common/component';
 .icon-bar {
   width: 16px;
   height: 14px;

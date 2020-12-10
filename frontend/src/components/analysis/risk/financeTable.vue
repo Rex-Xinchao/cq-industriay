@@ -46,7 +46,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/assets/styles/component';
+@import '~@/assets/styles/common/component';
 .finance-table-main {
   background-color: white;
 

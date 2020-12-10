@@ -1,11 +1,11 @@
 <template>
-  <div class="chartMain">
+  <div class="com-main">
     <div class="operation-bar">
       <span class="bar-item" :class="{ active: isBar }" @click="isBar = true">注册资本</span>
       <span class="bar-item" :class="{ active: !isBar }" @click="isBar = false">成立时间</span>
       <i class="icon-tip" title="样本数据来源于工商企业"></i>
     </div>
-    <div v-loading="loading" v-if="!noData" id="chart"></div>
+    <div v-loading="loading" v-if="!noData" class="chart-main" id="chart"></div>
     <no-data-show v-loading="loading" class="chart-nodata" :show="noData"></no-data-show>
   </div>
 </template>
@@ -16,7 +16,6 @@ import resize from '@/mixins/resize'
 import bar from '@/mixins/bar'
 import pie from '@/mixins/pie'
 export default {
-  name: '',
   data() {
     let vm = this
     return {
@@ -105,10 +104,5 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/assets/styles/chartMain';
-
-#chart {
-  width: 100%;
-  flex: 1;
-}
+@import '~@/assets/styles/common/component';
 </style>

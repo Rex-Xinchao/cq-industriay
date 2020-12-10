@@ -1,16 +1,16 @@
 <template>
-  <div class="chartMain">
-    <h1 class="chart-title">
+  <div class="com-main">
+    <h1 class="com-title">
       {{ title }}
       <i class="icon-tip" title="数据来源于裁判文书"></i>
-      <div class="filter fr">
+      <div class="com-filter fr">
         <el-select class="select" v-model="typeSelect">
           <el-option v-for="item in typeOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
         </el-select>
         <time-select class="select" v-model="dateTime"></time-select>
       </div>
     </h1>
-    <div v-loading="loading" v-if="!noData" id="barChart"></div>
+    <div v-loading="loading" v-if="!noData" class="chart-main" id="barChart"></div>
     <no-data-show v-loading="loading" class="chart-nodata" :show="noData"></no-data-show>
   </div>
 </template>
@@ -78,12 +78,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/assets/styles/chartMain';
+@import '~@/assets/styles/common/component';
 .select:first-of-type {
   width: 120px;
-}
-#barChart {
-  width: 100%;
-  flex: 1;
 }
 </style>

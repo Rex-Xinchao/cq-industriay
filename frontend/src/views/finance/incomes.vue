@@ -1,7 +1,7 @@
 <template>
   <div class="main growth-main">
     <div class="item-box">
-      <div class="item_100 item-tab item-menu">
+      <div class="item_100 item-menu">
         <h1 class="main-title">
           财政收支及债务：
           <el-select v-model="region" placeholder="请选择">
@@ -153,8 +153,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/assets/styles/view';
-@import '~@/assets/styles/component';
+@import '~@/assets/styles/common/view';
+@import '~@/assets/styles/common/component';
 .item-menu {
   position: sticky;
   top: 0;

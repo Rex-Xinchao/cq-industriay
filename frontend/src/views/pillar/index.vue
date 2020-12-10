@@ -245,7 +245,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/assets/styles/view';
+@import '~@/assets/styles/common/view';
 .main {
   height: calc(100% - 40px);
 }

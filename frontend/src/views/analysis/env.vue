@@ -16,7 +16,7 @@
             text-color="#94979B"
             active-text-color="#25211F"
             :default-active="activeMenu"
-            class="menu"
+            class="env-com_menu"
             @select="getHead"
             :default-openeds="['up', 'mid', 'down']"
           >
@@ -143,121 +143,109 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/assets/styles/view';
+@import '~@/assets/styles/common/view';
 .main {
   height: calc(100% - 40px);
-}
-.main-body {
-  .left {
-    display: inline-block;
-    vertical-align: top;
-    height: 100%;
-    padding-right: 20px;
-    box-sizing: border-box;
-    .siderbar {
-      width: 100%;
+  .main-body {
+    .left {
+      display: inline-block;
+      vertical-align: top;
       height: 100%;
-      background-color: white;
-      padding: 20px;
+      padding-right: 20px;
       box-sizing: border-box;
-
-      h1 {
-        font-size: 16px;
-        font-weight: 400;
-        color: #000a12;
-        line-height: 22px;
-        padding: 0;
-        margin: 0 0 12px 0;
-      }
-
-      .search-main {
-        border-radius: 2px;
-        margin: 0 0 12px 0;
-      }
-
-      .menu {
+      .siderbar {
         width: 100%;
-        height: calc(100% - 64px);
-        border: none;
-      }
-    }
-
-    .icon {
-      border: 1px solid #d9d9d9;
-      color: #595959;
-      cursor: pointer;
-      line-height: 22px;
-      padding: 0 2px;
-      background-color: white;
-    }
-
-    .el-icon-s-unfold {
-      margin-top: 20px;
-    }
-  }
-
-  .right {
-    display: inline-block;
-    vertical-align: top;
-    height: 100%;
-
-    .right-head {
-      width: 100%;
-      height: 92px;
-      padding: 16px 20px;
-      background-color: white;
-      box-sizing: border-box;
-      margin-bottom: 20px;
-      border-radius: 4px;
-
-      span {
-        display: inline-block;
-        vertical-align: top;
-        width: 240px;
-        height: 22px;
-        line-height: 22px;
-        border-radius: 4px;
+        height: 100%;
+        background-color: white;
+        padding: 20px;
         box-sizing: border-box;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        padding: 0 12px;
-        margin-bottom: 16px;
-        font-size: 12px;
+
+        h1 {
+          font-size: 16px;
+          font-weight: 400;
+          color: #000a12;
+          line-height: 22px;
+          padding: 0;
+          margin: 0 0 12px 0;
+        }
+
+        .search-main {
+          border-radius: 2px;
+          margin: 0 0 12px 0;
+        }
+
+        .env-com_menu {
+          width: 100%;
+          height: calc(100% - 64px);
+          border: none;
+        }
+      }
+
+      .icon {
+        border: 1px solid #d9d9d9;
+        color: #595959;
         cursor: pointer;
-
-        &.active {
-          background: #3a84ff;
-          color: white;
-        }
+        line-height: 22px;
+        padding: 0 2px;
+        background-color: white;
       }
 
-      @media screen and (max-width: 1440px) {
+      .el-icon-s-unfold {
+        margin-top: 20px;
+      }
+    }
+
+    .right {
+      display: inline-block;
+      vertical-align: top;
+      height: 100%;
+
+      .right-head {
+        width: 100%;
+        height: 92px;
+        padding: 16px 20px;
+        background-color: white;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+        border-radius: 4px;
+
         span {
-          width: auto;
-          padding: 0 16px;
+          display: inline-block;
+          vertical-align: top;
+          width: 240px;
+          height: 22px;
+          line-height: 22px;
+          border-radius: 4px;
+          box-sizing: border-box;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          padding: 0 12px;
+          margin-bottom: 16px;
+          font-size: 12px;
+          cursor: pointer;
+
+          &.active {
+            background: #3a84ff;
+            color: white;
+          }
+        }
+
+        @media screen and (max-width: 1440px) {
+          span {
+            width: auto;
+            padding: 0 16px;
+          }
         }
       }
-    }
 
-    .right-main {
-      width: 100%;
-      height: calc(100% - 112px);
-      background-color: white;
-      border-radius: 4px;
-      padding: 20px;
-      box-sizing: border-box;
-    }
-  }
-}
-</style>
-<style lang="scss">
-.left {
-  .siderbar {
-    .menu {
-      .el-submenu__title {
-        height: 32px;
-        line-height: 32px;
+      .right-main {
+        width: 100%;
+        height: calc(100% - 112px);
+        background-color: white;
+        border-radius: 4px;
+        padding: 20px;
+        box-sizing: border-box;
       }
     }
   }

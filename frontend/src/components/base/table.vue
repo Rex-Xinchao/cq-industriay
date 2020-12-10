@@ -1,7 +1,7 @@
 <template>
-  <div class="chartMain">
-    <h1 class="chart-title">基准指标</h1>
-    <div class="filter">
+  <div class="com-main">
+    <h1 class="com-title">基准指标</h1>
+    <div class="com-filter">
       <div class="filter-item">日期：</div>
       <time-select class="filter-item" v-model="time"></time-select>
       <el-button class="filter-item btn" type="primary" @click="search">查询</el-button>
@@ -49,9 +49,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/assets/styles/chartMain';
-.chartMain {
-  .filter {
+@import '~@/assets/styles/common/component';
+.com-filter {
     width: 100%;
     height: 28px;
     line-height: 28px;
@@ -66,5 +65,4 @@ export default {
       margin-left: 12px;
     }
   }
-}
 </style>

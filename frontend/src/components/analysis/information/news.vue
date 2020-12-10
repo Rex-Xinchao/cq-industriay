@@ -237,7 +237,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/assets/styles/newsList';
+@import '~@/assets/styles/common/newsList';
 </style>
 <style lang="scss">
 $company: #207cff;

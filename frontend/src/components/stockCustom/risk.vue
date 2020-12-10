@@ -137,8 +137,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/assets/styles/component';
-@import '~@/assets/styles/eventTag';
+@import '~@/assets/styles/common/component';
+@import '~@/assets/styles/common/eventTag';
 .risk-table-main {
   .select {
     margin-left: 12px;

@@ -1,0 +1,282 @@
+.login-main {
+    width: 100%;
+    height: 100%;
+    background-image: url(~@/assets/imgs/background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    .login-head {
+        padding: 20px 35px 0 35px;
+        overflow: hidden;
+
+        .login-logo {
+            width: 184px;
+            height: 50px;
+            background-image: url(~@/assets/imgs/login-logo.png);
+            background-repeat: no-repeat;
+            background-size: contain;
+            float: left;
+        }
+
+        .login-btn {
+            background: rgba(0, 0, 0, 0);
+            color: white;
+            width: 80px;
+            line-height: 32px;
+            border-radius: 4px;
+            border: 1px solid white;
+            text-align: center;
+            float: right;
+            cursor: pointer;
+
+            &:hover {
+                background: #079cf1;
+                border: 1px solid #079cf1;
+            }
+        }
+    }
+
+    .login-body {
+        width: 100%;
+        height: auto;
+        margin-top: 80px;
+
+        .login-logo_2 {
+            width: 260px;
+            height: 76px;
+            background-image: url(~@/assets/imgs/login-logo2.png);
+            background-repeat: no-repeat;
+            background-size: contain;
+            margin: 0 auto;
+        }
+
+        .login-menu {
+            display: block;
+            width: 750px;
+            color: white;
+            margin: 30px auto 24px auto;
+
+            li {
+                display: inline-block;
+                padding: 0 4px;
+                margin: 0 6px;
+                font-size: 20px;
+                line-height: 28px;
+                cursor: pointer;
+
+                &.active {
+                    border-bottom: 2px solid #62e9dd;
+                }
+            }
+        }
+
+        .login-search {
+            width: 750px;
+            margin: 0 auto;
+
+            .input {
+                width: calc(100% - 150px);
+                margin-right: 20px;
+            }
+
+            .btn {
+                width: 88px;
+            }
+
+            .advanced-search {
+                display: inline-block;
+                vertical-align: middle;
+                font-size: 14px;
+                height: 36px;
+                width: 32px;
+                margin-left: 10px;
+                color: white;
+                letter-spacing: 2px;
+                cursor: pointer;
+
+                &:hover {
+                    color: #079cf1;
+                }
+            }
+        }
+
+        .login-history {
+            width: 750px;
+            margin: 20px auto 0 auto;
+            color: white;
+            font-size: 12px;
+            overflow: hidden;
+
+            .title {
+                width: 70px;
+                height: auto;
+                float: left;
+            }
+
+            .list {
+                width: calc(100% - 70px);
+                float: right;
+
+                span {
+                    display: inline-block;
+                    margin-right: 20px;
+                }
+            }
+        }
+
+        .login-notice {
+            width: 750px;
+            height: 30px;
+            line-height: 30px;
+            background: rgba(1, 25, 61, 0.52);
+            border-radius: 2px;
+            margin: 30px auto 0 auto;
+            font-size: 14px;
+            color: white;
+            padding: 0 16px;
+            box-sizing: border-box;
+            overflow: hidden;
+
+            .notice-txt {
+                display: inline-block;
+                vertical-align: top;
+                margin-right: 12px;
+            }
+
+            .notice-tool {
+                display: inline-block;
+                vertical-align: top;
+                width: 16px;
+                height: 30px;
+                padding: 7px 0;
+                box-sizing: border-box;
+
+                .up {
+                    display: block;
+                    width: 16px;
+                    height: 8px;
+                    background-image: url(~@/assets/imgs/login/up.svg);
+                    cursor: pointer;
+
+                    &:hover {
+                        background-image: url(~@/assets/imgs/login/up_active.svg);
+                    }
+                }
+                .down {
+                    display: block;
+                    width: 16px;
+                    height: 8px;
+                    background-image: url(~@/assets/imgs/login/down.svg);
+                    cursor: pointer;
+
+                    &:hover {
+                        background-image: url(~@/assets/imgs/login/down_active.svg);
+                    }
+                }
+            }
+
+            ul {
+                display: inline-block;
+                width: calc(100% - 60px);
+                animation-name: paused;
+                animation-duration: 6s;
+                animation-timing-function: linear;
+                animation-delay: 1s;
+                animation-iteration-count: infinite;
+                animation-direction: normal;
+                animation-play-state: running;
+
+                .notice-time {
+                    float: right;
+                    margin-right: 12px;
+                }
+
+                li {
+                    margin: 0;
+                    overflow: hidden;
+                }
+            }
+
+            &:hover {
+                ul {
+                    animation-play-state: paused;
+                }
+            }
+        }
+    }
+
+    @keyframes move {
+        from {
+            transform: translateY(0);
+        }
+        to {
+            transform: translateY(-50%);
+        }
+    }
+}
+.login-tab {
+    width: 1120px;
+    margin: 50px auto 0 auto;
+    box-sizing: border-box;
+
+    .item {
+        display: inline-block;
+        width: 120px;
+        height: 86px;
+        background-color: #ccc;
+        margin: 10px;
+        border-radius: 4px;
+        vertical-align: top;
+        font-size: 16px;
+        font-weight: 500;
+        color: #f8f9fb;
+        line-height: 130px;
+        letter-spacing: 1px;
+        text-align: center;
+
+        p {
+            line-height: 22px;
+            margin: 0;
+
+            &:nth-of-type(1) {
+                margin-top: 22px;
+            }
+
+            &:nth-of-type(2) {
+                font-size: 12px;
+            }
+        }
+
+        &:nth-of-type(1) {
+            background-image: url(~@/assets/imgs/login/1.png);
+        }
+
+        &:nth-of-type(2) {
+            background-image: url(~@/assets/imgs/login/2.png);
+        }
+
+        &:nth-of-type(3) {
+            background-image: url(~@/assets/imgs/login/3.png);
+        }
+
+        &:nth-of-type(4) {
+            background-image: url(~@/assets/imgs/login/4.png);
+        }
+
+        &:nth-of-type(5) {
+            background-image: url(~@/assets/imgs/login/5.png);
+        }
+
+        &:nth-of-type(6) {
+            background-image: url(~@/assets/imgs/login/6.png);
+        }
+
+        &:nth-of-type(7) {
+            background-image: url(~@/assets/imgs/login/7.png);
+        }
+
+        &:nth-of-type(8) {
+            background-image: url(~@/assets/imgs/login/8.png);
+        }
+    }
+}

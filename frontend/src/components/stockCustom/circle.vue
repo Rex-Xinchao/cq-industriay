@@ -1,10 +1,10 @@
 <template>
-  <div class="chartMain" v-loading="loading">
-    <h1 class="chart-title">
+  <div class="com-main" v-loading="loading">
+    <h1 class="com-title">
       {{ title }}
       <i class="icon-tip" :title="`样本来源于重庆银行${industry}授信客户`"></i>
     </h1>
-    <div v-if="!noData" class="circleChart" :id="`circleChart_${timeStamp}`"></div>
+    <div v-if="!noData" class="chart-main" :id="`circleChart_${timeStamp}`"></div>
     <no-data-show class="chart-nodata" :show="noData"></no-data-show>
   </div>
 </template>
@@ -115,12 +115,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/assets/styles/chartMain';
-.circleChart {
-  width: 100%;
-  flex: 1;
-}
-
+@import '~@/assets/styles/common/component';
 .add-btn {
   margin-top: 12px;
   width: 100%;

@@ -94,119 +94,119 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/assets/styles/view';
+@import '~@/assets/styles/common/view';
 .main {
   height: calc(100% - 40px);
-}
-.main-body {
-  width: 100%;
-  box-sizing: border-box;
-
-  .finance-table-main {
+  .main-body {
     width: 100%;
-    height: 300px;
-    margin-bottom: 20px;
     box-sizing: border-box;
-  }
 
-  .market-info-main {
-    width: 100%;
-    height: 135px;
-
-    .card {
-      display: inline-block;
-      width: calc(50% - 10px);
-      height: 100%;
-      padding: 20px 0 20px 20px;
-      background-color: #ffffff;
-      margin-right: 20px;
+    .finance-table-main {
+      width: 100%;
+      height: 300px;
+      margin-bottom: 20px;
       box-sizing: border-box;
-      vertical-align: top;
+    }
 
-      &:last-of-type {
-        margin: 0;
-      }
+    .market-info-main {
+      width: 100%;
+      height: 135px;
 
-      .icon-card {
-        float: right;
-        width: 30px;
-        height: 30px;
-        background-color: #cccccc;
-      }
+      .card {
+        display: inline-block;
+        width: calc(50% - 10px);
+        height: 100%;
+        padding: 20px 0 20px 20px;
+        background-color: #ffffff;
+        margin-right: 20px;
+        box-sizing: border-box;
+        vertical-align: top;
 
-      .title {
-        display: block;
-        width: calc(100%);
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        font-size: 16px;
-        font-weight: 400;
-        color: #000a12;
-        line-height: 22px;
-        margin-bottom: 10px;
-      }
+        &:last-of-type {
+          margin: 0;
+        }
 
-      .num {
-        display: block;
-        width: calc(100%);
-        font-size: 35px;
-        font-weight: bold;
-        color: #1b253a;
-        line-height: 44px;
-        margin-bottom: 6px;
+        .icon-card {
+          float: right;
+          width: 30px;
+          height: 30px;
+          background-color: #cccccc;
+        }
 
-        .unit {
-          text-decoration: none;
-          font-size: 14px;
+        .title {
+          display: block;
+          width: calc(100%);
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          font-size: 16px;
           font-weight: 400;
           color: #000a12;
-          line-height: 20px;
+          line-height: 22px;
+          margin-bottom: 10px;
         }
 
-        .link {
-          text-indent: 1em;
-          text-decoration: none;
-          cursor: pointer;
-          font-size: 14px;
-          font-weight: 400;
-          color: #3a84ff;
-          line-height: 20px;
-          margin-left: 6px;
-        }
-      }
-
-      .tip {
-        font-size: 12px;
-        font-weight: 400;
-        color: #94979b;
-        line-height: 16px;
-        strong {
+        .num {
+          display: block;
+          width: calc(100%);
+          font-size: 35px;
+          font-weight: bold;
           color: #1b253a;
+          line-height: 44px;
+          margin-bottom: 6px;
+
+          .unit {
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 400;
+            color: #000a12;
+            line-height: 20px;
+          }
+
+          .link {
+            text-indent: 1em;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 400;
+            color: #3a84ff;
+            line-height: 20px;
+            margin-left: 6px;
+          }
         }
 
-        .icon-img {
-          width: 8px;
-          height: 16px;
-          margin-left: 6px;
-          vertical-align: sub;
-        }
+        .tip {
+          font-size: 12px;
+          font-weight: 400;
+          color: #94979b;
+          line-height: 16px;
+          strong {
+            color: #1b253a;
+          }
 
-        .icon-up {
-          background-image: url(~@/assets/imgs/icons/up.svg);
-        }
+          .icon-img {
+            width: 8px;
+            height: 16px;
+            margin-left: 6px;
+            vertical-align: sub;
+          }
 
-        .icon-down {
-          background-image: url(~@/assets/imgs/icons/down.svg);
+          .icon-up {
+            background-image: url(~@/assets/imgs/icons/up.svg);
+          }
+
+          .icon-down {
+            background-image: url(~@/assets/imgs/icons/down.svg);
+          }
         }
       }
     }
-  }
 
-  .bar-chart-main,
-  .line-chart-main {
-    height: calc(100% - 480px) !important;
-    min-height: 250px;
+    .bar-chart-main,
+    .line-chart-main {
+      height: calc(100% - 480px) !important;
+      min-height: 250px;
+    }
   }
 }
 </style>

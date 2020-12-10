@@ -1,6 +1,6 @@
 <template>
-  <div class="item">
-    <div class="map-main" id="map"></div>
+  <div class="map-com">
+    <div class="chart-main" id="map"></div>
     <area-search></area-search>
     <el-breadcrumb class="breadcrumb" v-show="activeType !== 'all'">
       <el-breadcrumb-item><span style="cursor: pointer" @click="resetActive">三省一市</span></el-breadcrumb-item>
@@ -8,8 +8,7 @@
         <strong>{{ activeName }}</strong>
       </el-breadcrumb-item>
     </el-breadcrumb>
-
-    <el-dialog :title="dialogTitle" :visible.sync="dialogVisible" width="1000px" :before-close="handleClose">
+    <el-dialog class="map-com_dialog" :title="dialogTitle" :visible.sync="dialogVisible" width="1000px" :before-close="handleClose">
       <span>
         <el-form :inline="true" :model="dialogForm" class="dialog-form">
           <el-form-item label="资质：">
@@ -237,9 +236,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.item {
+.map-com {
   position: relative;
-  .map-main {
+  .chart-main {
     width: calc(100% - 20px);
     height: 100%;
   }
@@ -267,45 +266,5 @@ export default {
   & + .sign-tag_com {
     margin-left: 8px;
   }
-}
-</style>
-<style lang="scss">
-.dialog-form {
-  display: inline-block;
-  width: calc(100% - 200px);
-
-  .el-form-item {
-    width: calc(50% - 10px);
-    box-sizing: border-box;
-  }
-
-  .el-form-item__label {
-    line-height: 38px;
-  }
-
-  .el-form-item__content {
-    width: calc(100% - 120px);
-    padding: 0 8px;
-  }
-
-  .select {
-    width: 100%;
-    margin-top: 6px;
-  }
-
-  .time-picker {
-    width: 100%;
-    margin-top: 6px;
-  }
-
-  .slider {
-    width: 100%;
-  }
-}
-.btn-box {
-  display: inline-block;
-  vertical-align: bottom;
-  width: 200px;
-  padding-bottom: 18px;
 }
 </style>

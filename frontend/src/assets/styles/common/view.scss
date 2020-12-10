@@ -1,3 +1,11 @@
+@mixin item {
+    display: flex;
+    height: auto;
+    background-color: white;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
 .main {
     width: 100%;
     height: auto;
@@ -39,88 +47,64 @@
         justify-content: space-between;
 
         .item_100 {
-            display: flex;
+            @include item;
             width: 100%;
-            height: 224px;
-            background-color: white;
-            margin-bottom: 20px;
-            box-sizing: border-box;
         }
 
         .item_60 {
-            display: flex;
+            @include item;
             width: calc(60% - 10px);
-            height: 224px;
-            background-color: white;
-            margin-bottom: 20px;
-            box-sizing: border-box;
         }
 
         .item_40 {
-            display: flex;
+            @include item;
             width: calc(40% - 10px);
-            height: 224px;
-            background-color: white;
-            margin-bottom: 20px;
-            box-sizing: border-box;
         }
 
         .item_50 {
-            display: flex;
+            @include item;
             width: calc(50% - 10px);
-            height: 224px;
-            background-color: white;
-            margin-bottom: 20px;
-            box-sizing: border-box;
         }
 
         .item_33 {
-            display: flex;
+            @include item;
             width: calc(100% / 3 - 40px / 3);
-            height: 224px;
-            background-color: white;
-            margin-bottom: 20px;
-            box-sizing: border-box;
         }
 
         .item_25 {
-            display: flex;
+            @include item;
             width: calc(100% / 4 - 15px);
-            height: 224px;
-            background-color: white;
-            margin-bottom: 20px;
-            box-sizing: border-box;
         }
 
         .item_75 {
-            display: flex;
+            @include item;
             width: calc(100% * 3 / 4 - 5px);
-            height: 224px;
-            background-color: white;
-            margin-bottom: 20px;
-            box-sizing: border-box;
         }
 
         .item_70 {
-            display: flex;
+            @include item;
             width: calc(70% - 10px);
-            height: 224px;
-            background-color: white;
-            margin-bottom: 20px;
-            box-sizing: border-box;
         }
 
         .item_30 {
-            display: flex;
+            @include item;
             width: calc(30% - 10px);
-            height: 224px;
-            background-color: white;
-            margin-bottom: 20px;
-            box-sizing: border-box;
         }
 
         .item_last {
             margin-bottom: 0;
+        }
+
+        .height_sm {
+            height: 280px;
+        }
+
+        .height_mid {
+            height: 380px;
+        }
+
+        .height_lg {
+            height: 480px;
         }
     }
 

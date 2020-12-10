@@ -35,7 +35,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/assets/styles/view';
+@import '~@/assets/styles/common/view';
 .main {
   padding: 40px 120px;
   height: auto;

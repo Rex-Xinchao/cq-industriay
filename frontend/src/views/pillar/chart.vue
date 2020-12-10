@@ -27264,7 +27264,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/assets/styles/view';
+@import '~@/assets/styles/common/view';
 .backTo {
   font-size: 14px;
   font-weight: 400;

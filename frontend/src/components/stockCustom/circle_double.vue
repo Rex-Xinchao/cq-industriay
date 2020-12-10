@@ -1,12 +1,12 @@
 <template>
-  <div class="chartMain">
-    <h1 class="chart-title">
+  <div class="com-main">
+    <h1 class="com-title">
       {{ title }}
-      <span class="chart-title_sub">{{ subTitle }}</span>
+      <span class="com-title_sub">{{ subTitle }}</span>
       <i class="icon-tip" :title="`重庆银行${industry}授信客户的新闻舆情事件`"></i>
       <time-select v-model="dataTime" :options="options" startValue="1Y"></time-select>
     </h1>
-    <div v-loading="loading" v-if="!noData" class="circleChart">
+    <div v-loading="loading" v-if="!noData" class="chart-main">
       <div class="half" :id="`pieChart_${timeStamp}`"></div>
       <div class="half">
         <span class="table-title">{{ tableTitle }}</span>
@@ -217,11 +217,13 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/assets/styles/chartMain';
-.circleChart {
-  width: 100%;
-  flex: 1;
-
+@import '~@/assets/styles/common/component';
+.com-main{
+  .operation-bar {
+    width: auto;
+  }
+}
+.chart-main {
   .half {
     width: 50%;
     height: 100%;
@@ -238,11 +240,6 @@ export default {
 .table {
   width: 50%;
   flex: 1;
-}
-.chartMain {
-  .operation-bar {
-    width: auto;
-  }
 }
 .table-title {
   width: 61px;

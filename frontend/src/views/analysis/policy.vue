@@ -112,7 +112,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/assets/styles/view';
+@import '~@/assets/styles/common/view';
 .main-body {
   width: 100%;
   padding: 20px;

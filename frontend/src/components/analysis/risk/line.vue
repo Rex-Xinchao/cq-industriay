@@ -1,10 +1,10 @@
 <template>
-  <div class="chartMain">
-    <h1 class="chart-title">
+  <div class="com-main">
+    <h1 class="com-title">
       {{ title }}
       <i class="icon-tip" title="数据基于重庆银行内数据进行的测算"></i>
     </h1>
-    <div v-loading="loading" v-if="!noData" id="lineChart"></div>
+    <div v-loading="loading" v-if="!noData" class="chart-main" id="lineChart"></div>
     <no-data-show v-loading="loading" class="chart-nodata" :show="noData"></no-data-show>
   </div>
 </template>
@@ -57,9 +57,5 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/assets/styles/chartMain';
-#lineChart {
-  width: 100%;
-  flex: 1;
-}
+@import '~@/assets/styles/common/component';
 </style>

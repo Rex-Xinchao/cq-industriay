@@ -2,7 +2,7 @@
   <div class="main growth-main">
     <h1 class="main-title">成长能力</h1>
     <div class="item-box">
-      <el-tabs class="item_100 item-tab" style="height: 60px; line-height: 60px; padding: 0 20px" v-model="activeType">
+      <el-tabs class="item_100" style="height: 60px; line-height: 60px; padding: 0 20px" v-model="activeType">
         <el-tab-pane label="绩效评价（国资委）" name="1"></el-tab-pane>
         <el-tab-pane label="财务基准" name="2"></el-tab-pane>
       </el-tabs>
@@ -46,7 +46,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/assets/styles/view';
+@import '~@/assets/styles/common/view';
 </style>
 <style lang="scss">
 .growth-main {

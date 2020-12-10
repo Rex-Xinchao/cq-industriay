@@ -9,21 +9,18 @@
 <script>
 import newsList from '@/components/analysis/information/news'
 export default {
-  data() {
-    return {}
-  },
   components: { newsList }
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/assets/styles/view';
+@import '~@/assets/styles/common/view';
 .main {
   min-height: calc(100% - 40px);
-}
-.main-body {
-  width: 100%;
-  height: auto !important;
-  box-sizing: border-box;
-  background-color: white;
+  .main-body {
+    width: 100%;
+    height: auto !important;
+    background-color: white;
+    box-sizing: border-box;
+  }
 }
 </style>

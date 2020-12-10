@@ -1,12 +1,12 @@
 <template>
   <div class="pack-chart-main">
-    <div class="filter">
+    <div class="chart-filter">
       <el-select class="select" v-model="typeSelect">
         <el-option v-for="item in typeOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
       </el-select>
       <time-select class="select" v-model="dateTime"></time-select>
     </div>
-    <div v-loading="loading" id="forceChart"></div>
+    <div v-loading="loading" class="chart-main" id="forceChart"></div>
     <no-data-show v-loading="loading" class="chart-nodata" :show="noData"></no-data-show>
   </div>
 </template>
@@ -116,7 +116,7 @@ export default {
 <style lang="scss" scoped>
 .pack-chart-main {
   position: relative;
-  .filter {
+  .chart-filter {
     position: absolute;
     top: 0;
     left: 0;
@@ -125,9 +125,9 @@ export default {
       margin-right: 12px;
     }
   }
-}
-#forceChart {
-  width: 100%;
-  height: 100%;
+  .chart-main {
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>

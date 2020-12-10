@@ -1,6 +1,6 @@
 <template>
-  <div class="chartMain">
-    <h1 class="chart-title">
+  <div class="com-main">
+    <h1 class="com-title">
       {{ title }}
       <el-popover placement="bottom" width="240" trigger="hover">
         <div>
@@ -109,7 +109,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/assets/styles/chartMain';
+@import '~@/assets/styles/common/component';
 .chart-body {
   width: 100%;
   flex: 1;

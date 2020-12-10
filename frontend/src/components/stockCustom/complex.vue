@@ -1,11 +1,11 @@
 <template>
-  <div class="chartMain" v-loading="loading">
-    <h1 class="chart-title">
+  <div class="com-main" v-loading="loading">
+    <h1 class="com-title">
       {{ title }}
-      <span class="chart-title_sub">{{ subTitle }}</span>
+      <span class="com-title_sub">{{ subTitle }}</span>
       <i class="icon-tip" :title="tip"></i>
     </h1>
-    <div v-if="!noData" class="complexChart" :id="`complexChart_${timeStamp}`"></div>
+    <div v-if="!noData" class="chart-main" :id="`complexChart_${timeStamp}`"></div>
     <no-data-show class="chart-nodata" :show="noData"></no-data-show>
   </div>
 </template>
@@ -96,9 +96,5 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/assets/styles/chartMain';
-.complexChart {
-  width: 100%;
-  flex: 1;
-}
+@import '~@/assets/styles/common/component';
 </style>

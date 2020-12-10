@@ -94,7 +94,7 @@
               </div>
               <el-button class="save-btn fr" type="primary" @click="onFilterCheck">确认</el-button>
             </div>
-            <span class="button-cfg filter fr" slot="reference">
+            <span class="filter fr" slot="reference">
               <i class="icon-img icon-filter"></i>
               筛选
             </span>
@@ -524,7 +524,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/assets/styles/component';
+@import '~@/assets/styles/common/component';
 .chart-nodata {
   width: 50%;
   height: calc(100% - 150px);

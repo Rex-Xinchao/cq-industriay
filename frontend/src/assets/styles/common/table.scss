@@ -1,0 +1,76 @@
+.table-main {
+    width: 100%;
+
+    .type-tag {
+        display: inline-block;
+        border-radius: 2px;
+        width: 60px;
+        color: white;
+        box-sizing: border-box;
+        text-align: center;
+        height: 22px;
+        background: rgba(0, 0, 0, 0);
+        vertical-align: top;
+        &.type_1 {
+            background: linear-gradient(50deg, #eabc93 0%, #e2a570 100%);
+        }
+        &.type_2 {
+            background: linear-gradient(50deg, #b3b2c9 0%, #9b9dc4 100%);
+        }
+    }
+
+    .name {
+        display: inline-block;
+        width: 180px;
+        line-height: 22px;
+        box-sizing: border-box;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        vertical-align: top;
+        text-align: left;
+        text-indent: 1em;
+    }
+
+    .bar {
+        display: inline-block;
+        height: 18px;
+        margin: 2px 0;
+        box-sizing: border-box;
+        background: linear-gradient(116deg, #4d7aff 0%, #9cb9ff 100%);
+        border-radius: 2px;
+    }
+
+    .amount {
+        display: inline-block;
+        width: 60px;
+        line-height: 22px;
+        box-sizing: border-box;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        vertical-align: top;
+        text-align: left;
+        text-indent: 1em;
+    }
+
+    .icon-qualify {
+        display: inline-block;
+        background-color: #22ca30;
+        padding: 0 6px;
+        border-radius: 4px;
+        color: white;
+        width: auto;
+        line-height: 22px;
+        i {
+            margin-right: 4px;
+        }
+    }
+
+    .ceil-line {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin: 0;
+    }
+}

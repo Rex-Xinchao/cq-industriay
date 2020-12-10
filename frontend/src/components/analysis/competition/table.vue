@@ -1,10 +1,10 @@
 <template>
-  <div class="com-main data-table-main">
+  <div class="com-main">
     <div class="operation-bar">
       <span class="bar-item" :class="{ active: type === 1 }" @click="type = 1">龙头企业</span>
       <span class="bar-item" :class="{ active: type === 2 }" @click="type = 2">资质企业</span>
       <span class="bar-item last" :class="{ active: type === 3 }" @click="type = 3">工商企业</span>
-      <el-radio-group v-model="radio" style="margin-left: 20px" v-if="type === 3">
+      <el-radio-group class="radio-group" v-model="radio" v-if="type === 3">
         <el-radio :label="1">全部</el-radio>
         <el-radio :label="2">2年以上</el-radio>
       </el-radio-group>
@@ -20,7 +20,7 @@
             </el-checkbox>
           </el-checkbox-group>
         </div>
-        <span class="fr filter" slot="reference" v-show="type === 2">
+        <span class="filter fr" slot="reference" v-show="type === 2">
           <i class="icon-img icon-filter"></i>
           筛选资质
         </span>
@@ -249,96 +249,26 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/assets/styles/component';
-.data-table-main {
+@import '~@/assets/styles/common/component';
+@import '~@/assets/styles/common/table';
+.com-main {
+  .last {
+    border-radius: 0px 4px 4px 0px;
+    border-right: 1px solid #d9d9d9;
+  }
+  .radio-group{
+    margin-left: 20px;
+  }
+  .button-export {
+    font-size: 14px;
+    font-weight: 400;
+    color: #666666;
+    line-height: 20px;
+    cursor: pointer;
+  }
   .table-main {
-    width: 100%;
     margin-top: 20px;
     flex: 1;
-
-    .type-tag {
-      display: inline-block;
-      border-radius: 2px;
-      width: 60px;
-      color: white;
-      box-sizing: border-box;
-      text-align: center;
-      height: 22px;
-      background: rgba(0, 0, 0, 0);
-      vertical-align: top;
-      &.type_1 {
-        background: linear-gradient(50deg, #eabc93 0%, #e2a570 100%);
-      }
-      &.type_2 {
-        background: linear-gradient(50deg, #b3b2c9 0%, #9b9dc4 100%);
-      }
-    }
-
-    .name {
-      display: inline-block;
-      width: 180px;
-      line-height: 22px;
-      box-sizing: border-box;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      vertical-align: top;
-      text-align: left;
-      text-indent: 1em;
-    }
-
-    .bar {
-      display: inline-block;
-      height: 18px;
-      margin: 2px 0;
-      box-sizing: border-box;
-      background: linear-gradient(116deg, #4d7aff 0%, #9cb9ff 100%);
-      border-radius: 2px;
-    }
-
-    .amount {
-      display: inline-block;
-      width: 60px;
-      line-height: 22px;
-      box-sizing: border-box;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      vertical-align: top;
-      text-align: left;
-      text-indent: 1em;
-    }
-  }
-  .save-btn {
-    margin-top: 12px;
-  }
-}
-.last {
-  border-radius: 0px 4px 4px 0px;
-  border-right: 1px solid #d9d9d9;
-}
-.button-export,
-.button-cfg {
-  font-size: 14px;
-  font-weight: 400;
-  color: #666666;
-  line-height: 20px;
-  cursor: pointer;
-}
-</style>
-<style lang="scss">
-.popover-main {
-  .demonstration {
-    display: inline-block;
-    font-size: 14px;
-    color: #8492a6;
-    vertical-align: top;
-    line-height: 44px;
-  }
-
-  .slider {
-    display: inline-block;
-    width: calc(100% - 88px);
   }
 }
 </style>

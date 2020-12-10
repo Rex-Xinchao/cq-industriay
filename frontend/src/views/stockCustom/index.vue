@@ -110,7 +110,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/assets/styles/view';
+@import '~@/assets/styles/common/view';
 .fill {
   width: 100%;
   height: 100%;

@@ -1,6 +1,6 @@
 <template>
-  <div class="chartMain">
-    <h1 class="chart-title">趋势分析</h1>
+  <div class="com-main">
+    <h1 class="com-title">趋势分析</h1>
     <div class="filter-bar">
       <span
         class="select-item"
@@ -13,7 +13,7 @@
         {{ item.name }}
       </span>
     </div>
-    <div v-loading="loading" v-if="!noData" id="lineChart"></div>
+    <div v-loading="loading" v-if="!noData" class="chart-main" id="lineChart"></div>
     <no-data-show v-loading="loading" class="chart-nodata" :show="noData"></no-data-show>
   </div>
 </template>
@@ -102,9 +102,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~@/assets/styles/chartMain';
-.chartMain {
-  .filter-bar {
+@import '~@/assets/styles/common/component';
+.filter-bar {
     width: 100%;
     height: 28px;
     line-height: 28px;
@@ -135,9 +134,4 @@ export default {
       }
     }
   }
-}
-#lineChart {
-  width: 100%;
-  flex: 1;
-}
 </style>
