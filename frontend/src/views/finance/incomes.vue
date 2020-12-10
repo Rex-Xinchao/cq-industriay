@@ -2,7 +2,12 @@
   <div class="main growth-main">
     <div class="item-box">
       <div class="item_100 item-tab item-menu">
-        <h1 class="main-title">财政收支及债务：</h1>
+        <h1 class="main-title">
+          财政收支及债务：
+          <el-select v-model="region" placeholder="请选择">
+            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+          </el-select>
+        </h1>
         <el-tabs
           style="width: calc(100% - 40px); height: 60px; line-height: 60px; padding: 0 20px; background: white"
           v-model="activeType"
@@ -90,7 +95,14 @@ export default {
       activeType: 'tag_1',
       loading: false,
       tableData: [],
-      idList: ['tag_1', 'tag_2', 'tag_3', 'tag_4']
+      idList: ['tag_1', 'tag_2', 'tag_3', 'tag_4'],
+      region: 1,
+      options: [
+        {
+          label: '重庆',
+          value: 1
+        }
+      ]
     }
   },
   methods: {
