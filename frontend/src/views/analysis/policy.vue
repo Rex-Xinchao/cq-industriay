@@ -7,7 +7,7 @@
     <div class="main-body">
       <el-form :inline="true" :model="form" class="filter-bar">
         <el-form-item label="时间：">
-          <time-select v-model="form.dateTime"></time-select>
+          <time-select v-model="form.dateTime" :options="options" startValue="1Y"></time-select>
         </el-form-item>
         <el-form-item label="区域：">
           <el-select v-model="form.region" placeholder="请选择区域">
@@ -48,6 +48,7 @@
             </p>
           </div>
         </li>
+        <no-data-show :show="noData"></no-data-show>
       </ul>
     </div>
   </div>
@@ -55,11 +56,15 @@
 <script>
 import { infos } from '@/mockData/policy'
 import { formatDate } from '@/libs/utils'
+import { policyList } from '@/api/analysis'
 import { mapGetters } from 'vuex'
+import noDataShow from '../../components/public/no-data-show.vue'
 export default {
+  components: { noDataShow },
   data() {
     return {
       loading: false,
+      noData: false,
       infos: [],
       form: {
         dateTime: [],
@@ -67,15 +72,39 @@ export default {
         org: null
       },
       regions: [
-        { label: '重庆', value: 1 },
-        { label: '四川', value: 2 },
-        { label: '陕西', value: 3 },
-        { label: '贵州', value: 4 }
+        { label: '全部', value: null },
+        { label: '重庆市', value: 1 },
+        { label: '四川省', value: 2 },
+        { label: '陕西省', value: 3 },
+        { label: '贵州省', value: 4 }
       ],
       orgs: [
+        { label: '全部', value: null },
         { label: '工信部', value: 1 },
         { label: '发改委', value: 2 },
         { label: '科技部', value: 3 }
+      ],
+      options: [
+        {
+          value: '1Y',
+          label: '最近1年'
+        },
+        {
+          value: '3Y',
+          label: '最近3年'
+        },
+        {
+          value: '5Y',
+          label: '最近5年'
+        },
+        {
+          value: 'udf',
+          label: '自定义'
+        },
+        {
+          value: 'udf_show',
+          label: '自定义'
+        }
       ]
     }
   },
@@ -94,10 +123,23 @@ export default {
   methods: {
     getData() {
       this.loading = true
-      setTimeout(() => {
-        this.loading = false
-        this.infos = infos
-      }, 1000)
+      let params = {
+        region: this.form.region,
+        org: this.form.org,
+        st: this.form.dateTime[0],
+        et: this.form.dateTime[1]
+      }
+      policyList(params)
+        .then((res) => {
+          this.loading = false
+          this.infos = res.result
+          this.noData = res.result.length === 0
+        })
+        .catch((err) => {
+          this.loading = false
+          this.noData = true
+          this.infos = []
+        })
     },
     copy(url) {
       const oInput = document.createElement('input')
@@ -165,6 +207,7 @@ export default {
     min-height: 300px;
     display: block;
     margin-top: 30px;
+    position: relative;
 
     .line {
       display: block;
