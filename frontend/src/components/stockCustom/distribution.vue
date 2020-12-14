@@ -132,6 +132,7 @@ import sx from '@/libs/map/shanxi'
 import all from '@/libs/map/all'
 import { converUnit } from '@/libs/utils'
 import resize from '@/mixins/resize'
+import { Regions } from '@/mixins/base'
 import { region_map, industry_map } from '@/api/custom'
 import { mapGetters } from 'vuex'
 export default {
@@ -222,10 +223,11 @@ export default {
       badListData: [],
       tableData_map: [],
       sum: null,
-      totalCount: null
+      totalCount: null,
+      selectAreaName: null
     }
   },
-  mixins: [resize],
+  mixins: [resize, Regions],
   computed: {
     ...mapGetters(['industry', 'industryCode'])
   },
@@ -356,7 +358,7 @@ export default {
       let params = {
         provinceCode: this.getProvinceCode(),
         industryCode: this.industryCode,
-        cityCode: '',
+        cityCode: this.getAreaCode(),
         level: this.classifySelect
       }
       region_map(params)
@@ -417,6 +419,7 @@ export default {
               break
             default:
               this.tableLoading = true
+              this.selectAreaName = data.name
               this.getMapData(false)
               break
           }
@@ -432,6 +435,10 @@ export default {
       this.mapChart.setOption(this.mapOption, true)
       this.mapChart.resize()
       this.setMapTable()
+    },
+    getAreaCode() {
+      if (!this.selectAreaName) return null
+      return this.regions_map[this.selectAreaName]
     },
     getAreaList_map() {
       let data = []

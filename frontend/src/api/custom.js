@@ -30,6 +30,7 @@ export const customer = (data) => {
 }
 
 export const neg_events = async (data) => {
+  await sleep(1000)
   return {
     events: [
       {

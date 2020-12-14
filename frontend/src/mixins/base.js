@@ -2,24 +2,28 @@ import { base_region, base_org, base_qualification } from '@/api/base'
 export const Regions = {
   data() {
     return {
-      regions: []
+      regions: [],
+      regions_map: {}
     }
   },
   methods: {
     getRegions() {
       base_region().then((res) => {
         let map = {}
+        let regions_map = {}
         res.result.forEach((item) => {
           item.children = item.children || []
           item.label = item.name
           item.value = item.code
           map[item.code] = item
+          regions_map[item.name] = item
         })
         res.result.forEach((item) => {
           if (item.parent) {
             map[item.parent].children.push(map[item.code])
           }
         })
+        this.regions_map = regions_map
         this.regions = res.result.filter((item) => item.level === 1)
       })
     }
