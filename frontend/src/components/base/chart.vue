@@ -18,8 +18,10 @@
   </div>
 </template>
 <script>
+import { tendency } from '@/api/base'
 import resize from '@/mixins/resize'
 import line from '@/mixins/line'
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -29,7 +31,28 @@ export default {
       loading: false,
       activeHead: 1,
       color: ['#5B8FF9', '#5AD8A6', '#5D7092', '#F6BD16', '#E8684A'],
-      legends: ['优秀值', '良好值', '平均值', '较低值', '较差值'],
+      legends: [
+        {
+          name: '优秀值',
+          code: 'greateValue'
+        },
+        {
+          name: '良好值',
+          code: 'goodValue'
+        },
+        {
+          name: '平均值',
+          code: 'averageValue'
+        },
+        {
+          name: '较低值',
+          code: 'lowerValue'
+        },
+        {
+          name: '较差值',
+          code: 'badValue'
+        }
+      ],
       tooltip: {
         formatter: function (data) {
           let time = data[0].axisValue
@@ -39,6 +62,17 @@ export default {
           })
           return result
         }
+      },
+      request: tendency
+    }
+  },
+  computed: {
+    ...mapGetters(['industryCode']),
+    urlOptions() {
+      return {
+        industryCode: this.industryCode,
+        indexType: this.activeHead,
+        type: this.type
       }
     }
   },
@@ -52,20 +86,10 @@ export default {
       this.drawChart()
     },
     type() {
-      this.getData()
+      this.drawChart()
     }
   },
   methods: {
-    getData() {
-      this.loading = true
-      setTimeout(() => {
-        this.loading = false
-        this.noData = false
-        this.activeHead = this.heads[0].value
-        this.drawChart()
-      })
-    },
-
     setChartOption() {
       this.chartOption_line.tooltip = Object.assign({}, this.chartOption_line.tooltip, this.tooltip)
       this.chartOption_line.color = this.color
@@ -74,64 +98,53 @@ export default {
       const series = []
       this.legends.forEach((item) => {
         series.push({
-          name: item,
+          name: item.name,
           type: 'line',
-          data: [
-            Math.ceil(Math.random() * 100),
-            Math.ceil(Math.random() * 100),
-            Math.ceil(Math.random() * 100),
-            Math.ceil(Math.random() * 100),
-            Math.ceil(Math.random() * 100),
-            Math.ceil(Math.random() * 100),
-            Math.ceil(Math.random() * 100),
-            Math.ceil(Math.random() * 100),
-            Math.ceil(Math.random() * 100)
-          ]
+          data: this.lineData.map((data) => data[item.code])
         })
       })
-
       this.chartOption_line.yAxis.axisLabel.formatter = '{value}%'
       this.chartOption_line.series = series
-      this.chartOption_line.xAxis.data = [2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020]
+      this.chartOption_line.xAxis.data = this.lineData.map((data) => data.rpt)
       return this.chartOption_line
     }
   },
   mounted() {
-    this.getData()
+    this.drawChart()
   }
 }
 </script>
 <style lang="scss" scoped>
 @import '~@/assets/styles/common/component';
 .filter-bar {
-    width: 100%;
-    height: 28px;
-    line-height: 28px;
-    margin: 20px 0 16px 0;
-    span {
-      display: inline-block;
-      vertical-align: top;
-      width: auto;
-      height: 22px;
-      line-height: 22px;
-      border-radius: 4px;
-      box-sizing: border-box;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      padding: 0 16px;
-      margin-bottom: 16px;
-      font-size: 12px;
-      cursor: pointer;
+  width: 100%;
+  height: 28px;
+  line-height: 28px;
+  margin: 20px 0 16px 0;
+  span {
+    display: inline-block;
+    vertical-align: top;
+    width: auto;
+    height: 22px;
+    line-height: 22px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 16px;
+    margin-bottom: 16px;
+    font-size: 12px;
+    cursor: pointer;
 
-      &:hover {
-        color: #3a84ff;
-      }
+    &:hover {
+      color: #3a84ff;
+    }
 
-      &.active {
-        background: #3a84ff;
-        color: white;
-      }
+    &.active {
+      background: #3a84ff;
+      color: white;
     }
   }
+}
 </style>

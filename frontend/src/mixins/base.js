@@ -1,4 +1,4 @@
-import { base_region, base_org, base_qualification } from '@/api/base'
+import { base_region, base_org, base_qualification } from '@/api/index'
 export const Regions = {
   data() {
     return {

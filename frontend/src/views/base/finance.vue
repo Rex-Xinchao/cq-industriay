@@ -18,14 +18,46 @@
         <span class="filter-label fr">披露时间：{{ time || '--' }}</span>
       </div>
       <el-table v-loading="loading" class="table-head-grey" :data="tableData" height="calc(100% - 120px)">
-        <el-table-column label="龙头企业" align="center"></el-table-column>
-        <el-table-column label="市场" align="center"></el-table-column>
-        <el-table-column label="业务线收入" align="center" sortable></el-table-column>
-        <el-table-column label="业务线毛利" align="center" sortable></el-table-column>
-        <el-table-column label="业务线收入增速" align="center" sortable></el-table-column>
-        <el-table-column label="业务线毛利率" align="center" sortable></el-table-column>
-        <el-table-column label="营业收入" align="center" sortable></el-table-column>
-        <el-table-column label="净利润" align="center" sortable></el-table-column>
+        <el-table-column prop="comName" label="龙头企业" align="center">
+          <template slot-scope="scope">
+            {{ scope.row.comName ? scope.row.comName : '--' }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="market" label="市场" align="center">
+          <template slot-scope="scope">
+            {{ scope.row.market ? scope.row.market : '--' }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="income" label="业务线收入" align="center" sortable>
+          <template slot-scope="scope">
+            {{ scope.row.income ? scope.row.income : '--' }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="grossMargin" label="业务线毛利" align="center" sortable>
+          <template slot-scope="scope">
+            {{ scope.row.grossMargin ? scope.row.grossMargin : '--' }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="growth" label="业务线收入增速" align="center" sortable>
+          <template slot-scope="scope">
+            {{ scope.row.growth ? `${scope.row.growth}%` : '--' }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="gpr" label="业务线毛利率" align="center" sortable>
+          <template slot-scope="scope">
+            {{ scope.row.gpr ? `${scope.row.gpr}%` : '--' }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="businessIncome" label="营业收入" align="center" sortable>
+          <template slot-scope="scope">
+            {{ scope.row.businessIncome ? scope.row.businessIncome : '--' }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="netIncome" label="净利润" align="center" sortable>
+          <template slot-scope="scope">
+            {{ scope.row.netIncome ? scope.row.netIncome : '--' }}
+          </template>
+        </el-table-column>
       </el-table>
       <el-pagination
         class="pagination fr"
@@ -38,10 +70,12 @@
   </div>
 </template>
 <script>
+import { leading_financial } from '@/api/base'
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      time: '2020 Q2',
+      time: null,
       norm: [],
       norms: [
         {
@@ -84,9 +118,12 @@ export default {
       tableData: [],
       page: {
         total: 100,
-        count: 5
+        count: 1
       }
     }
+  },
+  computed: {
+    ...mapGetters(['industryCode'])
   },
   watch: {
     norm() {
@@ -99,10 +136,26 @@ export default {
   methods: {
     getData() {
       this.loading = true
-      setTimeout(() => {
-        this.loading = false
-        this.tableData = []
-      }, 1000)
+      let params = {
+        industryCode: this.industryCode,
+        standardType: this.norm,
+        mkt: this.market,
+        page: this.page.count,
+        size: 20
+      }
+      console.log(params)
+      leading_financial(params)
+        .then((res) => {
+          this.loading = false
+          this.tableData = res.result
+          this.time = res.time
+          // todo page && size && total
+        })
+        .catch((err) => {
+          this.loading = false
+          this.tableData = []
+          this.time = null
+        })
     },
     currentChange(data) {
       this.page.count = data

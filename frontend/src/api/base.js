@@ -1,66 +1,149 @@
 import http from '@/libs/axios'
 const sleep = (time) => new Promise((res) => setTimeout(() => res(), time))
 
-// 地图地区列表
-export const base_region = async (data) => {
+// 基准指标
+export const standard = async (data) => {
   await sleep(1000)
   return {
     result: [
       {
-        name: '四川',
-        code: 'GS938585',
-        parent: null,
-        level: 1
+        name: '毛利率',
+        greateValue: '87.20',
+        goodValue: '75.23',
+        averageValue: '54.30',
+        lowerValue: '40.20',
+        badValue: '20.16'
       },
       {
-        name: '重庆',
-        code: 'GS955525',
-        parent: null,
-        level: 1
+        name: '毛利率',
+        greateValue: '87.20',
+        goodValue: '75.23',
+        averageValue: '54.30',
+        lowerValue: '40.20',
+        badValue: '20.16'
       },
       {
-        name: '渝中区',
-        code: 'GS95552',
-        parent: 'GS955525',
-        level: 2
+        name: '毛利率',
+        greateValue: '87.20',
+        goodValue: '75.23',
+        averageValue: '54.30',
+        lowerValue: '40.20',
+        badValue: '20.16'
+      },
+      {
+        name: '毛利率',
+        greateValue: '87.20',
+        goodValue: '75.23',
+        averageValue: '54.30',
+        lowerValue: '40.20',
+        badValue: '20.16'
+      },
+      {
+        name: '毛利率',
+        greateValue: '87.20',
+        goodValue: '75.23',
+        averageValue: '54.30',
+        lowerValue: '40.20',
+        badValue: '20.16'
+      },
+      {
+        name: '毛利率',
+        greateValue: '87.20',
+        goodValue: '75.23',
+        averageValue: '54.30',
+        lowerValue: '40.20',
+        badValue: '20.16'
+      },
+      {
+        name: '毛利率',
+        greateValue: '87.20',
+        goodValue: '75.23',
+        averageValue: '54.30',
+        lowerValue: '40.20',
+        badValue: '20.16'
+      },
+      {
+        name: '毛利率',
+        greateValue: '87.20',
+        goodValue: '75.23',
+        averageValue: '54.30',
+        lowerValue: '40.20',
+        badValue: '20.16'
+      },
+      {
+        name: '毛利率',
+        greateValue: '87.20',
+        goodValue: '75.23',
+        averageValue: '54.30',
+        lowerValue: '40.20',
+        badValue: '20.16'
+      },
+      {
+        name: '毛利率',
+        greateValue: '87.20',
+        goodValue: '75.23',
+        averageValue: '54.30',
+        lowerValue: '40.20',
+        badValue: '20.16'
+      },
+      {
+        name: '毛利率',
+        greateValue: '87.20',
+        goodValue: '75.23',
+        averageValue: '54.30',
+        lowerValue: '40.20',
+        badValue: '20.16'
+      },
+      {
+        name: '毛利率',
+        greateValue: '87.20',
+        goodValue: '75.23',
+        averageValue: '54.30',
+        lowerValue: '40.20',
+        badValue: '20.16'
       }
     ]
   }
-  return http.get(`/base/region`, data)
+  return http.get(`/base/${data.industryCode}/standard`, data)
 }
 
-// 机构列表
-export const base_org = async (data) => {
+// 指标趋势
+export const tendency = async (data) => {
   await sleep(1000)
   return {
     result: [
       {
-        name: '重庆市办公厅',
-        code: 'GS90001'
-      },
-      {
-        name: '国家交通部',
-        code: 'GS80025'
+        rpt: '2019',
+        name: '毛利率',
+        greateValue: '87.20',
+        goodValue: '75.23',
+        averageValue: '54.30',
+        lowerValue: '40.20',
+        badValue: '20.16'
       }
     ]
   }
-  return http.get(`/base/org`, data)
+  return http.get(`/base/${data.industryCode}/tendency`, data)
 }
 
-// 资质列表
-export const base_qualification = async (data) => {
+// 龙头财务
+export const leading_financial = async (data) => {
   await sleep(1000)
   return {
     result: [
       {
-        name: '高新科技',
-        type: 1
-      },
-      {
-        name: '专精特新企业',
-        type: 2
+        comName: '客户A',
+        comCode: 'XXXXXXXX',
+        csfId: 'XXXXXXXXXX',
+        income: 4200,
+        grossMargin: 2420,
+        growth: 75.23,
+        gpr: 54.3,
+        businessIncome: 2400,
+        netIncome: 1200
       }
-    ]
+    ],
+    time: '2019 Q2'
   }
-  return http.get(`/base/qualification`, data)
+  return http.get(`/base/${data.industryCode}/leading_financial`, data)
 }

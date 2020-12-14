@@ -170,6 +170,7 @@ export default {
     },
     showMenu(event, data) {
       this.dialogVisible = true
+      this.hideTip()
       this.initDialog()
     },
     showTip(event, data) {

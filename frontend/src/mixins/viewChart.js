@@ -166,7 +166,7 @@ export default {
       const transition = this.svgInstance
         .transition()
         .duration(duration)
-        .attr('viewBox', [-this.treeBox.width / 2, -this.treeBox.height / 2, this.treeBox.width, this.treeBox.height])
+        .attr('viewBox', [-this.treeBox.width / 3, -this.treeBox.height / 2, this.treeBox.width, this.treeBox.height])
         .tween('resize', window.ResizeObserver ? null : () => () => this.svgInstance.dispatch('toggle'))
 
       this.createNode(nodes, source, transition)

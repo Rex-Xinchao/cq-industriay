@@ -91,6 +91,7 @@ export default {
     },
     showMenu(event, data) {
       this.dialogVisible = true
+      this.hideTip()
     },
     showTip(event, data) {
       this.interval && clearTimeout(this.interval)
