@@ -1,18 +1,18 @@
 <template>
   <div class="main growth-main">
+    <div class="item-menu">
+      <h1 class="main-title">
+        财政收支及债务：
+        <area-search v-model="area" class="area-search" :showBtn="false" :startCode="start"></area-search>
+      </h1>
+      <el-tabs class="crumbs" v-model="activeType" @tab-click="scrollTo(activeType)">
+        <el-tab-pane label="一般公共预算收支" name="tag_1"></el-tab-pane>
+        <el-tab-pane label="政府性基金收支" name="tag_2"></el-tab-pane>
+        <el-tab-pane label="国有资本经营收支" name="tag_3"></el-tab-pane>
+        <el-tab-pane label="地方债务" name="tag_4"></el-tab-pane>
+      </el-tabs>
+    </div>
     <div class="item-box">
-      <div class="item_100 item-menu">
-        <h1 class="main-title">
-          财政收支及债务：
-          <area-search v-model="area" class="area-search" :showBtn="false" :startCode="start"></area-search>
-        </h1>
-        <el-tabs class="crumbs" v-model="activeType" @tab-click="scrollTo(activeType)">
-          <el-tab-pane label="一般公共预算收支" name="tag_1"></el-tab-pane>
-          <el-tab-pane label="政府性基金收支" name="tag_2"></el-tab-pane>
-          <el-tab-pane label="国有资本经营收支" name="tag_3"></el-tab-pane>
-          <el-tab-pane label="地方债务" name="tag_4"></el-tab-pane>
-        </el-tabs>
-      </div>
       <div id="tag_1" class="item_100 item-table">
         <h1 class="main-title">一般公共预算收支</h1>
         <el-table

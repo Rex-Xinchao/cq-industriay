@@ -4,6 +4,8 @@
     background-color: white;
     margin-bottom: 20px;
     box-sizing: border-box;
+    border-radius: 2px;
+    box-shadow: 0px 0px 5px 0px rgba(232, 232, 232, 0.53);
 }
 
 .main {
@@ -11,6 +13,7 @@
     height: auto;
     padding: 24px 24px 12px 24px;
     box-sizing: border-box;
+    border-radius: 2px;
     background-color: #f4f6f9;
 
     .main-title {

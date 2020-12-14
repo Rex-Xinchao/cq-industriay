@@ -4,7 +4,7 @@
       景气图谱
       <span class="sign">汽车行业</span>
     </h1>
-    <div class="chart">
+    <div class="chart-body">
       <div class="graph-box"></div>
       <div ref="tooltip" class="chart-tooltip" @mouseleave="hideTip">
         <h1>行业分析</h1>
@@ -218,6 +218,7 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/styles/common/view';
 @import '~@/assets/styles/industrial';
+
 .tooltip-main {
   width: 100%;
   height: calc(100% - 16px);

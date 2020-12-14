@@ -91,6 +91,8 @@ export default {
     margin-right: 20px;
     box-sizing: border-box;
     vertical-align: top;
+    border-radius: 2px;
+    box-shadow: 0px 0px 5px 0px rgba(232, 232, 232, 0.53);
 
     &:last-of-type {
       margin: 0;
@@ -184,6 +186,8 @@ export default {
   box-sizing: border-box;
   background-color: white;
   margin-bottom: 20px;
+  border-radius: 2px;
+  box-shadow: 0px 0px 5px 0px rgba(232, 232, 232, 0.53);
 
   &:last-of-type {
     margin-bottom: 0;

@@ -4,7 +4,7 @@
       风险图谱
       <span class="sign">汽车行业</span>
     </h1>
-    <div class="chart">
+    <div class="chart-body">
       <div class="graph-box"></div>
 
       <div ref="tooltip" class="chart-tooltip" @mouseleave="hideTip">

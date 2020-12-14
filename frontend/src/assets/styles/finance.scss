@@ -1,11 +1,22 @@
 .item-menu {
-    position: sticky;
-    top: 0;
+    width: calc(100% - 122px);
+    position: absolute;
+    top: 0px;
     z-index: 2001;
     background-color: #f4f6f9 !important;
     height: 108px !important;
     flex-direction: column;
+    padding-top: 20px;
     box-sizing: border-box;
+
+    .crumbs {
+        border-radius: 2px;
+        box-shadow: 0px 0px 5px 0px rgba(232, 232, 232, 0.53);
+    }
+}
+
+.item-box {
+    margin-top: 128px;
 }
 
 .item-table {

@@ -130,9 +130,6 @@ export default {
       // let url = ''
       //   window.open('')
     }
-  },
-  mounted() {
-    this.search()
   }
 }
 </script>

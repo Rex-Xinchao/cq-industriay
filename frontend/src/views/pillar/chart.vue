@@ -27282,6 +27282,8 @@ export default {
   background-color: white;
   box-sizing: border-box;
   position: relative;
+  border-radius: 2px;
+  box-shadow: 0px 0px 5px 0px rgba(232, 232, 232, 0.53);
 }
 .filter {
   position: absolute;

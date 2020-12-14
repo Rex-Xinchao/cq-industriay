@@ -123,6 +123,8 @@ export default {
     box-sizing: border-box;
     background-color: white;
     padding: 0 16px;
+    border-radius: 2px;
+    box-shadow: 0px 0px 5px 0px rgba(232, 232, 232, 0.53);
 
     .filter {
       width: 100%;

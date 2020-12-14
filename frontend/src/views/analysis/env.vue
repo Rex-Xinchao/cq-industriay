@@ -159,6 +159,8 @@ export default {
         background-color: white;
         padding: 20px;
         box-sizing: border-box;
+        border-radius: 2px;
+        box-shadow: 0px 0px 5px 0px rgba(232, 232, 232, 0.53);
 
         h1 {
           font-size: 16px;
@@ -207,7 +209,8 @@ export default {
         background-color: white;
         box-sizing: border-box;
         margin-bottom: 20px;
-        border-radius: 4px;
+        border-radius: 2px;
+        box-shadow: 0px 0px 5px 0px rgba(232, 232, 232, 0.53);
 
         span {
           display: inline-block;
@@ -215,7 +218,6 @@ export default {
           width: 240px;
           height: 22px;
           line-height: 22px;
-          border-radius: 4px;
           box-sizing: border-box;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -224,6 +226,8 @@ export default {
           margin-bottom: 16px;
           font-size: 12px;
           cursor: pointer;
+          border-radius: 2px;
+          box-shadow: 0px 0px 5px 0px rgba(232, 232, 232, 0.53);
 
           &.active {
             background: #3a84ff;

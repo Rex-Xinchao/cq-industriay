@@ -269,6 +269,8 @@ export default {
     background-color: white;
     margin-bottom: 20px;
     padding: 20px;
+    border-radius: 2px;
+    box-shadow: 0px 0px 5px 0px rgba(232, 232, 232, 0.53);
 
     &:nth-of-type(2n) {
       margin-left: 20px;

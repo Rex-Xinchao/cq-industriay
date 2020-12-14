@@ -1,19 +1,19 @@
 <template>
   <div class="main growth-main">
+    <div class="item-menu">
+      <h1 class="main-title">
+        地区经济状况：
+        <area-search v-model="area" class="area-search" :showBtn="false" :startCode="start"></area-search>
+      </h1>
+      <el-tabs class="crumbs" v-model="activeType" @tab-click="scrollTo(activeType)">
+        <el-tab-pane label="GDP及产业结构" name="tag_1"></el-tab-pane>
+        <el-tab-pane label="工业与投资" name="tag_2"></el-tab-pane>
+        <el-tab-pane label="进出口" name="tag_3"></el-tab-pane>
+        <el-tab-pane label="消费收入和人口" name="tag_4"></el-tab-pane>
+        <el-tab-pane label="存贷款" name="tag_5"></el-tab-pane>
+      </el-tabs>
+    </div>
     <div class="item-box">
-      <div class="item_100 item-menu">
-        <h1 class="main-title">
-          地区经济状况：
-          <area-search v-model="area" class="area-search" :showBtn="false" :startCode="start"></area-search>
-        </h1>
-        <el-tabs class="crumbs" v-model="activeType" @tab-click="scrollTo(activeType)">
-          <el-tab-pane label="GDP及产业结构" name="tag_1"></el-tab-pane>
-          <el-tab-pane label="工业与投资" name="tag_2"></el-tab-pane>
-          <el-tab-pane label="进出口" name="tag_3"></el-tab-pane>
-          <el-tab-pane label="消费收入和人口" name="tag_4"></el-tab-pane>
-          <el-tab-pane label="存贷款" name="tag_5"></el-tab-pane>
-        </el-tabs>
-      </div>
       <div id="tag_1" class="item_100 item-table">
         <h1 class="main-title">GDP及产业结构</h1>
         <el-table
@@ -38,7 +38,13 @@
       </div>
       <div id="tag_2" class="item_100 item-table">
         <h1 class="main-title">工业与投资</h1>
-        <el-table class="table-main table-head-grey" :data="tableData" style="width: 100%" height="394px">
+        <el-table
+          v-loading="loading"
+          class="table-main table-head-grey"
+          :data="tableData"
+          style="width: 100%"
+          height="394px"
+        >
           <el-table-column prop="name" label="指标" align="center">
             <template slot-scope="scope">
               <ceil-subject>

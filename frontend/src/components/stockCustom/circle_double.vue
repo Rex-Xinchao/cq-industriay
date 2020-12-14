@@ -174,7 +174,10 @@ export default {
         type: 'pie',
         radius: ['55%', '70%'],
         label: {
-          formatter: '{b}: {c}家 ({d}%)',
+          formatter: function (params) {
+            let data = params.data
+            return `${data.name}: ${data.comCount}家 (${params.percent}%)`
+          },
           borderWidth: 1,
           borderRadius: 4
         },
@@ -185,13 +188,15 @@ export default {
         series_in.color.push(colors[i].color)
         series_in.data.push({
           name: item_p.eventName,
-          value: item_p.comCount
+          comCount: item_p.comCount,
+          value: item_p.amountCount
         })
         item_p.negEvents.forEach((item_c, j) => {
           series_out.color.push(colors[i].children[j])
           series_out.data.push({
             name: item_c.eventName,
-            value: item_c.comCount,
+            comCount: item_c.comCount,
+            value: item_c.amountCount,
             list: item_c.comList
           })
           if (!this.tableData.length) {
@@ -218,7 +223,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '~@/assets/styles/common/component';
-.com-main{
+.com-main {
   .operation-bar {
     width: auto;
   }

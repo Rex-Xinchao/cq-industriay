@@ -1,11 +1,13 @@
 .main {
     height: calc(100% - 40px);
 }
-.chart {
+.chart-body {
     width: 100%;
     height: calc(100% - 40px);
     background-color: white;
     position: relative;
+    border-radius: 2px;
+    box-shadow: 0px 0px 5px 0px rgba(232, 232, 232, 0.53);
 }
 
 .icon-tip {

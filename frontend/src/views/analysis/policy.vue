@@ -120,6 +120,8 @@ export default {
   background-color: white;
   height: auto !important;
   min-height: calc(100% - 48px);
+  border-radius: 2px;
+  box-shadow: 0px 0px 5px 0px rgba(232, 232, 232, 0.53);
 
   .legend {
     font-size: 14px;

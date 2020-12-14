@@ -21,6 +21,8 @@ export default {
     height: auto !important;
     background-color: white;
     box-sizing: border-box;
+    border-radius: 2px;
+    box-shadow: 0px 0px 5px 0px rgba(232, 232, 232, 0.53);
   }
 }
 </style>
