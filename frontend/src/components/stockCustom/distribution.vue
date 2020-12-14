@@ -535,7 +535,6 @@ export default {
 .chart-nodata {
   width: 50%;
   height: calc(100% - 150px);
-  top: 150px;
 }
 .distribution-line {
   width: 100%;
@@ -569,6 +568,7 @@ export default {
   height: 360px;
   box-sizing: border-box;
   padding: 0 10px 20px 10px;
+  position: relative;
 
   .chart-main {
     display: inline-block;
