@@ -14,7 +14,7 @@
             <el-option v-for="item in regions" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="发布机构：">
+        <el-form-item label="发布机构：" v-if="false">
           <el-select v-model="form.org" placeholder="请选择结构">
             <el-option v-for="item in orgs" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
@@ -27,17 +27,17 @@
       <ul class="information-main" v-loading="loading">
         <li class="line" v-for="item in infos" :key="item.name">
           <div class="line-time">
-            <span class="time" v-if="item.time" v-html="item.time"></span>
+            <span class="time" v-if="item.rpt" v-html="item.rpt"></span>
           </div>
           <div class="line-main">
             <p class="name">
-              <span class="area-tag">{{ item.area }}</span>
-              {{ item.title }}
+              <span class="area-tag">{{ item.region }}</span>
+              {{ item.org }}
             </p>
-            <p class="summary">{{ item.summary }}</p>
-            <div class="news" v-for="(news, index) in item.newsList" :key="index">
-              <span class="type-tag" :class="news.type > 0 ? 'positive' : 'nagetive'">{{ news.typeName }}</span>
-              <span class="product-tag">{{ news.product }}</span>
+            <p class="summary">{{ item.title }}</p>
+            <div class="news" v-for="(news, index) in item.contentList" :key="index">
+              <span class="type-tag" :class="news.emotion > 0 ? 'positive' : 'nagetive'">{{ news.typeName }}</span>
+              <span class="product-tag">{{ news.industryName }}</span>
               <p class="content">
                 {{ news.content }}
               </p>
