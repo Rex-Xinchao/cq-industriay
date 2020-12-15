@@ -1,157 +1,6 @@
 const UP = -1 // 上游
 const DOWN = 1 // 下游
 const ROUTE_COLOR = '#3E73E3' // 根节点
-let data_o = {
-  nodes: [
-    {
-      nameZh: '农机具及其零部件',
-      nameEn: 'Agricultural Implements and Parts',
-      productCode: 'GB_C35070902',
-      dsCnt: 39,
-      usCnt: 3
-    },
-    { nameZh: '淀粉糖', nameEn: 'Starch Sugar', productCode: 'GB_C13090102', dsCnt: 8, usCnt: 15 },
-    { nameZh: '水稻', nameEn: 'Paddy', productCode: 'GB_A01010101', dsCnt: 6, usCnt: 3 },
-    { nameZh: '糠油', nameEn: 'Bran Oil', productCode: 'GB_C1303010106', dsCnt: 16, usCnt: 6 },
-    { nameZh: '水稻种子', nameEn: 'Paddy Seeds', productCode: 'GB_A05010104', dsCnt: 3, usCnt: 1 },
-    {
-      nameZh: '农产品烘干服务',
-      nameEn: 'Agricultural Product Drying Services',
-      productCode: 'GB_A05010401',
-      dsCnt: 0,
-      usCnt: 16
-    },
-    { nameZh: '大米', nameEn: 'Rice', productCode: 'GB_C13010101', dsCnt: 18, usCnt: 6 },
-    {
-      nameZh: '其他肥料制造',
-      nameEn: 'Manufacturing of Other Fertilizers',
-      productCode: 'GB_C260209',
-      dsCnt: 39,
-      usCnt: 5
-    },
-    { nameZh: '毛油', nameEn: 'Crude Oils', productCode: 'GB_C13030102', dsCnt: 2, usCnt: 12 },
-    { nameZh: '农业保险', nameEn: 'Agricultural Insurance', productCode: 'GB_J68020005', dsCnt: 3, usCnt: 70 }
-  ],
-  relationships: [
-    {
-      id: 18258,
-      startCode: 'GB_A01010101',
-      startNameZh: '水稻',
-      startNameEn: 'Paddy',
-      endCode: 'GB_J68020005',
-      endNameZh: '农业保险',
-      endNameEn: 'Agricultural Insurance',
-      weight: 2,
-      typeCode: 'T',
-      typeName: '技术服务',
-      direction: 1
-    },
-    {
-      id: 18120,
-      startCode: 'GB_A01010101',
-      startNameZh: '水稻',
-      startNameEn: 'Paddy',
-      endCode: 'GB_A05010401',
-      endNameZh: '农产品烘干服务',
-      endNameEn: 'Agricultural Product Drying Services',
-      weight: 4,
-      typeCode: 'T',
-      typeName: '技术服务',
-      direction: 1
-    },
-    {
-      id: 18568,
-      startCode: 'GB_A01010101',
-      startNameZh: '水稻',
-      startNameEn: 'Paddy',
-      endCode: 'GB_C13010101',
-      endNameZh: '大米',
-      endNameEn: 'Rice',
-      weight: 4,
-      typeCode: 'P',
-      typeName: '产品/业务',
-      direction: 1
-    },
-    {
-      id: 18600,
-      startCode: 'GB_A01010101',
-      startNameZh: '水稻',
-      startNameEn: 'Paddy',
-      endCode: 'GB_C13030102',
-      endNameZh: '毛油',
-      endNameEn: 'Crude Oils',
-      weight: 3,
-      typeCode: 'P',
-      typeName: '产品/业务',
-      direction: 1
-    },
-    {
-      id: 18121,
-      startCode: 'GB_A01010101',
-      startNameZh: '水稻',
-      startNameEn: 'Paddy',
-      endCode: 'GB_C35070902',
-      endNameZh: '农机具及其零部件',
-      endNameEn: 'Agricultural Implements and Parts',
-      weight: 4,
-      typeCode: 'A',
-      typeName: '生产设备',
-      direction: -1
-    },
-    {
-      id: 18617,
-      startCode: 'GB_A01010101',
-      startNameZh: '水稻',
-      startNameEn: 'Paddy',
-      endCode: 'GB_C1303010106',
-      endNameZh: '糠油',
-      endNameEn: 'Bran Oil',
-      weight: 3,
-      typeCode: 'P',
-      typeName: '产品/业务',
-      direction: 1
-    },
-    {
-      id: 36569,
-      startCode: 'GB_A01010101',
-      startNameZh: '水稻',
-      startNameEn: 'Paddy',
-      endCode: 'GB_C260209',
-      endNameZh: '其他肥料制造',
-      endNameEn: 'Manufacturing of Other Fertilizers',
-      weight: 1,
-      typeCode: 'M',
-      typeName: '生产原料',
-      direction: -1
-    },
-    {
-      id: 18122,
-      startCode: 'GB_A01010101',
-      startNameZh: '水稻',
-      startNameEn: 'Paddy',
-      endCode: 'GB_C13090102',
-      endNameZh: '淀粉糖',
-      endNameEn: 'Starch Sugar',
-      weight: 2,
-      typeCode: 'P',
-      typeName: '产品/业务',
-      direction: 1
-    },
-    {
-      id: 383,
-      startCode: 'GB_A01010101',
-      startNameZh: '水稻',
-      startNameEn: 'Paddy',
-      endCode: 'GB_A05010104',
-      endNameZh: '水稻种子',
-      endNameEn: 'Paddy Seeds',
-      weight: 4,
-      typeCode: 'M',
-      typeName: '生产原料',
-      direction: -1
-    }
-  ]
-}
 import * as d3 from 'd3'
 export default {
   data() {
@@ -185,10 +34,12 @@ export default {
       this.initChartOptions()
       this.initSvg()
       if (!data || !data.length) return
-      data[0].children.length > 0 && this.graphTree(data[0])
-      data[1].children.length > 0 && this.graphTree(data[1])
+      let root_0 = this.getRoot(data[0])
+      let root_1 = this.getRoot(data[1])
+      data[0].children.length > 0 && this.graphTree(root_0, data[0].direction === UP)
+      data[1].children.length > 0 && this.graphTree(root_1, data[1].direction === UP)
       if (!data[0].children.length && !data[1].children.length) {
-        this.graphTree(data[0])
+        this.graphTree(root_0, data[0].direction === UP)
       }
       this.treeData = data
       this.rootNode(data[1].children.length > 0)
@@ -201,11 +52,11 @@ export default {
         { name: '水稻', code: 'GB_A01010101', root: true, direction: UP, children: [] },
         { name: '水稻', code: 'GB_A01010101', root: true, direction: DOWN, children: [] }
       ]
-      data_o.nodes.forEach((item) => {
-        map_UP[item.productCode] = { ...item }
-        map_DOWN[item.productCode] = { ...item }
+      this.chartData.nodes.forEach((item) => {
+        map_UP[item.code] = { ...item }
+        map_DOWN[item.code] = { ...item }
       })
-      data_o.relationships.forEach((item) => {
+      this.chartData.relationships.forEach((item) => {
         if (item.direction === UP) {
           let node = map_UP[item.startCode]
           node.children = node.children || []
@@ -283,7 +134,6 @@ export default {
         rootNode = this.visInstance.select('g.isRoot')
         this.visInstance.select('g.down.isRoot').attr('display', 'none')
       }
-      rootNode.on('click', (d) => this.showMenu(d3.event, d.data))
       rootNode.select('text').remove()
       let colorLiner = this.svgInstance
         .append('linearGradient')
@@ -324,16 +174,20 @@ export default {
           return vm._substring(d.data.name, 14, true)
         })
     },
-    async graphTree(data) {
-      let vm = this
-      let root = d3.hierarchy(data)
+    getRoot(data) {
       let $pos = data.direction === UP
+      let root = d3.hierarchy(data)
+      this[`root_${$pos}`] = root
       root.x0 = this.d3TreeBox.width / 2
       root.y0 = this.d3TreeBox.height / 2
       root.descendants().forEach((d, i) => {
-        d.id = d.id || ($pos ? 'up_' : 'down_') + i
+        d.id = d.id || ($pos ? 'up_' : 'down_') + (d.data.code || d.data.id)
         if (d.children) d._children = d.children
+        if (d.depth > 1) d.children = null
       })
+      return root
+    },
+    async graphTree(root, $pos) {
       let d3TreeData = d3.tree().nodeSize([this.treeNode.height + 10, this.treeNode.width])(root)
       let duration = d3.event && d3.event.altKey ? 2500 : 250
       let nodes = d3TreeData.descendants().reverse()
@@ -341,52 +195,73 @@ export default {
       nodes.forEach((d) => {
         d.y = ($pos ? UP : DOWN) * d.depth * 180 + this.d3TreeBox.width / 2
       })
+      let vm = this
       let transition = this.svgInstance
         .transition()
         .duration(duration)
         .attr('viewBox', [vm.viewBox.y, vm.viewBox.x, vm.viewBox.width, vm.viewBox.height])
         .tween('resize', window.ResizeObserver ? null : () => () => this.svgInstance.dispatch('toggle'))
 
-      this.visInstance
+      let nodeEnter = this.visInstance
         .selectAll('g.node')
         .data(nodes, (d) => d.id)
         .enter()
         .append('g')
         .attr('class', (d) => {
           let className = 'node '
-          className += d.data.productCode || d.data.typeCode
+          className += d.data.code || d.data.typeName
           className += $pos ? ' up' : ' down'
-          className += d.data.typeCode ? ' typeNode' : ' productNode'
+          className += d.data.typeName ? ' typeNode' : ' productNode'
           className += d.data.root ? ' isRoot' : ''
           return className
         })
-        .attr('transform', () => `translate(${root.y0},${root.x0})`)
-        .on('click', (d) => this.showMenu(d3.event, d.data))
-        .on('mouseover', (d) => {
-          vm.setHighLight(true, d.data, $pos)
-          vm.showTip(d3.event, d.data)
-        })
-        .on('mouseout', (d) => {
-          vm.setHighLight(false, d.data, $pos)
-        })
         .transition(transition)
+        .attr('transform', () => `translate(${root.y0},${root.x0})`)
         .attr('transform', (d) => `translate(${d.y},${d.x})`)
 
       this.createProductNode($pos)
       this.createTypeNode($pos)
 
-      this.visInstance
+      let node = this.visInstance.selectAll(`g.${$pos ? 'up' : 'down'}`).data(nodes, (d) => d.id)
+      node.merge(nodeEnter).transition(transition)
+      node
+        .exit()
+        .transition(transition)
+        .remove()
+
+      let linkEnter = this.visInstance
         .selectAll('path.link')
-        .data(links, (d) => d.target.id)
+        .data(links, (d) => `${d.target.id}-${d.source.id}`)
         .enter()
         .insert('path', 'g')
         .attr('class', 'link ' + ($pos ? 'up' : 'down'))
         .transition(transition)
         .attr('d', this.diagonal)
-      this.createLink($pos, root)
+        .attr('style', 'cursor: default')
+        .attr('marker-start', (d) => {
+          if (!$pos) return
+          if (d.source.data.code) return
+          return 'url(#marker_arrow_reverse)'
+        })
+        .attr('marker-end', (d) => {
+          if ($pos) return
+          if (!d.source.data.code) return
+          return 'url(#marker_arrow)'
+        })
+
+      let link = this.visInstance
+        .selectAll(`path.${$pos ? 'up' : 'down'}`)
+        .data(links, (d) => `${d.target.id}-${d.source.id}`)
+      link.merge(linkEnter).transition(transition)
+      link
+        .exit()
+        .attr('marker-end', null)
+        .transition(transition)
+        .remove()
     },
     createProductNode($pos) {
       const Product = this.visInstance.selectAll(`g.${$pos ? 'up' : 'down'}.productNode`)
+      const vm = this
       Product.append('rect')
         .attr('class', 'rect')
         .attr('width', this.treeNode.width)
@@ -399,7 +274,12 @@ export default {
         .attr('x', -65)
         .attr('y', -20)
         .attr('text-anchor', 'middle')
-      Product.append('title').text((d) => `${d.data.nameZh} [${d.data.productCode}]`)
+        .on('click', (d) => {
+          if (d.data.typeName) return
+          vm.setHighLight(true, d.data, $pos)
+          vm.showTip(d3.event, d.data)
+        })
+      Product.append('title').text((d) => `${d.data.name} [${d.data.code}]`)
       Product.append('text')
         .attr('fill', '#2897EF')
         .attr('x', 0)
@@ -409,7 +289,12 @@ export default {
         .style('font-weight', 'bold')
         .append('tspan')
         .text((d) => {
-          return this._substring(d.data.nameZh, 14, true)
+          return this._substring(d.data.name, 14, true)
+        })
+        .on('click', (d) => {
+          if (d.data.typeName) return
+          vm.setHighLight(true, d.data, $pos)
+          vm.showTip(d3.event, d.data)
         })
       if (this.type === 'boom') {
         Product.append('text')
@@ -434,25 +319,65 @@ export default {
       } else {
         Product.append('image')
           .attr('xlink:href', require(`@/assets/imgs/icons/lamp.svg`))
-          .attr('class', (d) => (d.depth ? '' : 'remove'))
+          .attr('class', (d) => {
+            if (d.depth === 0) return 'remove'
+            if (!d.data.isRisk) return 'remove'
+          })
           .attr('x', (d) => ($pos ? -110 : 70))
           .attr('y', -12)
           .attr('height', '22px')
           .attr('width', '22px')
-        this.visInstance.selectAll('.remove').remove()
-
-        Product.append('text')
-          .attr('class', (d) => (d.depth ? '' : 'remove'))
-          .attr('x', (d) => ($pos ? -80 : 100))
-          .attr('y', 5)
-          .attr('text-anchor', 'middle')
-          .style('font', '12px sans-serif')
-          .style('fill', '#FFB21C')
-          .append('tspan')
-          .text((d) => {
-            return '7'
+          .on('mouseover', (d) => {
+            if (d.data.isRisk) this.showMenu(d3.event, d.data)
           })
+          .on('mouseout', (d) => {
+            this.interval && clearTimeout(this.interval)
+          })
+        this.visInstance.selectAll('.remove').remove()
       }
+      this.createIcon()
+    },
+    createIcon() {
+      this.visInstance
+        .selectAll('g.productNode')
+        .append('g')
+        .attr('class', (d) => {
+          return d.depth > 0 && d._children && d._children.length ? 'icon' : null
+        })
+
+      this.visInstance
+        .selectAll('g.icon')
+        .attr('style', 'cursor: pointer')
+        .append('image')
+        .attr('class', 'icon-circle')
+        .attr('width', 14)
+        .attr('height', 14)
+        .attr('x', () => this.treeNode.width / 2 - 7)
+        .attr('y', () => -7)
+        .attr('xlink:href', function(d) {
+          if (d.children && d.children.length && d._children && d._children.length) {
+            return require('@/assets/imgs/down_circle.svg')
+          } else {
+            return require('@/assets/imgs/up_circle.svg')
+          }
+        })
+        .on('click', (d) => {
+          let show = !d.children
+          if (show) {
+            d.children = d._children
+            d.children.forEach((child) => {
+              child.children = child._children
+            })
+          } else {
+            d.children.forEach((child) => {
+              child.children = null
+            })
+            d.children = null
+          }
+          let $pos = d.direction === UP
+          const root = this[`root_${$pos}`]
+          this.graphTree(root, $pos)
+        })
     },
     createTypeNode($pos) {
       const Type = this.visInstance.selectAll(`g.${$pos ? 'up' : 'down'}.typeNode`)
@@ -465,30 +390,11 @@ export default {
         .attr('style', 'cursor: default')
         .text((d) => d.data.typeName)
     },
-    createLink($pos, root) {
-      let linkEnter = this.visInstance.selectAll(`path.${$pos ? 'up' : 'down'}.link`)
-      linkEnter
-        .attr('d', (d) => {
-          let o = { x: root.x0, y: root.y0 }
-          return this.diagonal({ source: o, target: o })
-        })
-        .attr('style', 'cursor: default')
-        .attr('marker-start', (d) => {
-          if (!$pos) return
-          if (d.source.data.code) return
-          return 'url(#marker_arrow_reverse)'
-        })
-        .attr('marker-end', (d) => {
-          if ($pos) return
-          if (!d.source.data.code) return
-          return 'url(#marker_arrow)'
-        })
-    },
     setHighLight(isHighLight, data, $pos) {
       return
       // if (data.root) return
       // const direction = $pos ? 'up' : 'down'
-      // const nodes = this.visInstance.selectAll(`g.${direction}.${data.productCode}`)
+      // const nodes = this.visInstance.selectAll(`g.${direction}.${data.code}`)
       // if (isHighLight) {
       //   nodes.selectAll('rect').attr('style', (d) => `stroke: red`)
       // } else {
@@ -541,8 +447,5 @@ export default {
         .attr('fill', '#00C0D1')
         .attr('style', 'transform: rotate(180deg)')
     }
-  },
-  mounted() {
-    this.initChart()
   }
 }

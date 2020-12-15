@@ -60,9 +60,11 @@
 </template>
 <script>
 import chart from '@/mixins/chart'
+import { riskChain } from '@/api/chain'
 export default {
   data() {
     return {
+      chartData: null,
       dialogVisible: false,
       noData: false,
       loading: false,
@@ -90,40 +92,49 @@ export default {
       this.dialogVisible = false
     },
     showMenu(event, data) {
-      this.dialogVisible = true
-      this.hideTip()
-    },
-    showTip(event, data) {
       this.interval && clearTimeout(this.interval)
       this.interval = setTimeout(() => {
-        let top = 0
-        let left = 0
-        if (event.pageX < this.tooltip.width) {
-          left = this.treeNode.width / 2
-        } else if (event.pageX > this.d3TreeBox.width - this.tooltip.width / 2) {
-          left = this.d3TreeBox.width - this.tooltip.width - this.treeNode.width / 2
-        } else {
-          left = event.pageX - this.tooltip.width / 2
-        }
-        if (event.pageY + this.tooltip.height > this.d3TreeBox.height) {
-          top = event.pageY - this.tooltip.height - this.treeNode.height - 100
-        } else {
-          top = event.pageY - this.tooltip.height / 2
-        }
-        setTimeout(() => {
-          this.$refs.tooltip.style.display = 'block'
-          this.$refs.tooltip.style.top = top + 'px'
-          this.$refs.tooltip.style.left = left + 'px'
-        }, 100)
+        this.dialogVisible = true
       }, 500)
     },
+    showTip(event, data) {
+      let top = 0
+      let left = 0
+      if (event.pageX < this.tooltip.width) {
+        left = this.treeNode.width / 2
+      } else if (event.pageX > this.d3TreeBox.width - this.tooltip.width / 2) {
+        left = this.d3TreeBox.width - this.tooltip.width - this.treeNode.width / 2
+      } else {
+        left = event.pageX - this.tooltip.width / 2
+      }
+      if (event.pageY + this.tooltip.height > this.d3TreeBox.height) {
+        top = event.pageY - this.tooltip.height - this.treeNode.height - 100
+      } else {
+        top = event.pageY - this.tooltip.height / 2
+      }
+      setTimeout(() => {
+        this.$refs.tooltip.style.display = 'block'
+        this.$refs.tooltip.style.top = top + 'px'
+        this.$refs.tooltip.style.left = left + 'px'
+      }, 100)
+    },
     hideTip() {
-      this.interval && clearTimeout(this.interval)
       this.$refs.tooltip.style.display = 'none'
     },
-    pageTo() {}
+    pageTo() {},
+    getData() {
+      riskChain().then((res) => {
+        this.chartData = res
+        res.relationships.forEach((item, index) => {
+          item.id = index
+        })
+        this.initChart()
+      })
+    }
   },
-  mounted() {}
+  mounted() {
+    this.getData()
+  }
 }
 </script>
 <style lang="scss" scoped>
