@@ -29,29 +29,24 @@
       <el-dialog title="异动指标" :visible.sync="dialogVisible" width="50%" :before-close="hideMenu">
         <i class="icon-tip" title="这是一个提示"></i>
         <el-table v-loading="loading" class="table" :data="tableData" height="108px">
-          <el-table-column prop="name" label=""></el-table-column>
-          <el-table-column prop="last" label="最新值"></el-table-column>
-          <el-table-column prop="change" label="变动值"></el-table-column>
+          <el-table-column prop="indexName" label=""></el-table-column>
+          <el-table-column prop="latestIndex" label="最新值"></el-table-column>
+          <el-table-column prop="changeIndex" label="变动值"></el-table-column>
           <el-table-column label="变动率">
             <template slot-scope="scope">
-              <span :class="scope.row.ratio.indexOf('-') < 0 ? 'postive' : 'negative'">{{ scope.row.ratio }}</span>
-              <i :class="scope.row.ratio.indexOf('-') < 0 ? 'postive' : 'negative'" class="icon"></i>
+              <span :class="scope.row.indexRatio < 0 ? 'postive' : 'negative'">
+                {{ scope.row.indexRatio }}
+              </span>
+              <i :class="scope.row.indexRatio < 0 ? 'postive' : 'negative'" class="icon"></i>
             </template>
           </el-table-column>
         </el-table>
-        <h1 class="tooltip-title" style="margin-top: 12px">
+        <h1 class="tooltip-title" style="margin-top: 12px" v-if="tags.length">
           高发事件
           <i class="icon-tip" title="异动指标范围是行业宏观经济数据和财务数据"></i>
         </h1>
         <div class="tag-list">
-          <div class="tag">调查立案</div>
-          <div class="tag">调查立案</div>
-          <div class="tag">调查立案</div>
-          <div class="tag">调查立案</div>
-          <div class="tag">调查立案</div>
-          <div class="tag">调查立案</div>
-          <div class="tag">调查立案</div>
-          <div class="tag">调查立案</div>
+          <div class="tag" v-for="item in tags" :key="item.eventName">{{ item.eventName }}</div>
         </div>
         <p class="link"><a @click="pageTo">查看行业风险</a></p>
       </el-dialog>
@@ -60,7 +55,7 @@
 </template>
 <script>
 import chart from '@/mixins/chart'
-import { riskChain } from '@/api/chain'
+import { riskChain, riskDialog } from '@/api/chain'
 export default {
   data() {
     return {
@@ -73,16 +68,8 @@ export default {
         width: 400,
         height: 280
       },
-      tableData: [
-        { name: '行业营', ratio: '+10%' },
-        { name: '行业净利润', ratio: '+10%' },
-        { name: '行业毛利率', ratio: '+10%' },
-        { name: '汽车产量', ratio: '+10%' },
-        { name: '汽车销量', ratio: '+10%' },
-        { name: '汽车销量', ratio: '+10%' },
-        { name: '汽车销量', ratio: '+10%' },
-        { name: '汽车销量', ratio: '+10%' }
-      ],
+      tags: [],
+      tableData: [],
       interval: null
     }
   },
@@ -95,6 +82,19 @@ export default {
       this.interval && clearTimeout(this.interval)
       this.interval = setTimeout(() => {
         this.dialogVisible = true
+        this.loading = true
+        riskDialog({})
+          .then((res) => {
+            this.loading = false
+            this.current = data
+            this.tableData = res.indexes
+            this.tags = res.events
+          })
+          .catch((err) => {
+            this.loading = false
+            this.tableData = []
+            this.tags = []
+          })
       }, 500)
     },
     showTip(event, data) {
@@ -121,7 +121,14 @@ export default {
     hideTip() {
       this.$refs.tooltip.style.display = 'none'
     },
-    pageTo() {},
+    pageTo() {
+      this.$router.push({
+        path: '/analysis/risk',
+        query: {
+          code: this.current.code
+        }
+      })
+    },
     getData() {
       riskChain().then((res) => {
         this.chartData = res

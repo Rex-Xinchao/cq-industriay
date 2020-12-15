@@ -1,7 +1,7 @@
 import http from '@/libs/axios'
 const sleep = (time) => new Promise((res) => setTimeout(() => res(), time))
 
-// 政策导向
+// 风险图谱
 export const riskChain = async (data) => {
   await sleep(1000)
   let reponse = {
@@ -84,4 +84,28 @@ export const riskChain = async (data) => {
   }
   return reponse
   return http.get(`/${data.industryCode}/risk/graph`, data)
+}
+// 风险图谱弹窗
+export const riskDialog = async (data) => {
+  await sleep(1000)
+  let reponse = {
+    events: [
+      {
+        eventName: '公告事件',
+        eventCode: 'AF0002',
+        eventGrade: 3
+      }
+    ],
+    indexes: [
+      {
+        indexName: '净利润',
+        indexUnit: '元',
+        latestIndex: '20000',
+        changeIndex: '13240',
+        indexRatio: 65.12
+      }
+    ]
+  }
+  return reponse
+  return http.get(`/${data.industryCode}/risk`, data)
 }
