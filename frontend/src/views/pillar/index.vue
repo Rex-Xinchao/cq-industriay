@@ -4,52 +4,13 @@
       支柱产业
       <span class="sign">汽车行业</span>
     </h1>
-    <div class="map" id="map"></div>
+    <div class="map" id="map" v-loading="loading"></div>
     <div class="rank">
-      <div class="cq">
-        <h1>重庆市</h1>
-        <ul>
-          <li @click="pageTo">汽车</li>
-          <li>电子制作</li>
-          <li>机械制作</li>
-          <li>新材料</li>
-        </ul>
-      </div>
-      <div class="sc">
-        <h1>四川省</h1>
-        <ul>
-          <li>汽车</li>
-          <li>电子制作</li>
-          <li>机械制作</li>
-          <li>新材料</li>
-        </ul>
-      </div>
-      <div class="sx">
-        <h1>陕西省</h1>
-        <ul>
-          <li>汽车</li>
-          <li>电子制作</li>
-          <li>机械制作</li>
-          <li>新材料</li>
-        </ul>
-      </div>
-      <div class="gz">
-        <h1>贵州省</h1>
-        <ul>
-          <li>汽车</li>
-          <li>电子制作</li>
-          <li>机械制作</li>
-          <li>机械制作</li>
-          <li>机械制作</li>
-          <li>机械制作</li>
-          <li>机械制作</li>
-          <li>机械制作</li>
-          <li>机械制作</li>
-          <li>机械制作</li>
-          <li>机械制作</li>
-          <li>机械制作</li>
-          <li>机械制作</li>
-          <li>新材料</li>
+      <div class="card" v-for="item in regions" :class="item.class" :key="item.class" v-loading="loading">
+        <h1>{{ item.regionName }}</h1>
+        <ul style="position: relative">
+          <li v-for="child in item.tree" :key="child.id" @click="pageTo(child.id)">{{ child.name }}</li>
+          <no-data-show class="no-data-show" :show="item.tree.length === 0"></no-data-show>
         </ul>
       </div>
     </div>
@@ -63,8 +24,11 @@ import gz from '@/libs/map/guizhou'
 import sx from '@/libs/map/shanxi'
 import sc from '@/libs/map/sichuan'
 import resize from '@/mixins/resize'
+import { industryList } from '@/api/pillar'
+import noDataShow from '../../components/public/no-data-show.vue'
 // todo 地图背景色 颜色加上透明度
 export default {
+  components: { noDataShow },
   data() {
     return {
       loading: false,
@@ -190,12 +154,73 @@ export default {
             }
           }
         ]
+      },
+      regions: {
+        CSF_CN_500000: {
+          regionName: '重庆市',
+          class: 'cq',
+          tree: []
+        },
+        CSF_CN_510000: {
+          regionName: '四川省',
+          class: 'sc',
+          tree: []
+        },
+        CSF_CN_610000: {
+          regionName: '陕西省',
+          class: 'sx',
+          tree: []
+        },
+        CSF_CN_520000: {
+          regionName: '贵州省',
+          class: 'gz',
+          tree: []
+        }
       }
     }
   },
   mixins: [resize],
   methods: {
     initMap() {
+      this.loading = true
+      let map = {
+        CSF_CN_500000: {
+          regionName: '重庆市',
+          class: 'cq',
+          tree: []
+        },
+        CSF_CN_510000: {
+          regionName: '四川省',
+          class: 'sc',
+          tree: []
+        },
+        CSF_CN_610000: {
+          regionName: '陕西省',
+          class: 'sx',
+          tree: []
+        },
+        CSF_CN_520000: {
+          regionName: '贵州省',
+          class: 'gz',
+          tree: []
+        }
+      }
+      industryList({})
+        .then((res) => {
+          this.loading = false
+          res.result.forEach((item) => {
+            map[item.regionCode].tree = item.tree
+          })
+          this.regions = map
+          this.draw()
+        })
+        .then((err) => {
+          this.loading = false
+          this.regions = map
+          this.draw()
+        })
+    },
+    draw() {
       const all = {
         type: 'FeatureCollection',
         features: [...cq.features, ...gz.features, ...sx.features, ...sc.features]
@@ -208,35 +233,37 @@ export default {
         {
           type: 'sx',
           label: '陕',
-          value: 1,
+          value: this.regions.CSF_CN_610000.tree.length,
           coord: [108.95, 34.27]
         },
         {
           type: 'sc',
           label: '川',
-          value: 1,
+          value: this.regions.CSF_CN_510000.tree.length,
           coord: [102.06, 30.67]
         },
         {
           type: 'cq',
           label: '渝',
-          value: 1,
+          value: this.regions.CSF_CN_500000.tree.length,
           coord: [108.13, 30.35]
         },
         {
           type: 'gz',
           label: '贵',
-          value: 1,
+          value: this.regions.CSF_CN_520000.tree.length,
           coord: [106.71, 26.57]
         }
       ]
       this.myChart = echarts.init(document.getElementById('map'))
       this.myChart.setOption(this.mapOption, true)
       this.myChart.resize()
-      this.loading = false
     },
-    pageTo() {
-      this.$router.push('/pillar/chart')
+    pageTo(id) {
+      this.$router.push({
+        path: '/pillar/chart',
+        query: { id: id }
+      })
     }
   },
   mounted() {
@@ -246,6 +273,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '~@/assets/styles/common/view';
+
 .main {
   height: calc(100% - 40px);
 }
@@ -261,7 +289,7 @@ export default {
 }
 
 .rank {
-  div {
+  .card {
     display: inline-block;
     width: calc(50% - 10px);
     height: calc(50% - 10px);
