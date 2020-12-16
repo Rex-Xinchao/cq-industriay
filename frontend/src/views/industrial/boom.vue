@@ -48,6 +48,7 @@
 <script>
 const echarts = require('echarts')
 import { boomChain, boomDialog } from '@/api/chain'
+import { mapGetters } from 'vuex'
 import chart from '@/mixins/chart'
 export default {
   data() {
@@ -71,7 +72,7 @@ export default {
             let time = data[0].axisValue + '月'
             let result = `${time}<br/>`
             data.forEach((item) => {
-              result += `${item.seriesName}：${item.value}%<br/>`
+              result += `景气指数：${item.value}%<br/>`
             })
             return result
           }
@@ -135,7 +136,6 @@ export default {
           min: 0
         },
         series: {
-          name: 'test',
           type: 'line',
           smooth: true,
           data: [],
@@ -153,18 +153,12 @@ export default {
           }
         }
       },
-      tableData: [
-        { name: '行业营收规模', ratio: '+10%' },
-        { name: '行业净利润', ratio: '+10%' },
-        { name: '行业毛利率', ratio: '+10%' },
-        { name: '汽车产量', ratio: '+10%' },
-        { name: '汽车销量', ratio: '+10%' },
-        { name: '汽车销量', ratio: '+10%' },
-        { name: '汽车销量', ratio: '+10%' },
-        { name: '汽车销量', ratio: '+10%' }
-      ],
+      tableData: [],
       interval: null
     }
+  },
+  computed: {
+    ...mapGetters(['industryCode'])
   },
   mixins: [chart],
   methods: {
@@ -176,7 +170,9 @@ export default {
       this.interval = setTimeout(() => {
         this.dialogVisible = true
         this.loading = true
-        boomDialog({})
+        boomDialog({
+          industryCode: data.code
+        })
           .then((res) => {
             this.loading = false
             this.tableData = res.indexes
@@ -219,7 +215,9 @@ export default {
     },
     getData() {
       this.tableLoading = true
-      boomChain().then((res) => {
+      boomChain({
+        industryCode: this.industryCode
+      }).then((res) => {
         this.tableLoading = false
         this.chartData = res
         res.relationships.forEach((item, index) => {

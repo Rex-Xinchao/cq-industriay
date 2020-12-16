@@ -56,6 +56,7 @@
 <script>
 import chart from '@/mixins/chart'
 import { riskChain, riskDialog } from '@/api/chain'
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -73,6 +74,9 @@ export default {
       tableData: [],
       interval: null
     }
+  },
+  computed: {
+    ...mapGetters(['industryCode'])
   },
   mixins: [chart],
   methods: {
@@ -132,7 +136,9 @@ export default {
     },
     getData() {
       this.tableLoading = true
-      riskChain().then((res) => {
+      riskChain({
+        industryCode: this.industryCode
+      }).then((res) => {
         this.tableLoading = false
         this.chartData = res
         res.relationships.forEach((item, index) => {
