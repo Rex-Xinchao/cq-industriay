@@ -160,7 +160,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['industryCode'])
+    ...mapGetters(['industryCode', 'industry'])
   },
   mixins: [chart],
   methods: {
@@ -208,11 +208,9 @@ export default {
       } else {
         top = event.pageY - this.tooltip.height / 2
       }
-      setTimeout(() => {
-        this.$refs.tooltip.style.display = 'block'
-        this.$refs.tooltip.style.top = top + 'px'
-        this.$refs.tooltip.style.left = left + 'px'
-      }, 100)
+      this.$refs.tooltip.style.display = 'block'
+      this.$refs.tooltip.style.top = top + 'px'
+      this.$refs.tooltip.style.left = left + 'px'
     },
     hideTip() {
       this.$refs.tooltip.style.display = 'none'

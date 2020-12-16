@@ -49,8 +49,8 @@ export default {
       let map_UP = {}
       let map_DOWN = {}
       let data = [
-        { name: '水稻', code: 'GB_A01010101', root: true, direction: UP, children: [] },
-        { name: '水稻', code: 'GB_A01010101', root: true, direction: DOWN, children: [] }
+        { name: this.industry, code: this.industryCode, root: true, direction: UP, children: [] },
+        { name: this.industry, code: this.industryCode, root: true, direction: DOWN, children: [] }
       ]
       this.chartData.nodes.forEach((item) => {
         map_UP[item.code] = { ...item }
@@ -170,9 +170,7 @@ export default {
         .style('font', '12px sans-serif')
         .style('font-weight', 'bold')
         .append('tspan')
-        .text((d) => {
-          return vm._substring(d.data.name, 14, true)
-        })
+        .text((d) => vm._substring(d.data.name, 14, true))
     },
     getRoot(data) {
       let $pos = data.direction === UP
