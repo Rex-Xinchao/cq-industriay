@@ -15,7 +15,10 @@
     </div>
     <div class="item-box">
       <div id="tag_1" class="item_100 item-table">
-        <h1 class="main-title">GDP及产业结构</h1>
+        <h1 class="main-title">
+          GDP及产业结构
+          <span class="fr sub-title">全省</span>
+        </h1>
         <el-table
           v-loading="loading"
           class="table-main table-head-grey"
@@ -37,7 +40,10 @@
         </el-table>
       </div>
       <div id="tag_2" class="item_100 item-table">
-        <h1 class="main-title">工业与投资</h1>
+        <h1 class="main-title">
+          工业与投资
+          <span class="fr sub-title">全省</span>
+        </h1>
         <el-table
           v-loading="loading"
           class="table-main table-head-grey"
@@ -59,7 +65,10 @@
         </el-table>
       </div>
       <div id="tag_3" class="item_100 item-table">
-        <h1 class="main-title">进出口</h1>
+        <h1 class="main-title">
+          进出口
+          <span class="fr sub-title">全省</span>
+        </h1>
         <el-table
           v-loading="loading"
           class="table-main table-head-grey"
@@ -81,7 +90,10 @@
         </el-table>
       </div>
       <div id="tag_4" class="item_100 item-table">
-        <h1 class="main-title">消费收入和人口</h1>
+        <h1 class="main-title">
+          消费收入和人口
+          <span class="fr sub-title">全省</span>
+        </h1>
         <el-table
           v-loading="loading"
           class="table-main table-head-grey"
@@ -103,7 +115,10 @@
         </el-table>
       </div>
       <div id="tag_5" class="item_100 item-table item_last">
-        <h1 class="main-title">存贷款</h1>
+        <h1 class="main-title">
+          存贷款
+          <span class="fr sub-title">全省</span>
+        </h1>
         <el-table
           v-loading="loading"
           class="table-main table-head-grey"

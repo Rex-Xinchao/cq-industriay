@@ -219,14 +219,18 @@ export default {
       this.tableLoading = true
       boomChain({
         industryCode: this.industryCode
-      }).then((res) => {
-        this.tableLoading = false
-        this.chartData = res
-        res.relationships.forEach((item, index) => {
-          item.id = index
-        })
-        this.initChart()
       })
+        .then((res) => {
+          this.tableLoading = false
+          this.chartData = res
+          res.relationships.forEach((item, index) => {
+            item.id = index
+          })
+          this.initChart()
+        })
+        .catch((err) => {
+          this.tableLoading = false
+        })
     },
     pageTo(path) {
       this.$router.push({

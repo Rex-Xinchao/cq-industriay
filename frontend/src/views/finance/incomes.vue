@@ -14,7 +14,10 @@
     </div>
     <div class="item-box">
       <div id="tag_1" class="item_100 item-table">
-        <h1 class="main-title">一般公共预算收支</h1>
+        <h1 class="main-title">
+          一般公共预算收支
+          <span class="fr sub-title">全省</span>
+        </h1>
         <el-table
           v-loading="loading"
           class="table-main table-head-grey"
@@ -36,7 +39,10 @@
         </el-table>
       </div>
       <div id="tag_2" class="item_100 item-table">
-        <h1 class="main-title">政府性基金收支</h1>
+        <h1 class="main-title">
+          政府性基金收支
+          <span class="fr sub-title">全省</span>
+        </h1>
         <el-table
           v-loading="loading"
           class="table-main table-head-grey"
@@ -58,7 +64,10 @@
         </el-table>
       </div>
       <div id="tag_3" class="item_100 item-table">
-        <h1 class="main-title">国有资本经营收支</h1>
+        <h1 class="main-title">
+          国有资本经营收支
+          <span class="fr sub-title">全省</span>
+        </h1>
         <el-table
           v-loading="loading"
           class="table-main table-head-grey"
@@ -80,7 +89,10 @@
         </el-table>
       </div>
       <div id="tag_4" class="item_100 item-table">
-        <h1 class="main-title">地方债务</h1>
+        <h1 class="main-title">
+          地方债务
+          <span class="fr sub-title">全省</span>
+        </h1>
         <el-table
           v-loading="loading"
           class="table-main table-head-grey"
