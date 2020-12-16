@@ -4,7 +4,7 @@
       景气图谱
       <span class="sign">汽车行业</span>
     </h1>
-    <div class="chart-body">
+    <div class="chart-body" v-loading="tableLoading">
       <div class="graph-box"></div>
       <div ref="tooltip" class="chart-tooltip" @mouseleave="hideTip">
         <h1>行业分析</h1>
@@ -30,13 +30,13 @@
         <div class="tooltip-main">
           <div id="tooltipChart" class="chart" v-loading="loading"></div>
           <el-table v-loading="loading" class="boom-com_table" :data="tableData" height="380px">
-            <el-table-column prop="name" label=""></el-table-column>
-            <el-table-column prop="last" label="最新值"></el-table-column>
-            <el-table-column prop="change" label="变动值"></el-table-column>
+            <el-table-column prop="indexName" label=""></el-table-column>
+            <el-table-column prop="latestIndex" label="最新值"></el-table-column>
+            <el-table-column prop="changeIndex" label="变动值"></el-table-column>
             <el-table-column label="变动率">
               <template slot-scope="scope">
-                <span :class="scope.row.ratio.indexOf('-') < 0 ? 'postive' : 'negative'">{{ scope.row.ratio }}</span>
-                <i :class="scope.row.ratio.indexOf('-') < 0 ? 'postive' : 'negative'" class="icon"></i>
+                <span :class="scope.row.indexRatio < 0 ? 'postive' : 'negative'">{{ scope.row.indexRatio }}</span>
+                <i :class="scope.row.indexRatio < 0 ? 'postive' : 'negative'" class="icon"></i>
               </template>
             </el-table-column>
           </el-table>
@@ -47,13 +47,16 @@
 </template>
 <script>
 const echarts = require('echarts')
+import { boomChain, boomDialog } from '@/api/chain'
 import chart from '@/mixins/chart'
 export default {
   data() {
     const vm = this
     return {
+      chartData: null,
       dialogVisible: false,
       loading: false,
+      tableLoading: false,
       noData: false,
       type: 'boom',
       tooltip: {
@@ -169,51 +172,66 @@ export default {
       this.dialogVisible = false
     },
     showMenu(event, data) {
-      this.dialogVisible = true
-      this.hideTip()
-      this.initDialog()
-    },
-    showTip(event, data) {
       this.interval && clearTimeout(this.interval)
       this.interval = setTimeout(() => {
-        let top = 0
-        let left = 0
-        if (event.pageX < this.tooltip.width) {
-          left = this.treeNode.width / 2
-        } else if (event.pageX > this.d3TreeBox.width - this.tooltip.width / 2) {
-          left = this.d3TreeBox.width - this.tooltip.width - this.treeNode.width / 2
-        } else {
-          left = event.pageX - this.tooltip.width / 2
-        }
-        if (event.pageY + this.tooltip.height > this.d3TreeBox.height) {
-          top = event.pageY - this.tooltip.height - this.treeNode.height - 100
-        } else {
-          top = event.pageY - this.tooltip.height / 2
-        }
-        setTimeout(() => {
-          this.$refs.tooltip.style.display = 'block'
-          this.$refs.tooltip.style.top = top + 'px'
-          this.$refs.tooltip.style.left = left + 'px'
-        }, 100)
+        this.dialogVisible = true
+        this.loading = true
+        boomDialog({})
+          .then((res) => {
+            this.loading = false
+            this.tableData = res.indexes
+            this.initDialog(res.prosperities)
+          })
+          .catch((err) => {
+            this.loading = false
+          })
       }, 500)
     },
+    initDialog(data = []) {
+      this.chartOption.xAxis.data = data.map((item) => item.rpt)
+      this.chartOption.series.data = data.map((item) => item.ratio)
+      this.myChart = echarts.init(document.getElementById(`tooltipChart`))
+      this.myChart.setOption(this.chartOption, true)
+    },
+    showTip(event, data) {
+      let top = 0
+      let left = 0
+      if (event.pageX < this.tooltip.width) {
+        left = this.treeNode.width / 2
+      } else if (event.pageX > this.d3TreeBox.width - this.tooltip.width / 2) {
+        left = this.d3TreeBox.width - this.tooltip.width - this.treeNode.width / 2
+      } else {
+        left = event.pageX - this.tooltip.width / 2
+      }
+      if (event.pageY + this.tooltip.height > this.d3TreeBox.height) {
+        top = event.pageY - this.tooltip.height - this.treeNode.height - 100
+      } else {
+        top = event.pageY - this.tooltip.height / 2
+      }
+      setTimeout(() => {
+        this.$refs.tooltip.style.display = 'block'
+        this.$refs.tooltip.style.top = top + 'px'
+        this.$refs.tooltip.style.left = left + 'px'
+      }, 100)
+    },
     hideTip() {
-      this.interval && clearTimeout(this.interval)
       this.$refs.tooltip.style.display = 'none'
     },
-    initDialog() {
-      this.loading = true
-      setTimeout(() => {
-        this.loading = false
-        this.noData = false
-        this.chartOption.xAxis.data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-        this.chartOption.series.data = [50, 10, 21, 9, 30, 12, 6, 5, 8, 3, 2, 1]
-        this.myChart = echarts.init(document.getElementById(`tooltipChart`))
-        this.myChart.setOption(this.chartOption, true)
-      }, 1000)
+    getData() {
+      this.tableLoading = true
+      boomChain().then((res) => {
+        this.tableLoading = false
+        this.chartData = res
+        res.relationships.forEach((item, index) => {
+          item.id = index
+        })
+        this.initChart()
+      })
     }
   },
-  mounted() {}
+  mounted() {
+    this.getData()
+  }
 }
 </script>
 <style lang="scss" scoped>

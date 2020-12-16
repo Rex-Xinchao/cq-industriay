@@ -4,7 +4,7 @@
       风险图谱
       <span class="sign">汽车行业</span>
     </h1>
-    <div class="chart-body">
+    <div class="chart-body" v-loading="tableLoading">
       <div class="graph-box"></div>
 
       <div ref="tooltip" class="chart-tooltip" @mouseleave="hideTip">
@@ -63,6 +63,7 @@ export default {
       dialogVisible: false,
       noData: false,
       loading: false,
+      tableLoading: false,
       type: 'risk',
       tooltip: {
         width: 400,
@@ -130,7 +131,9 @@ export default {
       })
     },
     getData() {
+      this.tableLoading = true
       riskChain().then((res) => {
+        this.tableLoading = false
         this.chartData = res
         res.relationships.forEach((item, index) => {
           item.id = index

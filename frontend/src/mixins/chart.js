@@ -308,6 +308,12 @@ export default {
           .text((d) => {
             return '7.12%'
           })
+          .on('mouseover', (d) => {
+            this.showMenu(d3.event, d.data)
+          })
+          .on('mouseout', (d) => {
+            this.interval && clearTimeout(this.interval)
+          })
         Product.append('image')
           .attr('xlink:href', require(`@/assets/imgs/icons/up.svg`))
           .attr('class', (d) => (d.depth ? '' : 'remove'))
