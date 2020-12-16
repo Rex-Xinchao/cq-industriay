@@ -8,22 +8,24 @@
       <div class="graph-box"></div>
       <div ref="tooltip" class="chart-tooltip" @mouseleave="hideTip">
         <h1>行业分析</h1>
-        <span>行业环境</span>
-        <span>行业前景</span>
-        <span>政策导向</span>
-        <span>竞争格局</span>
-        <span>行业风险</span>
-        <span>行业获客</span>
+        <span @click="pageTo('/analysis/env')">行业环境</span>
+        <span @click="pageTo('/analysis/prospect')">行业前景</span>
+        <span @click="pageTo('/analysis/policy')">政策导向</span>
+        <span @click="pageTo('/analysis/compete')">竞争格局</span>
+        <span @click="pageTo('/analysis/risk')">行业风险</span>
+        <span @click="pageTo('/analysis/customer')">行业获客</span>
+        <span @click="pageTo('/analysis/information')">行业舆情</span>
         <h1>行业基准</h1>
-        <span>成长能力</span>
-        <span>盈利能力</span>
-        <span>偿还能力</span>
-        <span>运营能力</span>
+        <span @click="pageTo('/base/grow')">成长能力</span>
+        <span @click="pageTo('/base/profit')">盈利能力</span>
+        <span @click="pageTo('/base/repay')">偿还能力</span>
+        <span @click="pageTo('/base/business')">运营能力</span>
+        <span @click="pageTo('/base/finance')">龙头财务</span>
         <h1>产业分析</h1>
-        <span>景气图谱</span>
-        <span>风险图谱</span>
+        <span @click="pageTo('/industrial/boom')">景气图谱</span>
+        <span @click="pageTo('/industrial/risk')">风险图谱</span>
         <h1>存量客户</h1>
-        <span>存量客户画像</span>
+        <span @click="pageTo('/stockCustom/index')">存量客户画像</span>
       </div>
       <el-dialog title="景气指数" :visible.sync="dialogVisible" width="80%" :before-close="hideMenu">
         <i class="icon-tip" title="这是一个提示"></i>
@@ -170,6 +172,7 @@ export default {
       this.interval = setTimeout(() => {
         this.dialogVisible = true
         this.loading = true
+        this.current = data
         boomDialog({
           industryCode: data.code
         })
@@ -224,6 +227,14 @@ export default {
           item.id = index
         })
         this.initChart()
+      })
+    },
+    pageTo(path) {
+      this.$router.push({
+        path: path,
+        query: {
+          code: this.current.code
+        }
       })
     }
   },
