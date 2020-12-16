@@ -276,7 +276,6 @@ export default {
         .attr('text-anchor', 'middle')
         .on('click', (d) => {
           if (d.data.typeName) return
-          vm.setHighLight(true, d.data, $pos)
           vm.showTip(d3.event, d.data)
         })
       Product.append('title').text((d) => `${d.data.name} [${d.data.code}]`)
@@ -293,7 +292,6 @@ export default {
         })
         .on('click', (d) => {
           if (d.data.typeName) return
-          vm.setHighLight(true, d.data, $pos)
           vm.showTip(d3.event, d.data)
         })
       if (this.type === 'boom') {
@@ -321,6 +319,12 @@ export default {
           .attr('y', -6)
           .attr('height', '14px')
           .attr('width', '8px')
+          .on('mouseover', (d) => {
+            this.showMenu(d3.event, d.data)
+          })
+          .on('mouseout', (d) => {
+            this.interval && clearTimeout(this.interval)
+          })
         this.visInstance.selectAll('.remove').remove()
       } else {
         Product.append('image')
@@ -368,6 +372,7 @@ export default {
           }
         })
         .on('click', (d) => {
+          console.log('hello world')
           let show = !d.children
           if (show) {
             d.children = d._children
@@ -395,17 +400,6 @@ export default {
         .attr('style', (d) => ($pos ? (d._children ? 'start' : 'end') : d._children ? 'end' : 'start'))
         .attr('style', 'cursor: default')
         .text((d) => d.data.typeName)
-    },
-    setHighLight(isHighLight, data, $pos) {
-      return
-      // if (data.root) return
-      // const direction = $pos ? 'up' : 'down'
-      // const nodes = this.visInstance.selectAll(`g.${direction}.${data.code}`)
-      // if (isHighLight) {
-      //   nodes.selectAll('rect').attr('style', (d) => `stroke: red`)
-      // } else {
-      //   nodes.selectAll('rect').attr('style', (d) => `stroke: #5DB7FE`)
-      // }
     },
     _substring(str, n, $dot) {
       let r = /[^\x00-\xff]/g

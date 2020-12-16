@@ -6,7 +6,6 @@
     </h1>
     <div class="chart-body" v-loading="tableLoading">
       <div class="graph-box"></div>
-
       <div ref="tooltip" class="chart-tooltip" @mouseleave="hideTip">
         <h1>行业分析</h1>
         <span @click="pageTo('/analysis/env')">行业环境</span>
@@ -107,6 +106,7 @@ export default {
     showTip(event, data) {
       let top = 0
       let left = 0
+      this.current = data
       if (event.pageX < this.tooltip.width) {
         left = this.treeNode.width / 2
       } else if (event.pageX > this.d3TreeBox.width - this.tooltip.width / 2) {

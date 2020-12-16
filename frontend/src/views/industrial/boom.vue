@@ -195,6 +195,7 @@ export default {
     showTip(event, data) {
       let top = 0
       let left = 0
+      this.current = data
       if (event.pageX < this.tooltip.width) {
         left = this.treeNode.width / 2
       } else if (event.pageX > this.d3TreeBox.width - this.tooltip.width / 2) {
