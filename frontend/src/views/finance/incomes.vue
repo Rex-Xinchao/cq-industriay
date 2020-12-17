@@ -146,7 +146,7 @@ export default {
       this.loading = true
       setTimeout(() => {
         this.loading = false
-      }, 3000)
+      }, 1000)
     },
     scrollTo(id) {
       let top = document.getElementById(id).offsetTop - 128

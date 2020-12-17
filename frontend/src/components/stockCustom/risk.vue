@@ -1,6 +1,6 @@
 <template>
   <div class="com-main risk-table-main">
-    <h1 class="main-title">
+    <h1 class="com-title">
       {{ title }}
       <div class="fr">
         <el-select class="select" v-model="typeSelect">

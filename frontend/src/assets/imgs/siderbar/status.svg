@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>导航/小icon/地区经济/未选中</title>
+    <g id="导航/小icon/地区经济/未选中" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="concept-sharing">
+            <rect id="矩形" fill-opacity="0.01" fill="#FFFFFF" fill-rule="nonzero" x="0" y="0" width="16" height="16"></rect>
+            <g id="编组-80备份" transform="translate(2.000000, 1.000000)" stroke="#94979B">
+                <path d="M5.91013794,13.4848077 C9.47777161,10.3763808 11.2615884,7.83699248 11.2615884,5.86664282 C11.2615884,2.91111832 8.86566244,0.515192317 5.91013794,0.515192317 C2.95461344,0.515192317 0.558687441,2.91111832 0.558687441,5.86664282 C0.558687441,7.83699248 2.34250427,10.3763808 5.91013794,13.4848077 Z" id="椭圆形"></path>
+                <g id="编组" transform="translate(3.597546, 3.249260)" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline id="路径" points="0.338129329 1.0687879e-13 2.3669053 1.8765664 4.39568127 1.0687879e-13"></polyline>
+                    <line x1="7.00744736e-16" y1="2.50208853" x2="4.7338106" y2="2.50208853" id="路径"></line>
+                    <line x1="7.00744736e-16" y1="4.37865492" x2="4.7338106" y2="4.37865492" id="路径"></line>
+                    <line x1="2.3669053" y1="2.50208853" x2="2.3669053" y2="5.94246025" id="路径"></line>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

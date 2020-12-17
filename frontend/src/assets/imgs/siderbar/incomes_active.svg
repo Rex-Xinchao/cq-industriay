@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>导航/小icon/地区经济状况/选中</title>
+    <g id="导航/小icon/地区经济状况/选中" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="funds">
+            <rect id="矩形" fill-opacity="0.01" fill="#FFFFFF" fill-rule="nonzero" x="0" y="0" width="16" height="16"></rect>
+            <ellipse id="椭圆形" stroke="#3A84FF" stroke-linecap="round" stroke-linejoin="round" cx="4.66666667" cy="3.33333333" rx="3.33333333" ry="1.66666667"></ellipse>
+            <path d="M1.33333333,3.33333333 C1.33333333,3.33333333 1.33333333,4.7462 1.33333333,5.66666667 C1.33333333,6.58713333 2.82571667,7.33333333 4.66666667,7.33333333 C6.5076,7.33333333 8,6.58713333 8,5.66666667 C8,5.12146667 8,3.33333333 8,3.33333333" id="路径" stroke="#3A84FF" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M1.33333333,5.66666667 C1.33333333,5.66666667 1.33333333,7.07953333 1.33333333,8 C1.33333333,8.92046667 2.82571667,9.66666667 4.66666667,9.66666667 C6.5076,9.66666667 8,8.92046667 8,8 C8,7.4548 8,5.66666667 8,5.66666667" id="路径" stroke="#3A84FF" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M1.33333333,8 C1.33333333,8 1.33333333,9.41286667 1.33333333,10.3333333 C1.33333333,11.2538 2.82571667,12 4.66666667,12 C6.5076,12 8,11.2538 8,10.3333333 C8,9.78813333 8,8 8,8" id="路径" stroke="#3A84FF" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M1.33333333,10.3333333 C1.33333333,10.3333333 1.33333333,11.7462 1.33333333,12.6666667 C1.33333333,13.5871333 2.82571667,14.3333333 4.66666667,14.3333333 C6.5076,14.3333333 8,13.5871333 8,12.6666667 C8,12.1214667 8,10.3333333 8,10.3333333" id="路径" stroke="#3A84FF" stroke-linecap="round" stroke-linejoin="round"></path>
+            <ellipse id="椭圆形" stroke="#3A84FF" stroke-linecap="round" stroke-linejoin="round" cx="11.3333333" cy="8" rx="3.33333333" ry="1.66666667"></ellipse>
+            <path d="M8,8 C8,8 8,9.41286667 8,10.3333333 C8,11.2538 9.4924,12 11.3333333,12 C13.1742667,12 14.6666667,11.2538 14.6666667,10.3333333 C14.6666667,9.78813333 14.6666667,8 14.6666667,8" id="路径" stroke="#3A84FF" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M8,10.3333333 C8,10.3333333 8,11.7462 8,12.6666667 C8,13.5871333 9.4924,14.3333333 11.3333333,14.3333333 C13.1742667,14.3333333 14.6666667,13.5871333 14.6666667,12.6666667 C14.6666667,12.1214667 14.6666667,10.3333333 14.6666667,10.3333333" id="路径" stroke="#3A84FF" stroke-linecap="round" stroke-linejoin="round"></path>
+        </g>
+    </g>
+</svg>

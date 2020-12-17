@@ -165,7 +165,7 @@ export default {
     background-image: url(~@/assets/imgs/siderbar/baseMain.svg);
   }
   &.icon-industrialMain {
-    background-image: url(~@/assets/imgs/siderbar/baseMain.svg);
+    background-image: url(~@/assets/imgs/siderbar/industrialMain.svg);
   }
   &.icon-stockMain {
     background-image: url(~@/assets/imgs/siderbar/stockMain.svg);
@@ -269,15 +269,15 @@ export default {
     }
   }
   &.icon-status {
-    background-image: url(~@/assets/imgs/siderbar/stockCustom.svg);
+    background-image: url(~@/assets/imgs/siderbar/status.svg);
     &.active {
-      background-image: url(~@/assets/imgs/siderbar/stockCustom-active.svg);
+      background-image: url(~@/assets/imgs/siderbar/status_active.svg);
     }
   }
   &.icon-incomes {
-    background-image: url(~@/assets/imgs/siderbar/stockCustom.svg);
+    background-image: url(~@/assets/imgs/siderbar/incomes.svg);
     &.active {
-      background-image: url(~@/assets/imgs/siderbar/stockCustom-active.svg);
+      background-image: url(~@/assets/imgs/siderbar/incomes_active.svg);
     }
   }
 }

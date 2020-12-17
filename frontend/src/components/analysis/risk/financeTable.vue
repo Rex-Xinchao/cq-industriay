@@ -1,6 +1,6 @@
 <template>
   <div class="com-main finance-table-main">
-    <h1 class="main-title">
+    <h1 class="com-title">
       {{ title }}
       <i class="icon-tip" title="数据来源于行业宏观经济指标和龙头企业财务数据"></i>
     </h1>

@@ -11,7 +11,7 @@
             <i class="icon-img icon-all"></i>
             全行客户
           </div>
-          <div class="item" @click="pageTo('/stockCustom/index', '_blank')">
+          <div class="item" @click="pageTo('/pillar/index', '_blank')">
             <i class="icon-img icon-pillar"></i>
             支柱产业
           </div>
@@ -28,9 +28,6 @@
 import headCom from '@components/public/head'
 import siderCom from '@components/public/siderBar'
 export default {
-  data() {
-    return {}
-  },
   computed: {
     showSiderbar() {
       return !['/stockCustom/all', '/pillar/index', '/pillar/chart'].includes(this.$route.path)
