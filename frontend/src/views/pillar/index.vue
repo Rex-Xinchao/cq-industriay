@@ -275,7 +275,7 @@ export default {
 @import '~@/assets/styles/common/view';
 
 .main {
-  height: calc(100% - 40px);
+  height: calc(100% - 48px);
 }
 .map,
 .rank {

@@ -1,6 +1,8 @@
 <template>
   <div class="main">
-    <h1 class="main-title">行业获客</h1>
+    <div class="item-menu">
+      <h1 class="main-title">行业获客</h1>
+    </div>
     <div class="main-body">
       <map-chart class="map-chart"></map-chart>
       <el-button @click="handleOpen" type="primary" class="btn-show-more">推荐企业</el-button>
@@ -130,7 +132,7 @@ export default {
 @import '~@/assets/styles/common/view';
 @import '~@/assets/styles/common/table';
 .main {
-  height: calc(100% - 40px);
+  height: calc(100% - 48px);
   .main-body {
     box-sizing: border-box;
     position: relative;
@@ -150,7 +152,7 @@ export default {
 
     .btn-show-more {
       position: absolute;
-      top: 28px;
+      top: 48px;
       right: 8px;
       z-index: 1001;
     }

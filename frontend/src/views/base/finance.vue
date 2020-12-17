@@ -1,6 +1,8 @@
 <template>
   <div class="main">
-    <h1 class="main-title">龙头财务</h1>
+    <div class="item-menu">
+      <h1 class="main-title">龙头财务</h1>
+    </div>
     <div class="main-body">
       <div class="filter">
         <span class="filter-label">指标：</span>
@@ -170,9 +172,10 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/styles/common/view';
 .main {
-  height: calc(100% - 40px);
+  height: calc(100% - 48px);
   .main-body {
     width: 100%;
+    height: 100%;
     box-sizing: border-box;
     background-color: white;
     padding: 0 16px;

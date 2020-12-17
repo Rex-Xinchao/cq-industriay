@@ -1,11 +1,13 @@
 <template>
   <div class="main">
-    <h1 class="main-title">
-      行业风险
-      <span class="sign">汽车行业</span>
-      <el-button class="fr" @click="pageTo('/industrial/risk')">查看上下游风险</el-button>
-    </h1>
-    <div class="main-body item-box">
+    <div class="item-menu">
+      <h1 class="main-title">
+        行业风险
+        <span class="sign">汽车行业</span>
+        <el-button class="fr" @click="pageTo('/industrial/risk')">查看上下游风险</el-button>
+      </h1>
+    </div>
+    <div class="item-box">
       <pack-chart class="item_60 height_lg"></pack-chart>
       <div class="item_40 height_lg">
         <finance-table class="finance-table-main" title="财务及经济指标异动"></finance-table>
@@ -49,13 +51,8 @@
       <bar-table
         title="行业司法诉讼风险"
         :legends="['行业司法诉讼风险']"
-        class="item_50 item_last bar-chart-main"
+        class="item_100 item_last bar-chart-main"
       ></bar-table>
-      <line-table
-        title="行业不良率/违约率"
-        :legends="['行业不良率', '行业违约率']"
-        class="item_50 item_last line-chart-main"
-      ></line-table>
     </div>
   </div>
 </template>
@@ -65,7 +62,6 @@ import { bond, stock } from '@/mockData/risk'
 import packChart from '@/components/analysis/risk/pack.vue'
 import financeTable from '@/components/analysis/risk/financeTable.vue'
 import barTable from '@/components/analysis/risk/bar.vue'
-import lineTable from '@/components/analysis/risk/line.vue'
 export default {
   data() {
     return {
@@ -74,7 +70,7 @@ export default {
       stock: {}
     }
   },
-  components: { packChart, financeTable, barTable, lineTable },
+  components: { packChart, financeTable, barTable },
   methods: {
     getData() {
       this.loading = true
@@ -96,11 +92,8 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/styles/common/view';
 .main {
-  height: calc(100% - 40px);
-  .main-body {
-    width: 100%;
-    box-sizing: border-box;
-
+  height: calc(100% - 88px);
+  .item-box {
     .height_lg {
       background-color: #f4f6f9;
       flex-direction: column;

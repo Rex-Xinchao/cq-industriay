@@ -11,9 +11,9 @@
 .main {
     width: 100%;
     height: auto;
-    padding: 24px 24px 12px 24px;
-    box-sizing: border-box;
+    padding: 0;
     border-radius: 2px;
+    box-sizing: border-box;
     background-color: #f4f6f9;
 
     .main-title {
@@ -42,6 +42,7 @@
     .item-box {
         width: 100%;
         height: auto;
+        margin-top: 48px;
         min-height: calc(100% - 48px);
         display: flex;
         flex-direction: row;
@@ -114,5 +115,16 @@
     .main-body {
         width: 100%;
         height: calc(100% - 48px);
+        padding-top: 48px;
     }
+}
+
+.item-menu {
+    width: calc(100% - 258px);
+    position: absolute;
+    top: 0;
+    padding-top: 24px;
+    z-index: 2001;
+    flex-direction: column;
+    background-color: rgb(244, 246, 249);
 }

@@ -1,6 +1,8 @@
 <template>
   <div class="main" id="newsTable">
-    <h1 class="main-title">行业舆情</h1>
+    <div class="item-menu">
+      <h1 class="main-title">行业舆情</h1>
+    </div>
     <div class="main-body">
       <newsList></newsList>
     </div>
@@ -15,7 +17,7 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/styles/common/view';
 .main {
-  min-height: calc(100% - 40px);
+  min-height: calc(100% - 48px);
   .main-body {
     width: 100%;
     height: auto !important;

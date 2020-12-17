@@ -1,9 +1,11 @@
 <template>
   <div class="main">
-    <h1 class="main-title">
-      行业前景
-      <span class="sign">{{ industry }}</span>
-    </h1>
+    <div class="item-menu">
+      <h1 class="main-title">
+        行业前景
+        <span class="sign">{{ industry }}</span>
+      </h1>
+    </div>
     <div class="main-body">
       <div class="main-header">
         <div class="card" v-for="item in cards" :key="item.code" v-loading="loading">

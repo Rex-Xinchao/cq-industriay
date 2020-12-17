@@ -1,9 +1,11 @@
 <template>
   <div class="main competition-main">
-    <h1 class="main-title">
-      竞争格局
-      <span class="sign">{{ industry }}</span>
-    </h1>
+    <div class="item-menu">
+      <h1 class="main-title">
+        竞争格局
+        <span class="sign">{{ industry }}</span>
+      </h1>
+    </div>
     <div class="item-box">
       <multiple-chart class="item_60 height_sm" title="行业集中度指数"></multiple-chart>
       <toggle-chart class="item_40 height_sm"></toggle-chart>

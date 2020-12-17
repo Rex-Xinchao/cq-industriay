@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    industry: '汽车行业',
+    industry: '新能源车整车制造（国标）',
     industryCode: 'AF000001'
   },
   getters: {

@@ -24,7 +24,7 @@ export default {
       color: ['#147AD6', '#79D2DE', '#EC6666'],
       legend: {
         top: '40',
-        data: ['500万以下', '500~3000万', '3000万以上'],
+        data: [],
         formatter: function (name) {
           let { value, amount } = { ...vm.data.find((item) => item.name === name) }
           amount = amount.toFixed(2)
@@ -58,6 +58,7 @@ export default {
   mixins: [resize, pie],
   props: {
     title: String,
+    legendData: Array,
     request: {
       require: true,
       type: Function
@@ -87,6 +88,7 @@ export default {
       const data = this.pieData
       this.chartId_pie = `circleChart_${this.timeStamp}`
       this.chartOption_pie.color = this.color
+      this.chartOption_pie.legend.data = this.legendData
       this.chartOption_pie.legend = Object.assign({}, this.chartOption_pie.legend, this.legend)
       this.data = []
       for (let key in data) {

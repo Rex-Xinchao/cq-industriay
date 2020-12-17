@@ -143,7 +143,7 @@ export default {
       this.myChart.on('click', (params) => {
         if (params.componentSubType === 'pie') {
           if (params.seriesIndex === 0) {
-            this.tableTitle = params.data.name
+            this.tableTitle = `${params.data.name} ${params.data.value} 占比：${params.percent}%`
             this.tableData = params.data.list
           }
         }
@@ -174,6 +174,7 @@ export default {
         type: 'pie',
         radius: ['55%', '70%'],
         label: {
+          show: false,
           formatter: function (params) {
             let data = params.data
             return `${data.name}: ${data.comCount}家 (${params.percent}%)`

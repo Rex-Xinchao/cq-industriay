@@ -149,7 +149,7 @@ export default {
       }, 1000)
     },
     scrollTo(id) {
-      let top = document.getElementById(id).offsetTop - 128
+      let top = document.getElementById(id).offsetTop - 120
       const target = document.querySelector('.el-main')
       if (!target.scrollTo) {
         // 兼容ie
@@ -163,7 +163,7 @@ export default {
       let scrollTop = getScroll(document.querySelector('.el-main'), true)
       for (let i = this.idList.length - 1; i >= 0; i--) {
         let id = this.idList[i]
-        let top = document.getElementById(id) && document.getElementById(id).offsetTop - 128 - 60
+        let top = document.getElementById(id) && document.getElementById(id).offsetTop - 120 - 240
         if (i === this.idList.length - 1) {
           top -= 240
         }

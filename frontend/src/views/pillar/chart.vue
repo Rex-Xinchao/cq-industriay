@@ -96,7 +96,7 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/styles/common/view';
 .main {
-  height: calc(100% - 40px);
+  height: calc(100% - 48px);
 }
 .backTo {
   font-size: 14px;

@@ -40,4 +40,7 @@ export default {
   padding: 40px 120px;
   height: auto;
 }
+.item-box {
+  padding-top: 0px !important;
+}
 </style>

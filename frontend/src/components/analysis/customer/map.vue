@@ -8,7 +8,13 @@
         <strong>{{ activeName }}</strong>
       </el-breadcrumb-item>
     </el-breadcrumb>
-    <el-dialog class="map-com_dialog" :title="dialogTitle" :visible.sync="dialogVisible" width="1000px" :before-close="handleClose">
+    <el-dialog
+      class="map-com_dialog"
+      :title="dialogTitle"
+      :visible.sync="dialogVisible"
+      width="1000px"
+      :before-close="handleClose"
+    >
       <span>
         <el-form :inline="true" :model="dialogForm" class="dialog-form">
           <el-form-item label="资质：">
@@ -199,16 +205,16 @@ export default {
         this.myChart.on('click', (params) => {
           timer && clearTimeout(timer)
           timer = setTimeout(() => {
-            this.handleOpen(params.name)
+            this.handleOpen(params.name, params.value)
           }, 500)
         })
       }
       this.myChart.setOption(this.mapOption, true)
       this.myChart.resize()
     },
-    handleOpen(name) {
+    handleOpen(name, value) {
       this.dialogVisible = true
-      this.dialogTitle = name
+      this.dialogTitle = `${name} （${value}家）`
       this.search()
     },
     handleClose() {

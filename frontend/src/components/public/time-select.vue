@@ -120,6 +120,10 @@ export default {
           case '1Y':
             start.setFullYear(start.getFullYear() - 1)
             break
+          case '1YL':
+            start.setFullYear(start.getFullYear() - 2)
+            end.setFullYear(start.getFullYear() - 1)
+            break
           case '3Y':
             start.setFullYear(start.getFullYear() - 3)
             break

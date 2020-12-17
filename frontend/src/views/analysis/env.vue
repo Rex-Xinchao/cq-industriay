@@ -1,9 +1,11 @@
 <template>
   <div class="main">
-    <h1 class="main-title">
-      行业环境
-      <span class="sign">{{ industry }}</span>
-    </h1>
+    <div class="item-menu">
+      <h1 class="main-title">
+        行业环境
+        <span class="sign">{{ industry }}</span>
+      </h1>
+    </div>
     <div class="main-body">
       <div class="left" :style="{ width: showSiderbar ? '262px' : '44px' }">
         <div class="siderbar" v-if="showSiderbar">
@@ -145,7 +147,7 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/styles/common/view';
 .main {
-  height: calc(100% - 40px);
+  height: calc(100% - 48px);
   .main-body {
     .left {
       display: inline-block;
