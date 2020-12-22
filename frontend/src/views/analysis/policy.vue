@@ -10,7 +10,7 @@
       <div class="bg">
         <el-form :inline="true" :model="form" class="filter-bar">
           <el-form-item label="时间：">
-            <time-select v-model="form.dateTime" :options="options" startValue="1Y"></time-select>
+            <time-select v-model="form.dateTime" :options="options" startValue="3Y"></time-select>
           </el-form-item>
           <el-form-item label="区域：">
             <el-select v-model="form.region" placeholder="请选择区域">
@@ -89,6 +89,10 @@ export default {
         { label: '科技部', value: 3 }
       ],
       options: [
+        {
+          value: '3Y',
+          label: '近3年'
+        },
         {
           value: '1Y',
           label: '今年'

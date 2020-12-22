@@ -6,11 +6,18 @@
     <div class="main-body">
       <map-chart class="map-chart"></map-chart>
       <el-button @click="handleOpen" type="primary" class="btn-show-more">推荐企业</el-button>
-      <el-dialog title="推荐企业" :visible.sync="dialogVisible" width="80%" :before-close="handleClose">
+      <el-dialog
+        modal-append-to-body
+        title="推荐企业"
+        :visible.sync="dialogVisible"
+        width="80%"
+        :before-close="handleClose"
+      >
         <div class="operation-bar">
           <span class="bar-item" :class="{ active: type === 1 }" @click="type = 1">区域资质企业</span>
           <span class="bar-item" :class="{ active: type === 2 }" @click="type = 2">区域核心供应链</span>
           <span class="bar-item" :class="{ active: type === 3 }" @click="type = 3">区域园区企业</span>
+          <i style="margin-left: 8px" class="icon-tip" :title="titles[type - 1]"></i>
         </div>
         <div v-loading="loading">
           <el-table v-show="type === 1" class="table-main table-head-grey" :data="tableData" height="396">
@@ -92,7 +99,8 @@ export default {
         1: '授信客户',
         2: '行内客户'
       },
-      dialogVisible: false
+      dialogVisible: false,
+      titles: ['政府部门认定的区域内资质企业', '上市、三板、发债企业在区域内的供应商', '区域内产业园区入驻的企业']
     }
   },
   components: { mapChart },

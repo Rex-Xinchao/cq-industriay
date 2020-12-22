@@ -2,9 +2,10 @@
   <div class="com-main">
     <h1 class="com-title">
       {{ title }}
-      <el-popover placement="bottom" width="240" trigger="hover">
+      <el-popover placement="bottom" width="340" trigger="hover">
         <div>
           <p>HHI指数 （赫希芬达尔--赫希曼指数）</p>
+          <p>市场上所有企业的市场份额的平方和，再乘以10000</p>
           <p>低集中度市场：&lt;1000</p>
           <p>中集中度市场：1000~1800</p>
           <p>高集中度市场：>1800</p>

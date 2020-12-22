@@ -2,7 +2,7 @@
   <div class="com-main">
     <h1 class="com-title">
       {{ title }}
-      <i class="icon-tip" title="数据来源于裁判文书"></i>
+      <i class="icon-tip" title="数据来源于三省一市的司法数据"></i>
       <div class="com-filter fr">
         <el-select class="select" v-model="typeSelect">
           <el-option v-for="item in typeOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>

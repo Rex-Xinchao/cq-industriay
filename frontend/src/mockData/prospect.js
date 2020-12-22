@@ -9,7 +9,7 @@ export const cards = [
   },
   {
     code: 2,
-    name: '龙头企业营收规模',
+    name: '龙头企业业务营收规模',
     value: 2,
     change: '1',
     type: 'down',
@@ -17,7 +17,7 @@ export const cards = [
   },
   {
     code: 3,
-    name: '龙头企业毛利率',
+    name: '龙头企业业务毛利率',
     value: 2,
     change: '1',
     type: 'up'

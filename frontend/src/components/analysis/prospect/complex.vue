@@ -3,6 +3,9 @@
     <h1 class="com-title">
       {{ title }}
       <i class="icon-tip" :title="tip"></i>
+      <el-select class="fr" v-model="barType" placeholder="">
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+      </el-select>
     </h1>
     <div v-if="!noData" class="chart-main" :id="`complexChart_${timeStamp}`"></div>
     <no-data-show class="chart-nodata" :show="noData"></no-data-show>
@@ -21,14 +24,12 @@ export default {
       timeStamp: new Date().getTime(),
       series: [
         {
-          name: this.lineTitle,
           type: 'line',
           smooth: true,
           color: ['#F6BD16'],
           data: []
         },
         {
-          name: this.barTitle,
           type: 'bar',
           barWidth: '25%',
           yAxisIndex: 1,
@@ -40,26 +41,40 @@ export default {
         formatter: function (data) {
           let time = data[0].axisValue
           let result = `${time}<br/>`
-          let unit = vm.seriesIndex
           data.forEach((item) => {
             let unit = vm.types[item.seriesIndex] === 'ratio' ? '%' : '万元'
             result += `${item.seriesName}：${item.value}${unit}<br/>`
           })
           return result
         }
-      }
+      },
+      barType: 0,
+      options: [
+        {
+          label: '行业收入',
+          value: 0
+        },
+        {
+          label: '行业资产',
+          value: 1
+        }
+      ]
     }
   },
   mixins: [resize, complex],
   props: {
     requestPath: String,
     title: String,
-    lineTitle: String,
-    barTitle: String,
+    barTitles: Array,
     tip: String,
     types: {
       type: Array,
       default: () => ['number', 'number']
+    }
+  },
+  watch: {
+    barType() {
+      this.drawChart()
     }
   },
   methods: {
@@ -67,9 +82,12 @@ export default {
       this.chartId_c = `complexChart_${this.timeStamp}`
       this.chartOption_complex.tooltip = Object.assign({}, this.chartOption_complex.tooltip, this.tooltip)
       this.chartOption_complex.series = this.series
+      this.chartOption_complex.xAxis.data = []
       this.chartOption_complex.yAxis[1].data = []
       this.chartOption_complex.series[0].data = []
+      this.chartOption_complex.series[0].name = this.barTitles[this.barType] + '增速'
       this.chartOption_complex.series[1].data = []
+      this.chartOption_complex.series[1].name = this.barTitles[this.barType]
       let max1 = 0
       let max2 = 0
       chartData2.forEach((item) => {

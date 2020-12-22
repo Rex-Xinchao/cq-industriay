@@ -27,8 +27,14 @@
         <h1>存量客户</h1>
         <span @click="pageTo('/stockCustom/index')">存量客户画像</span>
       </div>
-      <el-dialog title="景气指数" :visible.sync="dialogVisible" width="80%" :before-close="hideMenu">
-        <i class="icon-tip" title="这是一个提示"></i>
+      <el-dialog
+        modal-append-to-body
+        title="景气指数"
+        :visible.sync="dialogVisible"
+        width="80%"
+        :before-close="hideMenu"
+      >
+        <i class="icon-tip" title="景气指数由宏观经济指标、财务指标、舆情指数综合构建而成"></i>
         <div class="tooltip-main">
           <div id="tooltipChart" class="chart" v-loading="loading"></div>
           <el-table v-loading="loading" class="boom-com_table" :data="tableData" height="380px">

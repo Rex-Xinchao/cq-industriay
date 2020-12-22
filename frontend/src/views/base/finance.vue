@@ -172,6 +172,7 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/styles/common/view';
 .main {
+  padding-top: 48px;
   height: calc(100% - 48px);
   .main-body {
     width: 100%;

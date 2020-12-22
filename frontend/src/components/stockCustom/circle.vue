@@ -2,7 +2,7 @@
   <div class="com-main" v-loading="loading">
     <h1 class="com-title">
       {{ title }}
-      <i class="icon-tip" :title="`样本来源于重庆银行${industry}授信客户`"></i>
+      <i class="icon-tip" :title="`来源于重庆银行${industry}授信客户`"></i>
     </h1>
     <div v-if="!noData" class="chart-main" :id="`circleChart_${timeStamp}`"></div>
     <no-data-show class="chart-nodata" :show="noData"></no-data-show>

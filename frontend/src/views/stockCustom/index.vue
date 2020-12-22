@@ -3,11 +3,12 @@
     <div class="item-menu">
       <h1 class="main-title">
         存量客户画像
-        <span class="sign">汽车行业</span>
+        <span class="sign">{{ industry }}</span>
         <el-button class="fr" @click="pageTo('/analysis/env')">查看更多指标</el-button>
       </h1>
     </div>
     <div class="item-box">
+      <h1 class="sunb-title">行业经济/宏观指标</h1>
       <div v-loading="loading" class="item_25 height_sm">
         <complex-chart v-if="dataList[0].indexType === 1" class="fill" :chartData="dataList[0]"></complex-chart>
         <line-chart v-else class="fill" :chartData="dataList[0]"></line-chart>
@@ -44,7 +45,7 @@
         class="item_100 height_sm"
       ></line-table>
       <table-com class="item_50 height_mid" :request="customer_statistics"></table-com>
-      <table-com title="行内客户" class="item_50 height_mid" :request="customer"></table-com>
+      <table-com title="行业内正常授信客户" class="item_50 height_mid" :request="customer"></table-com>
       <doucle-circle-chart
         class="item_100 item_last height_mid"
         title="行业存量授信客户负面舆情事件"
@@ -82,7 +83,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['industryCode'])
+    ...mapGetters(['industryCode', 'industry'])
   },
   components: {
     barChart,
@@ -135,5 +136,10 @@ export default {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
+}
+.sunb-title {
+  width: 100%;
+  font-size: 18px;
+  margin: 0 0 8px 0;
 }
 </style>

@@ -8,7 +8,7 @@
     </div>
     <div class="main-body">
       <div class="main-header">
-        <div class="card" v-for="item in cards" :key="item.code" v-loading="loading">
+        <div class="card" v-for="(item, index) in cards" :key="item.code" v-loading="loading" :title="item.title">
           <i class="icon-img icon-card"></i>
           <span class="title" :title="item.name">{{ item.name }}</span>
           <span class="num">
@@ -20,29 +20,30 @@
             <strong>{{ item.change }}</strong>
             <i class="icon-img" :class="`icon-${item.type}`"></i>
           </span>
+          <span class="link fr" @click="pageTo" v-if="index === 0">企业清单</span>
         </div>
       </div>
       <complex-chart
         class="main-chart"
         title="成长前景"
-        lineTitle="行业规模增速"
-        tip="样本数据来源于上市、三板、发债企业"
-        barTitle="行业规模"
+        tip="上市、三板、发债企业的业务收入数据和财报资产规模"
+        :barTitles="['行业收入', '行业资产']"
         :types="['ratio', 'number']"
       ></complex-chart>
       <bar-chart
         class="main-chart"
         title="盈利前景"
         :legends="['行业毛利率', '行业净利率']"
-        tip="样本数据来源于上市、三板、发债企业"
+        tip="上市、三板、发债企业的业务毛利率和财报净利率"
+        type="ratio"
       ></bar-chart>
-      <complex-chart
+      <bar-chart
         class="main-chart"
         title="市场前景"
-        lineTitle="龙头企业数量"
-        barTitle="龙头企业营收总规模"
-        tip="样本数据来源于上市、三板、发债企业"
-      ></complex-chart>
+        :showSelect="true"
+        :legends="['上市', '三板', '发债']"
+        tip="上市、三板、发债企业数量和工商企业数量"
+      ></bar-chart>
     </div>
   </div>
 </template>
@@ -68,7 +69,14 @@ export default {
       setTimeout(() => {
         this.loading = false
         this.cards = cards
+        this.cards[0].title = '上市、三板、发债企业数量'
+        this.cards[1].title = '上市、三板、发债企业的业务收入数据'
+        this.cards[2].title = '上市、三板、发债企业的业务毛利数据'
+        this.cards[3].title = '上市、三板、发债企业的财报资产规模'
       }, 1000)
+    },
+    pageTo() {
+      this.$router.push('/base/finance')
     }
   },
   mounted() {
@@ -153,6 +161,13 @@ export default {
       .unit {
         font-size: 16px;
       }
+    }
+
+    .link {
+      font-size: 12px;
+      font-weight: 400;
+      color: #3398db;
+      cursor: pointer;
     }
 
     .tip {

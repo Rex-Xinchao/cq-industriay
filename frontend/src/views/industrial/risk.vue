@@ -27,8 +27,14 @@
         <h1>存量客户</h1>
         <span @click="pageTo('/stockCustom/index')">存量客户画像</span>
       </div>
-      <el-dialog title="异动指标" :visible.sync="dialogVisible" width="50%" :before-close="hideMenu">
-        <i class="icon-tip" title="这是一个提示"></i>
+      <el-dialog
+        modal-append-to-body
+        title="异动指标"
+        :visible.sync="dialogVisible"
+        width="50%"
+        :before-close="hideMenu"
+      >
+        <i class="icon-tip" title="异动指标范围是行业宏观经济数据和财务数据"></i>
         <el-table v-loading="loading" class="table" :data="tableData" height="108px">
           <el-table-column prop="indexName" label=""></el-table-column>
           <el-table-column prop="latestIndex" label="最新值"></el-table-column>

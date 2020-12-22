@@ -10,6 +10,7 @@ const IndustryCustomer = () => import('@/views/analysis/customer')
 const IndustryInformation = () => import('@/views/analysis/information')
 const BaseGrow = () => import('@/views/base/grow')
 const BaseProfit = () => import('@/views/base/profit')
+const BaseProduct = () => import('@/views/base/product')
 const BaseRepay = () => import('@/views/base/repay')
 const BaseBusiness = () => import('@/views/base/business')
 const BaseFinance = () => import('@/views/base/finance')
@@ -89,6 +90,11 @@ const routes = [
         path: 'base/repay',
         name: 'BaseRepay',
         component: BaseRepay
+      },
+      {
+        path: 'base/product',
+        name: 'BaseProduct',
+        component: BaseProduct
       },
       {
         path: 'base/business',

@@ -9,6 +9,7 @@
       </el-breadcrumb-item>
     </el-breadcrumb>
     <el-dialog
+      modal-append-to-body
       class="map-com_dialog"
       :title="dialogTitle"
       :visible.sync="dialogVisible"

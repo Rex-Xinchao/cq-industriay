@@ -2,7 +2,7 @@
   <div class="com-main data-table-main">
     <h1 class="com-title" v-if="title">
       {{ title }}
-      <i class="icon-tip" :title="`样本来源于重庆银行${industry}授信客户`"></i>
+      <i class="icon-tip" :title="`来源于重庆银行${industry}授信客户`"></i>
       <el-popover ref="popover" placement="bottom" width="220" trigger="click">
         <div class="popover-main">
           <p>逾期客户筛选</p>

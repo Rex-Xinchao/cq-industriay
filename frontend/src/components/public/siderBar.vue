@@ -89,6 +89,10 @@ export default {
               name: '运营能力'
             },
             {
+              page: 'product',
+              name: '业务指标'
+            },
+            {
               page: 'finance',
               name: '龙头财务'
             }
@@ -278,6 +282,12 @@ export default {
     background-image: url(~@/assets/imgs/siderbar/incomes.svg);
     &.active {
       background-image: url(~@/assets/imgs/siderbar/incomes_active.svg);
+    }
+  }
+  &.icon-product {
+    background-image: url(~@/assets/imgs/siderbar/icon-product.svg);
+    &.active {
+      background-image: url(~@/assets/imgs/siderbar/icon-product_active.svg);
     }
   }
 }

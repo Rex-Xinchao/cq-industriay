@@ -9,7 +9,7 @@
     </el-tabs>
     <div class="distribution-line operation-bar">
       <span class="bar-item" :class="{ active: type === 1 }" @click="handleType(1)">行业分布</span>
-      <span class="bar-item" :class="{ active: type === 2 }" @click="handleType(2)">区域分布</span>
+      <span class="bar-item" :class="{ active: type === 2 }" @click="handleType(2)">机构分布</span>
       <el-select class="select" v-model="typeSelect">
         <el-option v-for="item in typeOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
       </el-select>
