@@ -77,7 +77,10 @@ export default {
       }, 1000)
     },
     pageTo() {
-      this.$router.push('/base/finance')
+      let url = this.$router.resolve({
+        path: '/base/finance'
+      })
+      window.open(url.href)
     }
   },
   mounted() {

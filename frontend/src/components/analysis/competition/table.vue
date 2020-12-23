@@ -48,7 +48,13 @@
       </el-popover>
     </div>
     <div v-loading="loading">
-      <el-table v-show="type === 1" class="table-main table-head-grey" :data="tableData" style="width: 100%">
+      <el-table
+        v-show="type === 1"
+        class="table-main table-head-grey"
+        :default-sort="{ prop: 'leading.income', order: 'descending' }"
+        :data="tableData"
+        style="width: 100%"
+      >
         <el-table-column type="index" width="50" label="排名" align="center"></el-table-column>
         <el-table-column label="公司名称" width="280" align="left">
           <template slot-scope="scope">
@@ -142,7 +148,13 @@
           </template>
         </el-table-column>
       </el-table>
-      <el-table v-show="type === 3" class="table-main table-head-grey" :data="tableData" style="width: 100%">
+      <el-table
+        v-show="type === 3"
+        class="table-main table-head-grey"
+        :default-sort="{ prop: 'gs.registered', order: 'descending' }"
+        :data="tableData"
+        style="width: 100%"
+      >
         <el-table-column type="index" width="50" label="排名" align="center"></el-table-column>
         <el-table-column label="公司名称" width="280" align="left">
           <template slot-scope="scope">

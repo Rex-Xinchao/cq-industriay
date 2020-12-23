@@ -81,7 +81,10 @@ export default {
       }, 1000)
     },
     pageTo(path) {
-      this.$router.push(path)
+      let url = this.$router.resolve({
+        path: path
+      })
+      window.open(url.href)
     }
   },
   mounted() {
