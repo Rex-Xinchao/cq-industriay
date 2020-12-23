@@ -49,7 +49,7 @@ export default {
         query: { csfId: item.code }
       })
       // window.open(url.href)
-      this.$message.info('功能开发')
+      this.$message.info('功能开发中')
     }
   }
 }

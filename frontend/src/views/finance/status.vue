@@ -28,13 +28,9 @@
               {{ scope.row.name }}
             </template>
           </el-table-column>
-          <el-table-column
-            v-for="(item, index) in keys_1"
-            :key="index"
-            :prop="item"
-            :label="item"
-            align="right"
-          ></el-table-column>
+          <el-table-column v-for="(item, index) in keys_1" :key="index" :prop="item" :label="item" align="right">
+            <template slot-scope="scope">{{ scope.row[item] ? numberFormat(scope.row[item]) : '--' }}</template>
+          </el-table-column>
         </el-table>
       </div>
       <div id="tag_2" class="item_100 item-table">
@@ -51,13 +47,9 @@
               {{ scope.row.name }}
             </template>
           </el-table-column>
-          <el-table-column
-            v-for="(item, index) in keys_2"
-            :key="index"
-            :prop="item"
-            :label="item"
-            align="right"
-          ></el-table-column>
+          <el-table-column v-for="(item, index) in keys_2" :key="index" :prop="item" :label="item" align="right">
+            <template slot-scope="scope">{{ scope.row[item] ? numberFormat(scope.row[item]) : '--' }}</template>
+          </el-table-column>
         </el-table>
       </div>
       <div id="tag_3" class="item_100 item-table">
@@ -74,13 +66,9 @@
               {{ scope.row.name }}
             </template>
           </el-table-column>
-          <el-table-column
-            v-for="(item, index) in keys_3"
-            :key="index"
-            :prop="item"
-            :label="item"
-            align="right"
-          ></el-table-column>
+          <el-table-column v-for="(item, index) in keys_3" :key="index" :prop="item" :label="item" align="right">
+            <template slot-scope="scope">{{ scope.row[item] ? numberFormat(scope.row[item]) : '--' }}</template>
+          </el-table-column>
         </el-table>
       </div>
       <div id="tag_4" class="item_100 item-table">
@@ -97,13 +85,9 @@
               {{ scope.row.name }}
             </template>
           </el-table-column>
-          <el-table-column
-            v-for="(item, index) in keys_4"
-            :key="index"
-            :prop="item"
-            :label="item"
-            align="right"
-          ></el-table-column>
+          <el-table-column v-for="(item, index) in keys_4" :key="index" :prop="item" :label="item" align="right">
+            <template slot-scope="scope">{{ scope.row[item] ? numberFormat(scope.row[item]) : '--' }}</template>
+          </el-table-column>
         </el-table>
       </div>
       <div id="tag_5" class="item_100 item-table item_last">
@@ -120,13 +104,9 @@
               {{ scope.row.name }}
             </template>
           </el-table-column>
-          <el-table-column
-            v-for="(item, index) in keys_5"
-            :key="index"
-            :prop="item"
-            :label="item"
-            align="right"
-          ></el-table-column>
+          <el-table-column v-for="(item, index) in keys_5" :key="index" :prop="item" :label="item" align="right">
+            <template slot-scope="scope">{{ scope.row[item] ? numberFormat(scope.row[item]) : '--' }}</template>
+          </el-table-column>
         </el-table>
       </div>
     </div>
@@ -166,6 +146,7 @@ export default {
     }
   },
   methods: {
+    numberFormat,
     getData() {
       this.loading = true
       let list = []
@@ -183,13 +164,6 @@ export default {
           res.forEach((item, index) => {
             item.result = item.result || []
             item.result.forEach((obj) => {
-              for (let key in obj) {
-                if (obj[key] && typeof obj[key] === 'number') {
-                  obj[key] = numberFormat(obj[key])
-                } else {
-                  obj[key] = obj[key] || '--'
-                }
-              }
               if (!this[`keys_${index + 1}`]) {
                 this[`keys_${index + 1}`] = []
                 for (let key in obj) {

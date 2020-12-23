@@ -1,9 +1,6 @@
 <template>
   <div class="tag-list_main">
-    <div
-      class="tag-list"
-      v-if="(tagData.companys && tagData.companys.length) || (tagData.people && tagData.people.length)"
-    >
+    <div class="tag-list">
       <template v-if="tagData.companys && tagData.companys.length && showTags.includes('company')">
         <span
           class="tag tag-company"
@@ -85,7 +82,7 @@ export default {
         query: { csfId: csfId }
       })
       // window.open(url.href)
-      this.$message.info('功能开发')
+      this.$message.info('功能开发中')
     },
     modifyCompanyName(html, code, bond) {
       if ((typeof code == 'string' && code.trim() === '') || !code) return html

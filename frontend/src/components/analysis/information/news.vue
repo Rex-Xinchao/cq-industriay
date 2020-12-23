@@ -155,15 +155,15 @@ export default {
           value: ''
         },
         {
-          label: '正',
+          label: '正面',
           value: 1
         },
         {
-          label: '中',
+          label: '中性',
           value: 0
         },
         {
-          label: '负',
+          label: '负面',
           value: -1
         }
       ]
@@ -179,12 +179,10 @@ export default {
       let params = {}
       newsList(params)
         .then((res) => {
-          console.log(res)
           this.loading = false
           this.tableData = res.result || []
         })
         .catch((err) => {
-          console.log(err)
           this.loading = false
           this.tableData = []
         })

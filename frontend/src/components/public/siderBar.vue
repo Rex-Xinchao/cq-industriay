@@ -312,4 +312,14 @@ export default {
     color: #409eff;
   }
 }
+.el-aside {
+  .el-submenu__title {
+    height: 32px;
+    line-height: 32px;
+  }
+  .el-submenu .el-menu-item {
+    height: 32px;
+    line-height: 32px;
+  }
+}
 </style>
