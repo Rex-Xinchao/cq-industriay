@@ -312,8 +312,4 @@ export default {
     color: #409eff;
   }
 }
-.el-submenu .el-menu-item {
-  height: 30px;
-  line-height: 30px;
-}
 </style>

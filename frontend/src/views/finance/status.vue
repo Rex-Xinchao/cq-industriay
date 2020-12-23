@@ -135,6 +135,7 @@
 <script>
 import ceilSubject from '@/components/public/ceil-subject'
 import { getStatusTable } from '@/api/finance'
+import { numberFormat } from '@/libs/utils'
 export default {
   data() {
     return {
@@ -184,7 +185,7 @@ export default {
             item.result.forEach((obj) => {
               for (let key in obj) {
                 if (obj[key] && typeof obj[key] === 'number') {
-                  obj[key] = obj[key].toFixed(2)
+                  obj[key] = numberFormat(obj[key])
                 } else {
                   obj[key] = obj[key] || '--'
                 }
