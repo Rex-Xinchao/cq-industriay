@@ -72,7 +72,7 @@
             <a style="font-size: 16px" :title="item.title" @click="pageTo(item.url)" v-html="item.title"></a>
             <span
               :class="
-                item.newsSentiment === 1 ? 'positive-tag' : item.newsSentiment === 2 ? 'negative-tag' : 'neutral-tag'
+                item.newsSentiment == 1 ? 'positive-tag' : item.newsSentiment == 2 ? 'negative-tag' : 'neutral-tag'
               "
             >
               <i class="icon"></i>
@@ -103,6 +103,7 @@
 </template>
 <script>
 import scroll from '@/mixins/scroll'
+import { newsList } from '@/api/analysis'
 export default {
   data() {
     return {
@@ -110,96 +111,7 @@ export default {
       noData: false,
       loading: false,
       height: 500,
-      tableData: [
-        {
-          dt: '2020-11-26',
-          tim: '2020-11-26 10:35:46',
-          url: 'https://www.tmtpost.com/4860732.html',
-          auth: '钛媒体',
-          title: '在未成年人保护中，那些技术解决不了的事才是最重要的',
-          summary:
-            '能顺利在第一次打电话中完成以上步骤的家长并不多，很多家长不知道孩子的游戏账号叫什么，不知道孩子是从什么时候开始玩的，不知道孩子是在电商平台充值的，甚至不知道这个游戏其实不是腾讯的游戏。有一些申请显然微妙到很难用已有经验去分辨——退款申请的未成年人只有九岁，账号则是4年前建立的，玩的游戏是《斗地主》，遇到这种单子，张晓京就只能多打电话向家长了解情况。她语气平淡地说出自己的诉求，说到最后才带了点情绪：“我的孩子沉迷游戏，我该去找谁负责，你们知道你们的游戏有多少孩子在玩吗。其中，「成长守护平台」和「健康系统」是守在成人游戏世界的两道关卡——家长主动把孩子账号绑定到成长守护平台，基本不会出现孩子过度游戏时长和大额充值的事。疫情也催熟了这些问题——当孩子声称用手机上网课，和家长共用设备时，如何精准识别这段时间是孩子在使用账号。问卷填写过程能帮助家长还原支付失控过程，给予不同场景下的教育技巧，获取管理孩子账号、与孩子平等沟通等问题的解决方案。',
-          stockReview: 0,
-          newsSentiment: 2,
-          newsSentiWeight: 0.733,
-          newsId: '453744',
-          joinStatus: false,
-          companys: [
-            {
-              secu: '00700_HK_EQ',
-              csfId: 'CSF0000000275',
-              mkt: 'HK',
-              pos: 2,
-              weight: 0.567,
-              relevance: 2,
-              name: '腾讯控股',
-              relationshipType: 1,
-              relationships: []
-            },
-            {
-              secu: '',
-              csfId: 'CSF0000036422',
-              mkt: 'N',
-              pos: 0,
-              weight: 0.953,
-              relevance: 1,
-              name: '支付宝（中国）网络技术有限公司',
-              relationshipType: 2,
-              relationships: [{ type: 'INVESTMENT', code: 'CSF0000050716', name: '蚂蚁科技集团股份有限公司' }]
-            }
-          ],
-          people: [],
-          events: [],
-          products: [],
-          industries: [],
-          regions: [{ itemCode: 'CSF_CN_510100', itemName: '成都市' }],
-          concepts: [{ itemCode: 'CP0231', itemName: '腾讯概念' }]
-        },
-        {
-          dt: '2020-11-26',
-          tim: '2020-11-26 10:01:53',
-          url: 'https://new.qq.com/omn/20201124/20201124A0D8JX00.html',
-          auth: '腾讯网',
-          title: '小孩子游戏充值、父母申请退费时，腾讯客服是这么干的',
-          summary:
-            '”“那如果是家长自己充的钱，后悔了，冒充孩子找你们退钱怎么办。”为了当好一个实习客服，我一边听，一边勤勤恳恳地记下客服工作中可能会面临的问题，把要点用括号写在后面：家长说的金额跟查询的金额对不上家长把自己充的钱说成是孩子充的（选择相信）家长不识字无法操作家长说方言，听不懂也说不明白（可怕。下一秒，电话接通了，娜娜立马换了一副表情，“您好，这里是腾讯后台的客服。一位家长在之前的沟通里说，“游戏害死了祖国的花朵，你们不要再危害更多的家庭了”，这句话伴随着工单传到了娜娜面前，看起来她即将迎来一场暴风骤雨。我还目睹了一次投诉，孩子用妈妈的微信账号登录游戏，用爸爸绑定的卡消费，一共花了2000多块钱。电话那头的妈妈一边催促着退款，一边激动地讲述着家里奶奶的病情，“饭也不吃，觉也不睡，吊针也白打了”，妈妈足足讲了十多分钟。',
-          stockReview: 0,
-          newsSentiment: 2,
-          newsSentiWeight: 0.956,
-          newsId: '452752',
-          joinStatus: false,
-          companys: [
-            {
-              secu: '00700_HK_EQ',
-              csfId: 'CSF0000000275',
-              mkt: 'HK',
-              pos: 2,
-              weight: 0.861,
-              relevance: 2,
-              name: '腾讯控股',
-              relationshipType: 1,
-              relationships: []
-            },
-            {
-              secu: '',
-              csfId: 'CSF0000036422',
-              mkt: 'N',
-              pos: 0,
-              weight: 0.975,
-              relevance: 1,
-              name: '支付宝（中国）网络技术有限公司',
-              relationshipType: 2,
-              relationships: [{ type: 'INVESTMENT', code: 'CSF0000050716', name: '蚂蚁科技集团股份有限公司' }]
-            }
-          ],
-          people: [],
-          events: [],
-          products: [],
-          industries: [],
-          regions: [],
-          concepts: []
-        }
-      ],
+      tableData: [],
       tags: ['company', 'people', 'industry', 'product', 'event'],
       events: [],
       options: [
@@ -259,10 +171,27 @@ export default {
   },
   mixins: [scroll],
   methods: {
-    pageTo() {},
+    pageTo(URL) {
+      window.open(URL)
+    },
     search() {
-      console.log(111)
+      this.loading = true
+      let params = {}
+      newsList(params)
+        .then((res) => {
+          console.log(res)
+          this.loading = false
+          this.tableData = res.result || []
+        })
+        .catch((err) => {
+          console.log(err)
+          this.loading = false
+          this.tableData = []
+        })
     }
+  },
+  mounted() {
+    this.search()
   }
 }
 </script>

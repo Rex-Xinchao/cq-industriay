@@ -84,7 +84,8 @@ export default {
         path: '/company',
         query: { csfId: csfId }
       })
-      this.$windowOpen(url.href)
+      // window.open(url.href)
+      this.$message.info('功能开发')
     },
     modifyCompanyName(html, code, bond) {
       if ((typeof code == 'string' && code.trim() === '') || !code) return html
@@ -192,6 +193,7 @@ $posFu: #009b37;
   .tag-company {
     border: 1px solid $companyBorder;
     color: $company;
+    cursor: pointer;
   }
 
   .tag-people {

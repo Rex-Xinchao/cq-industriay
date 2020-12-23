@@ -13,7 +13,7 @@
     <span
       v-for="sub in subjects"
       :key="sub.name"
-      :class="{ _company: sub.type === 'company', _people: sub.type === 'person' }"
+      :class="{ _company: sub.type == 1, _people: sub.type == 2 }"
       @click="toPage(sub)"
     >
       {{ sub.name }}
@@ -21,6 +21,7 @@
   </el-popover>
   <span v-else>
     <slot>
+      {{ subjects }}
       <span>{{ event.itemName }}</span>
     </slot>
   </span>
@@ -42,17 +43,18 @@ export default {
   },
   methods: {
     toPage(item) {
-      if (item.type === 'person') return
+      if (item.type === 2) return
       let url = this.$router.resolve({
         path: '/company',
         query: { csfId: item.code }
       })
-      this.$windowOpen(url.href)
+      // window.open(url.href)
+      this.$message.info('功能开发')
     }
   }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss" >
 ._company {
   color: #207cff;
   border: 1px solid rgba(32, 124, 255, 0.5);
@@ -75,7 +77,6 @@ export default {
   font-size: 12px;
   padding: 1px 4px;
   border-radius: 4px;
-  cursor: pointer;
   display: inline-block;
   margin: 0 6px 6px 0;
 
@@ -83,6 +84,11 @@ export default {
     background: #c59001;
     color: #fff;
     border-color: #c59001;
+  }
+}
+.event-subject-popover {
+  p {
+    margin: 0 0 12px 0;
   }
 }
 </style>
