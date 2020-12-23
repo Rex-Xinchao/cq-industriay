@@ -313,7 +313,7 @@ export default {
   }
 }
 .el-submenu .el-menu-item {
-  height: 36px;
-  line-height: 36px;
+  height: 30px;
+  line-height: 30px;
 }
 </style>

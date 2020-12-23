@@ -19,13 +19,7 @@
           GDP及产业结构
           <span class="sub-title_fr">全省</span>
         </h1>
-        <el-table
-          v-loading="loading"
-          class="table-main table-head-grey"
-          :data="tableData_1"
-          style="width: 100%"
-          height="394px"
-        >
+        <el-table v-loading="loading" class="table-main table-head-grey" :data="tableData_1" style="width: 100%">
           <el-table-column prop="name" label="指标" align="left">
             <template slot-scope="scope">
               <ceil-subject :dataMap="scope.row" :unit="scope.row.unit" :name="scope.row.name">
@@ -48,13 +42,7 @@
           工业与投资
           <span class="sub-title_fr">全省</span>
         </h1>
-        <el-table
-          v-loading="loading"
-          class="table-main table-head-grey"
-          :data="tableData_2"
-          style="width: 100%"
-          height="394px"
-        >
+        <el-table v-loading="loading" class="table-main table-head-grey" :data="tableData_2" style="width: 100%">
           <el-table-column prop="name" label="指标" align="left">
             <template slot-scope="scope">
               <ceil-subject :dataMap="scope.row" :unit="scope.row.unit" :name="scope.row.name">
@@ -77,13 +65,7 @@
           进出口
           <span class="sub-title_fr">全省</span>
         </h1>
-        <el-table
-          v-loading="loading"
-          class="table-main table-head-grey"
-          :data="tableData_3"
-          style="width: 100%"
-          height="394px"
-        >
+        <el-table v-loading="loading" class="table-main table-head-grey" :data="tableData_3" style="width: 100%">
           <el-table-column prop="name" label="指标" align="left">
             <template slot-scope="scope">
               <ceil-subject :dataMap="scope.row" :unit="scope.row.unit" :name="scope.row.name">
@@ -106,13 +88,7 @@
           消费收入和人口
           <span class="sub-title_fr">全省</span>
         </h1>
-        <el-table
-          v-loading="loading"
-          class="table-main table-head-grey"
-          :data="tableData_4"
-          style="width: 100%"
-          height="394px"
-        >
+        <el-table v-loading="loading" class="table-main table-head-grey" :data="tableData_4" style="width: 100%">
           <el-table-column prop="name" label="指标" align="left">
             <template slot-scope="scope">
               <ceil-subject :dataMap="scope.row" :unit="scope.row.unit" :name="scope.row.name">
@@ -135,13 +111,7 @@
           存贷款
           <span class="sub-title_fr">全省</span>
         </h1>
-        <el-table
-          v-loading="loading"
-          class="table-main table-head-grey"
-          :data="tableData_5"
-          style="width: 100%"
-          height="394px"
-        >
+        <el-table v-loading="loading" class="table-main table-head-grey" :data="tableData_5" style="width: 100%">
           <el-table-column prop="name" label="指标" align="left">
             <template slot-scope="scope">
               <ceil-subject :dataMap="scope.row" :unit="scope.row.unit" :name="scope.row.name">
