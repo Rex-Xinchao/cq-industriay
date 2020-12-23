@@ -69,7 +69,7 @@
       <ul v-if="!noData" class="news-list-main">
         <li v-for="(item, index) in tableData" :key="index">
           <h1 class="title">
-            <a style="font-size: 16px" :title="item.title" @click="pageTo(item.url)" v-html="item.title"></a>
+            <span style="font-size: 16px" :title="item.title" v-html="item.title"></span>
             <span
               :class="
                 item.newsSentiment == 1 ? 'positive-tag' : item.newsSentiment == 2 ? 'negative-tag' : 'neutral-tag'
@@ -83,7 +83,7 @@
           <tag-list :showTags="tags" :tagData="item"></tag-list>
           <div class="msg-bottom">
             <span class="time">{{ item.tim }}</span>
-            <span class="source" @click="pageTo(item.url)">
+            <span class="source">
               来源：{{
                 item.auth == '入库' ||
                 item.auth == '抓取' ||
@@ -175,7 +175,6 @@ export default {
       window.open(URL)
     },
     search() {
-      return
       this.loading = true
       let params = {}
       newsList(params)

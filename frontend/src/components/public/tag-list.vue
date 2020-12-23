@@ -30,12 +30,12 @@
       </template>
       <template v-if="tagData.products && tagData.products.length && showTags.includes('product')">
         <span class="tag tag-product" v-for="(item, index) in tagData.products" :key="`product_${index}`">
-          {{ item.itemName || '--' }}
+          {{ item.name || '--' }}
         </span>
       </template>
       <template v-if="tagData.industries && tagData.industries.length && showTags.includes('industry')">
         <span class="tag tag-industry" v-for="(item, index) in tagData.industries" :key="`industry_${index}`">
-          {{ item.itemName || '--' }}
+          {{ item.name || '--' }}
         </span>
       </template>
       <template v-if="tagData.events && tagData.events.length && showTags.includes('event')">

@@ -26,7 +26,7 @@
           style="width: 100%"
           height="394px"
         >
-          <el-table-column prop="name" label="指标" align="center">
+          <el-table-column prop="name" label="指标" align="left">
             <template slot-scope="scope">
               <ceil-subject :dataMap="scope.row" :unit="scope.row.unit" :name="scope.row.name">
                 <i class="icon-img icon-bar"></i>
@@ -39,7 +39,7 @@
             :key="index"
             :prop="item"
             :label="item"
-            align="center"
+            align="right"
           ></el-table-column>
         </el-table>
       </div>
@@ -55,7 +55,7 @@
           style="width: 100%"
           height="394px"
         >
-          <el-table-column prop="name" label="指标" align="center">
+          <el-table-column prop="name" label="指标" align="left">
             <template slot-scope="scope">
               <ceil-subject :dataMap="scope.row" :unit="scope.row.unit" :name="scope.row.name">
                 <i class="icon-img icon-bar"></i>
@@ -68,7 +68,7 @@
             :key="index"
             :prop="item"
             :label="item"
-            align="center"
+            align="right"
           ></el-table-column>
         </el-table>
       </div>
@@ -84,7 +84,7 @@
           style="width: 100%"
           height="394px"
         >
-          <el-table-column prop="name" label="指标" align="center">
+          <el-table-column prop="name" label="指标" align="left">
             <template slot-scope="scope">
               <ceil-subject :dataMap="scope.row" :unit="scope.row.unit" :name="scope.row.name">
                 <i class="icon-img icon-bar"></i>
@@ -97,7 +97,7 @@
             :key="index"
             :prop="item"
             :label="item"
-            align="center"
+            align="right"
           ></el-table-column>
         </el-table>
       </div>
@@ -113,7 +113,7 @@
           style="width: 100%"
           height="394px"
         >
-          <el-table-column prop="name" label="指标" align="center">
+          <el-table-column prop="name" label="指标" align="left">
             <template slot-scope="scope">
               <ceil-subject :dataMap="scope.row" :unit="scope.row.unit" :name="scope.row.name">
                 <i class="icon-img icon-bar"></i>
@@ -126,7 +126,7 @@
             :key="index"
             :prop="item"
             :label="item"
-            align="center"
+            align="right"
           ></el-table-column>
         </el-table>
       </div>
@@ -142,7 +142,7 @@
           style="width: 100%"
           height="394px"
         >
-          <el-table-column prop="name" label="指标" align="center">
+          <el-table-column prop="name" label="指标" align="left">
             <template slot-scope="scope">
               <ceil-subject :dataMap="scope.row" :unit="scope.row.unit" :name="scope.row.name">
                 <i class="icon-img icon-bar"></i>
@@ -155,7 +155,7 @@
             :key="index"
             :prop="item"
             :label="item"
-            align="center"
+            align="right"
           ></el-table-column>
         </el-table>
       </div>
@@ -213,7 +213,11 @@ export default {
             item.result = item.result || []
             item.result.forEach((obj) => {
               for (let key in obj) {
-                obj[key] = obj[key] || '--'
+                if (obj[key] && typeof obj[key] === 'number') {
+                  obj[key] = obj[key].toFixed(2)
+                } else {
+                  obj[key] = obj[key] || '--'
+                }
               }
               if (!this[`keys_${index + 1}`]) {
                 this[`keys_${index + 1}`] = []

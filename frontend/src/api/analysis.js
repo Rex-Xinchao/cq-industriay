@@ -196,7 +196,7 @@ export const newsList = async (data) => {
           }
         ],
         companys: null,
-        inds: [
+        industries: [
           {
             id: null,
             oid: 27375056,
@@ -246,7 +246,7 @@ export const newsList = async (data) => {
             nameen: 'Automobile'
           }
         ],
-        prods: [
+        products: [
           {
             id: null,
             oid: 27375056,
@@ -377,7 +377,7 @@ export const newsList = async (data) => {
             tech: null
           }
         ],
-        inds: [
+        industries: [
           {
             id: null,
             oid: 27374175,
@@ -427,7 +427,7 @@ export const newsList = async (data) => {
             nameen: 'Electrical Components and Equipment'
           }
         ],
-        prods: [
+        products: [
           {
             id: null,
             oid: 27374175,
@@ -559,7 +559,7 @@ export const newsList = async (data) => {
           }
         ],
         companys: null,
-        inds: [
+        industries: [
           {
             id: null,
             oid: 27374197,
@@ -577,7 +577,7 @@ export const newsList = async (data) => {
             nameen: 'Automobile'
           }
         ],
-        prods: [
+        products: [
           {
             id: null,
             oid: 27374197,
@@ -696,7 +696,7 @@ export const newsList = async (data) => {
           }
         ],
         companys: null,
-        inds: [
+        industries: [
           {
             id: null,
             oid: 27373542,
@@ -714,7 +714,7 @@ export const newsList = async (data) => {
             nameen: 'Electrical Components and Equipment'
           }
         ],
-        prods: [
+        products: [
           {
             id: null,
             oid: 27373542,
@@ -1105,7 +1105,7 @@ export const newsList = async (data) => {
             tech: null
           }
         ],
-        inds: [
+        industries: [
           {
             id: null,
             oid: 27372596,
@@ -1154,7 +1154,7 @@ export const newsList = async (data) => {
             nameen: 'Electrical Components and Equipment'
           }
         ],
-        prods: [
+        products: [
           {
             id: null,
             oid: 27372596,
@@ -1424,7 +1424,7 @@ export const newsList = async (data) => {
         generateGraph: false,
         concepts: null,
         companys: null,
-        inds: [
+        industries: [
           {
             id: null,
             oid: 27370417,
@@ -1458,7 +1458,7 @@ export const newsList = async (data) => {
             nameen: 'Electrical Components and Equipment'
           }
         ],
-        prods: [
+        products: [
           {
             id: null,
             oid: 27370417,
@@ -1573,7 +1573,7 @@ export const newsList = async (data) => {
         generateGraph: false,
         concepts: null,
         companys: null,
-        inds: [
+        industries: [
           {
             id: null,
             oid: 27370418,
@@ -1591,7 +1591,7 @@ export const newsList = async (data) => {
             nameen: 'Trade of Motor Vehicles'
           }
         ],
-        prods: [
+        products: [
           {
             id: null,
             oid: 27370418,
@@ -1708,7 +1708,7 @@ export const newsList = async (data) => {
             tech: null
           }
         ],
-        inds: [
+        industries: [
           {
             id: null,
             oid: 27362690,
@@ -1774,7 +1774,7 @@ export const newsList = async (data) => {
             nameen: 'Automobile'
           }
         ],
-        prods: [
+        products: [
           {
             id: null,
             oid: 27362690,
@@ -1974,7 +1974,7 @@ export const newsList = async (data) => {
             tech: null
           }
         ],
-        inds: [
+        industries: [
           {
             id: null,
             oid: 27356223,
@@ -2024,7 +2024,7 @@ export const newsList = async (data) => {
             nameen: 'Electronic Manufacturing'
           }
         ],
-        prods: [
+        products: [
           {
             id: null,
             oid: 27356223,
@@ -2279,7 +2279,7 @@ export const newsList = async (data) => {
             tech: null
           }
         ],
-        inds: [
+        industries: [
           {
             id: null,
             oid: 27292627,
@@ -2329,7 +2329,7 @@ export const newsList = async (data) => {
             nameen: 'Research and Consulting Services'
           }
         ],
-        prods: [
+        products: [
           {
             id: null,
             oid: 27292627,
@@ -2500,7 +2500,7 @@ export const newsList = async (data) => {
           }
         ],
         companys: null,
-        inds: [
+        industries: [
           {
             id: null,
             oid: 27178047,
@@ -2534,7 +2534,7 @@ export const newsList = async (data) => {
             nameen: 'Automobile'
           }
         ],
-        prods: [
+        products: [
           {
             id: null,
             oid: 27178047,
@@ -2645,7 +2645,7 @@ export const newsList = async (data) => {
           }
         ],
         companys: null,
-        inds: [
+        industries: [
           {
             id: null,
             oid: 27135781,
@@ -2663,7 +2663,7 @@ export const newsList = async (data) => {
             nameen: 'Automobile'
           }
         ],
-        prods: [
+        products: [
           {
             id: null,
             oid: 27135781,
@@ -2760,7 +2760,7 @@ export const newsList = async (data) => {
             tech: null
           }
         ],
-        inds: [
+        industries: [
           {
             id: null,
             oid: 26915110,
@@ -2826,7 +2826,7 @@ export const newsList = async (data) => {
             nameen: 'Automobile'
           }
         ],
-        prods: [
+        products: [
           {
             id: null,
             oid: 26915110,
