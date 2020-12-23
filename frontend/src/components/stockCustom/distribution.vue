@@ -1,5 +1,8 @@
 <template>
   <div class="com-main distribution-main">
+    <h1 class="com-title">
+      {{ title }}
+    </h1>
     <el-tabs v-model="activeType">
       <el-tab-pane label="全部" name="all"></el-tab-pane>
       <el-tab-pane label="重庆市" name="cq"></el-tab-pane>
@@ -53,7 +56,7 @@
       </div>
       <div v-else class="information-main">
         <div class="map-main" id="map"></div>
-        <div v-loading="tableLoading" class="legend-main">
+        <div v-if="false" class="legend-main">
           <p class="title">
             全部非正常客户数：
             <span class="info-num">
@@ -229,7 +232,10 @@ export default {
   },
   mixins: [resize, Regions],
   computed: {
-    ...mapGetters(['industry', 'industryCode'])
+    ...mapGetters(['industry', 'industryCode']),
+    title() {
+      return this.type === 1 ? '全行存量客户的行业分布' : '全行存量客户的管护机构分布'
+    }
   },
   watch: {
     activeType: {
@@ -581,7 +587,7 @@ export default {
   .map-main {
     display: inline-block;
     vertical-align: top;
-    width: 35%;
+    width: 50%;
     height: 100%;
     padding-right: 10px;
     box-sizing: border-box;
@@ -650,7 +656,7 @@ export default {
   }
   .table-main_min {
     display: inline-block;
-    width: 40%;
+    width: 50%;
     height: 100%;
     padding-left: 10px;
     box-sizing: border-box;

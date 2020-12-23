@@ -2,12 +2,14 @@
   <div class="main">
     <h1 class="main-title">全行客户画像</h1>
     <div class="item-box">
+      <h1 class="sub-title">全行存量授信客户贷款余额情况</h1>
       <bar-chart class="item_50 height_sm" :request="loan_balance"></bar-chart>
-      <circle-chart class="item_50 height_sm" title="贷款余额分布" :request="total_loan_balance"></circle-chart>
+      <circle-chart class="item_50 height_sm" title="" :request="total_loan_balance"></circle-chart>
+      <h1 class="sub-title">全行存量授信客户不良贷款情况</h1>
       <stack-chart class="item_50 height_sm" :request="abnormal_loan"></stack-chart>
-      <circle-chart class="item_50 height_sm" title="不良贷款余额分布" :request="total_abnormal_loan"></circle-chart>
-      <distribution-main style="height: 520px" class="item_100 height_lg"></distribution-main>
-      <risk-table class="item_100 item_last height_mid" title="近期重点风险"></risk-table>
+      <circle-chart class="item_50 height_sm" title="" :request="total_abnormal_loan"></circle-chart>
+      <distribution-main style="height: 560px" class="item_100 height_lg"></distribution-main>
+      <risk-table class="item_100 item_last height_mid" title="全行存量客户舆情风险事件"></risk-table>
     </div>
   </div>
 </template>
@@ -36,8 +38,10 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '~@/assets/styles/common/view';
+.item-box {
+  margin-top: 20px !important;
+}
 .main {
-  padding: 40px 120px;
   height: auto;
 }
 .item-box {

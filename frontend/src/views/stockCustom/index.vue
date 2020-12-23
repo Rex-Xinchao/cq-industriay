@@ -8,7 +8,7 @@
       </h1>
     </div>
     <div class="item-box">
-      <h1 class="sunb-title">行业经济/宏观指标</h1>
+      <h1 class="sub-title">行业经济/宏观指标</h1>
       <div v-loading="loading" class="item_25 height_sm">
         <complex-chart v-if="dataList[0].indexType === 1" class="fill" :chartData="dataList[0]"></complex-chart>
         <line-chart v-else class="fill" :chartData="dataList[0]"></line-chart>
@@ -25,17 +25,19 @@
         <complex-chart v-if="dataList[3].indexType === 1" class="fill" :chartData="dataList[3]"></complex-chart>
         <line-chart v-else class="fill" :chartData="dataList[3]"></line-chart>
       </div>
+      <h1 class="sub-title">行业存量授信客户贷款余额情况</h1>
       <bar-chart class="item_50 height_sm" :request="loan_balance"></bar-chart>
       <circle-chart
         class="item_50 height_sm"
-        title="贷款余额分布"
+        title=""
         :request="total_loan_balance"
         :legendData="legendData_1"
       ></circle-chart>
+      <h1 class="sub-title">行业存量授信客户不良贷款情况</h1>
       <stack-chart class="item_50 height_sm" :request="abnormal_loan"></stack-chart>
       <circle-chart
         class="item_50 height_sm"
-        title="不良贷款余额分布"
+        title=""
         :request="total_abnormal_loan"
         :legendData="legendData_2"
       ></circle-chart>
@@ -44,7 +46,12 @@
         :legends="['行业不良率', '行业违约率']"
         class="item_100 height_sm"
       ></line-table>
-      <table-com class="item_50 height_mid" :request="customer_statistics"></table-com>
+      <table-com
+        title="行业逾期客户和黑名单情况"
+        class="item_50 height_mid"
+        :showSelect="true"
+        :request="customer_statistics"
+      ></table-com>
       <table-com title="行业内正常授信客户" class="item_50 height_mid" :request="customer"></table-com>
       <doucle-circle-chart
         class="item_100 item_last height_mid"
@@ -136,10 +143,5 @@ export default {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-}
-.sunb-title {
-  width: 100%;
-  font-size: 18px;
-  margin: 0 0 8px 0;
 }
 </style>

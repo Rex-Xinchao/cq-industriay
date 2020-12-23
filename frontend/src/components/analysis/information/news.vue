@@ -2,10 +2,20 @@
   <div class="news-main">
     <div class="filter-main">
       <el-form :inline="true">
+        <el-form-item label="情绪：">
+          <el-select v-model="type" placeholder="请选择情绪">
+            <el-option
+              v-for="item in typeOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item label="事件：">
           <el-select v-model="events" multiple collapse-tags placeholder="请选择事件">
             <el-option
-              v-for="item in eventOptions"
+              v-for="item in eventOptions.filter((item) => type === '' || item.type === type)"
               :key="item.value"
               :label="item.label"
               :value="item.value"
@@ -221,8 +231,28 @@ export default {
       ],
       eventOptions: [
         {
-          label: '事件1',
+          label: '事件',
+          value: 1,
+          type: 1
+        }
+      ],
+      type: '',
+      typeOptions: [
+        {
+          label: '全部',
+          value: ''
+        },
+        {
+          label: '正',
           value: 1
+        },
+        {
+          label: '中',
+          value: 0
+        },
+        {
+          label: '负',
+          value: -1
         }
       ]
     }

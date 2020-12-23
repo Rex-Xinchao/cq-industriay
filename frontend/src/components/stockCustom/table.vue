@@ -1,8 +1,14 @@
 <template>
   <div class="com-main data-table-main">
-    <h1 class="com-title" v-if="title">
+    <h1 class="com-title">
       {{ title }}
       <i class="icon-tip" :title="`来源于重庆银行${industry}授信客户`"></i>
+      <div class="operation-bar half-fr" v-if="showSelect">
+        <span class="bar-item" :class="{ active: type === 1 }" @click="type = 1">{{ `逾期客户  (${number_1})` }}</span>
+        <span class="bar-item last" :class="{ active: type === 2 }" @click="type = 2">
+          {{ `黑名单  (${number_2})` }}
+        </span>
+      </div>
       <el-popover ref="popover" placement="bottom" width="220" trigger="click">
         <div class="popover-main">
           <p>逾期客户筛选</p>
@@ -28,42 +34,13 @@
           </div>
           <el-button class="save-btn fr" type="primary" @click="init">确认</el-button>
         </div>
-        <span class="filter fr" slot="reference">
+        <span class="filter fr" slot="reference" style="margin-right: 8px">
           <i class="icon-img icon-filter"></i>
           筛选
         </span>
       </el-popover>
     </h1>
-    <div class="operation-bar" v-else>
-      <span class="bar-item" :class="{ active: type === 1 }" @click="type = 1">{{ `逾期客户  (${number_1})` }}</span>
-      <span class="bar-item last" :class="{ active: type === 2 }" @click="type = 2">
-        {{ `黑名单  (${number_2})` }}
-      </span>
-      <el-popover ref="popover" placement="bottom" width="220" trigger="click">
-        <div class="popover-main">
-          <p>逾期客户筛选</p>
-          <div class="block">
-            <span class="demonstration">管护机构</span>
-            <el-select class="select" v-model="orgSelect">
-              <el-option v-for="item in orgs" :key="item.value" :label="item.label" :value="item.value"></el-option>
-            </el-select>
-          </div>
-          <div class="block">
-            <span class="demonstration">金额</span>
-            <el-slider class="slider" style="margin-left: 46px" v-model="amountRange" range :max="3000"></el-slider>
-          </div>
-          <div class="block">
-            <span class="demonstration">逾期天数</span>
-            <el-slider class="slider" style="margin-left: 18px" v-model="timeRange" range :max="100"></el-slider>
-          </div>
-          <el-button class="save-btn fr" type="primary" @click="init">确认</el-button>
-        </div>
-        <span class="filter fr" slot="reference">
-          <i class="icon-img icon-filter"></i>
-          筛选
-        </span>
-      </el-popover>
-    </div>
+
     <el-table
       v-loading="loading"
       class="table-main table-head-grey"
@@ -120,7 +97,11 @@ export default {
   },
   props: {
     title: String,
-    request: Function
+    request: Function,
+    showSelect: {
+      type: Boolean,
+      default: () => false
+    }
   },
   watch: {
     type() {

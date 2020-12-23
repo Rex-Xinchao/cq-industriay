@@ -1,11 +1,30 @@
 <template>
   <div class="com-main">
-    <div class="operation-bar">
-      <span class="bar-item" :class="{ active: type === 1 }" @click="type = 1">龙头企业</span>
-      <span class="bar-item" :class="{ active: type === 2 }" @click="type = 2">资质企业</span>
-      <span class="bar-item last" :class="{ active: type === 3 }" @click="type = 3">工商企业</span>
+    <h1 class="com-title">
+      {{ title }}
+      <el-popover placement="bottom" width="340" trigger="hover">
+        <div>
+          <p>龙头企业：上市、三板和发债企业</p>
+          <p>资质企业：数据来自于各政府部门认定的资质企业名单</p>
+          <p>工商企业：工商企业数据</p>
+        </div>
+        <i class="icon-tip" slot="reference"></i>
+      </el-popover>
 
-      <i class="icon-tip" slot="reference" :title="titles[type - 1]"></i>
+      <div class="operation-bar half-fr">
+        <span class="bar-item" :class="{ active: type === 1 }" @click="type = 1">龙头企业</span>
+        <span class="bar-item" :class="{ active: type === 2 }" @click="type = 2">资质企业</span>
+        <span class="bar-item last" :class="{ active: type === 3 }" @click="type = 3">工商企业</span>
+      </div>
+    </h1>
+    <el-tabs class="com-tabs" v-model="area">
+      <el-tab-pane label="全部" name="all"></el-tab-pane>
+      <el-tab-pane label="重庆市" name="cq"></el-tab-pane>
+      <el-tab-pane label="四川省" name="sc"></el-tab-pane>
+      <el-tab-pane label="贵州省" name="gz"></el-tab-pane>
+      <el-tab-pane label="陕西省" name="sx"></el-tab-pane>
+    </el-tabs>
+    <div>
       <el-radio-group class="radio-group" v-model="radio" v-if="type === 3">
         <el-radio :label="1">全部</el-radio>
         <el-radio :label="2">2年以上</el-radio>
@@ -158,6 +177,7 @@ export default {
   data() {
     let vm = this
     return {
+      area: 'all',
       sum: {},
       amountRange: [0, 500],
       timeRange: [0, 30],
@@ -178,7 +198,6 @@ export default {
         2: '三板',
         3: '发债'
       },
-      titles: ['上市、三板和发债企业', '数据来自于各政府部门认定的资质企业名单', '工商企业数据'],
       checkList: []
       // filters: [
       //   '高新技术',
@@ -193,7 +212,7 @@ export default {
   },
   mixins: [Qualifications],
   props: {
-    area: String
+    title: String
   },
   watch: {
     area: {
@@ -259,9 +278,6 @@ export default {
     border-radius: 0px 4px 4px 0px;
     border-right: 1px solid #d9d9d9;
   }
-  .radio-group {
-    margin-left: 20px;
-  }
   .button-export {
     font-size: 14px;
     font-weight: 400;
@@ -273,5 +289,8 @@ export default {
     margin-top: 20px;
     flex: 1;
   }
+}
+.com-tabs {
+  margin-top: 12px;
 }
 </style>

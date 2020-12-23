@@ -7,6 +7,7 @@
       </h1>
     </div>
     <div class="main-body">
+      <h1 class="sub-title">前景概览</h1>
       <div class="main-header">
         <div class="card" v-for="(item, index) in cards" :key="item.code" v-loading="loading" :title="item.title">
           <i class="icon-img icon-card"></i>

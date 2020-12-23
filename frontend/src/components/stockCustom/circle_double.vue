@@ -2,7 +2,7 @@
   <div class="com-main">
     <h1 class="com-title">
       {{ title }}
-      <span class="com-title_sub">{{ subTitle }}</span>
+      <span class="com-title_sub">{{ industry }}</span>
       <i class="icon-tip" :title="`重庆银行${industry}授信客户的新闻舆情事件`"></i>
       <time-select v-model="dataTime" :options="options" startValue="1Y"></time-select>
     </h1>

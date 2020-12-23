@@ -17,126 +17,146 @@
       <div id="tag_1" class="item_100 item-table">
         <h1 class="main-title">
           GDP及产业结构
-          <span class="fr sub-title">全省</span>
+          <span class="sub-title_fr">全省</span>
         </h1>
         <el-table
           v-loading="loading"
           class="table-main table-head-grey"
-          :data="tableData"
+          :data="tableData_1"
           style="width: 100%"
           height="394px"
         >
           <el-table-column prop="name" label="指标" align="center">
             <template slot-scope="scope">
-              <ceil-subject>
+              <ceil-subject :dataMap="scope.row" :unit="scope.row.unit" :name="scope.row.name">
                 <i class="icon-img icon-bar"></i>
               </ceil-subject>
               {{ scope.row.name }}
             </template>
           </el-table-column>
-          <el-table-column prop="2020" label="2020" align="center"></el-table-column>
-          <el-table-column prop="2019" label="2019" align="center"></el-table-column>
-          <el-table-column prop="2018" label="2018" align="center"></el-table-column>
+          <el-table-column
+            v-for="(item, index) in keys_1"
+            :key="index"
+            :prop="item"
+            :label="item"
+            align="center"
+          ></el-table-column>
         </el-table>
       </div>
       <div id="tag_2" class="item_100 item-table">
         <h1 class="main-title">
           工业与投资
-          <span class="fr sub-title">全省</span>
+          <span class="sub-title_fr">全省</span>
         </h1>
         <el-table
           v-loading="loading"
           class="table-main table-head-grey"
-          :data="tableData"
+          :data="tableData_2"
           style="width: 100%"
           height="394px"
         >
           <el-table-column prop="name" label="指标" align="center">
             <template slot-scope="scope">
-              <ceil-subject>
+              <ceil-subject :dataMap="scope.row" :unit="scope.row.unit" :name="scope.row.name">
                 <i class="icon-img icon-bar"></i>
               </ceil-subject>
               {{ scope.row.name }}
             </template>
           </el-table-column>
-          <el-table-column prop="2020" label="2020" align="center"></el-table-column>
-          <el-table-column prop="2019" label="2019" align="center"></el-table-column>
-          <el-table-column prop="2018" label="2018" align="center"></el-table-column>
+          <el-table-column
+            v-for="(item, index) in keys_2"
+            :key="index"
+            :prop="item"
+            :label="item"
+            align="center"
+          ></el-table-column>
         </el-table>
       </div>
       <div id="tag_3" class="item_100 item-table">
         <h1 class="main-title">
           进出口
-          <span class="fr sub-title">全省</span>
+          <span class="sub-title_fr">全省</span>
         </h1>
         <el-table
           v-loading="loading"
           class="table-main table-head-grey"
-          :data="tableData"
+          :data="tableData_3"
           style="width: 100%"
           height="394px"
         >
           <el-table-column prop="name" label="指标" align="center">
             <template slot-scope="scope">
-              <ceil-subject>
+              <ceil-subject :dataMap="scope.row" :unit="scope.row.unit" :name="scope.row.name">
                 <i class="icon-img icon-bar"></i>
               </ceil-subject>
               {{ scope.row.name }}
             </template>
           </el-table-column>
-          <el-table-column prop="2020" label="2020" align="center"></el-table-column>
-          <el-table-column prop="2019" label="2019" align="center"></el-table-column>
-          <el-table-column prop="2018" label="2018" align="center"></el-table-column>
+          <el-table-column
+            v-for="(item, index) in keys_3"
+            :key="index"
+            :prop="item"
+            :label="item"
+            align="center"
+          ></el-table-column>
         </el-table>
       </div>
       <div id="tag_4" class="item_100 item-table">
         <h1 class="main-title">
           消费收入和人口
-          <span class="fr sub-title">全省</span>
+          <span class="sub-title_fr">全省</span>
         </h1>
         <el-table
           v-loading="loading"
           class="table-main table-head-grey"
-          :data="tableData"
+          :data="tableData_4"
           style="width: 100%"
           height="394px"
         >
           <el-table-column prop="name" label="指标" align="center">
             <template slot-scope="scope">
-              <ceil-subject>
+              <ceil-subject :dataMap="scope.row" :unit="scope.row.unit" :name="scope.row.name">
                 <i class="icon-img icon-bar"></i>
               </ceil-subject>
               {{ scope.row.name }}
             </template>
           </el-table-column>
-          <el-table-column prop="2020" label="2020" align="center"></el-table-column>
-          <el-table-column prop="2019" label="2019" align="center"></el-table-column>
-          <el-table-column prop="2018" label="2018" align="center"></el-table-column>
+          <el-table-column
+            v-for="(item, index) in keys_4"
+            :key="index"
+            :prop="item"
+            :label="item"
+            align="center"
+          ></el-table-column>
         </el-table>
       </div>
       <div id="tag_5" class="item_100 item-table item_last">
         <h1 class="main-title">
           存贷款
-          <span class="fr sub-title">全省</span>
+          <span class="sub-title_fr">全省</span>
         </h1>
         <el-table
           v-loading="loading"
           class="table-main table-head-grey"
-          :data="tableData"
+          :data="tableData_5"
           style="width: 100%"
           height="394px"
         >
           <el-table-column prop="name" label="指标" align="center">
             <template slot-scope="scope">
-              <ceil-subject>
+              <ceil-subject :dataMap="scope.row" :unit="scope.row.unit" :name="scope.row.name">
                 <i class="icon-img icon-bar"></i>
               </ceil-subject>
               {{ scope.row.name }}
             </template>
           </el-table-column>
-          <el-table-column prop="2020" label="2020" align="center"></el-table-column>
-          <el-table-column prop="2019" label="2019" align="center"></el-table-column>
-          <el-table-column prop="2018" label="2018" align="center"></el-table-column>
+          <el-table-column
+            v-for="(item, index) in keys_5"
+            :key="index"
+            :prop="item"
+            :label="item"
+            align="center"
+          ></el-table-column>
         </el-table>
       </div>
     </div>
@@ -144,6 +164,7 @@
 </template>
 <script>
 import ceilSubject from '@/components/public/ceil-subject'
+import { getStatusTable } from '@/api/finance'
 export default {
   data() {
     return {
@@ -154,32 +175,70 @@ export default {
       area: null,
       activeType: 'tag_1',
       loading: false,
-      tableData: [
-        {
-          name: '工业增加值（亿元）',
-          2020: 1000,
-          2019: 1000,
-          2018: 1000
-        }
-      ],
+      tableData_1: [],
+      keys_1: [],
+      tableData_2: [],
+      keys_2: [],
+      tableData_3: [],
+      keys_3: [],
+      tableData_4: [],
+      keys_4: [],
+      tableData_5: [],
+      keys_5: [],
       idList: ['tag_1', 'tag_2', 'tag_3', 'tag_4', 'tag_5']
     }
   },
   components: { ceilSubject },
   watch: {
-    area: {
-      immediate: true,
-      handler(data) {
-        this.getData()
-      }
+    area() {
+      this.getData()
     }
   },
   methods: {
     getData() {
       this.loading = true
-      setTimeout(() => {
-        this.loading = false
-      }, 1000)
+      let list = []
+      for (let i = 1; i < 6; i++) {
+        list.push(getStatusTable({ type: i, area: this.area }))
+      }
+      Promise.all(list)
+        .then((res) => {
+          this.loading = false
+          this.keys_1 = null
+          this.keys_2 = null
+          this.keys_3 = null
+          this.keys_4 = null
+          this.keys_5 = null
+          res.forEach((item, index) => {
+            item.result = item.result || []
+            item.result.forEach((obj) => {
+              for (let key in obj) {
+                obj[key] = obj[key] || '--'
+              }
+              if (!this[`keys_${index + 1}`]) {
+                this[`keys_${index + 1}`] = []
+                for (let key in obj) {
+                  if (!['name', 'unit'].includes(key)) {
+                    this[`keys_${index + 1}`].push(key)
+                  }
+                }
+              }
+            })
+          })
+          this.tableData_1 = res[0].result
+          this.tableData_2 = res[1].result
+          this.tableData_3 = res[2].result
+          this.tableData_4 = res[3].result
+          this.tableData_5 = res[4].result
+        })
+        .catch((e) => {
+          this.loading = false
+          this.tableData_1 = []
+          this.tableData_2 = []
+          this.tableData_3 = []
+          this.tableData_4 = []
+          this.tableData_5 = []
+        })
     },
     scrollTo(id) {
       let top = document.getElementById(id).offsetTop - 120

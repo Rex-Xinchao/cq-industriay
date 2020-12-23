@@ -1,7 +1,7 @@
 <template>
   <el-popover placement="bottom-start" popper-class="event-subject-popover" width="336" trigger="hover">
     <slot slot="reference"></slot>
-    <p>重庆市GDP（亿元）</p>
+    <p>{{ name }}</p>
     <div v-loading="loading" class="chart-main" :id="chartId_bar"></div>
   </el-popover>
 </template>
@@ -19,30 +19,26 @@ export default {
   },
   mixins: [resize, bar],
   props: {
-    data: Object
+    dataMap: Object,
+    unit: String,
+    name: String
   },
   methods: {
     setChartOption() {
-      const data = [
-        {
-          loanBalance: {
-            amount: 100000
-          },
-          rpt: '2020'
-        }
-      ]
+      const data = this.dataMap
       const vm = this
       this.chartOption_bar.color = this.color
       this.chartOption_bar.grid.top = '20px'
+      this.chartOption_bar.grid.left = '60px'
       this.chartOption_bar.series = {
         type: 'bar',
         barWidth: '36%',
         data: []
       }
-      this.chartOption_bar.tooltip.formatter = function (data) {
+      this.chartOption_bar.tooltip.formatter = (data) => {
         let time = data[0].axisValue
         let result = ''
-        let unit = '万元'
+        let unit = this.unit
         data.forEach((item) => {
           result += `${time}：${numberFormat(item.value)} ${unit}<br/>`
         })
@@ -51,12 +47,14 @@ export default {
       this.chartOption_bar.xAxis.data = []
       this.chartOption_bar.series.data = []
       let max = 0
-      data.forEach((item) => {
-        let value = converUnit_w(item.loanBalance.amount)
-        max = Math.max(max, Number(value))
-        this.chartOption_bar.series.data.push(value)
-        this.chartOption_bar.xAxis.data.push(item.rpt)
-      })
+      for (let key in data) {
+        if (key !== 'name' && key !== 'unit') {
+          let value = data[key]
+          max = Math.max(max, Number(value))
+          this.chartOption_bar.series.data.push(value)
+          this.chartOption_bar.xAxis.data.push(key)
+        }
+      }
       return this.chartOption_bar
     }
   },

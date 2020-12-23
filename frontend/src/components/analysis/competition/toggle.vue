@@ -1,10 +1,13 @@
 <template>
   <div class="com-main">
-    <div class="operation-bar">
-      <span class="bar-item" :class="{ active: isBar }" @click="isBar = true">注册资本</span>
-      <span class="bar-item" :class="{ active: !isBar }" @click="isBar = false">成立时间</span>
+    <h1 class="com-title">
+      {{ title }}
       <i class="icon-tip" title="样本数据来源于工商企业"></i>
-    </div>
+      <div class="operation-bar half-fr">
+        <span class="bar-item" :class="{ active: isBar }" @click="isBar = true">注册资本</span>
+        <span class="bar-item" :class="{ active: !isBar }" @click="isBar = false">成立时间</span>
+      </div>
+    </h1>
     <div v-loading="loading" v-if="!noData" class="chart-main" id="chart"></div>
     <no-data-show v-loading="loading" class="chart-nodata" :show="noData"></no-data-show>
   </div>
@@ -27,6 +30,9 @@ export default {
       color_pie: ['#147AD6', '#79D2DE', '#EC6666'],
       legend: ['2年以下', '2~5年', '5年以上']
     }
+  },
+  props: {
+    title: String
   },
   mixins: [resize, bar, pie],
   watch: {

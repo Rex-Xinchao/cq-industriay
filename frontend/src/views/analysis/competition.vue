@@ -8,15 +8,8 @@
     </div>
     <div class="item-box">
       <multiple-chart class="item_60 height_sm" title="行业集中度指数"></multiple-chart>
-      <toggle-chart class="item_40 height_sm"></toggle-chart>
-      <el-tabs class="item_100 crumbs" v-model="activeType">
-        <el-tab-pane label="全部" name="all"></el-tab-pane>
-        <el-tab-pane label="重庆市" name="cq"></el-tab-pane>
-        <el-tab-pane label="四川省" name="sc"></el-tab-pane>
-        <el-tab-pane label="贵州省" name="gz"></el-tab-pane>
-        <el-tab-pane label="陕西省" name="sx"></el-tab-pane>
-      </el-tabs>
-      <table-com class="item_100 item_last height_mid" :area="activeType"></table-com>
+      <toggle-chart class="item_40 height_sm" title="行业工商企业注册资本和成立时间"></toggle-chart>
+      <table-com class="item_100 item_last height_lg" :area="activeType" title="行业区域企业金字塔"></table-com>
     </div>
   </div>
 </template>
