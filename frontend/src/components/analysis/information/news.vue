@@ -110,7 +110,7 @@ export default {
       tableId: 'newsTable',
       noData: false,
       loading: false,
-      height: 500,
+      height: '500px',
       tableData: [],
       tags: ['company', 'people', 'industry', 'product', 'event'],
       events: [],
@@ -175,6 +175,7 @@ export default {
       window.open(URL)
     },
     search() {
+      return
       this.loading = true
       let params = {}
       newsList(params)

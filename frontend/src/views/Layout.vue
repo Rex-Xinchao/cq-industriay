@@ -49,6 +49,9 @@ export default {
         this.$router.push(path)
       }
     }
+  },
+  updated() {
+    document.getElementsByClassName('el-main')[0].scrollTo(0, 0)
   }
 }
 </script>

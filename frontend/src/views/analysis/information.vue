@@ -4,7 +4,7 @@
       <h1 class="main-title">行业舆情</h1>
     </div>
     <div class="main-body">
-      <newsList></newsList>
+      <newsList class="news-list"></newsList>
     </div>
   </div>
 </template>
@@ -21,10 +21,13 @@ export default {
   .main-body {
     width: 100%;
     height: auto !important;
-    background-color: white;
-    box-sizing: border-box;
-    border-radius: 2px;
-    box-shadow: 0px 0px 5px 0px rgba(232, 232, 232, 0.53);
+
+    .news-list {
+      background-color: white;
+      box-sizing: border-box;
+      border-radius: 2px;
+      box-shadow: 0px 0px 5px 0px rgba(232, 232, 232, 0.53);
+    }
   }
 }
 </style>
