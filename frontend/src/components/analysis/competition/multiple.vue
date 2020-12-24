@@ -15,6 +15,9 @@
     </h1>
     <div class="chart-body" v-loading="loading">
       <div class="progress-main">
+        <span class="high">高</span>
+        <span class="middle">中</span>
+        <span class="low">低</span>
         <span class="point" :style="getRoute(2360)"></span>
         <span class="num">2360</span>
       </div>
@@ -121,11 +124,33 @@ export default {
   vertical-align: top;
   width: 170px;
   height: 100%;
-  background-image: url(~@/assets/imgs/circle.png);
+  background-image: url(~@/assets/imgs/circle.svg);
   background-size: contain;
   background-repeat: no-repeat;
   background-position-y: 36px;
   position: relative;
+
+  .high {
+    font-size: 12px;
+    color: #969bab;
+    position: absolute;
+    top: 114px;
+    right: 0px;
+  }
+  .middle {
+    font-size: 12px;
+    color: #969bab;
+    position: absolute;
+    top: 40px;
+    left: calc(50% - 6px);
+  }
+  .low {
+    font-size: 12px;
+    color: #969bab;
+    position: absolute;
+    top: 114px;
+    left: 0px;
+  }
 
   .point {
     width: 100px;
