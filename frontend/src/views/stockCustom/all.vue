@@ -39,6 +39,12 @@ import circleChart from '@components/stockCustom/circle'
 import riskTable from '@components/stockCustom/risk'
 import distributionMain from '@components/stockCustom/distribution'
 export default {
+  data() {
+    return {
+      legendData_1: ['500万以下', '500~2000万', '2000~3000万', '3000万以上'],
+      legendData_2: ['500万以下', '500~2000万', '2000~5000万', '5000万~1亿', '1亿以上']
+    }
+  },
   components: {
     barChart,
     stackChart,

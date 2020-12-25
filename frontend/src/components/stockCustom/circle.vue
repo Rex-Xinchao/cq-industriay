@@ -88,8 +88,8 @@ export default {
       const data = this.pieData
       this.chartId_pie = `circleChart_${this.timeStamp}`
       this.chartOption_pie.color = this.color
-      this.chartOption_pie.legend.data = this.legendData
       this.chartOption_pie.legend = Object.assign({}, this.chartOption_pie.legend, this.legend)
+      this.chartOption_pie.legend.data = this.legendData
       this.data = []
       for (let key in data) {
         this.data.push({

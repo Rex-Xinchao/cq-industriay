@@ -119,6 +119,9 @@ export default {
 <style lang="scss" scoped>
 .pack-chart-main {
   position: relative;
+  background-image: url(~@/assets/imgs/pack-bg.svg);
+  background-repeat: no-repeat;
+  background-position: center;
   .chart-filter {
     position: absolute;
     top: 0;
