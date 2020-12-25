@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 const Login = () => import('@/views/login')
-const Layout = () => import('@/views/Layout')
+const Layout = () => import('@/views/layout/Index')
 const StockCustom_All = () => import('@/views/stockCustom/all')
 const Pillar = () => import('@/views/pillar/index')
-const LayoutWithSider = () => import('@/views/LayoutWithSider')
+const LayoutWithSider = () => import('@/views/layout/LayoutWithSider')
 const IndustryEnv = () => import('@/views/analysis/env')
 const IndustryProspect = () => import('@/views/analysis/prospect')
 const IndustryPolicy = () => import('@/views/analysis/policy')
@@ -21,7 +21,7 @@ const BaseFinance = () => import('@/views/base/finance')
 const Boom = () => import('@/views/industrial/boom')
 const Risk = () => import('@/views/industrial/risk')
 const StockCustom = () => import('@/views/stockCustom/index')
-const LayoutForAreaFinance = () => import('@/views/LayoutForAreaF')
+const LayoutForAreaFinance = () => import('@/views/layout/LayoutForAreaF')
 const PillarChart = () => import('@/views/pillar/chart')
 const FinanceStatus = () => import('@/views/finance/status')
 const FinanceIncomes = () => import('@/views/finance/incomes')
@@ -29,6 +29,10 @@ const FinanceIncomes = () => import('@/views/finance/incomes')
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/',
+    redirect: '/analysis/env'
+  },
   {
     path: '/login',
     name: 'Login',

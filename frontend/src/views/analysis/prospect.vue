@@ -7,23 +7,7 @@
       </h1>
     </div>
     <div class="main-body">
-      <h1 class="sub-title">前景概览</h1>
-      <div class="main-header">
-        <div class="card" v-for="(item, index) in cards" :key="item.code" v-loading="loading" :title="item.title">
-          <i class="icon-img icon-card"></i>
-          <span class="title" :title="item.name">{{ item.name }}</span>
-          <span class="num">
-            {{ item.value }}
-            <span class="unit">{{ item.unit }}</span>
-          </span>
-          <span class="tip">
-            {{ item.type === 'up' ? '较去年增加' : '较去年减少' }}
-            <strong>{{ item.change }}</strong>
-            <i class="icon-img" :class="`icon-${item.type}`"></i>
-          </span>
-          <span class="link fr" @click="pageTo" v-if="index === 0">企业清单</span>
-        </div>
-      </div>
+      <card-list class="card-list"></card-list>
       <complex-chart
         class="main-chart"
         title="成长前景"
@@ -51,156 +35,32 @@
 </template>
 <script>
 import complexChart from '@components/analysis/prospect/complex'
+import cardList from '@components/analysis/prospect/cards'
 import barChart from '@components/analysis/prospect/bar'
 import barOnly from '@components/analysis/prospect/bar_only'
-import { cards } from '@/mockData/prospect'
 import { mapGetters } from 'vuex'
 export default {
   data() {
-    return {
-      loading: false,
-      cards: [{}, {}, {}, {}]
-    }
+    return {}
   },
   computed: {
     ...mapGetters(['industry'])
   },
-  components: { complexChart, barChart, barOnly },
-  methods: {
-    getData() {
-      this.loading = true
-      setTimeout(() => {
-        this.loading = false
-        this.cards = cards
-        this.cards[0].title = '上市、三板、发债企业数量'
-        this.cards[1].title = '上市、三板、发债企业的业务收入数据'
-        this.cards[2].title = '上市、三板、发债企业的业务毛利数据'
-        this.cards[3].title = '上市、三板、发债企业的财报资产规模'
-      }, 1000)
-    },
-    pageTo() {
-      let url = this.$router.resolve({
-        path: '/base/finance'
-      })
-      window.open(url.href)
-    }
-  },
-  mounted() {
-    this.getData()
-  }
+  components: { complexChart, barChart, barOnly, cardList },
+  methods: {}
 }
 </script>
 <style lang="scss" scoped>
 @import '~@/assets/styles/common/view';
-.main-header {
+@import '~@/assets/styles/common/component';
+.card-list {
   width: 100%;
-  height: 140px;
+  height: 200px;
   margin-bottom: 20px;
   box-sizing: border-box;
-
-  .card {
-    display: inline-block;
-    width: calc(25% - 15px);
-    height: 100%;
-    padding: 20px 30px 20px 20px;
-    background-color: #ffffff;
-    margin-right: 20px;
-    box-sizing: border-box;
-    vertical-align: top;
-    border-radius: 2px;
-    box-shadow: 0px 0px 5px 0px rgba(232, 232, 232, 0.53);
-
-    &:last-of-type {
-      margin: 0;
-    }
-
-    &:nth-of-type(1) {
-      .icon-card {
-        background-image: url(~@/assets/imgs/icons/prospect_head_1.svg);
-      }
-    }
-    &:nth-of-type(2) {
-      .icon-card {
-        background-image: url(~@/assets/imgs/icons/prospect_head_2.svg);
-      }
-    }
-    &:nth-of-type(3) {
-      .icon-card {
-        background-image: url(~@/assets/imgs/icons/prospect_head_3.svg);
-      }
-    }
-    &:nth-of-type(4) {
-      .icon-card {
-        background-image: url(~@/assets/imgs/icons/prospect_head_4.svg);
-      }
-    }
-
-    .icon-card {
-      float: right;
-      width: 30px;
-      height: 30px;
-      background-color: #cccccc;
-    }
-
-    .title {
-      display: block;
-      width: calc(100% - 50px);
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      font-size: 16px;
-      font-weight: 400;
-      color: #000a12;
-      line-height: 22px;
-      margin-bottom: 10px;
-    }
-
-    .num {
-      display: block;
-      width: calc(100% - 60px);
-      font-size: 35px;
-      font-weight: bold;
-      color: #1b253a;
-      line-height: 44px;
-      margin-bottom: 6px;
-
-      .unit {
-        font-size: 16px;
-      }
-    }
-
-    .link {
-      font-size: 12px;
-      font-weight: 400;
-      color: #3398db;
-      cursor: pointer;
-    }
-
-    .tip {
-      font-size: 12px;
-      font-weight: 400;
-      color: #94979b;
-      line-height: 16px;
-      strong {
-        color: #1b253a;
-      }
-
-      .icon-img {
-        width: 8px;
-        height: 16px;
-        margin-left: 6px;
-        vertical-align: sub;
-      }
-
-      .icon-up {
-        background-image: url(~@/assets/imgs/icons/up.svg);
-      }
-
-      .icon-down {
-        background-image: url(~@/assets/imgs/icons/down.svg);
-      }
-    }
-  }
+  background-color: white;
+  border-radius: 2px;
+  box-shadow: 0px 0px 5px 0px rgba(232, 232, 232, 0.53);
 }
 .main-chart {
   width: 100%;

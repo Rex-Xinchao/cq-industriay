@@ -215,7 +215,7 @@ export default {
       height: auto;
       min-height: 300px;
       display: block;
-      margin-top: 30px;
+      margin-top: 20px;
       position: relative;
 
       .line {

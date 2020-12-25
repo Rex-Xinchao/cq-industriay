@@ -10,12 +10,6 @@
         </div>
         <i class="icon-tip" slot="reference"></i>
       </el-popover>
-
-      <div class="operation-bar half-fr">
-        <span class="bar-item" :class="{ active: type === 1 }" @click="type = 1">龙头企业</span>
-        <span class="bar-item" :class="{ active: type === 2 }" @click="type = 2">资质企业</span>
-        <span class="bar-item last" :class="{ active: type === 3 }" @click="type = 3">工商企业</span>
-      </div>
     </h1>
     <el-tabs class="com-tabs" v-model="area">
       <el-tab-pane label="全部" name="all"></el-tab-pane>
@@ -24,13 +18,18 @@
       <el-tab-pane label="贵州省" name="gz"></el-tab-pane>
       <el-tab-pane label="陕西省" name="sx"></el-tab-pane>
     </el-tabs>
-    <div>
+    <div class="com-filter">
+      <div class="operation-bar fl">
+        <span class="bar-item" :class="{ active: type === 1 }" @click="type = 1">龙头企业</span>
+        <span class="bar-item" :class="{ active: type === 2 }" @click="type = 2">资质企业</span>
+        <span class="bar-item last" :class="{ active: type === 3 }" @click="type = 3">工商企业</span>
+      </div>
       <el-radio-group class="radio-group" v-model="radio" v-if="type === 3">
         <el-radio :label="1">全部</el-radio>
         <el-radio :label="2">2年以上</el-radio>
       </el-radio-group>
       <span class="button-export fr" @click="exportFile">
-        <i class="icon-img"></i>
+        <i class="el-icon-download"></i>
         导出
       </span>
       <el-popover ref="popover" placement="bottom" width="108" trigger="click">
@@ -41,7 +40,7 @@
             </el-checkbox>
           </el-checkbox-group>
         </div>
-        <span class="filter fr" slot="reference" v-show="type === 2">
+        <span class="button-filter filter fr" slot="reference" v-show="type === 2">
           <i class="icon-img icon-filter"></i>
           筛选资质
         </span>
@@ -53,6 +52,7 @@
         class="table-main table-head-grey"
         :default-sort="{ prop: 'leading.income', order: 'descending' }"
         :data="tableData"
+        height="300px"
         style="width: 100%"
       >
         <el-table-column type="index" width="50" label="排名" align="center"></el-table-column>
@@ -92,7 +92,13 @@
           </template>
         </el-table-column>
       </el-table>
-      <el-table v-show="type === 2" class="table-main table-head-grey" :data="tableData" style="width: 100%">
+      <el-table
+        v-show="type === 2"
+        class="table-main table-head-grey"
+        :data="tableData"
+        height="300px"
+        style="width: 100%"
+      >
         <el-table-column label="公司名称" width="280" align="left">
           <template slot-scope="scope">
             <span class="type-tag" :class="`type_${scope.row.comType}`">{{ typeMap[scope.row.comType] }}</span>
@@ -153,6 +159,7 @@
         class="table-main table-head-grey"
         :default-sort="{ prop: 'gs.registered', order: 'descending' }"
         :data="tableData"
+        height="300px"
         style="width: 100%"
       >
         <el-table-column type="index" width="50" label="排名" align="center"></el-table-column>
@@ -285,24 +292,43 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/styles/common/component';
 @import '~@/assets/styles/common/table';
+.com-tabs {
+  margin: 2px 0 8px 0;
+}
 .com-main {
-  .last {
-    border-radius: 0px 4px 4px 0px;
-    border-right: 1px solid #d9d9d9;
-  }
-  .button-export {
-    font-size: 14px;
-    font-weight: 400;
-    color: #666666;
-    line-height: 20px;
-    cursor: pointer;
-  }
   .table-main {
     margin-top: 20px;
     flex: 1;
   }
 }
-.com-tabs {
-  margin-top: 12px;
+.com-filter {
+  .operation-bar {
+    width: auto;
+    margin-right: 8px;
+
+    .last {
+      & + .active {
+        border-right: 1px solid #3a84ff;
+      }
+    }
+  }
+  .radio-group {
+    height: 30px;
+    padding-top: 6px;
+    box-sizing: border-box;
+  }
+}
+.button-export,
+.button-filter {
+  margin-right: 12px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #666666;
+  line-height: 20px;
+  cursor: pointer;
+
+  &:hover {
+    color: #3a84ff;
+  }
 }
 </style>

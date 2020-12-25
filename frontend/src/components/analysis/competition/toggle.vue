@@ -1,9 +1,11 @@
 <template>
   <div class="com-main">
     <h1 class="com-title">
-      {{ title }}
-      <i class="icon-tip" title="样本数据来源于工商企业"></i>
-      <div class="operation-bar half-fr">
+      <div class="line-half">
+        {{ title }}
+        <i class="icon-tip" title="样本数据来源于工商企业"></i>
+      </div>
+      <div class="operation-bar line-half fr">
         <span class="bar-item" :class="{ active: isBar }" @click="isBar = true">注册资本</span>
         <span class="bar-item" :class="{ active: !isBar }" @click="isBar = false">成立时间</span>
       </div>
