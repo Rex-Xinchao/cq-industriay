@@ -8,60 +8,21 @@
       </h1>
     </div>
     <div class="item-box">
-      <pack-chart class="item_60 height_lg"></pack-chart>
-      <div class="item_40 height_lg">
-        <finance-table class="finance-table-main" title="财务及经济指标异动"></finance-table>
-        <div class="market-info-main">
-          <div class="card" v-loading="loading">
-            <span class="title">债券市场</span>
-            <span class="num">
-              {{ bond.value }}
-              <s class="unit">违约企业</s>
-              <el-popover ref="popover" placement="bottom" width="108" trigger="click">
-                <div class="popover-main">
-                  <p style="text-align: center" v-for="(item, index) in bond.list" :key="index">{{ item }}</p>
-                </div>
-                <s class="link" slot="reference">查看</s>
-              </el-popover>
-            </span>
-            <span class="tip">
-              占总企业
-              <strong>{{ bond.ratio }}%</strong>
-            </span>
-          </div>
-          <div class="card" v-loading="loading">
-            <span class="title">股票市场</span>
-            <span class="num">
-              {{ stock.value }}
-              <s class="unit">ST企业</s>
-              <el-popover ref="popover" placement="bottom" width="108" trigger="click">
-                <div class="popover-main">
-                  <p style="text-align: center" v-for="(item, index) in stock.list" :key="index">{{ item }}</p>
-                </div>
-                <s class="link" slot="reference">查看</s>
-              </el-popover>
-            </span>
-            <span class="tip">
-              占总企业
-              <strong>{{ stock.ratio }}%</strong>
-            </span>
-          </div>
-        </div>
-      </div>
-      <bar-table
-        title="行业司法诉讼风险"
-        :legends="['行业司法诉讼风险']"
-        class="item_100 item_last bar-chart-main"
-      ></bar-table>
+      <pack-chart class="item_100 pack-main"></pack-chart>
+      <finance-table class="item_40 finance-table-main" title="财务及经济指标异动"></finance-table>
+      <bar-table title="行业司法诉讼风险" :legends="['行业司法诉讼风险']" class="item_60 bar-chart-main"></bar-table>
+      <table-com class="item_50 last" :type="1"></table-com>
+      <table-com class="item_50 last" :type="2"></table-com>
     </div>
   </div>
 </template>
 <script>
 const echarts = require('echarts')
 import { bond, stock } from '@/mockData/risk'
-import packChart from '@/components/analysis/risk/pack.vue'
-import financeTable from '@/components/analysis/risk/financeTable.vue'
-import barTable from '@/components/analysis/risk/bar.vue'
+import packChart from '@/components/analysis/risk/pack'
+import financeTable from '@/components/analysis/risk/financeTable'
+import barTable from '@/components/analysis/risk/bar'
+import tableCom from '@/components/analysis/risk/table'
 export default {
   data() {
     return {
@@ -70,7 +31,7 @@ export default {
       stock: {}
     }
   },
-  components: { packChart, financeTable, barTable },
+  components: { packChart, financeTable, barTable, tableCom },
   methods: {
     getData() {
       this.loading = true
@@ -95,119 +56,15 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/styles/common/view';
 .main {
-  height: calc(100% - 88px);
-  .item-box {
-    .height_lg {
-      background-color: #f4f6f9;
-      flex-direction: column;
-    }
-
-    .finance-table-main {
-      width: 100%;
-      height: calc(100% - 155px);
-      margin-bottom: 20px;
-      box-sizing: border-box;
-    }
-
-    .market-info-main {
-      width: 100%;
-      height: 135px;
-
-      .card {
-        display: inline-block;
-        width: calc(50% - 10px);
-        height: 100%;
-        padding: 20px 0 20px 20px;
-        background-color: #ffffff;
-        margin-right: 20px;
-        box-sizing: border-box;
-        vertical-align: top;
-
-        &:last-of-type {
-          margin: 0;
-        }
-
-        .icon-card {
-          float: right;
-          width: 30px;
-          height: 30px;
-          background-color: #cccccc;
-        }
-
-        .title {
-          display: block;
-          width: calc(100%);
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          font-size: 16px;
-          font-weight: 400;
-          color: #000a12;
-          line-height: 22px;
-          margin-bottom: 10px;
-        }
-
-        .num {
-          display: block;
-          width: calc(100%);
-          font-size: 35px;
-          font-weight: bold;
-          color: #1b253a;
-          line-height: 44px;
-          margin-bottom: 6px;
-
-          .unit {
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 400;
-            color: #000a12;
-            line-height: 20px;
-          }
-
-          .link {
-            text-indent: 1em;
-            text-decoration: none;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 400;
-            color: #3a84ff;
-            line-height: 20px;
-            margin-left: 6px;
-          }
-        }
-
-        .tip {
-          font-size: 12px;
-          font-weight: 400;
-          color: #94979b;
-          line-height: 16px;
-          strong {
-            color: #1b253a;
-          }
-
-          .icon-img {
-            width: 8px;
-            height: 16px;
-            margin-left: 6px;
-            vertical-align: sub;
-          }
-
-          .icon-up {
-            background-image: url(~@/assets/imgs/icons/up.svg);
-          }
-
-          .icon-down {
-            background-image: url(~@/assets/imgs/icons/down.svg);
-          }
-        }
-      }
-    }
-
-    .bar-chart-main,
-    .line-chart-main {
-      height: calc(100% - 500px) !important;
-      min-height: 250px;
-    }
+  .pack-main {
+    background-color: rgba(0, 0, 0, 0) !important;
+    height: 580px !important;
+  }
+  .finance-table-main,
+  .bar-chart-main,
+  .line-chart-main {
+    height: calc(100% - 500px) !important;
+    min-height: 250px;
   }
 }
 </style>

@@ -22,7 +22,7 @@
         node-key="value"
         :props="defaultProps"
       ></el-tree>
-      <i class="icon-more el-icon-more" slot="reference"></i>
+      <i class="icon-more el-icon-s-operation" style="color: #94979b" slot="reference"></i>
     </el-popover>
     <el-button v-if="showBtn" class="search-btn fr" type="primary" @click="search">查询</el-button>
   </div>

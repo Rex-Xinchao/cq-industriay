@@ -3,29 +3,76 @@
     <h1 class="com-title">基准指标</h1>
     <div class="com-filter">
       <div class="filter-item">日期：</div>
-      <time-select class="filter-item" v-model="dateTime"></time-select>
+      <el-date-picker
+        class="filter-item time-select"
+        v-model="dateTime"
+        type="year"
+        :clearable="false"
+        placeholder="请选择年份"
+        :picker-options="pickerOptions"
+      ></el-date-picker>
+      <el-select class="filter-item time-type-select" v-model="timeType" placeholder="请选择">
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+      </el-select>
       <el-button class="filter-item btn" type="primary" @click="search">查询</el-button>
     </div>
     <el-table v-loading="loading" class="table-main table-head-grey" :data="tableData" height="300">
       <el-table-column prop="name" label="科目" align="center"></el-table-column>
-      <el-table-column prop="greateValue" label="优秀值" align="center"></el-table-column>
-      <el-table-column prop="goodValue" label="良好值" align="center"></el-table-column>
-      <el-table-column prop="averageValue" label="平均值" align="center"></el-table-column>
-      <el-table-column prop="lowerValue" label="较低值" align="center"></el-table-column>
-      <el-table-column prop="badValue" label="较差值" align="center"></el-table-column>
+      <el-table-column prop="greateValue" label="优秀值" align="center">
+        <template slot-scope="scope">
+          <span v-html="getValue(scope.row.greateValue, scope.row.type)"></span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="goodValue" label="良好值" align="center">
+        <template slot-scope="scope">
+          <span v-html="getValue(scope.row.goodValue, scope.row.type)"></span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="averageValue" label="平均值" align="center">
+        <template slot-scope="scope">
+          <span v-html="getValue(scope.row.averageValue, scope.row.type)"></span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="lowerValue" label="较低值" align="center">
+        <template slot-scope="scope">
+          <span v-html="getValue(scope.row.lowerValue, scope.row.type)"></span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="badValue" label="较差值" align="center">
+        <template slot-scope="scope">
+          <span v-html="getValue(scope.row.badValue, scope.row.type)"></span>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
 <script>
 import { standard } from '@/api/base'
 import { mapGetters } from 'vuex'
+import { formatDate } from '@/libs/utils'
 export default {
   data() {
     return {
       form: {},
-      dateTime: [],
+      dateTime: new Date(),
       loading: false,
-      tableData: []
+      tableData: [],
+      timeType: 'Q4',
+      options: [
+        {
+          label: '年度',
+          value: 'Q4'
+        },
+        {
+          label: '半年度',
+          value: 'Q2'
+        }
+      ],
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() > new Date().getTime()
+        }
+      }
     }
   },
   computed: {
@@ -38,6 +85,12 @@ export default {
   watch: {
     type() {
       this.search()
+    },
+    dateTime() {
+      this.search()
+    },
+    timeType() {
+      this.search()
     }
   },
   methods: {
@@ -45,8 +98,8 @@ export default {
       let params = {
         industryCode: this.industryCode,
         standardType: this.standardType,
-        st: this.dateTime[0],
-        et: this.dateTime[1]
+        dateTime: formatDate(this.dateTime, 'yyyy'),
+        timeType: this.timeType
       }
       this.loading = true
       standard(params)
@@ -58,6 +111,12 @@ export default {
           this.loading = false
           this.tableData = []
         })
+    },
+    getValue(value, type = 'ratio') {
+      console.log(value)
+      if (!value) return null
+      const unit = type === 'ratio' ? '%' : '万元'
+      return `${value}${unit}`
     }
   },
   mounted() {
@@ -78,8 +137,10 @@ export default {
     float: none;
   }
 
-  .btn {
-    margin-left: 12px;
+  .time-select,
+  .time-type-select {
+    margin: 0 12px 0 0;
+    width: 180px;
   }
 }
 </style>

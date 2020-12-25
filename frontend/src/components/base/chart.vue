@@ -118,9 +118,11 @@ export default {
 @import '~@/assets/styles/common/component';
 .filter-bar {
   width: 100%;
-  height: 28px;
+  height: auto;
   line-height: 28px;
-  margin: 20px 0 16px 0;
+  padding: 16px 0 16px 0;
+  border-bottom: 1px dashed #ccc;
+
   span {
     display: inline-block;
     vertical-align: top;
@@ -133,7 +135,6 @@ export default {
     text-overflow: ellipsis;
     white-space: nowrap;
     padding: 0 16px;
-    margin-bottom: 16px;
     font-size: 12px;
     cursor: pointer;
 

@@ -1,13 +1,13 @@
 <template>
-  <div class="pack-chart-main">
+  <div class="pack-chart-main" v-loading="loading" element-loading-background="#F4F6F9">
     <div class="chart-filter">
       <el-select class="select" v-model="typeSelect">
         <el-option v-for="item in typeOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
       </el-select>
       <time-select class="select" v-model="dateTime"></time-select>
     </div>
-    <div v-loading="loading" class="chart-main" id="forceChart"></div>
-    <no-data-show v-loading="loading" class="chart-nodata" :show="noData"></no-data-show>
+    <div class="chart-main" id="forceChart"></div>
+    <no-data-show class="chart-nodata" :show="noData"></no-data-show>
   </div>
 </template>
 <script>
@@ -123,7 +123,7 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 100000;
+    z-index: 1999;
     .select {
       margin-right: 12px;
     }
