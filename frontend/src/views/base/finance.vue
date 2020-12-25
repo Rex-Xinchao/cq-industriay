@@ -17,7 +17,7 @@
             <el-option v-for="item in markets" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
         </span>
-        <span class="filter-label fr">披露时间：{{ time || '--' }}</span>
+        <span class="filter-label fr">披露期：{{ time || '--' }}</span>
       </div>
       <el-table v-loading="loading" class="table-head-grey" :data="tableData" height="calc(100% - 120px)">
         <el-table-column prop="comName" label="龙头企业" align="center">

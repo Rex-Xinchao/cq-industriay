@@ -1,6 +1,6 @@
 <template>
   <div class="com-main" v-loading="loading">
-    <h1 class="com-title">
+    <h1 class="com-title_min">
       {{ title }}
       <span class="com-title_sub">{{ subTitle }}</span>
       <i class="icon-tip" :title="tip"></i>

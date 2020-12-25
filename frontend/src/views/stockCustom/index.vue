@@ -8,44 +8,47 @@
       </h1>
     </div>
     <div class="item-box">
-      <h1 class="sub-title">行业经济/宏观指标</h1>
-      <div v-loading="loading" class="item_25 height_sm">
-        <complex-chart v-if="dataList[0].indexType === 1" class="fill" :chartData="dataList[0]"></complex-chart>
-        <line-chart v-else class="fill" :chartData="dataList[0]"></line-chart>
+      <div class="com-main" v-loading="loading">
+        <h1 class="com-title">行业经济/宏观指标</h1>
+        <div class="card-box">
+          <complex-chart v-if="dataList[0].indexType === 1" class="card" :chartData="dataList[0]"></complex-chart>
+          <line-chart v-else class="card" :chartData="dataList[0]"></line-chart>
+          <complex-chart v-if="dataList[1].indexType === 1" class="card" :chartData="dataList[1]"></complex-chart>
+          <line-chart v-else class="card" :chartData="dataList[1]"></line-chart>
+          <complex-chart v-if="dataList[2].indexType === 1" class="card" :chartData="dataList[2]"></complex-chart>
+          <line-chart v-else class="card" :chartData="dataList[2]"></line-chart>
+          <complex-chart v-if="dataList[3].indexType === 1" class="card" :chartData="dataList[3]"></complex-chart>
+          <line-chart v-else class="card" :chartData="dataList[3]"></line-chart>
+        </div>
+        <div class="card-box">
+          <ratio-line color="#344CE9" title="行业不良率" legend="行业不良率" class="card_lg"></ratio-line>
+          <ratio-line color="#72AF78" title="行业违约率" legend="行业违约率" class="card_lg"></ratio-line>
+        </div>
       </div>
-      <div v-loading="loading" class="item_25 height_sm">
-        <complex-chart v-if="dataList[1].indexType === 1" class="fill" :chartData="dataList[1]"></complex-chart>
-        <line-chart v-else class="fill" :chartData="dataList[1]"></line-chart>
+      <div class="com-main">
+        <h1 class="com-title">行业存量授信客户贷款余额情况</h1>
+        <div class="card-box">
+          <bar-chart class="card_lg" :request="loan_balance"></bar-chart>
+          <circle-chart
+            class="card_lg"
+            title=""
+            :request="total_loan_balance"
+            :legendData="legendData_1"
+          ></circle-chart>
+        </div>
       </div>
-      <div v-loading="loading" class="item_25 height_sm">
-        <complex-chart v-if="dataList[2].indexType === 1" class="fill" :chartData="dataList[2]"></complex-chart>
-        <line-chart v-else class="fill" :chartData="dataList[2]"></line-chart>
+      <div class="com-main">
+        <h1 class="com-title">行业存量授信客户不良贷款情况</h1>
+        <div class="card-box">
+          <stack-chart class="card_lg" :request="abnormal_loan"></stack-chart>
+          <circle-chart
+            class="card_lg"
+            title=""
+            :request="total_abnormal_loan"
+            :legendData="legendData_2"
+          ></circle-chart>
+        </div>
       </div>
-      <div v-loading="loading" class="item_25 height_sm">
-        <complex-chart v-if="dataList[3].indexType === 1" class="fill" :chartData="dataList[3]"></complex-chart>
-        <line-chart v-else class="fill" :chartData="dataList[3]"></line-chart>
-      </div>
-      <h1 class="sub-title">行业存量授信客户贷款余额情况</h1>
-      <bar-chart class="item_50 height_sm" :request="loan_balance"></bar-chart>
-      <circle-chart
-        class="item_50 height_sm"
-        title=""
-        :request="total_loan_balance"
-        :legendData="legendData_1"
-      ></circle-chart>
-      <h1 class="sub-title">行业存量授信客户不良贷款情况</h1>
-      <stack-chart class="item_50 height_sm" :request="abnormal_loan"></stack-chart>
-      <circle-chart
-        class="item_50 height_sm"
-        title=""
-        :request="total_abnormal_loan"
-        :legendData="legendData_2"
-      ></circle-chart>
-      <line-table
-        title="行业不良率/违约率"
-        :legends="['行业不良率', '行业违约率']"
-        class="item_100 height_sm"
-      ></line-table>
       <table-com
         title="行业逾期客户和黑名单情况"
         class="item_50 height_mid"
@@ -78,7 +81,7 @@ import complexChart from '@components/stockCustom/complex'
 import lineChart from '@components/stockCustom/line'
 import tableCom from '@components/stockCustom/table'
 import doucleCircleChart from '@components/stockCustom/circle_double'
-import lineTable from '@/components/analysis/risk/line.vue'
+import ratioLine from '@/components/stockCustom/ratioLine'
 import { mapGetters } from 'vuex'
 export default {
   data() {
@@ -100,7 +103,7 @@ export default {
     lineChart,
     tableCom,
     doucleCircleChart,
-    lineTable
+    ratioLine
   },
   methods: {
     loan_balance,
@@ -139,9 +142,50 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '~@/assets/styles/common/view';
-.fill {
+@import '~@/assets/styles/common/component';
+
+.com-main {
+  background-color: white;
+}
+.card-box {
   width: 100%;
-  height: 100%;
-  box-sizing: border-box;
+  height: 186px;
+  margin: 12px 0 0 0;
+  display: flex;
+  border-bottom: 1px solid #cccccc;
+  padding: 0 0 20px 0;
+
+  &:nth-of-type(2) {
+    border-bottom: none;
+    padding: 0;
+  }
+
+  .card {
+    width: calc(25% - 15px);
+    height: 100%;
+    box-sizing: border-box;
+    border-right: 1px solid #dcdee3;
+    padding: 0;
+    margin: 0 20px 0 0;
+
+    &:last-of-type {
+      border: none;
+      margin: 0;
+    }
+  }
+
+  .card_lg {
+    width: calc(50% - 10px);
+    height: 100%;
+    box-sizing: border-box;
+    border-right: 1px solid #dcdee3;
+    padding: 0;
+    margin: 0 20px 0 0;
+
+    &:last-of-type {
+      border: none;
+      margin: 0;
+    }
+  }
 }
 </style>
