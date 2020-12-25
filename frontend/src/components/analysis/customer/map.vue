@@ -107,7 +107,8 @@ export default {
               show: true
             },
             itemStyle: {
-              areaColor: '#F5F6F7'
+              areaColor: '#F5F6F7',
+              hoverable: false
             },
             emphasis: {
               itemStyle: {}
@@ -177,6 +178,14 @@ export default {
       if (!this.myChart) {
         this.myChart = echarts.init(document.getElementById('map'))
         let timer = null
+        this.myChart.on('mouseover', (params) => {
+          this.myChart.dispatchAction({
+            type: 'downplay'
+          })
+        })
+        this.myChart.on('hover', function (param) {
+          return false
+        })
         this.myChart.on('dblclick', (params) => {
           timer && clearTimeout(timer)
           if (this.activeType === 'all') {
@@ -206,7 +215,13 @@ export default {
         this.myChart.on('click', (params) => {
           timer && clearTimeout(timer)
           timer = setTimeout(() => {
-            this.handleOpen(params.name, params.value)
+            if (this.activeType === 'all') {
+              if (['重庆', '陕西', '贵州', '四川'].includes(params.name)) {
+                this.handleOpen(params.name, params.value)
+              }
+            } else {
+              this.handleOpen(params.name, params.value)
+            }
           }, 500)
         })
       }
@@ -273,5 +288,8 @@ export default {
   & + .sign-tag_com {
     margin-left: 8px;
   }
+}
+.chart-main > div > canvas:hover {
+  cursor: default;
 }
 </style>

@@ -4,7 +4,7 @@
     :default-active="activeName"
     class="sidebar"
     @select="pageTo"
-    :default-openeds="['/analysis', '/base', '/industrial', '/stockCustom', '/finance']"
+    :default-openeds="['/analysis', '/base', '/industrial', '/stockCustom']"
   >
     <el-submenu v-for="(item, index) in menu" :index="`/${item.page}`" :key="`/${item.page}`">
       <template slot="title">
@@ -123,21 +123,6 @@ export default {
               name: '存量客户图像'
             }
           ]
-        },
-        {
-          name: '区域经济',
-          imgName: 'financeMain',
-          page: 'finance',
-          children: [
-            {
-              page: 'status',
-              name: '区域经济状况'
-            },
-            {
-              page: 'incomes',
-              name: '财政收支及债务'
-            }
-          ]
         }
       ]
     }
@@ -173,9 +158,6 @@ export default {
   }
   &.icon-stockMain {
     background-image: url(~@/assets/imgs/siderbar/stockMain.svg);
-  }
-  &.icon-financeMain {
-    background-image: url(~@/assets/imgs/siderbar/area.png);
   }
 }
 .icon-sub {
@@ -293,33 +275,5 @@ export default {
 }
 </style>
 <style lang="scss">
-.sidebar {
-  height: calc(100% - 80px);
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-.el-menu {
-  border: none;
-}
-.el-menu-item {
-  a {
-    text-decoration: none;
-    color: #94979b;
-  }
-}
-.is-active {
-  a {
-    color: #409eff;
-  }
-}
-.el-aside {
-  .el-submenu__title {
-    height: 32px;
-    line-height: 32px;
-  }
-  .el-submenu .el-menu-item {
-    height: 32px;
-    line-height: 32px;
-  }
-}
+@import '~@/assets/styles/common/sider';
 </style>

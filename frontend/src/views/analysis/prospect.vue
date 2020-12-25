@@ -31,13 +31,14 @@
         :barTitles="['行业收入', '行业资产']"
         :types="['ratio', 'number']"
       ></complex-chart>
-      <bar-chart
-        class="main-chart"
-        title="盈利前景"
-        :legends="['行业毛利率', '行业净利率']"
-        tip="上市、三板、发债企业的业务毛利率和财报净利率"
-        type="ratio"
-      ></bar-chart>
+      <div class="main-chart com-main" style="height: 520px">
+        <h1 class="com-title">
+          盈利前景
+          <i class="icon-tip" title="上市、三板、发债企业的业务毛利率和财报净利率"></i>
+        </h1>
+        <barOnly style="height: 200px" name="行业毛利率"></barOnly>
+        <barOnly style="height: 200px" name="行业净利率"></barOnly>
+      </div>
       <bar-chart
         class="main-chart"
         title="市场前景"
@@ -51,6 +52,7 @@
 <script>
 import complexChart from '@components/analysis/prospect/complex'
 import barChart from '@components/analysis/prospect/bar'
+import barOnly from '@components/analysis/prospect/bar_only'
 import { cards } from '@/mockData/prospect'
 import { mapGetters } from 'vuex'
 export default {
@@ -63,7 +65,7 @@ export default {
   computed: {
     ...mapGetters(['industry'])
   },
-  components: { complexChart, barChart },
+  components: { complexChart, barChart, barOnly },
   methods: {
     getData() {
       this.loading = true

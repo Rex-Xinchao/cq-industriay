@@ -145,14 +145,18 @@ export default {
       this.tableLoading = true
       riskChain({
         industryCode: this.industryCode
-      }).then((res) => {
-        this.tableLoading = false
-        this.chartData = res
-        res.relationships.forEach((item, index) => {
-          item.id = index
-        })
-        this.initChart()
       })
+        .then((res) => {
+          this.tableLoading = false
+          this.chartData = res
+          res.relationships.forEach((item, index) => {
+            item.id = index
+          })
+          this.initChart()
+        })
+        .catch((err) => {
+          this.tableLoading = false
+        })
     }
   },
   mounted() {

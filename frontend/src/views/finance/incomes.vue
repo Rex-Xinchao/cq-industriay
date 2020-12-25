@@ -181,10 +181,7 @@ export default {
       let scrollTop = getScroll(document.querySelector('.el-main'), true)
       for (let i = this.idList.length - 1; i >= 0; i--) {
         let id = this.idList[i]
-        let top = document.getElementById(id) && document.getElementById(id).offsetTop - 120 - 240
-        if (i === this.idList.length - 1) {
-          top -= 240
-        }
+        let top = document.getElementById(id) && document.getElementById(id).offsetTop - 120
         if (top && scrollTop >= top) {
           this.activeType = id
           break
@@ -206,6 +203,9 @@ export default {
   },
   mounted() {
     document.querySelector('.el-main').addEventListener('scroll', this.handleScroll, false)
+    this.$nextTick(() => {
+      if (this.$route.query.id) this.scrollTo(this.$route.query.id)
+    })
   },
   destroyed() {
     document.querySelector('.el-main').removeEventListener('scroll', this.handleScroll, false)

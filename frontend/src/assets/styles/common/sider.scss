@@ -1,0 +1,29 @@
+.sidebar {
+    height: calc(100% - 80px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.el-menu {
+    border: none;
+}
+.el-menu-item {
+    a {
+        text-decoration: none;
+        color: #94979b;
+    }
+}
+.is-active {
+    a {
+        color: #409eff;
+    }
+}
+.el-aside {
+    .el-submenu__title {
+        height: 36px;
+        line-height: 36px;
+    }
+    .el-submenu .el-menu-item {
+        height: 36px;
+        line-height: 36px;
+    }
+}

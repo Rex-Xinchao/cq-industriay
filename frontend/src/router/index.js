@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+const Login = () => import('@/views/login')
 const Layout = () => import('@/views/Layout')
+const StockCustom_All = () => import('@/views/stockCustom/all')
+const Pillar = () => import('@/views/pillar/index')
+const LayoutWithSider = () => import('@/views/LayoutWithSider')
 const IndustryEnv = () => import('@/views/analysis/env')
 const IndustryProspect = () => import('@/views/analysis/prospect')
 const IndustryPolicy = () => import('@/views/analysis/policy')
@@ -17,12 +21,10 @@ const BaseFinance = () => import('@/views/base/finance')
 const Boom = () => import('@/views/industrial/boom')
 const Risk = () => import('@/views/industrial/risk')
 const StockCustom = () => import('@/views/stockCustom/index')
-const StockCustom_All = () => import('@/views/stockCustom/all')
-const Pillar = () => import('@/views/pillar/index')
+const LayoutForAreaFinance = () => import('@/views/LayoutForAreaF')
 const PillarChart = () => import('@/views/pillar/chart')
 const FinanceStatus = () => import('@/views/finance/status')
 const FinanceIncomes = () => import('@/views/finance/incomes')
-const Login = () => import('@/views/login')
 
 Vue.use(VueRouter)
 
@@ -33,116 +35,154 @@ const routes = [
     component: Login
   },
   {
-    path: '/',
-    name: 'Layout',
-    component: Layout,
+    path: '/analysis',
+    name: 'Analysis',
+    component: LayoutWithSider,
     children: [
       {
-        path: '',
-        redirect: '/analysis/env'
-      },
-      {
-        path: 'analysis/env',
+        path: 'env',
         name: 'IndustryEnv',
         component: IndustryEnv
       },
       {
-        path: 'analysis/prospect',
+        path: 'prospect',
         name: 'IndustryProspect',
         component: IndustryProspect
       },
       {
-        path: 'analysis/policy',
+        path: 'policy',
         name: 'IndustryPolicy',
         component: IndustryPolicy
       },
       {
-        path: 'analysis/compete',
+        path: 'compete',
         name: 'IndustryCompete',
         component: IndustryCompete
       },
       {
-        path: 'analysis/risk',
+        path: 'risk',
         name: 'IndustryRisk',
         component: IndustryRisk
       },
       {
-        path: 'analysis/customer',
+        path: 'customer',
         name: 'IndustryCustomer',
         component: IndustryCustomer
       },
       {
-        path: 'analysis/information',
+        path: 'information',
         name: 'IndustryInformation',
         component: IndustryInformation
-      },
+      }
+    ]
+  },
+  {
+    path: '/base',
+    name: 'Base',
+    component: LayoutWithSider,
+    children: [
       {
-        path: 'base/grow',
+        path: 'grow',
         name: 'BaseGrow',
         component: BaseGrow
       },
       {
-        path: 'base/profit',
+        path: 'profit',
         name: 'BaseProfit',
         component: BaseProfit
       },
       {
-        path: 'base/repay',
+        path: 'repay',
         name: 'BaseRepay',
         component: BaseRepay
       },
       {
-        path: 'base/product',
+        path: 'product',
         name: 'BaseProduct',
         component: BaseProduct
       },
       {
-        path: 'base/business',
+        path: 'business',
         name: 'BaseBusiness',
         component: BaseBusiness
       },
       {
-        path: 'base/finance',
+        path: 'finance',
         name: 'BaseFinance',
         component: BaseFinance
-      },
+      }
+    ]
+  },
+  {
+    path: '/industrial',
+    name: 'Industrial',
+    component: LayoutWithSider,
+    children: [
       {
-        path: 'industrial/boom',
+        path: 'boom',
         name: 'component',
         component: Boom
       },
       {
-        path: 'industrial/risk',
+        path: 'risk',
         name: 'component',
         component: Risk
-      },
+      }
+    ]
+  },
+  {
+    path: '/stockCustom/index',
+    name: 'StockCustomIndex',
+    component: LayoutWithSider,
+    children: [
       {
-        path: 'stockCustom/index',
+        path: '',
         name: 'StockCustom',
         component: StockCustom
-      },
+      }
+    ]
+  },
+  {
+    path: '/stockCustom/all',
+    name: 'StockCustomAll',
+    component: Layout,
+    children: [
       {
-        path: '/stockCustom/all',
+        path: '',
         name: 'StockCustom_All',
         component: StockCustom_All
-      },
+      }
+    ]
+  },
+  {
+    path: '/pillar',
+    name: 'Layout',
+    component: Layout,
+    children: [
       {
-        path: '/pillar/index',
+        path: 'index',
         name: 'Pillar',
         component: Pillar
       },
       {
-        path: '/pillar/chart',
+        path: 'chart',
         name: 'PillarChart',
         component: PillarChart
-      },
+      }
+    ]
+  },
+  {
+    path: '/finance',
+    name: 'LayoutForAreaFinance',
+    component: LayoutForAreaFinance,
+    children: [
       {
-        path: '/finance/status',
+        path: 'status',
         name: 'FinanceStatus',
         component: FinanceStatus
       },
       {
-        path: '/finance/incomes',
+        path: 'incomes',
         name: 'FinanceIncomes',
         component: FinanceIncomes
       }

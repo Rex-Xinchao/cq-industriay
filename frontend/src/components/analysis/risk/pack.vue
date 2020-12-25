@@ -20,7 +20,10 @@ export default {
       loading: false,
       noData: true,
       typeSelect: 1,
-      typeOptions: [{ label: '行业舆情热度', value: 1 }],
+      typeOptions: [
+        { label: '行业舆情热度', value: 1 },
+        { label: '行业多发事件', value: 2 }
+      ],
       dateTime: [],
       chartOption: {
         animationDuration: 1500,
