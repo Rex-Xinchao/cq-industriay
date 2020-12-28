@@ -76,15 +76,20 @@ export default {
         width: 440,
         height: 280
       },
+      legends: {
+        show: true,
+        data: ['景气指数', '核心财务指数', '行业经济指数', '舆情情绪指数'],
+        bottom: 0
+      },
       chartOption: {
-        color: ['#5B8FF9'],
+        // color: ['#5B8FF9'],
         tooltip: {
           trigger: 'axis',
           formatter: function (data) {
             let time = data[0].axisValue + '月'
             let result = `${time}<br/>`
             data.forEach((item) => {
-              result += `景气指数：${item.value}%<br/>`
+              result += `${item.seriesName}：${item.value}<br/>`
             })
             return result
           }
@@ -92,7 +97,7 @@ export default {
         grid: {
           left: '38px',
           right: '20px',
-          bottom: '20px',
+          bottom: '50px',
           top: '32px'
         },
         xAxis: {
@@ -135,7 +140,7 @@ export default {
             }
           },
           axisLabel: {
-            formatter: '{value}%',
+            formatter: '{value}',
             color: '#999999'
           },
           splitLine: {
@@ -143,30 +148,18 @@ export default {
               type: 'dashed',
               color: '#F2F2F2'
             }
-          },
-          max: 100,
-          min: 0
-        },
-        series: {
-          type: 'line',
-          smooth: true,
-          data: [],
-          areaStyle: {
-            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-              {
-                offset: 0,
-                color: '#5B8FF9'
-              },
-              {
-                offset: 1,
-                color: '#ffe'
-              }
-            ])
           }
-        }
+        },
+        series: []
       },
       tableData: [],
-      interval: null
+      interval: null,
+      keyNames: {
+        value1: '景气指数',
+        value2: '核心财务指数',
+        value3: '行业经济指数',
+        value4: '舆情情绪指数'
+      }
     }
   },
   computed: {
@@ -197,8 +190,19 @@ export default {
       }, 500)
     },
     initDialog(data = []) {
+      let series = []
+      this.keyNames
+      for (let key in this.keyNames) {
+        series.push({
+          name: this.keyNames[key],
+          type: 'line',
+          smooth: true,
+          data: data.map((item) => item[key])
+        })
+      }
       this.chartOption.xAxis.data = data.map((item) => item.rpt)
-      this.chartOption.series.data = data.map((item) => item.ratio)
+      this.chartOption.legend = this.legends
+      this.chartOption.series = series
       this.myChart = echarts.init(document.getElementById(`tooltipChart`))
       this.myChart.setOption(this.chartOption, true)
     },
@@ -246,7 +250,8 @@ export default {
       this.$router.push({
         path: path,
         query: {
-          code: this.current.code
+          code: this.current.code,
+          name: this.current.name
         }
       })
     }

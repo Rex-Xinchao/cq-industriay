@@ -14,13 +14,14 @@
       </ul>
       <div class="login-search">
         <el-autocomplete
+          ref="autocomplete"
           class="input search-main"
           v-model="keyword"
           :fetch-suggestions="querySearchAsync"
           size="medium"
-          placeholder="请输入关键词"
+          placeholder="请输入企业关键词"
         ></el-autocomplete>
-        <el-button class="btn" type="primary" size="medium">搜索</el-button>
+        <el-button class="btn" type="primary" size="medium" @click="search">搜索</el-button>
         <div class="advanced-search">高级搜索</div>
       </div>
       <div class="login-history" v-if="list.length">
@@ -82,11 +83,14 @@ export default {
       keyword: null,
       type: 3,
       index: 1,
-      list: ['新能源汽车', '电子芯片', '零售行业', '养殖业', '建筑装饰', '房地产开发', '医药', '有色冶炼加工']
+      list: ['新能源汽车', '电子芯片', '零售行业', '养殖业', '建筑装饰', '房地产开发', '医药', '有色冶炼加工'],
+      suggestions: []
     }
   },
   watch: {
     type(data) {
+      this.keyword = null
+      this.$refs.autocomplete._data.suggestions = []
       if (data === 3) {
         this.list = ['新能源汽车', '电子芯片', '零售行业', '养殖业', '建筑装饰', '房地产开发', '医药', '有色冶炼加工']
       } else {
@@ -122,7 +126,57 @@ export default {
     },
     querySearchAsync(queryString, cb) {
       if (!queryString) return cb([])
-      cb([{ value: '汽车' }])
+      this.suggestions = []
+      if (this.type === 1) {
+        this.suggestions = [{ value: '长安汽车' }]
+      }
+      if (this.type === 2) {
+        this.suggestions = []
+      }
+      if (this.type === 3) {
+        this.suggestions = [{ value: '新能源车整车制造（国标）', code: 'AF000001' }]
+      }
+      if (this.type === 4) {
+        this.suggestions = [{ value: '重庆', code: 'AF000001' }]
+      }
+      cb(this.suggestions)
+    },
+    search() {
+      if (!this.keyword) {
+        this.$message.error('关键处不能为空')
+        return
+      }
+      if (this.type === 1) {
+        this.$router.push({
+          path: '/test',
+          query: {
+            id: this.keyword
+          }
+        })
+      } else if (this.type === 2) {
+        this.$router.push({
+          path: '/test',
+          query: {
+            id: this.keyword
+          }
+        })
+      } else if (this.type === 3) {
+        this.$router.push({
+          path: '/analysis/env',
+          query: {
+            code: this.suggestions.find((item) => item.value === this.keyword).code,
+            name: this.keyword
+          }
+        })
+      } else if (this.type === 4) {
+        this.$router.push({
+          path: '/finance/status',
+          query: {
+            area: this.suggestions.find((item) => item.value === this.keyword).code,
+            name: this.keyword
+          }
+        })
+      }
     }
   },
   mounted() {}

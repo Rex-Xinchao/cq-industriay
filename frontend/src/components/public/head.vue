@@ -4,7 +4,15 @@
     <div class="log_bar"></div>
     <div class="log_sub"></div>
     <div class="user-right">
-      <el-input class="search-main" placeholder="请输入关键词" v-model="keyword" clearable></el-input>
+      <el-autocomplete
+        ref="autocomplete"
+        class="search-main"
+        v-model="keyword"
+        :fetch-suggestions="querySearchAsync"
+        size="medium"
+        placeholder="请输入关键词"
+        @select="pageTo"
+      ></el-autocomplete>
       <div class="user-info">用户A</div>
     </div>
   </div>
@@ -13,7 +21,25 @@
 export default {
   data() {
     return {
-      keyword: null
+      keyword: null,
+      suggestions: []
+    }
+  },
+  methods: {
+    querySearchAsync(queryString, cb) {
+      if (!queryString) return cb([])
+      this.suggestions = [{ value: '新能源车整车制造（国标）', code: 'AF000001' }]
+      cb(this.suggestions)
+    },
+    pageTo(data) {
+      if (!this.keyword) return
+      this.$router.push({
+        path: '/analysis/env',
+        query: {
+          code: this.suggestions.find((item) => item.value === this.keyword).code,
+          name: this.keyword
+        }
+      })
     }
   }
 }

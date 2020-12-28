@@ -141,7 +141,8 @@ export default {
       this.$router.push({
         path: path,
         query: {
-          code: this.current.code
+          code: this.current.code,
+          name: this.current.name
         }
       })
     },
