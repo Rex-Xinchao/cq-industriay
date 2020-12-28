@@ -13,7 +13,7 @@
           <span class="tip">
             {{ item.type === 'up' ? '较去年增加' : '较去年减少' }}
             <strong>{{ item.change }}</strong>
-            <i class="icon-img" :class="`icon-${item.type}`"></i>
+            <i class="icon-img" :class="`icon-${item.type}`" :title="item.type === 'up' ? '增加' : '减少'"></i>
           </span>
           <span class="link fr" @click="pageTo" v-if="index === 0">企业清单</span>
         </div>

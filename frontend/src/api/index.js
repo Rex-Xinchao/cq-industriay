@@ -2,30 +2,7 @@ import http from '@/libs/axios'
 const sleep = (time) => new Promise((res) => setTimeout(() => res(), time))
 
 // 地图地区列表
-export const base_region = async (data) => {
-  await sleep(1000)
-  return {
-    result: [
-      {
-        name: '四川',
-        code: 'GS938585',
-        parent: null,
-        level: 1
-      },
-      {
-        name: '重庆',
-        code: 'GS955525',
-        parent: null,
-        level: 1
-      },
-      {
-        name: '渝中区',
-        code: 'GS95552',
-        parent: 'GS955525',
-        level: 2
-      }
-    ]
-  }
+export const base_region = (data) => {
   return http.get(`/api/region`, data)
 }
 

@@ -29,7 +29,9 @@ export default {
   props: {
     title: String,
     legend: String,
-    color: String
+    color: String,
+    rejectData: Array,
+    keyName: String
   },
   methods: {
     setChartOption() {
@@ -59,20 +61,10 @@ export default {
       console.log(this.chartOption_line)
       let max = 0
       this.chartOption_line.xAxis.data = []
-      let lineData = [
-        {
-          time: '2020.8',
-          value: (Math.random() * 100).toFixed(2)
-        },
-        {
-          time: '2020.9',
-          value: (Math.random() * 100).toFixed(2)
-        }
-      ]
-      lineData.forEach((item) => {
-        max = Math.max(max, item.value, item.value1)
-        this.chartOption_line.xAxis.data.push(item.time)
-        this.chartOption_line.series.data.push(item.value)
+      this.rejectData.forEach((item) => {
+        max = Math.max(max, item[this.keyName])
+        this.chartOption_line.xAxis.data.push(item.rpt)
+        this.chartOption_line.series.data.push(item[this.keyName])
       })
       this.chartOption_line.yAxis.minInterval = max < 10 ? 1 : 10
       this.chartOption_line.yAxis.max = max ? max : 10

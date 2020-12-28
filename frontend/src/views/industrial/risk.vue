@@ -44,7 +44,11 @@
               <span :class="scope.row.indexRatio < 0 ? 'postive' : 'negative'">
                 {{ scope.row.indexRatio }}
               </span>
-              <i :class="scope.row.indexRatio < 0 ? 'postive' : 'negative'" class="icon"></i>
+              <i
+                :class="scope.row.indexRatio < 0 ? 'postive' : 'negative'"
+                class="icon"
+                :title="scope.row.indexRatio < 0 ? '增加' : '减少'"
+              ></i>
             </template>
           </el-table-column>
         </el-table>

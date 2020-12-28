@@ -13,7 +13,11 @@
           <span :class="scope.row.ratio && scope.row.ratio.indexOf('-') < 0 ? 'postive' : 'negative'">
             {{ scope.row.ratio }}
           </span>
-          <i :class="scope.row.ratio && scope.row.ratio.indexOf('-') < 0 ? 'postive' : 'negative'" class="icon"></i>
+          <i
+            :class="scope.row.ratio && scope.row.ratio.indexOf('-') < 0 ? 'postive' : 'negative'"
+            class="icon"
+            :title="scope.row.ratio && scope.row.ratio.indexOf('-') < 0 ? '增加' : '减少'"
+          ></i>
         </template>
       </el-table-column>
     </el-table>

@@ -21,8 +21,22 @@
           <line-chart v-else class="card" :chartData="dataList[3]"></line-chart>
         </div>
         <div class="card-box">
-          <ratio-line color="#344CE9" title="行业不良率" legend="行业不良率" class="card_lg"></ratio-line>
-          <ratio-line color="#72AF78" title="行业违约率" legend="行业违约率" class="card_lg"></ratio-line>
+          <ratio-line
+            color="#344CE9"
+            title="行业不良率"
+            legend="行业不良率"
+            class="card_lg"
+            :rejectData="rejectData"
+            keyName="rejectRate"
+          ></ratio-line>
+          <ratio-line
+            color="#72AF78"
+            title="行业违约率"
+            legend="行业违约率"
+            class="card_lg"
+            :rejectData="rejectData"
+            keyName="defaultRate"
+          ></ratio-line>
         </div>
       </div>
       <div class="com-main">
@@ -72,7 +86,8 @@ import {
   total_abnormal_loan,
   core_index,
   customer_statistics,
-  customer
+  customer,
+  reject_default
 } from '@/api/custom'
 import barChart from '@components/stockCustom/bar'
 import stackChart from '@components/stockCustom/stack'
@@ -88,6 +103,7 @@ export default {
     return {
       loading: false,
       dataList: [{}, {}, {}, {}],
+      rejectData: [],
       legendData_1: ['500万以下', '500~2000万', '2000~3000万', '3000万以上'],
       legendData_2: ['500万以下', '500~2000万', '2000~5000万', '5000万~1亿', '1亿以上']
     }
@@ -132,6 +148,18 @@ export default {
         .catch((e) => {
           this.loading = false
           this.dataList = [{}, {}, {}, {}]
+        })
+      reject_default({
+        industryCode: this.industryCode
+      })
+        .then((res) => {
+          this.rejectData = res.result || []
+          for (let i = 0; i < 4; i++) {
+            this.dataList.push(res.result[i] || {})
+          }
+        })
+        .catch((e) => {
+          this.rejectData = []
         })
     }
   },

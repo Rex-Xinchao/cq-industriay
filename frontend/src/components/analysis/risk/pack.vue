@@ -40,7 +40,7 @@ export default {
               borderWidth: 0,
               color: (d) => {
                 const colorList = [
-                  ['#0062EA', '#00B2F8'],
+                  ['#00B2F8', '#0062EA'],
                   ['#C9A1FF', '#7783DA'],
                   ['#1EE9FE', '#4DB0FD']
                 ]
@@ -62,7 +62,11 @@ export default {
                   ],
                   global: false // 缺省为 false
                 }
-              }
+              },
+              shadowColor: 'rgba(134, 136, 225, 0.28)',
+              shadowBlur: 20,
+              shadowOffsetX: 1.5,
+              shadowOffsetY: 1
             },
             label: {
               show: true,

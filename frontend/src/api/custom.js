@@ -29,41 +29,7 @@ export const customer = (data) => {
   return http.get(`/custom/${data.industryCode}/customer`, data)
 }
 
-export const neg_events = async (data) => {
-  // await sleep(1000)
-  // return {
-  //   events: [
-  //     {
-  //       eventName: '公告事件',
-  //       eventCode: 'FA20001',
-  //       eventGrade: 1,
-  //       comCount: 2,
-  //       amountCount: 2,
-  //       negEvents: [
-  //         {
-  //           eventName: '业绩亏损',
-  //           eventCode: 'FA20001',
-  //           eventGrade: 1,
-  //           comCount: 1,
-  //           amountCount: 1,
-  //           comList: [
-  //             {
-  //               comName: '客户名称',
-  //               csfId: 'XXXXXXXXX',
-  //               comCode: 'XXXXXXXXXXX',
-  //               buName: '分行名称',
-  //               loanBalance: {
-  //                 amount: 5000000.0,
-  //                 currency: 'CNY',
-  //                 unit: 'UN'
-  //               }
-  //             }
-  //           ]
-  //         }
-  //       ]
-  //     }
-  //   ]
-  // }
+export const neg_events = (data) => {
   return http.get(`/custom/${data.industryCode}/neg_events`, data)
 }
 
@@ -77,4 +43,8 @@ export const region_map = (data) => {
 
 export const risk_event = (data) => {
   return http.get(`/custom/risk_event`, data)
+}
+
+export const reject_default = (data) => {
+  return http.get(`/custom/${data.industryCode}/reject_default`, data)
 }
