@@ -60,7 +60,7 @@ export default {
         if (item.direction === UP) {
           let node = map_UP[item.startCode]
           node.children = node.children || []
-          let typeNode = node.children.find((type) => type.typeCode === item.typeCode)
+          let typeNode = node.children.find((type) => type.typeName === item.typeName)
           if (typeNode) {
             typeNode.children.push(map_UP[item.endCode])
           } else {
@@ -71,7 +71,7 @@ export default {
         } else {
           let node = map_DOWN[item.startCode]
           node.children = node.children || []
-          let typeNode = node.children.find((type) => type.typeCode === item.typeCode)
+          let typeNode = node.children.find((type) => type.typeName === item.typeName)
           if (typeNode) {
             typeNode.children.push(map_DOWN[item.endCode])
           } else {
@@ -180,7 +180,10 @@ export default {
       root.x0 = this.d3TreeBox.width / 2
       root.y0 = this.d3TreeBox.height / 2
       root.descendants().forEach((d, i) => {
-        d.id = d.id || ($pos ? 'up_' : 'down_') + (d.data.code || d.data.id)
+        if (d.depth > 3) {
+          d.children = null
+        }
+        d.id = d.id || ($pos ? 'up_' : 'down_') + (`${d.data.code}_${i}` || d.data.id)
         if (d.children) d._children = d.children
         if (d.depth > 1) d.children = null
       })
@@ -208,7 +211,7 @@ export default {
         .append('g')
         .attr('class', (d) => {
           let className = 'node '
-          className += d.data.code || d.data.typeName
+          className += `${d.data.code}${(d.data.parent && d.data.parent.typeName) || ''}` || d.data.typeName
           className += $pos ? ' up' : ' down'
           className += d.data.typeName ? ' typeNode' : ' productNode'
           className += d.data.root ? ' isRoot' : ''

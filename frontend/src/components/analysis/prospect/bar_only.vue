@@ -12,13 +12,12 @@ export default {
     const vm = this
     return {
       chartId_bar: `barOnly_${new Date().getTime()}_${Math.random()}`,
-      color: ['#3398DB', '#79D2DE', '#FFD37A'],
       tooltip: {
         formatter: function (data) {
           let time = data[0].axisValue
           let result = `${time}<br/>`
           data.forEach((item) => {
-            let value = vm.type === 'ratio' ? `${item.value}%` : `${converUnit(item.value)}元`
+            let value = vm.type === 'ratio' ? `${item.value}%` : `${converUnit(item.value)}${vm.unit}`
             result += `${item.seriesName}：${value}<br/>`
           })
           return result
@@ -30,7 +29,15 @@ export default {
   props: {
     type: String,
     requestPath: String,
-    name: String
+    name: String,
+    unit: {
+      type: String,
+      default: '元'
+    },
+    color: {
+      type: Array,
+      default: () => ['#3398DB']
+    }
   },
   methods: {
     async getChartData() {

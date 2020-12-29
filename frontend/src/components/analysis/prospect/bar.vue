@@ -28,7 +28,7 @@ export default {
           let time = data[0].axisValue
           let result = `${time}<br/>`
           data.forEach((item) => {
-            let value = vm.type === 'ratio' ? `${item.value}%` : `${converUnit(item.value)}元`
+            let value = vm.type === 'ratio' ? `${item.value}%` : `${converUnit(item.value, 'zh', 0)}${vm.unit}`
             result += `${item.seriesName}：${value}<br/>`
           })
           return result
@@ -57,6 +57,10 @@ export default {
     type: {
       type: String,
       default: 'number'
+    },
+    unit: {
+      type: String,
+      default: '家'
     },
     showSelect: {
       type: Boolean,

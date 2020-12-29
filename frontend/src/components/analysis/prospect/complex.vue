@@ -42,7 +42,8 @@ export default {
           let time = data[0].axisValue
           let result = `${time}<br/>`
           data.forEach((item) => {
-            let value = vm.types[item.seriesIndex] === 'ratio' ? `${item.value}%` : `${converUnit(item.value)}元`
+            let type = vm.types[item.seriesIndex]
+            let value = type === 'ratio' ? `${item.value}%` : `${converUnit(item.value)}${vm.unit}`
             result += `${item.seriesName}：${value}<br/>`
           })
           return result
@@ -70,6 +71,10 @@ export default {
     types: {
       type: Array,
       default: () => ['number', 'number']
+    },
+    unit: {
+      type: String,
+      default: '元'
     }
   },
   watch: {
@@ -89,7 +94,6 @@ export default {
       this.chartOption_complex.tooltip = Object.assign({}, this.chartOption_complex.tooltip, this.tooltip)
       this.chartOption_complex.series = this.series
       this.chartOption_complex.xAxis.data = []
-      this.chartOption_complex.yAxis[1].data = []
       this.chartOption_complex.series[0].data = []
       this.chartOption_complex.series[0].name = this.barTitles[this.barType] + '增速'
       this.chartOption_complex.series[1].data = []
