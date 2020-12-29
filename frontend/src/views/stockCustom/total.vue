@@ -36,8 +36,8 @@ import { loan_balance, abnormal_loan, total_loan_balance, total_abnormal_loan } 
 import barChart from '@components/stockCustom/bar'
 import stackChart from '@components/stockCustom/stack'
 import circleChart from '@components/stockCustom/circle'
-import riskTable from '@components/stockCustom/risk'
-import distributionMain from '@components/stockCustom/distribution'
+import distributionMain from '@components/stockCustom/total/distribution'
+import riskTable from '@components/stockCustom/total/risk_information_list'
 export default {
   data() {
     return {

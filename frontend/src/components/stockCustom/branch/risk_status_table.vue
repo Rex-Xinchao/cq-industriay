@@ -3,6 +3,21 @@
     <h1 class="com-title">
       {{ title }}
       <i class="icon-tip" :title="`来源于重庆银行${industry}授信客户`"></i>
+    </h1>
+    <div class="operation-bar">
+      <span class="bar-item" :class="{ active: type === 0 }" @click="type = 0">{{ `全部  (${number_0})` }}</span>
+      <span class="bar-item" :class="{ active: type === 1 }" @click="type = 1">{{ `逾期客户  (${number_1})` }}</span>
+      <span class="bar-item" :class="{ active: type === 2 }" @click="type = 2">
+        {{ `黑名单  (${number_2})` }}
+      </span>
+      <span class="bar-item last" :class="{ active: type === 3 }" @click="type = 3">
+        {{ `账户状态异常  (${number_3})` }}
+      </span>
+
+      <span class="button-export fr" @click="exportFile">
+        <i class="el-icon-download"></i>
+        导出
+      </span>
       <el-popover ref="popover" placement="bottom" width="220" trigger="click">
         <div class="popover-main">
           <p>逾期客户筛选</p>
@@ -28,17 +43,11 @@
           </div>
           <el-button class="save-btn fr" type="primary" @click="init">确认</el-button>
         </div>
-        <span class="filter fr" slot="reference" style="margin-right: 8px">
+        <span class="filter button-export fr" slot="reference" style="margin-right: 8px">
           <i class="icon-img icon-filter"></i>
           筛选
         </span>
       </el-popover>
-    </h1>
-    <div class="operation-bar" v-if="showSelect">
-      <span class="bar-item" :class="{ active: type === 1 }" @click="type = 1">{{ `逾期客户  (${number_1})` }}</span>
-      <span class="bar-item last" :class="{ active: type === 2 }" @click="type = 2">
-        {{ `黑名单  (${number_2})` }}
-      </span>
     </div>
 
     <el-table
@@ -48,25 +57,29 @@
       style="width: 100%"
       height="324px"
     >
-      <el-table-column prop="comName" label="名称"></el-table-column>
+      <el-table-column prop="comName" label="名称">
+        <template slot-scope="scope">
+          <span>{{ scope.row.comName }}</span>
+          <span v-if="scope.row.isOverdue" class="overdue-tag">逾期</span>
+          <span v-if="scope.row.isBlack" class="black-tag">黑名单</span>
+          <span v-if="scope.row.isChange" class="change-tag">异常</span>
+        </template>
+      </el-table-column>
       <el-table-column prop="buName" label="管护机构"></el-table-column>
-      <el-table-column v-if="type === 2" label="黑名单原因">
+      <el-table-column label="贷款余额">
         <template slot-scope="scope">
-          {{ scope.row.reason || '--' }}
+          <span class="bar" :style="{ width: 100 * (scope.row.loanBalance.amount / sum) + 'px' }"></span>
+          <span class="amount">{{ scope.row.loanBalance.amount }}</span>
         </template>
       </el-table-column>
-      <el-table-column v-if="type !== 2" label="贷款余额">
-        <template slot-scope="scope">
-          {{
-            scope.row.loanBalance && scope.row.loanBalance.amount
-              ? `${converUnit(scope.row.loanBalance.amount)} ${scope.row.loanBalance.currency}`
-              : '--'
-          }}
-        </template>
-      </el-table-column>
-      <el-table-column v-if="type === 1 && !title" label="逾期天数">
+      <el-table-column label="最大逾期天数">
         <template slot-scope="scope">
           {{ scope.row.overdueDay + '天' }}
+        </template>
+      </el-table-column>
+      <el-table-column label="风险列入原因">
+        <template slot-scope="scope">
+          {{ scope.row.reason || '--' }}
         </template>
       </el-table-column>
     </el-table>
@@ -86,8 +99,11 @@ export default {
       amountRange: [0, 500],
       timeRange: [0, 30],
       type: 1,
+      number_0: 18,
       number_1: 6,
       number_2: 6,
+      number_3: 6,
+      sum: 0,
       tableData: [],
       loading: false
     }
@@ -97,11 +113,7 @@ export default {
   },
   props: {
     title: String,
-    request: Function,
-    showSelect: {
-      type: Boolean,
-      default: () => false
-    }
+    request: Function
   },
   watch: {
     type() {
@@ -126,24 +138,29 @@ export default {
       })
         .then((res) => {
           this.loading = false
+          this.number_0 = res.count || 0
           this.number_1 = res.overdueCount || 0
           this.number_2 = res.blacklistCount || 0
+          this.number_3 = res.changeCount || 0
           this.response = res
-          this.getData()
+          this.tableData = this.response.result
+          this.sum = 0
+          this.tableData.forEach((item) => {
+            this.sum += item.loanBalance.amount
+          })
         })
         .catch((e) => {
           this.loading = false
+          this.number_0 = 0
           this.number_1 = 0
           this.number_2 = 0
+          this.number_3 = 0
+          this.sum = 0
           this.tableData = []
         })
     },
-    getData() {
-      if (this.type === 1) {
-        this.tableData = this.response.overdueCustomers || this.response.result
-      } else {
-        this.tableData = this.response.blacklist
-      }
+    exportFile() {
+      this.$message.info('功能开发中')
     }
   },
   mounted() {
@@ -153,6 +170,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '~@/assets/styles/common/component';
+@import '~@/assets/styles/common/table';
 .data-table-main {
   .table-main {
     width: 100%;
@@ -168,5 +186,38 @@ export default {
 }
 .operation-bar {
   margin-top: 12px;
+}
+.button-export,
+.button-filter {
+  margin-right: 12px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #666666;
+  line-height: 20px;
+  cursor: pointer;
+
+  &:hover {
+    color: #3a84ff;
+  }
+}
+.overdue-tag,
+.black-tag,
+.change-tag {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 0 4px;
+  line-height: 18px;
+}
+
+.overdue-tag {
+  background-color: #e5e7fa;
+  color: #7180f8;
+}
+.black-tag {
+  background-color: #eaeaea;
+}
+.change-tag {
+  background-color: #fbe4e8;
+  color: #fe6a80;
 }
 </style>

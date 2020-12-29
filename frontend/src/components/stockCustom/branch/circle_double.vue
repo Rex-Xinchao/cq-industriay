@@ -35,7 +35,6 @@ import resize from '@/mixins/resize'
 import pie from '@/mixins/pie'
 import { mapGetters } from 'vuex'
 import { neg_events } from '@/api/custom'
-import timeSelect from '../public/time-select.vue'
 const colors = [
   {
     color: '#3B6EEE',
@@ -67,7 +66,6 @@ const colors = [
   }
 ]
 export default {
-  components: { timeSelect },
   data() {
     return {
       tableTitle: null,

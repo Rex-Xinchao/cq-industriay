@@ -45,7 +45,7 @@
           <bar-chart class="card_lg" :request="loan_balance"></bar-chart>
           <circle-chart
             class="card_lg"
-            title=""
+            title="贷款余额分布"
             :request="total_loan_balance"
             :legendData="legendData_1"
           ></circle-chart>
@@ -57,19 +57,13 @@
           <stack-chart class="card_lg" :request="abnormal_loan"></stack-chart>
           <circle-chart
             class="card_lg"
-            title=""
+            title="不良贷款余额分布"
             :request="total_abnormal_loan"
             :legendData="legendData_2"
           ></circle-chart>
         </div>
       </div>
-      <table-com
-        title="行业逾期客户和黑名单情况"
-        class="item_50 height_mid"
-        :showSelect="true"
-        :request="customer_statistics"
-      ></table-com>
-      <table-com title="行业内正常授信客户" class="item_50 height_mid" :request="customer"></table-com>
+      <table-com title="行业客户及行内风险状况" class="item_100 height_mid" :request="customer_statistics"></table-com>
       <doucle-circle-chart
         class="item_100 item_last height_mid"
         title="行业存量授信客户负面舆情事件"
@@ -92,11 +86,11 @@ import {
 import barChart from '@components/stockCustom/bar'
 import stackChart from '@components/stockCustom/stack'
 import circleChart from '@components/stockCustom/circle'
-import complexChart from '@components/stockCustom/complex'
-import lineChart from '@components/stockCustom/line'
-import tableCom from '@components/stockCustom/table'
-import doucleCircleChart from '@components/stockCustom/circle_double'
-import ratioLine from '@/components/stockCustom/ratioLine'
+import complexChart from '@components/stockCustom/branch/complex'
+import lineChart from '@components/stockCustom/branch/line'
+import tableCom from '@components/stockCustom/branch/risk_status_table'
+import doucleCircleChart from '@components/stockCustom/branch/circle_double'
+import ratioLine from '@/components/stockCustom/branch/ratio_line'
 import { mapGetters } from 'vuex'
 export default {
   data() {
@@ -104,7 +98,7 @@ export default {
       loading: false,
       dataList: [{}, {}, {}, {}],
       rejectData: [],
-      legendData_1: ['500万以下', '500~2000万', '2000~3000万', '3000万以上'],
+      legendData_1: ['500万以下', '500~2000万', '2000~5000万', '5000万~1亿', '1亿以上'],
       legendData_2: ['500万以下', '500~2000万', '2000~5000万', '5000万~1亿', '1亿以上']
     }
   },
@@ -182,6 +176,11 @@ export default {
   display: flex;
   border-bottom: 1px solid #cccccc;
   padding: 0 0 20px 0;
+
+  &:last-of-type {
+    border-bottom: none;
+    padding: 0;
+  }
 
   &:nth-of-type(2) {
     border-bottom: none;

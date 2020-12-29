@@ -1,7 +1,7 @@
 import axios from 'axios'
 import router from '@/router/index'
 const CancelToken = axios.CancelToken
-axios.defaults.timeout = 10000
+axios.defaults.timeout = 1000
 
 axios.interceptors.request.use(
   (config) => {
