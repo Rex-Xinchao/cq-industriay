@@ -2,7 +2,7 @@
   <div class="main">
     <h1 class="main-title">
       风险图谱
-      <span class="sign">汽车行业</span>
+      <span class="sign">{{ industry }}</span>
     </h1>
     <div class="chart-body" v-loading="tableLoading">
       <div class="graph-box"></div>

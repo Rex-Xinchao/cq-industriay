@@ -2,7 +2,7 @@
   <div class="main">
     <h1 class="main-title">
       景气图谱
-      <span class="sign">汽车行业</span>
+      <span class="sign">{{ industry }}</span>
     </h1>
     <div class="chart-body" v-loading="tableLoading">
       <div class="graph-box"></div>
@@ -191,7 +191,24 @@ export default {
     },
     initDialog(data = []) {
       let series = []
-      this.keyNames
+      series.push({
+        name: '占比',
+        type: 'line',
+        smooth: true,
+        data: data.map((item) => item.ratio),
+        areaStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            {
+              offset: 0,
+              color: '#5B8FF9'
+            },
+            {
+              offset: 1,
+              color: '#ffe'
+            }
+          ])
+        }
+      })
       for (let key in this.keyNames) {
         series.push({
           name: this.keyNames[key],

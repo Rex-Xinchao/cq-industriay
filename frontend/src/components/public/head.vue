@@ -28,7 +28,7 @@ export default {
   methods: {
     querySearchAsync(queryString, cb) {
       if (!queryString) return cb([])
-      this.suggestions = [{ value: '新能源车整车制造（国标）', code: 'AF000001' }]
+      this.suggestions = [{ value: '新能源车整车制造（国标）', code: 'AC003005' }]
       cb(this.suggestions)
     },
     pageTo(data) {

@@ -81,8 +81,9 @@ export default {
           }
         }
       })
-      data[0].children = map_UP['GB_A01010101'].children
-      data[1].children = map_DOWN['GB_A01010101'].children
+      data[0].children = map_UP[this.industryCode].children
+      data[1].children = map_DOWN[this.industryCode].children
+      console.log(data)
       return data
     },
     initChartOptions() {
@@ -215,7 +216,13 @@ export default {
         })
         .transition(transition)
         .attr('transform', () => `translate(${root.y0},${root.x0})`)
-        .attr('transform', (d) => `translate(${d.y},${d.x})`)
+        .attr('transform', (d) => {
+          return `translate(${d.y},${d.x})`
+        })
+
+      this.visInstance.selectAll('g.node').attr('transform', (d) => {
+        return `translate(${d.y},${d.x})`
+      })
 
       this.createProductNode($pos)
       this.createTypeNode($pos)
@@ -246,6 +253,11 @@ export default {
           if (!d.source.data.code) return
           return 'url(#marker_arrow)'
         })
+
+      this.visInstance
+        .selectAll(`path.link`)
+        .transition(transition)
+        .attr('d', this.diagonal)
 
       let link = this.visInstance
         .selectAll(`path.${$pos ? 'up' : 'down'}`)
@@ -343,9 +355,9 @@ export default {
           })
         this.visInstance.selectAll('.remove').remove()
       }
-      this.createIcon()
+      this.createIcon($pos)
     },
-    createIcon() {
+    createIcon($pos) {
       this.visInstance
         .selectAll('g.productNode')
         .append('g')
@@ -360,7 +372,13 @@ export default {
         .attr('class', 'icon-circle')
         .attr('width', 14)
         .attr('height', 14)
-        .attr('x', () => this.treeNode.width / 2 - 7)
+        .attr('x', (d) => {
+          if (d.parent.data.direction === DOWN) {
+            return this.treeNode.width / 2 - 7
+          } else {
+            return -this.treeNode.width / 2 - 14
+          }
+        })
         .attr('y', () => -7)
         .attr('xlink:href', function(d) {
           if (d.children && d.children.length && d._children && d._children.length) {
@@ -383,7 +401,7 @@ export default {
             })
             d.children = null
           }
-          let $pos = d.direction === UP
+          let $pos = d.parent.data.direction === UP
           const root = this[`root_${$pos}`]
           this.graphTree(root, $pos)
         })
@@ -391,9 +409,9 @@ export default {
     createTypeNode($pos) {
       const Type = this.visInstance.selectAll(`g.${$pos ? 'up' : 'down'}.typeNode`)
       Type.append('text')
-        .attr('dy', -4)
+        .attr('dy', -12)
         .attr('x', 0)
-        .attr('x', (d) => ($pos ? (d._children ? 16 : -16) : d._children ? -16 : 16))
+        .attr('x', (d) => (!$pos ? (d._children ? 16 : -16) : d._children ? -16 : 16))
         .attr('text-anchor', (d) => ($pos ? (d._children ? 'start' : 'end') : d._children ? 'end' : 'start'))
         .attr('style', (d) => ($pos ? (d._children ? 'start' : 'end') : d._children ? 'end' : 'start'))
         .attr('style', 'cursor: default')

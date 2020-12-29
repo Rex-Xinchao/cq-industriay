@@ -134,10 +134,10 @@ export default {
         this.suggestions = []
       }
       if (this.type === 3) {
-        this.suggestions = [{ value: '新能源车整车制造（国标）', code: 'AF000001' }]
+        this.suggestions = [{ value: '新能源车整车制造（国标）', code: 'AC003005' }]
       }
       if (this.type === 4) {
-        this.suggestions = [{ value: '重庆', code: 'AF000001' }]
+        this.suggestions = [{ value: '重庆', code: 'AC003005' }]
       }
       cb(this.suggestions)
     },
@@ -172,7 +172,7 @@ export default {
         this.$router.push({
           path: '/finance/status',
           query: {
-            area: this.suggestions.find((item) => item.value === this.keyword).code,
+            regionCode: this.suggestions.find((item) => item.value === this.keyword).code,
             name: this.keyword
           }
         })

@@ -5,10 +5,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    // industry: '新能源车整车制造（国标）',
-    // industryCode: 'AF000001',
     industry: null,
-    industryCode: null
+    industryCode: null,
+    regionCode: null,
+    regionName: null
   },
   getters: {
     industry: (state) => {
@@ -16,11 +16,20 @@ export default new Vuex.Store({
     },
     industryCode: (state) => {
       return state.industryCode || localStorage.getItem('industryCode')
+    },
+    regionCode: (state) => {
+      return state.regionCode || localStorage.getItem('regionCode')
+    },
+    regionName: (state) => {
+      return state.regionName || localStorage.getItem('regionName')
     }
   },
   actions: {
     setIndustry({ commit }, data) {
       commit('SET_INDUSTRY', data)
+    },
+    setRegion({ commit }, data) {
+      commit('SET_REGION', data)
     }
   },
   mutations: {
@@ -29,6 +38,12 @@ export default new Vuex.Store({
       state.industryCode = data.code
       localStorage.setItem('industryName', data.name)
       localStorage.setItem('industryCode', data.code)
+    },
+    SET_REGION: (state, data) => {
+      state.regionCode = data.code
+      state.regionName = data.name
+      localStorage.setItem('regionCode', data.code)
+      localStorage.setItem('regionName', data.name)
     }
   }
 })

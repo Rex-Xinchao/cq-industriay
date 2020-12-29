@@ -29,6 +29,7 @@
 </template>
 <script>
 import { Regions } from '@/mixins/base'
+import { mapGetters } from 'vuex'
 export default {
   name: 'area-search',
   data() {
@@ -41,6 +42,9 @@ export default {
         label: 'label'
       }
     }
+  },
+  computed: {
+    ...mapGetters(['regionCode', 'regionName'])
   },
   props: {
     showBtn: {
@@ -58,12 +62,25 @@ export default {
     area(data) {
       this.$emit('update', data)
     },
-    startCode: {
+    // startCode: {
+    //   immediate: true,
+    //   handler(data) {
+    //     if (!data) return
+    //     this.options = [data]
+    //     this.area = data.value
+    //   }
+    // },
+    regionCode: {
       immediate: true,
       handler(data) {
         if (!data) return
-        this.options = [data]
-        this.area = data.value
+        this.options = [
+          {
+            label: this.regionName,
+            value: this.regionCode
+          }
+        ]
+        this.area = data
       }
     }
   },
