@@ -15,7 +15,8 @@
 <script>
 import resize from '@/mixins/resize'
 import bar from '@/mixins/bar'
-import { chartData } from '@/mockData/prospect'
+import { prospectData } from '@/api/analysis'
+import { converUnit } from '@/libs/utils'
 export default {
   data() {
     const vm = this
@@ -27,21 +28,21 @@ export default {
           let time = data[0].axisValue
           let result = `${time}<br/>`
           data.forEach((item) => {
-            let unit = vm.type === 'ratio' ? '%' : '个'
-            result += `${item.seriesName}：${item.value}${unit}<br/>`
+            let value = vm.type === 'ratio' ? `${item.value}%` : `${converUnit(item.value)}元`
+            result += `${item.seriesName}：${value}<br/>`
           })
           return result
         }
       },
-      barType: 1,
+      barType: 0,
       options: [
         {
           label: '龙头企业',
-          value: 1
+          value: 0
         },
         {
           label: '工商企业',
-          value: 2
+          value: 1
         }
       ],
       legend: []
@@ -66,7 +67,7 @@ export default {
   },
   watch: {
     barType(data) {
-      if (data === 1) {
+      if (data === 0) {
         this.legend = this.legends
       } else {
         this.legend = ['工商企业']
@@ -75,6 +76,12 @@ export default {
     }
   },
   methods: {
+    async getChartData() {
+      let data = await prospectData()
+      let result = data.prospect || []
+      this.noData = result.length === 0
+      return result
+    },
     setChartOption() {
       const series = []
       this.legend.forEach((item) => {
@@ -87,25 +94,31 @@ export default {
       })
       this.chartOption_bar.color = this.color
       this.chartOption_bar.tooltip = Object.assign({}, this.chartOption_bar.tooltip, this.tooltip)
-      this.chartOption_bar.grid.left = '40px'
-      this.chartOption_bar.yAxis.axisLabel.formatter = '{value}%'
       this.chartOption_bar.series = series
       this.chartOption_bar.xAxis.data = []
       this.chartOption_bar.series[0].data = []
       this.chartOption_bar.series[1] && (this.chartOption_bar.series[1].data = [])
-      chartData.forEach((item) => {
-        this.chartOption_bar.xAxis.data.push(item.year)
-        this.chartOption_bar.series[0].data.push(item.value1)
-        this.chartOption_bar.series[1] && this.chartOption_bar.series[1].data.push(item.value2)
-        this.chartOption_bar.series[2] && this.chartOption_bar.series[2].data.push(item.value2)
-      })
+      if (this.barType === 0) {
+        this.barData.forEach((item) => {
+          this.chartOption_bar.xAxis.data.push(item.rpt)
+          this.chartOption_bar.series[0].data.push(item.value1)
+          this.chartOption_bar.series[1].data.push(item.value2)
+          this.chartOption_bar.series[2].data.push(item.value3)
+        })
+      } else {
+        this.barData.forEach((item) => {
+          this.chartOption_bar.xAxis.data.push(item.rpt)
+          this.chartOption_bar.series[0].data.push(item.value4)
+        })
+      }
+
       if (this.type === 'ratio') {
         this.chartOption_bar.yAxis.axisLabel.formatter = '{value}%'
-        this.chartOption_bar.yAxis.max = 100
       } else {
-        this.chartOption_bar.yAxis.axisLabel.formatter = '{value}'
+        this.chartOption_bar.yAxis.axisLabel.formatter = (d) => converUnit(d, 'zh', 0)
       }
-      this.chartOption_bar.yAxis.minInterval = 1
+
+      this.chartOption_bar.grid.left = '60px'
       return this.chartOption_bar
     }
   },

@@ -20,8 +20,8 @@
           盈利前景
           <i class="icon-tip" title="上市、三板、发债企业的业务毛利率和财报净利率"></i>
         </h1>
-        <barOnly style="height: 200px" name="行业毛利率"></barOnly>
-        <barOnly style="height: 200px" name="行业净利率"></barOnly>
+        <barOnly type="ratio" style="height: 200px" name="行业毛利率"></barOnly>
+        <barOnly type="ratio" style="height: 200px" name="行业净利率"></barOnly>
       </div>
       <bar-chart
         class="main-chart"

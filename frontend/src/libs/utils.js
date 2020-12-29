@@ -71,7 +71,31 @@ function converUnit($num, $lang = 'zh', $point = 1) {
   return $num
 }
 
-function converUnit_w($num, $point = 1) {
+function getNumUnit($num, $point = 1) {
+  let _num = Number($num),
+    _unit = ''
+  if (!isNaN(_num)) {
+    if ($num < 10000) {
+      _unit = ''
+    } else if ($num < 100000000) {
+      _num = _num / 10000
+      _unit = '万'
+    } else {
+      _num = _num / 100000000
+      _unit = '亿'
+    }
+    return {
+      num: numberFormat(_num, $point),
+      unit: _unit
+    }
+  }
+  return {
+    num: $num,
+    unit: _unit
+  }
+}
+
+function converUnit_w($num) {
   let _num = Number($num)
   if (!isNaN(_num)) {
     _num = _num / 10000
@@ -159,5 +183,6 @@ export {
   getTimeLine,
   getAxisMax,
   getAllDate,
-  numberFormat
+  numberFormat,
+  getNumUnit
 }

@@ -2,13 +2,15 @@
   <div class="com-main">
     <h1 class="com-title">前景概览</h1>
     <div class="com-body">
-      <div class="card-box" v-for="(item, index) in cards" :key="item.code" v-loading="loading" :title="item.title">
+      <div class="card-box" v-for="(item, index) in cards" :key="index" v-loading="loading" :title="item.title">
         <div class="card">
           <i class="icon-img icon-card"></i>
           <span class="title" :title="item.name">{{ item.name }}</span>
           <span class="num">
-            {{ item.value }}
-            <span class="unit">{{ item.unit }}</span>
+            {{ item.unit === '元' ? getNumUnit(item.value).num : item.value }}
+            <span class="unit">
+              {{ item.unit === '元' ? `${getNumUnit(item.value).unit}${item.unit}` : item.unit }}
+            </span>
           </span>
           <span class="tip">
             {{ item.type === 'up' ? '较去年增加' : '较去年减少' }}
@@ -23,7 +25,8 @@
 </template>
 
 <script>
-import { cards } from '@/mockData/prospect'
+import { prospectData } from '@/api/analysis'
+import { getNumUnit } from '@/libs/utils'
 export default {
   data() {
     return {
@@ -32,16 +35,26 @@ export default {
     }
   },
   methods: {
+    getNumUnit,
     getData() {
       this.loading = true
-      setTimeout(() => {
-        this.loading = false
-        this.cards = cards
-        this.cards[0].title = '上市、三板、发债企业数量'
-        this.cards[1].title = '上市、三板、发债企业的业务收入数据'
-        this.cards[2].title = '上市、三板、发债企业的业务毛利数据'
-        this.cards[3].title = '上市、三板、发债企业的财报资产规模'
-      }, 1000)
+      prospectData()
+        .then((res) => {
+          this.loading = false
+          this.cards = res.cards
+          this.cards[0].name = '龙头企业数量'
+          this.cards[0].title = '上市、三板、发债企业数量'
+          this.cards[1].name = '龙头企业业务营收规模'
+          this.cards[1].title = '上市、三板、发债企业的业务收入数据'
+          this.cards[2].name = '龙头企业业务毛利率'
+          this.cards[2].title = '上市、三板、发债企业的业务毛利数据'
+          this.cards[3].name = '龙头企业资产规模'
+          this.cards[3].title = '上市、三板、发债企业的财报资产规模'
+        })
+        .catch((err) => {
+          this.loading = false
+          this.cards = []
+        })
     },
     pageTo() {
       let url = this.$router.resolve({
@@ -96,7 +109,7 @@ export default {
 .card {
   display: inline-block;
   width: 100%;
-  max-width: 260px;
+  max-width: 280px;
   height: 100%;
   padding: 20px 30px 0 20px;
   background-color: #ffffff;
@@ -131,6 +144,9 @@ export default {
     color: #1b253a;
     line-height: 44px;
     margin-bottom: 6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
     .unit {
       font-size: 16px;

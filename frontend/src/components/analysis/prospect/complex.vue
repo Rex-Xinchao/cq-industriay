@@ -13,10 +13,10 @@
 </template>
 
 <script>
-const echarts = require('echarts')
 import resize from '@/mixins/resize'
 import complex from '@/mixins/complex'
-import { chartData2 } from '@/mockData/prospect'
+import { prospectData } from '@/api/analysis'
+import { converUnit } from '@/libs/utils'
 export default {
   data() {
     let vm = this
@@ -42,8 +42,8 @@ export default {
           let time = data[0].axisValue
           let result = `${time}<br/>`
           data.forEach((item) => {
-            let unit = vm.types[item.seriesIndex] === 'ratio' ? '%' : '万元'
-            result += `${item.seriesName}：${item.value}${unit}<br/>`
+            let value = vm.types[item.seriesIndex] === 'ratio' ? `${item.value}%` : `${converUnit(item.value)}元`
+            result += `${item.seriesName}：${value}<br/>`
           })
           return result
         }
@@ -78,6 +78,12 @@ export default {
     }
   },
   methods: {
+    async getChartData() {
+      let data = await prospectData()
+      let result = data.growth || []
+      this.noData = result.length === 0
+      return result
+    },
     setChartOption() {
       this.chartId_c = `complexChart_${this.timeStamp}`
       this.chartOption_complex.tooltip = Object.assign({}, this.chartOption_complex.tooltip, this.tooltip)
@@ -90,26 +96,37 @@ export default {
       this.chartOption_complex.series[1].name = this.barTitles[this.barType]
       let max1 = 0
       let max2 = 0
-      chartData2.forEach((item) => {
-        max1 = Math.max(item.value2, max1)
-        max2 = Math.max(item.value1, max2)
-        this.chartOption_complex.xAxis.data.push(item.year)
-        this.chartOption_complex.series[0].data.push(item.value2)
-        this.chartOption_complex.series[1].data.push(item.value1)
-      })
-
+      if (this.barType === 0) {
+        this.complexData.forEach((item) => {
+          max1 = Math.max(item.value2, max1)
+          max2 = Math.max(item.value1, max2)
+          this.chartOption_complex.xAxis.data.push(item.rpt)
+          this.chartOption_complex.series[0].data.push(item.value2)
+          this.chartOption_complex.series[1].data.push(item.value1)
+        })
+      } else {
+        this.complexData.forEach((item) => {
+          max1 = Math.max(item.value4, max1)
+          max2 = Math.max(item.value3, max2)
+          this.chartOption_complex.xAxis.data.push(item.rpt)
+          this.chartOption_complex.series[0].data.push(item.value4)
+          this.chartOption_complex.series[1].data.push(item.value3)
+        })
+      }
       this.chartOption_complex.yAxis[0].max = max1 ? max1 : 10
       this.chartOption_complex.yAxis[1].max = max2 ? max2 : 10
       if (this.types[0] === 'ratio') {
         this.chartOption_complex.yAxis[0].axisLabel.formatter = '{value}%'
-        this.chartOption_complex.yAxis[0].max = 100
-        this.chartOption_complex.grid.left = '40px'
+      } else {
+        this.chartOption_complex.yAxis[0].axisLabel.formatter = (d) => converUnit(d, 'zh', 0)
       }
       if (this.types[1] === 'ratio') {
         this.chartOption_complex.yAxis[1].axisLabel.formatter = '{value}%'
-        this.chartOption_complex.yAxis[1].max = 100
-        this.chartOption_complex.grid.right = '40px'
+      } else {
+        this.chartOption_complex.yAxis[1].axisLabel.formatter = (d) => converUnit(d, 'zh', 0)
       }
+      this.chartOption_complex.grid.left = '60px'
+      this.chartOption_complex.grid.right = '80px'
       return this.chartOption_complex
     }
   },

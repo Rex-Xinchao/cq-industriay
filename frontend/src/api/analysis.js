@@ -2981,3 +2981,56 @@ export const newsList = async (data) => {
   }
   return result
 }
+
+//行业前景
+export const prospectData = async (data) => {
+  await sleep(1000)
+  return {
+    cards: [
+      {
+        value: 7,
+        change: '5',
+        type: 'down',
+        unit: '家'
+      },
+      {
+        value: 60987917670.46,
+        change: '6.79%',
+        type: 'down',
+        unit: '元'
+      },
+      {
+        value: '12.71%',
+        change: '1.35%',
+        type: 'up'
+      },
+      {
+        value: 154833363490.24,
+        change: '11.29%',
+        type: 'down',
+        unit: '元'
+      }
+    ],
+    growth: [
+      { rpt: '2015', value1: 861997535.51, value2: 235.63, value3: 10027309908.49, value4: 3221.17 },
+      { rpt: '2016', value1: 2758875165.64, value2: 220.06, value3: 19456217844.29, value4: 94.03 },
+      { rpt: '2017', value1: 22509689607.26, value2: 715.9, value3: 188501810589.16, value4: 868.85 },
+      { rpt: '2018', value1: 26000728949.67, value2: 15.51, value3: 174546211190.25, value4: -7.4 },
+      { rpt: '2019', value1: 18652869079.42, value2: -28.26, value3: 154833363490.24, value4: -11.29 }
+    ],
+    profit: [
+      { rpt: '2015', value1: 17.11, value2: 5.55 },
+      { rpt: '2016', value1: 13.37, value2: 7.18 },
+      { rpt: '2017', value1: 11.85, value2: 2.56 },
+      { rpt: '2018', value1: 14.06, value2: -9.17 },
+      { rpt: '2019', value1: 12.71, value2: -22.6 }
+    ],
+    prospect: [
+      { rpt: '2015', value1: 4, value2: 0, value3: 0, value4: 3357 },
+      { rpt: '2016', value1: 6, value2: 0, value3: 0, value4: 4724 },
+      { rpt: '2017', value1: 14, value2: 0, value3: 0, value4: 5563 },
+      { rpt: '2018', value1: 12, value2: 0, value3: 0, value4: 9561 },
+      { rpt: '2019', value1: 7, value2: 0, value3: 0, value4: 4007 }
+    ]
+  }
+}
