@@ -6,6 +6,7 @@
     </h1>
     <div class="chart-body" v-loading="tableLoading">
       <div class="graph-box"></div>
+      <no-data-show :show="noData"></no-data-show>
       <div ref="tooltip" class="chart-tooltip" @mouseleave="hideTip">
         <h1>行业分析</h1>
         <span @click="onItemClick('/analysis/env')">行业环境</span>
@@ -145,6 +146,7 @@ export default {
         .then((res) => {
           this.tableLoading = false
           this.chartData = res
+          this.noData = res.nodes.length === 0
           res.relationships.forEach((item, index) => {
             item.id = index
           })
@@ -152,6 +154,7 @@ export default {
         })
         .catch((err) => {
           this.tableLoading = false
+          this.noData = true
         })
     },
     onItemClick(path) {

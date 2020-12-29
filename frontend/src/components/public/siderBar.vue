@@ -134,6 +134,9 @@ export default {
       if (path === this.$route.path) return
       this.pageTo(path, true)
     }
+  },
+  updated() {
+    this.activeName = this.$route.path
   }
 }
 </script>

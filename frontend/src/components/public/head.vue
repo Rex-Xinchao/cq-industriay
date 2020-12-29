@@ -1,8 +1,8 @@
 <template>
   <div class="head">
-    <div class="log_main"></div>
+    <div class="log_main" @click="pageTo('/login')"></div>
     <div class="log_bar"></div>
-    <div class="log_sub"></div>
+    <div class="log_sub" @click="pageTo('/login')"></div>
     <div class="user-right">
       <el-autocomplete
         ref="autocomplete"
@@ -35,7 +35,7 @@ export default {
         .then((res) => {
           this.suggestions = res.result.map((item) => {
             return {
-              value: item.name,
+              value: `${item.name}${item.type === 1 ? '（国标）' : ''}`,
               code: item.code,
               type: item.type
             }
@@ -72,6 +72,7 @@ export default {
     background-image: url(~@/assets/imgs/logo_2.png);
     background-size: contain;
     background-repeat: no-repeat;
+    cursor: pointer;
   }
 
   .log_bar {
@@ -91,6 +92,7 @@ export default {
     background-image: url(~@/assets/imgs/logo_1.png);
     background-size: contain;
     background-repeat: no-repeat;
+    cursor: pointer;
   }
 
   .user-right {

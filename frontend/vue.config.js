@@ -26,21 +26,21 @@ module.exports = {
   devServer: {
     proxy: {
       '/api': {
-        target: 'http://192.168.250.214:30100/cqb/base/',
+        target: '/cqb/base/',
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''
         }
       },
       '/custom': {
-        target: 'http://192.168.250.214:30100/cqb/customer/industry/',
+        target: '/cqb/customer/industry/',
         changeOrigin: true,
         pathRewrite: {
           '^/custom': ''
         }
       },
       '/base': {
-        target: 'http://192.168.250.214:30100/cqb/index/industry/',
+        target: '/cqb/index/industry/',
         changeOrigin: true,
         pathRewrite: {
           '^/base': ''

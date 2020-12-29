@@ -44,7 +44,5 @@ export const base_qualification = async (data) => {
 
 // 行业查询
 export const getIndustry = async (data) => {
-  await sleep(1000)
-  return { result: [{ code: 'A', name: 'aaa', type: 1, level: 3 }] }
   return http.get(`/api/product`, data)
 }

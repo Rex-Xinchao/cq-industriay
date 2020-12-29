@@ -113,7 +113,7 @@ export default {
       } else if (data === 1) {
         this.list = [
           {
-            name: '长安汽车',
+            name: '重庆长安汽车股份有限公司',
             code: 'TEST_1001'
           }
         ]
@@ -168,7 +168,7 @@ export default {
           .then((res) => {
             this.suggestions = res.result.map((item) => {
               return {
-                value: item.name,
+                value: `${item.name}${item.type === 1 ? '（国标）' : ''}`,
                 code: item.code,
                 type: item.type
               }
@@ -199,7 +199,7 @@ export default {
         this.pageTo('/analysis/env', { type, code, name: value })
       } else if (this.type === 4) {
         this.pageTo('/finance/status', {
-          code: this.suggestions.find((item) => item.value === this.keyword).code,
+          regionCode: this.suggestions.find((item) => item.value === this.keyword).code,
           name: this.keyword
         })
       }
@@ -207,6 +207,19 @@ export default {
     setKey(item) {
       this.keyword = item.name
       this.suggestions = [{ value: item.name, code: item.code, type: item.type }]
+      if (this.type === 1) {
+        this.pageTo('/test', { id: this.keyword })
+      } else if (this.type === 2) {
+        this.pageTo('/test', { id: this.keyword })
+      } else if (this.type === 3) {
+        let { type, value, code } = { ...this.suggestions.find((item) => item.value === this.keyword) }
+        this.pageTo('/analysis/env', { type, code, name: value })
+      } else if (this.type === 4) {
+        this.pageTo('/finance/status', {
+          regionCode: this.suggestions.find((item) => item.value === this.keyword).code,
+          name: this.keyword
+        })
+      }
     }
   },
   mounted() {}
