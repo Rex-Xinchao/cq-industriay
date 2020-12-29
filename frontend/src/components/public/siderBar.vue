@@ -3,7 +3,7 @@
     ref="menu"
     :default-active="activeName"
     class="sidebar"
-    @select="pageTo"
+    @select="onSelectChange"
     :default-openeds="['/analysis', '/base', '/industrial', '/stockCustom']"
   >
     <el-submenu v-for="(item, index) in menu" :index="`/${item.page}`" :key="`/${item.page}`">
@@ -26,6 +26,7 @@
   </el-menu>
 </template>
 <script>
+import pageTo from '@/mixins/pageTo'
 export default {
   data() {
     const vm = this
@@ -127,17 +128,11 @@ export default {
       ]
     }
   },
+  mixins: [pageTo],
   methods: {
-    pageTo(path, type = '_self') {
+    onSelectChange(path) {
       if (path === this.$route.path) return
-      if (type === '_blank') {
-        let url = this.$router.resolve({
-          path: path
-        })
-        window.open(url.href)
-      } else {
-        this.$router.push(path)
-      }
+      this.pageTo(path, true)
     }
   }
 }

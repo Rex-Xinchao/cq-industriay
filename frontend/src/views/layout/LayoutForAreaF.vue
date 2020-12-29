@@ -142,19 +142,23 @@ export default {
     },
     pageTo(route, type = '_self') {
       let [path, query] = route.split('?')
-      let id = query && query.split('=')[1]
       if (path === this.$route.path) {
+        let id = query && query.split('=')[1]
         if (!id) return
         this.scrollTo(id)
       } else {
+        let { regionCode, name } = { ...this.$route.query }
         if (type === '_blank') {
           let url = this.$router.resolve({
             path: path,
-            query: query
+            query: { regionCode, name }
           })
           window.open(url.href)
         } else {
-          this.$router.push(route)
+          this.$router.push({
+            path: path,
+            query: { regionCode, name }
+          })
         }
       }
     }

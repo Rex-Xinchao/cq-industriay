@@ -18,10 +18,10 @@
     <div class="main-body com-main" style="height: 560px">
       <h1 class="com-title">行业财务基准对比</h1>
       <div class="filter-main">
-        <span :class="{ active: type === 1 }" @click="type = 1">出售资产</span>
-        <span :class="{ active: type === 2 }" @click="type = 2">产量冻结</span>
-        <span :class="{ active: type === 3 }" @click="type = 3">机构减持</span>
-        <span :class="{ active: type === 4 }" @click="type = 4">董事辞职</span>
+        <span :class="{ active: type === 1 }" @click="type = 1">成长能力</span>
+        <span :class="{ active: type === 2 }" @click="type = 2">盈利能力</span>
+        <span :class="{ active: type === 3 }" @click="type = 3">偿还能力</span>
+        <span :class="{ active: type === 4 }" @click="type = 4">运营能力</span>
       </div>
       <div class="slider-main">
         <div class="line time-line">
@@ -51,7 +51,7 @@
         <div class="left">
           <div class="head-div">产业链内产业布局</div>
           <div class="body-div">
-            <div class="column">
+            <div class="column" style="height: 85%">
               <div class="tab">
                 <div class="name" style="background-color: #727b95">汽车生产设备</div>
               </div>
@@ -78,9 +78,9 @@
                 </div>
               </div>
             </div>
-            <div class="relation"></div>
+            <div class="relation_1"></div>
             <div class="column">
-              <div class="tab" style="margin-top: 80px">
+              <div class="tab" style="margin-top: 70px">
                 <div class="name">汽车</div>
                 <div class="children">
                   <div class="child-com" title="重庆长安新能源汽车有限公司">
@@ -101,7 +101,7 @@
                 </div>
               </div>
             </div>
-            <div class="relation"></div>
+            <div class="relation_2"></div>
             <div class="column">
               <div class="tab">
                 <div class="name" style="background-color: #727b95">陆运</div>
@@ -285,8 +285,9 @@ export default {
             fontWeight: 'normal',
             fontSize: 14
           },
-          top: '45%',
-          left: '42%'
+          top: 'middle',
+          left: 'middle',
+          textAlign: 'middle'
         },
         color: ['#147AD6', '#79D2DE', '#EC6666'],
         tooltip: {
@@ -300,6 +301,7 @@ export default {
           {
             type: 'pie',
             radius: ['50%', '70%'],
+            center: ['50%', '50%'],
             avoidLabelOverlap: false,
             data: [
               { value: 55, name: '汽车' },
@@ -496,7 +498,7 @@ export default {
     width: 76px;
     height: 76px;
     margin: 20px 24px;
-    background-color: #cccccc;
+    background-image: url(~@/assets/imgs/changan_logo.png);
     box-sizing: border-box;
   }
 
@@ -593,6 +595,7 @@ export default {
       .slider {
         display: inline-block;
         width: calc(100% - 140px);
+        max-width: 600px;
       }
     }
 
@@ -609,6 +612,8 @@ export default {
   .industrial-main {
     width: 100%;
     height: calc(100% - 30px);
+    padding: 0;
+    margin: 0;
 
     .left,
     .right {
@@ -629,7 +634,7 @@ export default {
 
       .body-div {
         width: 100%;
-        height: 100%;
+        height: calc(100% - 40px);
         box-sizing: border-box;
         padding: 20px 0;
         display: flex;
@@ -687,9 +692,19 @@ export default {
           }
         }
       }
-      .relation {
+      .relation_1 {
         width: 35px;
         height: 100%;
+        background-image: url(~@/assets/imgs/relation_1.png);
+        background-repeat: no-repeat;
+        background-position-y: 20px;
+      }
+      .relation_2 {
+        width: 35px;
+        height: 100%;
+        background-image: url(~@/assets/imgs/relation_2.png);
+        background-repeat: no-repeat;
+        background-position-y: 20px;
       }
     }
 
@@ -706,7 +721,6 @@ export default {
         width: calc(100% - 20px);
         height: 100%;
         box-sizing: border-box;
-        padding: 20px 0;
       }
     }
   }

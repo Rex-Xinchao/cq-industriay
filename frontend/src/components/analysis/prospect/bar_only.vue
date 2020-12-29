@@ -59,13 +59,18 @@ export default {
       this.chartOption_bar.xAxis.data = []
       this.barData.forEach((item) => {
         this.chartOption_bar.xAxis.data.push(item.rpt)
-        this.chartOption_bar.series.data.push(item.value1)
+        if (this.name === '行业毛利率') {
+          this.chartOption_bar.series.data.push(item.value1)
+        } else {
+          this.chartOption_bar.series.data.push(item.value2)
+        }
       })
       if (this.type === 'ratio') {
         this.chartOption_bar.yAxis.axisLabel.formatter = '{value}%'
       } else {
         this.chartOption_bar.yAxis.axisLabel.formatter = (d) => converUnit(d, 'zh', 0)
       }
+      this.chartOption_bar.yAxis.min = null
       this.chartOption_bar.grid.left = '60px'
       return this.chartOption_bar
     }

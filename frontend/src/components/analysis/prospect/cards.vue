@@ -7,17 +7,20 @@
           <i class="icon-img icon-card"></i>
           <span class="title" :title="item.name">{{ item.name }}</span>
           <span class="num">
-            {{ item.unit === '元' ? getNumUnit(item.value).num : item.value }}
+            <span :style="{ color: item.type === 'up' ? 'red' : 'green' }">
+              {{ item.unit === '元' ? getNumUnit(item.value).num : item.value }}
+            </span>
             <span class="unit">
               {{ item.unit === '元' ? `${getNumUnit(item.value).unit}${item.unit}` : item.unit }}
             </span>
+
+            <span class="link" @click="pageTo('/base/finance', true, true)" v-if="index === 0">查看企业清单</span>
           </span>
           <span class="tip">
             {{ item.type === 'up' ? '较去年增加' : '较去年减少' }}
             <strong>{{ item.change }}</strong>
             <i class="icon-img" :class="`icon-${item.type}`" :title="item.type === 'up' ? '增加' : '减少'"></i>
           </span>
-          <span class="link fr" @click="pageTo" v-if="index === 0">企业清单</span>
         </div>
       </div>
     </div>
@@ -27,6 +30,7 @@
 <script>
 import { prospectData } from '@/api/analysis'
 import { getNumUnit } from '@/libs/utils'
+import pageTo from '@/mixins/pageTo'
 export default {
   data() {
     return {
@@ -34,6 +38,7 @@ export default {
       cards: [{}, {}, {}, {}]
     }
   },
+  mixins: [pageTo],
   methods: {
     getNumUnit,
     getData() {
@@ -55,12 +60,6 @@ export default {
           this.loading = false
           this.cards = []
         })
-    },
-    pageTo() {
-      let url = this.$router.resolve({
-        path: '/base/finance'
-      })
-      window.open(url.href)
     }
   },
   mounted() {

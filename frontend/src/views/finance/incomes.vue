@@ -152,7 +152,6 @@ export default {
               }
             })
           })
-
           this.tableData_1 = res[0].result
           this.tableData_2 = res[1].result
           this.tableData_3 = res[2].result

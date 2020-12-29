@@ -9,7 +9,9 @@
       <div class="card" v-for="item in regions" :class="item.class" :key="item.class" v-loading="loading">
         <h1>{{ item.regionName }}</h1>
         <ul style="position: relative">
-          <li v-for="child in item.tree" :key="child.id" @click="pageTo(child.id)">{{ child.name }}</li>
+          <li v-for="child in item.tree" :key="child.id" @click="pageTo('/pillar/chart', { id: child.id })">
+            {{ child.name }}
+          </li>
           <no-data-show class="no-data-show" :show="item.tree.length === 0"></no-data-show>
         </ul>
       </div>
@@ -25,10 +27,8 @@ import sx from '@/libs/map/shanxi'
 import sc from '@/libs/map/sichuan'
 import resize from '@/mixins/resize'
 import { industryList } from '@/api/pillar'
-import noDataShow from '../../components/public/no-data-show.vue'
-// todo 地图背景色 颜色加上透明度
+import pageTo from '@/mixins/pageTo'
 export default {
-  components: { noDataShow },
   data() {
     return {
       loading: false,
@@ -179,7 +179,7 @@ export default {
       }
     }
   },
-  mixins: [resize],
+  mixins: [resize, pageTo],
   methods: {
     initMap() {
       this.loading = true
@@ -258,12 +258,6 @@ export default {
       this.myChart = echarts.init(document.getElementById('map'))
       this.myChart.setOption(this.mapOption, true)
       this.myChart.resize()
-    },
-    pageTo(id) {
-      this.$router.push({
-        path: '/pillar/chart',
-        query: { id: id }
-      })
     }
   },
   mounted() {

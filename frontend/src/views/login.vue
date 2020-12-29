@@ -27,7 +27,9 @@
       <div class="login-history" v-if="list.length">
         <div class="title">热点搜索：</div>
         <div class="list">
-          <span v-for="item in list" :key="item">{{ item }}</span>
+          <span v-for="item in list" :key="item.code" @click="setKey(item)" style="cursor: pointer">
+            {{ item.name }}
+          </span>
         </div>
       </div>
       <div class="login-notice">
@@ -68,8 +70,8 @@
         <div class="item"></div>
         <div class="item"></div>
         <div class="item"></div>
-        <div class="item" style="cursor: pointer" @click="pageTo('/pillar/index')"></div>
-        <div class="item" style="cursor: pointer" @click="pageTo('/stockCustom/all')"></div>
+        <div class="item" style="cursor: pointer" @click="pageTo('/pillar/index', false)"></div>
+        <div class="item" style="cursor: pointer" @click="pageTo('/stockCustom/all', false)"></div>
         <div class="item"></div>
         <div class="item"></div>
       </div>
@@ -77,22 +79,51 @@
   </div>
 </template>
 <script>
+import { getIndustry } from '@/api/index'
+import pageTo from '@/mixins/pageTo'
 export default {
   data() {
     return {
       keyword: null,
       type: 3,
       index: 1,
-      list: ['新能源汽车', '电子芯片', '零售行业', '养殖业', '建筑装饰', '房地产开发', '医药', '有色冶炼加工'],
+      list: [
+        {
+          name: '新能源车整车制造（国标）',
+          code: 'AC003005',
+          type: 1
+        }
+      ],
       suggestions: []
     }
   },
+  mixins: [pageTo],
   watch: {
     type(data) {
       this.keyword = null
       this.$refs.autocomplete._data.suggestions = []
       if (data === 3) {
-        this.list = ['新能源汽车', '电子芯片', '零售行业', '养殖业', '建筑装饰', '房地产开发', '医药', '有色冶炼加工']
+        this.list = [
+          {
+            name: '新能源车整车制造（国标）',
+            code: 'AC003005',
+            type: 1
+          }
+        ]
+      } else if (data === 1) {
+        this.list = [
+          {
+            name: '长安汽车',
+            code: 'TEST_1001'
+          }
+        ]
+      } else if (data === 4) {
+        this.list = [
+          {
+            name: '重庆',
+            code: 'GS955525'
+          }
+        ]
       } else {
         this.list = []
       }
@@ -121,25 +152,38 @@ export default {
       }
       this.$refs.notice.style.marginTop = marginTop + 'px'
     },
-    pageTo(path) {
-      this.$router.push(path)
-    },
     querySearchAsync(queryString, cb) {
       if (!queryString) return cb([])
       this.suggestions = []
       if (this.type === 1) {
-        this.suggestions = [{ value: '长安汽车' }]
+        this.suggestions = [{ value: '长安汽车', code: 'TEST_1001' }]
+        cb(this.suggestions)
       }
       if (this.type === 2) {
         this.suggestions = []
+        cb(this.suggestions)
       }
       if (this.type === 3) {
-        this.suggestions = [{ value: '新能源车整车制造（国标）', code: 'AC003005' }]
+        getIndustry({ keyword: queryString })
+          .then((res) => {
+            this.suggestions = res.result.map((item) => {
+              return {
+                value: item.name,
+                code: item.code,
+                type: item.type
+              }
+            })
+            cb(this.suggestions)
+          })
+          .catch((err) => {
+            this.suggestions = [{ value: '新能源车整车制造（国标）', code: 'AC003005', type: 1 }]
+            cb(this.suggestions)
+          })
       }
       if (this.type === 4) {
-        this.suggestions = [{ value: '重庆', code: 'AC003005' }]
+        this.suggestions = [{ value: '重庆', code: 'GS955525' }]
+        cb(this.suggestions)
       }
-      cb(this.suggestions)
     },
     search() {
       if (!this.keyword) {
@@ -147,36 +191,22 @@ export default {
         return
       }
       if (this.type === 1) {
-        this.$router.push({
-          path: '/test',
-          query: {
-            id: this.keyword
-          }
-        })
+        this.pageTo('/test', { id: this.keyword })
       } else if (this.type === 2) {
-        this.$router.push({
-          path: '/test',
-          query: {
-            id: this.keyword
-          }
-        })
+        this.pageTo('/test', { id: this.keyword })
       } else if (this.type === 3) {
-        this.$router.push({
-          path: '/analysis/env',
-          query: {
-            code: this.suggestions.find((item) => item.value === this.keyword).code,
-            name: this.keyword
-          }
-        })
+        let { type, value, code } = { ...this.suggestions.find((item) => item.value === this.keyword) }
+        this.pageTo('/analysis/env', { type, code, name: value })
       } else if (this.type === 4) {
-        this.$router.push({
-          path: '/finance/status',
-          query: {
-            regionCode: this.suggestions.find((item) => item.value === this.keyword).code,
-            name: this.keyword
-          }
+        this.pageTo('/finance/status', {
+          code: this.suggestions.find((item) => item.value === this.keyword).code,
+          name: this.keyword
         })
       }
+    },
+    setKey(item) {
+      this.keyword = item.name
+      this.suggestions = [{ value: item.name, code: item.code, type: item.type }]
     }
   },
   mounted() {}

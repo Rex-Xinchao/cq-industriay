@@ -24,16 +24,16 @@ export default {
       timeStamp: new Date().getTime(),
       series: [
         {
-          type: 'line',
-          smooth: true,
-          color: ['#F6BD16'],
+          type: 'bar',
+          barWidth: '25%',
+          yAxisIndex: 0,
+          color: ['#4A84FF'],
           data: []
         },
         {
-          type: 'bar',
-          barWidth: '25%',
+          type: 'line',
+          color: ['#F6BD16'],
           yAxisIndex: 1,
-          color: ['#4A84FF'],
           data: []
         }
       ],
@@ -93,31 +93,26 @@ export default {
       this.chartOption_complex.tooltip = Object.assign({}, this.chartOption_complex.tooltip, this.tooltip)
       this.chartOption_complex.series = this.series
       this.chartOption_complex.xAxis.data = []
-      this.chartOption_complex.series[0].data = []
-      this.chartOption_complex.series[0].name = this.options[this.barType].label + '增速'
       this.chartOption_complex.series[1].data = []
-      this.chartOption_complex.series[1].name = this.options[this.barType].label
-      let max1 = 0
-      let max2 = 0
+      this.chartOption_complex.series[1].name = this.options[this.barType].label + '增速'
+      this.chartOption_complex.series[0].data = []
+      this.chartOption_complex.series[0].name = this.options[this.barType].label
+
       if (this.barType === 0) {
         this.complexData.forEach((item) => {
-          max1 = Math.max(item.value2, max1)
-          max2 = Math.max(item.value1, max2)
           this.chartOption_complex.xAxis.data.push(item.rpt)
-          this.chartOption_complex.series[0].data.push(item.value2)
-          this.chartOption_complex.series[1].data.push(item.value1)
+          this.chartOption_complex.series[0].data.push(item.value1)
+          this.chartOption_complex.series[1].data.push(item.value2)
         })
       } else {
         this.complexData.forEach((item) => {
-          max1 = Math.max(item.value4, max1)
-          max2 = Math.max(item.value3, max2)
+          max1 = Math.max(item.value3, max1)
+          max2 = Math.max(item.value4, max2)
           this.chartOption_complex.xAxis.data.push(item.rpt)
-          this.chartOption_complex.series[0].data.push(item.value4)
-          this.chartOption_complex.series[1].data.push(item.value3)
+          this.chartOption_complex.series[0].data.push(item.value3)
+          this.chartOption_complex.series[1].data.push(item.value4)
         })
       }
-      this.chartOption_complex.yAxis[0].max = max1 ? max1 : 10
-      this.chartOption_complex.yAxis[1].max = max2 ? max2 : 10
       if (this.types[0] === 'ratio') {
         this.chartOption_complex.yAxis[0].axisLabel.formatter = '{value}%'
       } else {

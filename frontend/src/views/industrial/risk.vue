@@ -8,24 +8,24 @@
       <div class="graph-box"></div>
       <div ref="tooltip" class="chart-tooltip" @mouseleave="hideTip">
         <h1>行业分析</h1>
-        <span @click="pageTo('/analysis/env')">行业环境</span>
-        <span @click="pageTo('/analysis/prospect')">行业前景</span>
-        <span @click="pageTo('/analysis/policy')">政策导向</span>
-        <span @click="pageTo('/analysis/compete')">竞争格局</span>
-        <span @click="pageTo('/analysis/risk')">行业风险</span>
-        <span @click="pageTo('/analysis/customer')">行业获客</span>
-        <span @click="pageTo('/analysis/information')">行业舆情</span>
+        <span @click="onItemClick('/analysis/env')">行业环境</span>
+        <span @click="onItemClick('/analysis/prospect')">行业前景</span>
+        <span @click="onItemClick('/analysis/policy')">政策导向</span>
+        <span @click="onItemClick('/analysis/compete')">竞争格局</span>
+        <span @click="onItemClick('/analysis/risk')">行业风险</span>
+        <span @click="onItemClick('/analysis/customer')">行业获客</span>
+        <span @click="onItemClick('/analysis/information')">行业舆情</span>
         <h1>行业基准</h1>
-        <span @click="pageTo('/base/grow')">成长能力</span>
-        <span @click="pageTo('/base/profit')">盈利能力</span>
-        <span @click="pageTo('/base/repay')">偿还能力</span>
-        <span @click="pageTo('/base/business')">运营能力</span>
-        <span @click="pageTo('/base/finance')">龙头财务</span>
+        <span @click="onItemClick('/base/grow')">成长能力</span>
+        <span @click="onItemClick('/base/profit')">盈利能力</span>
+        <span @click="onItemClick('/base/repay')">偿还能力</span>
+        <span @click="onItemClick('/base/business')">运营能力</span>
+        <span @click="onItemClick('/base/finance')">龙头财务</span>
         <h1>产业分析</h1>
-        <span @click="pageTo('/industrial/boom')">景气图谱</span>
-        <span @click="pageTo('/industrial/risk')">风险图谱</span>
+        <span @click="onItemClick('/industrial/boom')">景气图谱</span>
+        <span @click="onItemClick('/industrial/risk')">风险图谱</span>
         <h1>存量客户</h1>
-        <span @click="pageTo('/stockCustom/index')">存量客户画像</span>
+        <span @click="onItemClick('/stockCustom/index')">存量客户画像</span>
       </div>
       <el-dialog
         modal-append-to-body
@@ -59,13 +59,14 @@
         <div class="tag-list">
           <div class="tag" v-for="item in tags" :key="item.eventName">{{ item.eventName }}</div>
         </div>
-        <p class="link"><a @click="pageTo">查看行业风险</a></p>
+        <p class="link"><a @click="pageTo('/analysis/risk', true, true)">查看行业风险</a></p>
       </el-dialog>
     </div>
   </div>
 </template>
 <script>
 import chart from '@/mixins/chart'
+import pageTo from '@/mixins/chart'
 import { riskChain, riskDialog } from '@/api/chain'
 import { mapGetters } from 'vuex'
 export default {
@@ -89,7 +90,7 @@ export default {
   computed: {
     ...mapGetters(['industryCode', 'industry'])
   },
-  mixins: [chart],
+  mixins: [chart, pageTo],
   methods: {
     hideMenu() {
       this.dialogVisible = false
@@ -136,16 +137,6 @@ export default {
     hideTip() {
       this.$refs.tooltip.style.display = 'none'
     },
-    pageTo(path) {
-      path = path || '/analysis/risk'
-      this.$router.push({
-        path: path,
-        query: {
-          code: this.current.code,
-          name: this.current.name
-        }
-      })
-    },
     getData() {
       this.tableLoading = true
       riskChain({
@@ -162,6 +153,11 @@ export default {
         .catch((err) => {
           this.tableLoading = false
         })
+    },
+    onItemClick(path) {
+      let { name, code } = { ...this.current }
+      let type = 2
+      this.pageTo(path, { name, code, type }, true)
     }
   },
   mounted() {

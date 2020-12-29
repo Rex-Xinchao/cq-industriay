@@ -11,13 +11,15 @@
         :fetch-suggestions="querySearchAsync"
         size="medium"
         placeholder="请输入关键词"
-        @select="pageTo"
+        @select="onSelectChange"
       ></el-autocomplete>
       <div class="user-info">用户A</div>
     </div>
   </div>
 </template>
 <script>
+import { getIndustry } from '@/api/index'
+import pageTo from '@/mixins/pageTo'
 export default {
   data() {
     return {
@@ -25,21 +27,30 @@ export default {
       suggestions: []
     }
   },
+  mixins: [pageTo],
   methods: {
     querySearchAsync(queryString, cb) {
       if (!queryString) return cb([])
-      this.suggestions = [{ value: '新能源车整车制造（国标）', code: 'AC003005' }]
-      cb(this.suggestions)
+      getIndustry({ keyword: queryString })
+        .then((res) => {
+          this.suggestions = res.result.map((item) => {
+            return {
+              value: item.name,
+              code: item.code,
+              type: item.type
+            }
+          })
+          cb(this.suggestions)
+        })
+        .catch((err) => {
+          this.suggestions = [{ value: '新能源车整车制造（国标）', code: 'AC003005', type: 1 }]
+          cb(this.suggestions)
+        })
     },
-    pageTo(data) {
+    onSelectChange(data) {
       if (!this.keyword) return
-      this.$router.push({
-        path: '/analysis/env',
-        query: {
-          code: this.suggestions.find((item) => item.value === this.keyword).code,
-          name: this.keyword
-        }
-      })
+      let { code, value, type } = { ...this.suggestions.find((item) => item.value === this.keyword) }
+      this.pageTo('/analysis/env', { code, name: value, type })
     }
   }
 }

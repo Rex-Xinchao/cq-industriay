@@ -27,7 +27,7 @@
 .chart-tooltip {
     display: none;
     position: absolute;
-    width: 440px;
+    width: 500px;
     height: 320px;
     top: 0;
     left: 0;
@@ -55,5 +55,9 @@
         line-height: 18px;
         margin: 0 16px 12px 0;
         cursor: pointer;
+
+        &:hover {
+            color: #3a84ff;
+        }
     }
 }

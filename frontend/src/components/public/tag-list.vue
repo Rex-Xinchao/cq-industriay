@@ -6,7 +6,7 @@
           class="tag tag-company"
           v-for="(v, index) in tagData.companys"
           :key="`company_${index}`"
-          @click="turnTo(v.csfId)"
+          @click="onTagClick(v.csfId)"
         >
           <span v-html="modifyCompanyName(v.name, v.secu, v.bond)"></span>
           <span v-if="typeof v.pos === 'number' && v.weight" :style="{ color: color[v.pos] }">
@@ -76,12 +76,7 @@ export default {
   computed: {},
   components: { eventSubject },
   methods: {
-    turnTo(csfId) {
-      let url = this.$router.resolve({
-        path: '/company',
-        query: { csfId: csfId }
-      })
-      // window.open(url.href)
+    onTagClick(csfId) {
       this.$message.info('功能开发中')
     },
     modifyCompanyName(html, code, bond) {

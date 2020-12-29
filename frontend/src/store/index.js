@@ -12,16 +12,16 @@ export default new Vuex.Store({
   },
   getters: {
     industry: (state) => {
-      return state.industry || localStorage.getItem('industryName')
+      return state.industry
     },
     industryCode: (state) => {
-      return state.industryCode || localStorage.getItem('industryCode')
+      return state.industryCode
     },
     regionCode: (state) => {
-      return state.regionCode || localStorage.getItem('regionCode')
+      return state.regionCode
     },
     regionName: (state) => {
-      return state.regionName || localStorage.getItem('regionName')
+      return state.regionName
     }
   },
   actions: {
@@ -36,14 +36,10 @@ export default new Vuex.Store({
     SET_INDUSTRY: (state, data) => {
       state.industry = data.name
       state.industryCode = data.code
-      localStorage.setItem('industryName', data.name)
-      localStorage.setItem('industryCode', data.code)
     },
     SET_REGION: (state, data) => {
       state.regionCode = data.code
       state.regionName = data.name
-      localStorage.setItem('regionCode', data.code)
-      localStorage.setItem('regionName', data.name)
     }
   }
 })

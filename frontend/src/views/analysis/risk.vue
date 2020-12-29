@@ -4,7 +4,7 @@
       <h1 class="main-title">
         行业风险
         <span class="sign">汽车行业</span>
-        <el-button class="fr" @click="pageTo('/industrial/risk')">查看上下游风险</el-button>
+        <el-button class="fr" @click="pageTo('/industrial/risk', true, true)">查看上下游风险</el-button>
       </h1>
     </div>
     <div class="item-box">
@@ -23,6 +23,7 @@ import packChart from '@/components/analysis/risk/pack'
 import financeTable from '@/components/analysis/risk/financeTable'
 import barTable from '@/components/analysis/risk/bar'
 import tableCom from '@/components/analysis/risk/table'
+import pageTo from '@/mixins/pageTo'
 export default {
   data() {
     return {
@@ -31,6 +32,7 @@ export default {
       stock: {}
     }
   },
+  mixins: [pageTo],
   components: { packChart, financeTable, barTable, tableCom },
   methods: {
     getData() {
@@ -40,12 +42,6 @@ export default {
         this.bond = bond
         this.stock = stock
       }, 1000)
-    },
-    pageTo(path) {
-      let url = this.$router.resolve({
-        path: path
-      })
-      window.open(url.href)
     }
   },
   mounted() {

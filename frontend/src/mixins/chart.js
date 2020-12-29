@@ -48,9 +48,10 @@ export default {
     handleData() {
       let map_UP = {}
       let map_DOWN = {}
+      let name = this.chartData.nodes.find((item) => item.code === this.industryCode).name
       let data = [
-        { name: this.industry, code: this.industryCode, root: true, direction: UP, children: [] },
-        { name: this.industry, code: this.industryCode, root: true, direction: DOWN, children: [] }
+        { name: name, code: this.industryCode, root: true, direction: UP, children: [] },
+        { name: name, code: this.industryCode, root: true, direction: DOWN, children: [] }
       ]
       this.chartData.nodes.forEach((item) => {
         map_UP[item.code] = { ...item }
@@ -161,7 +162,7 @@ export default {
         .attr('x', -65)
         .attr('y', -20)
         .attr('text-anchor', 'middle')
-      rootNode.append('title').text((d) => `${d.data.name} [${d.data.code}]`)
+      rootNode.append('title').text((d) => `${d.data.name}`)
       rootNode
         .append('text')
         .attr('fill', '#fff')
@@ -291,7 +292,7 @@ export default {
           if (d.data.typeName) return
           vm.showTip(d3.event, d.data)
         })
-      Product.append('title').text((d) => `${d.data.name} [${d.data.code}]`)
+      Product.append('title').text((d) => `${d.data.name}`)
       Product.append('text')
         .attr('fill', '#2897EF')
         .attr('x', 0)

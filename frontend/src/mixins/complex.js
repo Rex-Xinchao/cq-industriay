@@ -73,7 +73,8 @@ export default {
                 type: 'dashed',
                 color: '#F2F2F2'
               }
-            }
+            },
+            min: 0
           },
           {
             type: 'value',
@@ -99,8 +100,7 @@ export default {
                 type: 'dashed',
                 color: '#F2F2F2'
               }
-            },
-            min: 0
+            }
           }
         ],
         series: []

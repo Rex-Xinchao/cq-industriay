@@ -4,7 +4,7 @@
       <h1 class="main-title">
         存量客户画像
         <span class="sign">{{ industry }}</span>
-        <el-button class="fr" @click="pageTo('/analysis/env')">查看更多指标</el-button>
+        <el-button class="fr" @click="pageTo('/analysis/env', true)">查看更多指标</el-button>
       </h1>
     </div>
     <div class="item-box">
@@ -91,6 +91,7 @@ import lineChart from '@components/stockCustom/branch/line'
 import tableCom from '@components/stockCustom/branch/risk_status_table'
 import doucleCircleChart from '@components/stockCustom/branch/circle_double'
 import ratioLine from '@/components/stockCustom/branch/ratio_line'
+import pageTo from '@/mixins/pageTo'
 import { mapGetters } from 'vuex'
 export default {
   data() {
@@ -102,6 +103,7 @@ export default {
       legendData_2: ['500万以下', '500~2000万', '2000~5000万', '5000万~1亿', '1亿以上']
     }
   },
+  mixins: [pageTo],
   computed: {
     ...mapGetters(['industryCode', 'industry'])
   },
@@ -122,9 +124,6 @@ export default {
     total_abnormal_loan,
     customer_statistics,
     customer,
-    pageTo(path) {
-      this.$router.push(path)
-    },
     getData() {
       this.loading = true
       core_index({

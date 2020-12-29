@@ -14,7 +14,7 @@
       v-for="sub in subjects"
       :key="sub.name"
       :class="{ _company: sub.type == 1, _people: sub.type == 2 }"
-      @click="toPage(sub)"
+      @click="onSubClick(sub)"
     >
       {{ sub.name }}
     </span>
@@ -42,13 +42,8 @@ export default {
     }
   },
   methods: {
-    toPage(item) {
+    onSubClick(item) {
       if (item.type === 2) return
-      let url = this.$router.resolve({
-        path: '/company',
-        query: { csfId: item.code }
-      })
-      // window.open(url.href)
       this.$message.info('功能开发中')
     }
   }
