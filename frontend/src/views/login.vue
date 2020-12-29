@@ -19,7 +19,7 @@
           v-model="keyword"
           :fetch-suggestions="querySearchAsync"
           size="medium"
-          placeholder="请输入企业关键词"
+          :placeholder="`请输入${type === 1 ? '企业' : type === 2 ? '自然人' : type === 3 ? '行业' : '区域'}关键词`"
         ></el-autocomplete>
         <el-button class="btn" type="primary" size="medium" @click="search">搜索</el-button>
         <div class="advanced-search">高级搜索</div>

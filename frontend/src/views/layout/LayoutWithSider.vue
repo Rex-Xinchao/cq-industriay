@@ -28,7 +28,7 @@
 import headCom from '@components/public/head'
 import footCom from '@components/public/foot'
 import siderCom from '@components/public/siderBar'
-import pageTo from '@/mixins/chart'
+import pageTo from '@/mixins/pageTo'
 export default {
   computed: {
     showSiderbar() {

@@ -10,7 +10,7 @@ export default {
       }
       if (_blank) {
         let url = this.$router.resolve({
-          path: '/base/finance',
+          path: path,
           query: query
         })
         window.open(url.href)

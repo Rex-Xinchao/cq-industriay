@@ -113,7 +113,6 @@ export default {
         })
     },
     getValue(value, type = 'ratio') {
-      console.log(value)
       if (!value) return null
       const unit = type === 'ratio' ? '%' : '万元'
       return `${value}${unit}`
