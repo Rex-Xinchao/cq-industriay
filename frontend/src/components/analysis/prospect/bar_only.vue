@@ -27,9 +27,9 @@ export default {
   },
   mixins: [resize, bar],
   props: {
-    type: String,
     requestPath: String,
     name: String,
+    type: String,
     unit: {
       type: String,
       default: '元'

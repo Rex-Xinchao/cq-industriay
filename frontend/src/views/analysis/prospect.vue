@@ -12,7 +12,6 @@
         class="main-chart"
         title="成长前景"
         tip="上市、三板、发债企业的业务收入数据和财报资产规模"
-        :barTitles="['行业收入', '行业资产']"
         :types="['ratio', 'number']"
       ></complex-chart>
       <div class="main-chart com-main" style="height: 520px">

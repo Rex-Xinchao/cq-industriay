@@ -66,7 +66,6 @@ export default {
   props: {
     requestPath: String,
     title: String,
-    barTitles: Array,
     tip: String,
     types: {
       type: Array,
@@ -95,9 +94,9 @@ export default {
       this.chartOption_complex.series = this.series
       this.chartOption_complex.xAxis.data = []
       this.chartOption_complex.series[0].data = []
-      this.chartOption_complex.series[0].name = this.barTitles[this.barType] + '增速'
+      this.chartOption_complex.series[0].name = this.options[this.barType].label + '增速'
       this.chartOption_complex.series[1].data = []
-      this.chartOption_complex.series[1].name = this.barTitles[this.barType]
+      this.chartOption_complex.series[1].name = this.options[this.barType].label
       let max1 = 0
       let max2 = 0
       if (this.barType === 0) {
