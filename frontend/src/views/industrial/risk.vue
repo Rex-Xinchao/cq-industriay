@@ -105,7 +105,7 @@ export default {
           .then((res) => {
             this.loading = false
             this.current = data
-            this.tableData = res.indexes
+            this.tableData = res.indexes || []
             this.tags = res.events
           })
           .catch((err) => {

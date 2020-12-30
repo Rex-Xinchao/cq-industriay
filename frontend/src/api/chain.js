@@ -7,7 +7,60 @@ export const riskChain = (data) => {
   return http.get(`/chain/${data.industryCode}/risk/graph`, data)
 }
 // 风险图谱弹窗
-export const riskDialog = (data) => {
+export const riskDialog = async (data) => {
+  await sleep(1000)
+  let reponse = {}
+  if (data.code === 'AC003005') {
+    reponse = {
+      indexes: [
+        {
+          indexName: '新能源汽车销量_当月值',
+          indexUnit: '元',
+          latestIndex: 200000,
+          changeIndex: 39815,
+          indexRatio: 24.86
+        },
+        {
+          indexName: '新能源汽车产量_当月值',
+          indexUnit: '元',
+          latestIndex: 198000,
+          changeIndex: 31332,
+          indexRatio: 18.8
+        },
+        {
+          indexName: '纯电动汽车保有量_中国',
+          indexUnit: '元',
+          latestIndex: 2581.186,
+          changeIndex: 834.197,
+          indexRatio: 47.75
+        }
+      ]
+    }
+  } else if (data.code === 'FA0040010709') {
+    reponse = {
+      indexes: []
+    }
+  } else if (data.code === 'EC0010010201') {
+    reponse = {
+      indexes: [
+        {
+          indexName: '动力电池装机量_当月值',
+          indexUnit: '元',
+          latestIndex: 6.56,
+          changeIndex: 1.45,
+          indexRatio: 28.38
+        },
+        {
+          indexName: '动力电池装机量_累计值',
+          indexUnit: '元',
+          latestIndex: 34.16,
+          changeIndex: 6.56,
+          indexRatio: 23.77
+        }
+      ]
+    }
+  }
+  return reponse
   return http.get(`/chain/${data.industryCode}/risk`, data)
 }
 

@@ -31,6 +31,7 @@
                 :index="child.code"
                 :key="`${index}_child`"
                 v-show="child.show"
+                :disabled="child.disabled"
               >
                 {{ child.name }}
               </el-menu-item>
@@ -143,6 +144,8 @@ export default {
           this.heads = res.names || []
           this.activeHead = this.heads[0].value
           this.envData = res
+          this.$refs.chart.drawChart()
+          this.$refs.chart.getTableData()
         })
         .catch((err) => {
           this.headLoding = false

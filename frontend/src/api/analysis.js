@@ -4890,8 +4890,23 @@ export const envMenu = async (data) => {
         code: 'up',
         children: [
           {
-            name: '充电桩',
-            code: 'FA0040010709'
+            name: '锂离子电池',
+            code: 'EC0010010201'
+          },
+          {
+            name: '汽车生产设备',
+            code: '汽车生产设备',
+            disabled: true
+          },
+          {
+            name: '汽车模具',
+            code: '汽车模具',
+            disabled: true
+          },
+          {
+            name: '汽车车身系统',
+            code: '汽车车身系统',
+            disabled: true
           }
         ]
       },
@@ -4908,8 +4923,23 @@ export const envMenu = async (data) => {
         code: 'down',
         children: [
           {
-            name: '锂离子电池材料',
-            code: 'EC0010010201'
+            name: '充电桩',
+            code: 'FA0040010709'
+          },
+          {
+            name: '汽保设备',
+            code: '汽保设备',
+            disabled: true
+          },
+          {
+            name: '汽车充电枪',
+            code: '汽车充电枪',
+            disabled: true
+          },
+          {
+            name: '汽车租赁',
+            code: '汽车租赁',
+            disabled: true
           }
         ]
       }
@@ -5193,18 +5223,18 @@ export const envChart = async (data) => {
         }
       ],
       chart: [
-        { rpt: '2017-01-31', value1: 'null', value2: 'null', value3: '0.11', value4: '0.11' },
-        { rpt: '2017-02-28', value1: '109.09', value2: 'null', value3: '0.23', value4: '0.34' },
-        { rpt: '2017-03-31', value1: '308.7', value2: 'null', value3: '0.94', value4: '1.28' },
-        { rpt: '2017-04-30', value1: '-1.06', value2: 'null', value3: '0.93', value4: '2.21' },
-        { rpt: '2017-05-31', value1: '54.84', value2: 'null', value3: '1.44', value4: '3.65' },
-        { rpt: '2017-06-30', value1: '50', value2: 'null', value3: '2.16', value4: '5.81' },
-        { rpt: '2017-07-31', value1: '19.91', value2: 'null', value3: '2.59', value4: '8.4' },
-        { rpt: '2017-08-31', value1: '11.97', value2: 'null', value3: '2.9', value4: '11.3' },
-        { rpt: '2017-09-30', value1: '18.62', value2: 'null', value3: '3.44', value4: '14.74' },
-        { rpt: '2017-10-31', value1: '-14.83', value2: 'null', value3: '2.93', value4: '17.67' },
-        { rpt: '2017-11-30', value1: '138.23', value2: 'null', value3: '6.98', value4: '24.65' },
-        { rpt: '2017-12-31', value1: '68.91', value2: 'null', value3: '11.79', value4: '36.44' },
+        { rpt: '2017-01-31', value1: null, value2: null, value3: '0.11', value4: '0.11' },
+        { rpt: '2017-02-28', value1: '109.09', value2: null, value3: '0.23', value4: '0.34' },
+        { rpt: '2017-03-31', value1: '308.7', value2: null, value3: '0.94', value4: '1.28' },
+        { rpt: '2017-04-30', value1: '-1.06', value2: null, value3: '0.93', value4: '2.21' },
+        { rpt: '2017-05-31', value1: '54.84', value2: null, value3: '1.44', value4: '3.65' },
+        { rpt: '2017-06-30', value1: '50', value2: null, value3: '2.16', value4: '5.81' },
+        { rpt: '2017-07-31', value1: '19.91', value2: null, value3: '2.59', value4: '8.4' },
+        { rpt: '2017-08-31', value1: '11.97', value2: null, value3: '2.9', value4: '11.3' },
+        { rpt: '2017-09-30', value1: '18.62', value2: null, value3: '3.44', value4: '14.74' },
+        { rpt: '2017-10-31', value1: '-14.83', value2: null, value3: '2.93', value4: '17.67' },
+        { rpt: '2017-11-30', value1: '138.23', value2: null, value3: '6.98', value4: '24.65' },
+        { rpt: '2017-12-31', value1: '68.91', value2: null, value3: '11.79', value4: '36.44' },
         { rpt: '2018-01-31', value1: '-88.89', value2: '1090.91', value3: '1.31', value4: '1.31' },
         { rpt: '2018-02-28', value1: '-21.37', value2: '347.83', value3: '1.03', value4: '2.34' },
         { rpt: '2018-03-31', value1: '101.94', value2: '121.28', value3: '2.08', value4: '4.42' },

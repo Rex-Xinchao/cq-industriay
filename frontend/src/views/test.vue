@@ -171,10 +171,11 @@
       </h1>
       <div class="filter-main">
         <div class="tag-list">
-          <span>出售资产</span>
-          <span>产量冻结</span>
+          <span>大盘下跌</span>
+          <span>利润减少</span>
           <span>机构减持</span>
           <span>董事辞职</span>
+          <span>个股下跌</span>
         </div>
       </div>
       <div v-loading="loading" class="news-list-main_loading" :style="{ 'min-height': height }">

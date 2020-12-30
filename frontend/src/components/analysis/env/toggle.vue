@@ -39,6 +39,7 @@ export default {
   data() {
     const vm = this
     return {
+      noData: false,
       rate: '--',
       unit: '--',
       tableHead: [],
@@ -47,7 +48,9 @@ export default {
       chartType: 'line',
       tooltip: {
         formatter: (data) => {
-          return `${data[0].name}<br/>${vm.activeName}：${converUnit(data[0].value)}${vm.unit}`
+          let value = data[0].value ? converUnit(data[0].value) : '--'
+          console.log(data[0].value)
+          return `${data[0].name}<br/>${vm.activeName}：${value}${vm.unit}`
         }
       },
       dataZoom: [{ show: true }, { type: 'inside' }],
@@ -114,18 +117,16 @@ export default {
   },
   watch: {
     chartType() {
+      this.tableData = []
       this.drawChart()
     },
     dateTime() {
       this.drawChart()
       this.getTableData()
     },
-    activeName: {
-      immediate: true,
-      handler() {
-        this.drawChart()
-        this.getTableData()
-      }
+    activeName() {
+      this.drawChart()
+      this.getTableData()
     }
   },
   methods: {
@@ -162,7 +163,7 @@ export default {
       this.tableHead = tableData.map((item) => item.rpt.substring(0, 7))
       let data = {}
       tableData.forEach((item) => {
-        data[item.rpt.substring(0, 7)] = item[key] ? converUnit(item[key]) : '--'
+        data[item.rpt.substring(0, 7)] = !!item[key] ? converUnit(item[key]) : '--'
       })
       this.tableData = [data]
     }
