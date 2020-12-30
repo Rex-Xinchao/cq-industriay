@@ -15,7 +15,7 @@
         <div class="com-address">重庆市江北区建新东路260号</div>
       </div>
     </div>
-    <div class="main-body com-main" style="height: 560px">
+    <div class="main-body com-main" style="height: auto">
       <h1 class="com-title">行业财务基准对比</h1>
       <div class="filter-main">
         <span :class="{ active: type === 1 }" @click="type = 1">成长能力</span>
@@ -25,23 +25,17 @@
       </div>
       <div class="slider-main">
         <div class="line time-line">
-          <time-select></time-select>
+          <el-date-picker
+            v-model="dateTime"
+            type="year"
+            :clearable="false"
+            placeholder="请选择年份"
+            :picker-options="pickerOptions"
+          ></el-date-picker>
         </div>
-        <div class="line">
-          <span>营业收入增长率 ：</span>
-          <el-slider class="slider" v-model="value1" :marks="marks"></el-slider>
-        </div>
-        <div class="line">
-          <span>毛利润增长率 ：</span>
-          <el-slider class="slider" v-model="value2" :marks="marks"></el-slider>
-        </div>
-        <div class="line">
-          <span>净利润增长率 ：</span>
-          <el-slider class="slider" v-model="value3" :marks="marks"></el-slider>
-        </div>
-        <div class="line">
-          <span>总资产增长率 ：</span>
-          <el-slider class="slider" v-model="value4" :marks="marks"></el-slider>
+        <div class="line" v-for="(item, index) in sliderData" :key="index">
+          <span>{{ item.name }}：</span>
+          <el-slider class="slider" v-model="item.value" :marks="marks" :disabled="false"></el-slider>
         </div>
       </div>
     </div>
@@ -224,8 +218,100 @@
 <script>
 const echarts = require('echarts')
 import scroll from '@/mixins/scroll'
-import { newsList } from '@/api/analysis'
+import { testList } from '@/api/analysis'
 import timeSelect from '../components/public/time-select.vue'
+const sliderData = [
+  {
+    rpt: 2019,
+    name: '毛利润增长率',
+    value: 6.66876878,
+    type: 1
+  },
+  { rpt: 2019, name: '净利润增长率', value: 4.415, type: 1 },
+  { rpt: 2019, name: '所有者权益增长率', value: -4.80760671, type: 1 },
+  { rpt: 2019, name: '营业收入增长率', value: 6.48127729, type: 1 },
+  { rpt: 2019, name: '总资产增长率', value: 4.41571301, type: 1 },
+  { rpt: 2019, name: '净利率', value: -3.7526, type: 2 },
+  { rpt: 2019, name: '毛利率', value: 14.679, type: 2 },
+  { rpt: 2019, name: '平均净资产收益率(ROE)', value: -5.88127499, type: 2 },
+  { rpt: 2019, name: '平均资产收益率(ROA)', value: -2.77242281, type: 2 },
+  { rpt: 2019, name: '税息折旧及摊销前利润率', value: -1.1192, type: 2 },
+  { rpt: 2019, name: '息税前利润率', value: -6.8436, type: 2 },
+  { rpt: 2019, name: '营业利润率', value: -3.0468, type: 2 },
+  { rpt: 2019, name: '流动比率', value: 100.7583, type: 3 },
+  { rpt: 2019, name: '权益乘数', value: 222.1899, type: 3 },
+  { rpt: 2019, name: '速动比率', value: 81.509, type: 3 },
+  { rpt: 2019, name: '现金比率', value: 25.3601, type: 3 },
+  { rpt: 2019, name: '债务权益比', value: 2.5999, type: 3 },
+  { rpt: 2019, name: '资产负债率', value: 54.9934, type: 3 },
+  { rpt: 2019, name: '存货周转率', value: 14.52636878, type: 4 },
+  { rpt: 2019, name: '固定资产周转率', value: 2.51165206, type: 4 },
+  { rpt: 2019, name: '应付账款周转率', value: 1.97288758, type: 4 },
+  { rpt: 2019, name: '应收账款周转率', value: 2.84572215, type: 4 }
+]
+
+const statusList = [
+  { name: '应收账款周转率', list: [33.32584904, 8.87593085, 7.20833170076923, 1.9062937, 0.51471451] },
+  { name: '应付账款周转率', list: [63.40495363, 2.703500465, 4.40367784076923, 1.2758592725, 0.41771102] },
+  { name: '固定资产周转率', list: [13.5950055, 6.5747229925, 4.53313939846154, 2.1566207825, 0.52590605] },
+  { name: '存货周转率', list: [18.57726748, 11.39752238, 8.7884838156, 5.61704646, 1.65475702] },
+  { name: '营业利润率', list: [35.0813, 4.14205, -0.9690875, -3.1117, -28.3256] },
+  { name: '息税前利润率', list: [13.0778, 4.223225, -4.35864166666667, -4.0002, -52.0764] },
+  { name: '税息折旧及摊销前利润率', list: [18.447, 6.47345, 0.142925, 1.152975, -47.918] },
+  { name: '平均资产收益率(ROA)', list: [5.34122026, 1.8850225325, -4.01345257807692, 0.05555971, -45.79721389] },
+  { name: '平均净资产收益率(ROE)', list: [27.03688793, 8.36932146, -6.2802789576, 0.47116989, -93.39042162] },
+  { name: '毛利率', list: [56.556, 16.6925, 15.8891136363636, 10.98175, 7.425] },
+  { name: '净利率', list: [11.2406, 3.220725, -5.68085416666667, 0.26785, -79.6952] },
+  { name: '资产合计', list: [849333279599.19, 50840709713.3875, 70359093242.4854, 7200234019.13, 1946530105.55] },
+  { name: '营业总收入', list: [843324372577.26, 42844250150.9125, 58285666710.0585, 3739954119.2925, 152844045.25] },
+  { name: '营业利润', list: [12973908002.2001, 284846333.3475, 295933438.246542, -726966522.975, -5722071285] },
+  {
+    name: '息税前利润(EBIT)',
+    list: [35319679929.67, 330258687.8825, 772814149.396538, -1070977055.98, -11491523354.08]
+  },
+  {
+    name: '税息折旧及摊销前利润(EBITDA)',
+    list: [47935922623.06, 789771242.835, 2592540412.17231, -9866928.07250007, -10533275756.09]
+  },
+  { name: '税前利润', list: [40957792203.69, 386670692.8525, 1399239775.32115, -35398920.1925, -11781146135.59] },
+  { name: '毛利润', list: [112736625486.56, 5138169270.0475, 7988069365.42423, 391847541.35, -224929083.31] },
+  {
+    name: '扣除非经常性损益后净利润',
+    list: [30510588205.53, 215460923.47, 453859562.675385, -1045897082.205, -11132181217.79]
+  },
+  { name: '净利润', list: [35288906907.63, 370242810.3225, 1195294044.035, 6469789.1, -11191325134.77] },
+  { name: '股东权益合计', list: [300839624341.71, 17042020163.295, 26202276861.1965, 2762454360.16, -1358911862.98] },
+  { name: '负债合计', list: [548493655257.48, 36005532424.0625, 44156816381.2888, 5023523026.4575, 2357282093.91] },
+  { name: '总负债增长率', list: [43.96637262, 3.507553275, -3.83040685038462, -11.5816957975, -35.95121199] },
+  {
+    name: '现金及现金等价物净增加额',
+    list: [3605325137.81, 900420005.64, -28432567.1965385, -600564804.32, -7501357079]
+  },
+  {
+    name: '投资活动产生的现金流量净额',
+    list: [1686056675.5, 61081505.53, -3771430379.23808, -2583257356.93, -39264387323.87]
+  },
+  {
+    name: '经营活动产生的现金流量净额',
+    list: [46271852926.75, 2577234198.0425, 3179294900.42808, -234952965.49, -6377970073.56]
+  },
+  { name: '负债权益比', list: [1790.3763, 278.85995, 293.376019230769, 124.515, -243.2418] },
+  {
+    name: '筹资活动产生的现金流量净额',
+    list: [14034822405.43, 38150387.4575, 570472762.828077, -681412955.1725, -3645544163.5]
+  },
+  { name: '总资产增长率', list: [29.36390898, 3.966657715, -6.41976855653846, -7.8389793925, -56.88301782] },
+  { name: '营业收入增长率', list: [30.39259753, 7.0799441725, -7.16166806653846, -13.1016225, -79.77676621] },
+  { name: '所有者权益增长率', list: [15.16947261, 5.66148711, -4.0820299184, -0.94964351, -63.66289745] },
+  { name: '毛利润增长率', list: [265.31427723, 15.36141895, 9.52956160478261, -7.23823752, -68.38779483] },
+  { name: '净利润增长率', list: [139.04720596, 104.01394051, 18.3168721309524, -24.65545519, -86.10519316] },
+  { name: '资产负债率', list: [169.812, 76.42385, 70.9466076923077, 57.2793, 39.9938] },
+  { name: '债务权益比', list: [466.207, 103.80335, 79.8044653846154, 3.0737, -85.0841] },
+  { name: '现金比率', list: [79.5611, 40.909075, 30.9557692307692, 16.343325, 6.7717] },
+  { name: '速动比率', list: [129.7502, 90.88165, 64.5083115384615, 37.825225, 7.1534] },
+  { name: '权益乘数', list: [1890.3763, 378.85995, 393.376019230769, 224.515, -143.2418] },
+  { name: '流动比率', list: [166.6249, 127.0219, 104.607080769231, 86.213825, 33.141] }
+]
 export default {
   components: { timeSelect },
   data() {
@@ -236,42 +322,11 @@ export default {
       height: '500px',
       tableData: [],
       tags: ['company', 'people', 'industry', 'product', 'event'],
+      dateTime: new Date().setFullYear(new Date().getFullYear() - 1),
       value1: 30,
       value2: 30,
       value3: 30,
       value4: 30,
-      marks: {
-        18: {
-          style: {
-            color: '#94979B'
-          },
-          label: '优秀23%'
-        },
-        36: {
-          style: {
-            color: '#94979B'
-          },
-          label: '良好19%'
-        },
-        54: {
-          style: {
-            color: '#94979B'
-          },
-          label: '平均12%'
-        },
-        72: {
-          style: {
-            color: '#94979B'
-          },
-          label: '较低8%'
-        },
-        90: {
-          style: {
-            color: '#94979B'
-          },
-          label: '较差3%'
-        }
-      },
       typeMap: {
         1: '授信客户',
         2: '行内客户'
@@ -406,6 +461,69 @@ export default {
             data: [120, 132, 101]
           }
         ]
+      },
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() > new Date().getTime() - 3600 * 24 * 365 * 1000
+        }
+      },
+      sliderData: [],
+      marks: {
+        18: {
+          style: {
+            color: '#94979B'
+          },
+          label: '优秀23%'
+        },
+        36: {
+          style: {
+            color: '#94979B'
+          },
+          label: '良好19%'
+        },
+        54: {
+          style: {
+            color: '#94979B'
+          },
+          label: '平均12%'
+        },
+        72: {
+          style: {
+            color: '#94979B'
+          },
+          label: '较低8%'
+        },
+        90: {
+          style: {
+            color: '#94979B'
+          },
+          label: '较差3%'
+        }
+      }
+    }
+  },
+  watch: {
+    type: {
+      immediate: true,
+      handler(data) {
+        this.sliderData = sliderData
+          .filter((item) => item.type === data)
+          .map((item) => {
+            let status = statusList.find((status) => status.name === item.name).list
+            let max = 99999
+            let index = 0
+            status.forEach((num, i) => {
+              if (num > item.value && num < max) {
+                max = num
+                index = i
+              }
+            })
+            let sumList = [18, 36, 54, 72, 90, 100]
+            let sum = sumList[index] || 0
+            let min = status[index + 1] || 0
+            item.value = 18 - (Math.abs(max / item.value) / (max - min)) * 18 + sum
+            return item
+          })
       }
     }
   },
@@ -417,9 +535,50 @@ export default {
     search() {
       this.loading = true
       let params = {}
-      newsList(params)
+      testList(params)
         .then((res) => {
           this.loading = false
+          res.result.forEach((i) => {
+            if (i.companys && i.companys.length > 1) {
+              for (let g = 0; g < i.companys.length; g++) {
+                for (let h = g + 1; h < i.companys.length; h++) {
+                  if (i.companys[g].comcode === i.companys[h].comcode) {
+                    if (typeof i.companys[g].secu === 'string') {
+                      i.companys[g].secu = [i.companys[g].secu, i.companys[h].secu]
+                    } else {
+                      i.companys[g].secu.push(i.companys[h].secu)
+                    }
+                    i.companys.splice(h, 1)
+                    h--
+                  }
+                }
+              }
+              i.companys = i.companys.sort((a, b) => {
+                let start = a.relationshipType || 999
+                let end = b.relationshipType || 999
+                return start - end
+              })
+            }
+            if (i.people && i.people.length > 0) {
+              let _map = new Map()
+              i.people = i.people.filter((n) => {
+                //去重
+                if (n.code) {
+                  if (!_map.has(n.code)) {
+                    _map.set(n.code, 1)
+                    return n
+                  }
+                } else {
+                  return n
+                }
+              })
+              i.people = i.people.sort((a, b) => {
+                let start = a.relationshipType || 999
+                let end = b.relationshipType || 999
+                return start - end
+              })
+            }
+          })
           this.tableData = res.result || []
         })
         .catch((err) => {
@@ -586,7 +745,7 @@ export default {
 
       & > span {
         display: inline-block;
-        width: 140px;
+        width: 180px;
         font-size: 14px;
         vertical-align: top;
         line-height: 40px;

@@ -180,6 +180,47 @@ export default {
       newsList(params)
         .then((res) => {
           this.loading = false
+          res.result.forEach((i) => {
+            if (i.companys && i.companys.length > 1) {
+              for (let g = 0; g < i.companys.length; g++) {
+                for (let h = g + 1; h < i.companys.length; h++) {
+                  if (i.companys[g].comcode === i.companys[h].comcode) {
+                    if (typeof i.companys[g].secu === 'string') {
+                      i.companys[g].secu = [i.companys[g].secu, i.companys[h].secu]
+                    } else {
+                      i.companys[g].secu.push(i.companys[h].secu)
+                    }
+                    i.companys.splice(h, 1)
+                    h--
+                  }
+                }
+              }
+              i.companys = i.companys.sort((a, b) => {
+                let start = a.relationshipType || 999
+                let end = b.relationshipType || 999
+                return start - end
+              })
+            }
+            if (i.people && i.people.length > 0) {
+              let _map = new Map()
+              i.people = i.people.filter((n) => {
+                //去重
+                if (n.code) {
+                  if (!_map.has(n.code)) {
+                    _map.set(n.code, 1)
+                    return n
+                  }
+                } else {
+                  return n
+                }
+              })
+              i.people = i.people.sort((a, b) => {
+                let start = a.relationshipType || 999
+                let end = b.relationshipType || 999
+                return start - end
+              })
+            }
+          })
           this.tableData = res.result || []
         })
         .catch((err) => {
