@@ -22,7 +22,7 @@
       <el-table-column
         v-for="item in tableHead"
         :key="item"
-        :label="`${item}年`"
+        :label="item"
         :prop="item"
         align="center"
       ></el-table-column>
@@ -156,11 +156,13 @@ export default {
       return chartOption
     },
     getTableData() {
-      let tableData = this.envData.table || []
-      this.tableHead = tableData.map((item) => item.rpt)
+      if (!this.envData.names) return {}
+      let tableData = this.envData.chart || []
+      let key = this.envData.names.find((item) => item.name === this.activeName).value
+      this.tableHead = tableData.map((item) => item.rpt.substring(0, 7))
       let data = {}
       tableData.forEach((item) => {
-        data[item.rpt] = item.value ? converUnit(item.value) : '--'
+        data[item.rpt.substring(0, 7)] = item[key] ? converUnit(item[key]) : '--'
       })
       this.tableData = [data]
     }

@@ -1,7 +1,10 @@
 <template>
   <div class="main">
     <div class="item-menu">
-      <h1 class="main-title">龙头财务</h1>
+      <h1 class="main-title">
+        龙头财务
+        <span class="sign">{{ industry }}</span>
+      </h1>
     </div>
     <div class="main-body">
       <div class="filter">
@@ -125,7 +128,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['industryCode'])
+    ...mapGetters(['industryCode', 'industry'])
   },
   watch: {
     norm() {

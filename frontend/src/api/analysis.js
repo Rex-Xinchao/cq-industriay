@@ -1,153 +1,6 @@
 import http from '@/libs/axios'
 const sleep = (time) => new Promise((res) => setTimeout(() => res(), time))
 
-// 政策导向
-export const policyList = async (data) => {
-  await sleep(300)
-  let reponse = {
-    result: [
-      {
-        rpt: '2019/11/6',
-        region: '全国',
-        org: '中华人民共和国生态环境部',
-        title: ' 关于印发《汾渭平原2019-2020年秋冬季大气污染综合治理攻坚行动方案》的通知',
-        contentList: [
-          {
-            industryName: '货车',
-            industryCode: '货车',
-            emotion: -1,
-            typeName: '加快淘汰',
-            content: '加快淘汰国三及以下排放标准的柴油货车、采用稀薄燃烧技术或“油改气”的老旧燃气车辆'
-          },
-          {
-            industryName: '货车',
-            emotion: -1,
-            typeName: '淘汰',
-            content: '各地应统筹考虑老旧柴油货车淘汰任务'
-          }
-        ],
-        url: 'http://www.mee.gov.cn/xxgk2018/xxgk/xxgk03/201911/t20191112_741904.html'
-      },
-      {
-        rpt: '2020/11/5',
-        region: '重庆市',
-        org: '重庆市经济和信息化委员会',
-        title: '重庆市经济和信息化委员会关于组织开展2020年重庆市物联网十大应用案例评选的通知',
-        contentList: [
-          {
-            industryName: '传感器',
-            emotion: 1,
-            typeName: '研发',
-            content:
-              '研发基于数据采集、数据感知、网络通信等物联网技术的芯片、传感器、无线模组等新产品、终端、关键元器件'
-          }
-        ],
-        url: 'https://jjxxw.cq.gov.cn/zwgk_213/fdzdgknr/zcwj/qtwj/202011/t20201105_8431827.html'
-      },
-      {
-        rpt: '2020/10/3',
-        region: '全国',
-        org: '中华人民共和国生态环境部',
-        title: '关于印发《长三角地区2020-2021年秋冬季大气污染综合治理攻坚行动方案》的通知',
-        contentList: [
-          {
-            industryName: '钢铁',
-            emotion: 1,
-            typeName: '持续推进',
-            content:
-              '持续推进钢铁行业超低排放改造、大宗货物运输“公转铁”“公转水”、柴油货车和船舶污染治理、挥发性有机物攻坚治理、工业炉窑和燃煤锅炉治理等'
-          },
-          {
-            industryName: '钢铁',
-            emotion: 1,
-            typeName: '完成',
-            content: '各地要指导完成超低排放改造的钢铁企业'
-          },
-          {
-            industryName: '钢铁',
-            emotion: 1,
-            typeName: '发展',
-            content: '各地按照已出台的钢铁、建材、焦化、化工等行业产业结构调整、高质量发展等方案要求'
-          },
-          {
-            industryName: '钢铁',
-            emotion: 1,
-            typeName: '加强',
-            content: '全面加强钢铁、建材、有色、焦化、铸造等重点行业无组织排放治理'
-          }
-        ],
-        url: 'http://www.mee.gov.cn/xxgk2018/xxgk/xxgk03/202011/t20201103_806151.html'
-      },
-      {
-        rpt: '2020/10/2',
-        region: '全国',
-        org: '国务院办公厅',
-        title: '国务院办公厅关于印发新能源汽车产业发展规划（2021—2035年）的通知',
-        contentList: [
-          {
-            industryName: '新能源汽车',
-            emotion: 1,
-            typeName: '发展',
-            content: '发展新能源汽车是我国从汽车大国迈向汽车强国的必由之路'
-          },
-          {
-            industryName: '新能源汽车',
-            emotion: 1,
-            typeName: '完善 | 增强 | 提升',
-            content: '我国新能源汽车产业技术水平显著提升、产业体系日趋完善、企业竞争力大幅增强'
-          }
-        ],
-        url: 'http://www.gov.cn/zhengce/content/2020-11/02/content_5556716.htm'
-      },
-      {
-        rpt: '2020/9/23',
-        region: '贵州省',
-        org: '贵州盛发展和改革委员会',
-        title: '关于扩大战略性新兴产业投资 培育壮大新增长点增长极的指导意见（发改高技〔2020〕1409号）',
-        contentList: [
-          {
-            industryName: '传感器',
-            emotion: 1,
-            typeName: '推广 | 研发 ',
-            content: '研发推广城市市政基础设施运维、农业生产专用传感器、智能装备、自动化系统和管理平台'
-          },
-          {
-            industryName: '电子材料',
-            emotion: 1,
-            typeName: '加快 | 突破 | 实现',
-            content:
-              '加快在光刻胶、高纯靶材、高温合金、高性能纤维材料、高强高导耐热材料、耐腐蚀材料、大尺寸硅片、电子封装材料等领域实现突破'
-          },
-          {
-            industryName: '新能源汽车',
-            emotion: 1,
-            typeName: '加快',
-            content: '(六)加快智能及新能源汽车产业基础支撑能力建设'
-          }
-        ],
-        url: 'http://fgw.guizhou.gov.cn/zwgk/xxgkml/zcfg/zcwj/202009/t20200923_63349757.html'
-      }
-    ]
-  }
-  if (data.region) {
-    let regions = ['全国', '重庆市', '四川省', '陕西省', '贵州省']
-    reponse.result = reponse.result.filter((item) => item.region === regions[data.region])
-  }
-  if (data.st) {
-    let startDate = new Date(data.st).getTime()
-    let endDate = new Date(data.et).getTime()
-    reponse.result = reponse.result.filter((item) => {
-      let rptStamp = new Date(item.rpt).getTime()
-      return startDate <= rptStamp && endDate >= rptStamp
-    })
-  }
-  if (data.org) {
-    reponse.result = []
-  }
-  return reponse
-  return http.get(`/policy/industry/${data.industryCode}`, data)
-}
-
 // 舆情咨询
 export const newsList = async (data) => {
   await sleep(300)
@@ -2982,59 +2835,6 @@ export const newsList = async (data) => {
   return result
 }
 
-//行业前景
-export const prospectData = async (data) => {
-  await sleep(300)
-  return {
-    cards: [
-      {
-        value: 7,
-        change: '5',
-        type: 'down',
-        unit: '家'
-      },
-      {
-        value: 60987917670.46,
-        change: '6.79%',
-        type: 'down',
-        unit: '元'
-      },
-      {
-        value: '12.71%',
-        change: '1.35%',
-        type: 'up'
-      },
-      {
-        value: 154833363490.24,
-        change: '11.29%',
-        type: 'down',
-        unit: '元'
-      }
-    ],
-    growth: [
-      { rpt: '2015', value1: 861997535.51, value2: 235.63, value3: 10027309908.49, value4: 3221.17 },
-      { rpt: '2016', value1: 2758875165.64, value2: 220.06, value3: 19456217844.29, value4: 94.03 },
-      { rpt: '2017', value1: 22509689607.26, value2: 715.9, value3: 188501810589.16, value4: 868.85 },
-      { rpt: '2018', value1: 26000728949.67, value2: 15.51, value3: 174546211190.25, value4: -7.4 },
-      { rpt: '2019', value1: 18652869079.42, value2: -28.26, value3: 154833363490.24, value4: -11.29 }
-    ],
-    profit: [
-      { rpt: '2015', value1: 17.11, value2: 5.55 },
-      { rpt: '2016', value1: 13.37, value2: 7.18 },
-      { rpt: '2017', value1: 11.85, value2: 2.56 },
-      { rpt: '2018', value1: 14.06, value2: -9.17 },
-      { rpt: '2019', value1: 12.71, value2: -22.6 }
-    ],
-    prospect: [
-      { rpt: '2015', value1: 4, value2: 0, value3: 0, value4: 3357 },
-      { rpt: '2016', value1: 6, value2: 0, value3: 0, value4: 4724 },
-      { rpt: '2017', value1: 14, value2: 0, value3: 0, value4: 5563 },
-      { rpt: '2018', value1: 12, value2: 0, value3: 0, value4: 9561 },
-      { rpt: '2019', value1: 7, value2: 0, value3: 0, value4: 4007 }
-    ]
-  }
-}
-
 // 行业环境
 export const envMenu = async (data) => {
   await sleep(500)
@@ -3440,4 +3240,5433 @@ export const envChart = async (data) => {
   }
 
   return response
+}
+
+// 行业前景
+export const prospectData = async (data) => {
+  await sleep(300)
+  return {
+    cards: [
+      {
+        value: 7,
+        change: '5',
+        type: 'down',
+        unit: '家'
+      },
+      {
+        value: 60987917670.46,
+        change: '6.79%',
+        type: 'down',
+        unit: '元'
+      },
+      {
+        value: '12.71%',
+        change: '1.35%',
+        type: 'up'
+      },
+      {
+        value: 154833363490.24,
+        change: '11.29%',
+        type: 'down',
+        unit: '元'
+      }
+    ],
+    growth: [
+      { rpt: '2015', value1: 861997535.51, value2: 235.63, value3: 10027309908.49, value4: 3221.17 },
+      { rpt: '2016', value1: 2758875165.64, value2: 220.06, value3: 19456217844.29, value4: 94.03 },
+      { rpt: '2017', value1: 22509689607.26, value2: 715.9, value3: 188501810589.16, value4: 868.85 },
+      { rpt: '2018', value1: 26000728949.67, value2: 15.51, value3: 174546211190.25, value4: -7.4 },
+      { rpt: '2019', value1: 18652869079.42, value2: -28.26, value3: 154833363490.24, value4: -11.29 }
+    ],
+    profit: [
+      { rpt: '2015', value1: 17.11, value2: 5.55 },
+      { rpt: '2016', value1: 13.37, value2: 7.18 },
+      { rpt: '2017', value1: 11.85, value2: 2.56 },
+      { rpt: '2018', value1: 14.06, value2: -9.17 },
+      { rpt: '2019', value1: 12.71, value2: -22.6 }
+    ],
+    prospect: [
+      { rpt: '2015', value1: 2, value2: 2, value3: 0, value4: 3221 },
+      { rpt: '2016', value1: 3, value2: 3, value3: 0, value4: 4483 },
+      { rpt: '2017', value1: 4, value2: 10, value3: 1, value4: 5290 },
+      { rpt: '2018', value1: 4, value2: 8, value3: 1, value4: 8380 },
+      { rpt: '2019', value1: 2, value2: 5, value3: 1, value4: 3662 }
+    ]
+  }
+}
+
+// 政策导向
+export const policyList = async (data) => {
+  await sleep(300)
+  let reponse = {
+    result: [
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广使用',
+            content: '推广使用新能源汽车'
+          }
+        ],
+        rpt: '2018/09/25',
+        region: '贵州省',
+        org: '贵州省人民政府',
+        title: '省人民政府关于印发贵州省打赢蓝天保卫战三年行动计划的通知（黔府发〔2018〕26号）',
+        url: 'http://www.guizhou.gov.cn/zwgk/zcfg/szfwj_8191/qff_8193/201809/t20180925_1645105.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广使用',
+            content: '推广使用新能源汽车'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广使用',
+            content: '公交、城市出租、环卫等行业和政府机关推广使用纯电动等新能源汽车'
+          }
+        ],
+        rpt: '2014/05/20',
+        region: '贵州省',
+        org: '贵州省人民政府',
+        title: '省人民政府关于印发贵州省大气污染防治行动计划实施方案的通知（黔府发〔2014〕13号）',
+        url: 'http://www.guizhou.gov.cn/zwgk/zcfg/szfwj_8191/qff_8193/201709/t20170925_821992.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快',
+            content:
+              '加快遵义轻卡及微型面包车等低排量汽车生产基地、毕节力帆骏马载货汽车和农用车生产基地和贵阳客车、电动汽车、新能源汽车及其他专用车生产基地等三个汽车基地和安顺轿车及特种车基地建设'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快',
+            content:
+              '加快遵义轻卡及微型面包车等低排量汽车生产基地、毕节力帆骏马载货汽车和农用车生产基地和贵阳客车、电动汽车、新能源汽车及其他专用车生产基地等三个汽车基地和安顺轿车及特种车基地建设'
+          },
+          {
+            industryName: '新能源汽车配套',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '培育',
+            content: '培育以汽车动力电池为代表的新能源汽车配套产业链'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '打造',
+            content: '打造国家新能源汽车产业基地'
+          }
+        ],
+        rpt: '2010/11/11',
+        region: '贵州省',
+        org: '贵州省人民政府',
+        title: '省人民政府关于印发贵州省工业十大产业振兴规划的通知（黔府发〔2010〕16号）',
+        url: 'http://www.guizhou.gov.cn/zwgk/zcfg/szfwj_8191/qff_8193/201709/t20170925_821857.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|引导',
+            content:
+              '引导民营经济投资发展新材料、先进制造、电子及新一代信息技术、生物技术、节能环保、新能源汽车等新兴产业'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '研发|支持',
+            content:
+              '新能源汽车：支持新型锂电池功能材料与动力电池、磷酸铁锂锂离子电池、新能源汽车驱动电机及动力总成系统等产品研发及产业化'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '培育',
+            content: '培育以汽车动力电池为代表的新能源汽车产业链'
+          },
+          {
+            industryName: '民营新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完成',
+            content: '民营新能源汽车重点项目累计完成投资3.5亿元'
+          }
+        ],
+        rpt: '2011/05/29',
+        region: '贵州省',
+        org: '贵州省人民政府',
+        title: '省人民政府关于印发贵州省民营经济倍增计划的通知（黔府发〔2011〕19号）',
+        url: 'http://www.guizhou.gov.cn/zwgk/zcfg/szfwj_8191/qff_8193/201709/t20170925_821886.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|加快',
+            content: '加快发展北斗卫星导航、新能源汽车、无人机等产业'
+          }
+        ],
+        rpt: '2017/09/06',
+        region: '贵州省',
+        org: '贵州省人民政府',
+        title: '省人民政府关于印发贵州省深化制造业与互联网融合发展实施意见的通知(黔府发〔2017〕23号)',
+        url: 'http://www.guizhou.gov.cn/zwgk/zcfg/szfwj_8191/qff_8193/201709/t20170925_822081.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '大力发展',
+            content: '大力发展航空航天、智能终端、精密仪器、高端数控机床、新能源汽车等制造业'
+          }
+        ],
+        rpt: '2016/06/01',
+        region: '贵州省',
+        org: '贵州省人民政府',
+        title: '省人民政府关于支持“1+7”开放创新平台加快发展的意见（黔府发〔2016〕16号）',
+        url: 'http://www.guizhou.gov.cn/zwgk/zcfg/szfwj_8191/qff_8193/201709/t20170925_822050.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车配套',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '培育',
+            content: '大力培育动力电池、电机、电控等新能源汽车配套产业'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广使用',
+            content: '推广使用纯电动、插电式混合动力等新能源汽车'
+          }
+        ],
+        rpt: '2019/02/01',
+        region: '贵州省',
+        org: '贵州省人民政府',
+        title: '省人民政府关于支持黔南自治州加快推进绿色发展建设生态之州的意见（黔府发〔2019〕3号）',
+        url: 'http://www.guizhou.gov.cn/zwgk/zcfg/szfwj_8191/qff_8193/201902/t20190201_2234707.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '发展新材料、电子及新一代信息技术、生物技术、新能源汽车等新兴产业'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '研发',
+            content: '建设光伏产品研发及新能源汽车产业基地'
+          }
+        ],
+        rpt: '2012/02/01',
+        region: '贵州省',
+        org: '贵州省人民政府',
+        title: '省人民政府印发国务院关于进一步促进贵州经济社会又好又快发展的若干意见的通知（黔府发〔２０１２〕３号）',
+        url: 'http://www.guizhou.gov.cn/zwgk/zcfg/szfwj_8191/qff_8193/201709/t20170925_821913.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '引导',
+            content:
+              '重点引导信息技术、高端装备、新材料、生物、新能源、新能源汽车、节能环保、数字创意等战略性新兴产业和农产品“走出去”拓展市场'
+          }
+        ],
+        rpt: '2017/10/31',
+        region: '四川省',
+        org: '四川省商务厅',
+        title: '省商务厅关于征集2018年“万企出国门”活动计划的通知',
+        url: 'http://swt.sc.gov.cn/sccom/ghjh/2017/10/31/82ea14611b8145c49c097a13c71d9c8c.shtml'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车购置',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '落实',
+            content: '7.落实新能源汽车购置补贴和免征车辆购置税优惠政策'
+          }
+        ],
+        rpt: 'NaN//',
+        region: '贵州省',
+        org: '贵州盛发展和改革委员会',
+        title: '省政府办公厅印发《多彩贵州促消费百日专项行动方案》',
+        url: 'http://fgw.guizhou.gov.cn/zwgk/xxgkml/zcfg/zcwj/202004/t20200420_62138836.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '实施新能源汽车推广计划'
+          }
+        ],
+        rpt: '2016/05/11',
+        region: '四川省',
+        org: '四川省交通运输厅',
+        title: '十三五期间交通运输工作总体思路',
+        url: 'http://jtt.sc.gov.cn/jtt/c101533/2016/5/11/9d280cf15df2410893dcf0ebf15b20ca.shtml'
+      },
+      {
+        contentList: [
+          {
+            industryName: '节能与新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|加快',
+            content:
+              '加快发展新一代信息技术、航空航天、先进能源电力、智能制造、先进轨道交通、节能环保、油气开采及加工、节能与新能源汽车、新材料和生物医药等高新技术领域'
+          },
+          {
+            industryName: '电动汽车智能化',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '研发',
+            content:
+              '开展数字化整车设计及优化、动力总成、动力电池与系统、高性能整车级电控系统、新型驱动电机、电动汽车驱动及传动系统、电动汽车智能化及电动辅助系统等核心关键技术攻关与产品研发'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '研发',
+            content: '目标：形成新能源汽车及智能网联汽车产业的研发体系'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '突破',
+            content: '新能源汽车产业总产值力争突破1000亿元'
+          },
+          {
+            industryName: '新能源汽车及智能网联汽车整车制造和关键零部',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '建成',
+            content: '建成我国重要的新能源汽车及智能网联汽车整车制造和关键零部制造基地'
+          }
+        ],
+        rpt: '2018/11/08',
+        region: '四川省',
+        org: '四川省科学技术厅',
+        title: '四川省“十三五”科技创新规划',
+        url: 'http://kjt.sc.gov.cn/kjt/jhgh/2018/11/8/1bde87f220944f4fab6b9fdadc7a00f0.shtml'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推进|研发',
+            content: '（四）推进新能源汽车研发与应用'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|支持',
+            content: '抓住国家支持发展新能源汽车的机遇'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '积极推动|加大|研发',
+            content: '积极推动省内科研院所和企业加大新能源汽车的研发与应用'
+          },
+          {
+            industryName: '电动汽车整车开发',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|培育',
+            content: '重点培育发展电动汽车整车开发?动力电池?驱动电机?电子控制系统?充（换）电系统?电动汽车应用产业链'
+          },
+          {
+            industryName: '电动汽车应用',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|培育',
+            content: '重点培育发展电动汽车整车开发?动力电池?驱动电机?电子控制系统?充（换）电系统?电动汽车应用产业链'
+          },
+          {
+            industryName: '纯电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '打造',
+            content: '打造形成纯电动汽车、混合动力汽车、燃气汽车3条新能源汽车产品链'
+          },
+          {
+            industryName: '新能源汽车产',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '打造',
+            content: '打造形成纯电动汽车、混合动力汽车、燃气汽车3条新能源汽车产品链'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广|积极开展',
+            content: '积极开展新能源汽车推广示范运用工作'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '建立',
+            content: '（五）建立新能源汽车产业链联盟'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '建立',
+            content: '组织省内高校、科研机构和企业建立全省新能源汽车产业链联盟'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|推动',
+            content: '推动新能源汽车产业标准化、规模化发展'
+          },
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '建立',
+            content: '重点建立电动汽车产业链联盟'
+          },
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持',
+            content: '支持重点企业组建电动汽车企业技术中心或工程技术中心'
+          },
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '形成电动汽车产业发展技术创新平台'
+          },
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '（六）实施电动汽车推广应用示范工程'
+          },
+          {
+            industryName: '节能和新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广|支持',
+            content: '支持成都市争取成为国家级节能和新能源汽车示范推广试点城市'
+          }
+        ],
+        rpt: '2010/07/20',
+        region: '四川省',
+        org: '四川省经济和信息化厅',
+        title: '四川省工业7+3产业2010年度工作计划',
+        url: 'https://jxt.sc.gov.cn/scjxt/jxtz/2010/7/20/e66839bffff943edaf781a3df6ac95ef.shtml'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '促进',
+            content: '促进港澳台创业交流、军转民技术转移以及新能源汽车、第三代半导体、创客、人工智能等专业领域创新创业'
+          }
+        ],
+        rpt: '2017/04/21',
+        region: '四川省',
+        org: '四川省科学技术厅',
+        title: '四川省科学技术厅关于开展第六届中国创新创业大赛（四川赛区）有关工作的通知',
+        url: 'http://kjt.sc.gov.cn/kjt/gfwj/2017/4/21/cc601ad919dd4f778aa5c74d9aed2a1e.shtml'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持',
+            content: '积极支持省内企业生产的新能源汽车进入交通运输部道路运输车辆达标车型公告'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广|加大',
+            content: '加大新能源汽车推广应用力度'
+          }
+        ],
+        rpt: 'NaN//',
+        region: '四川省',
+        org: '四川省人民政府',
+        title: '四川省人民政府',
+        url: 'http://www.sc.gov.cn/10462/c103044/2020/9/30/5a37938af489498b861716f17e236964.shtml'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车车辆',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '落实',
+            content: '落实国家新能源汽车车辆购置税优惠政策'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '在公共服务领域、党政机关和企事业单位推广应用新能源汽车'
+          }
+        ],
+        rpt: 'NaN//',
+        region: '四川省',
+        org: '四川省人民政府',
+        title: '四川省人民政府办公厅关于印发四川省完善促进消费体制机制实施方案的通知',
+        url: 'http://www.sc.gov.cn/10462/c103042/2019/7/4/80bf76bf6f544d83949300801e67f250.shtml'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加强',
+            content: '加强航空与燃机、信息安全、新能源汽车、轨道交通、生物医学、石墨烯、人工智能等领域新职业新技能培训'
+          }
+        ],
+        rpt: 'NaN//',
+        region: '四川省',
+        org: '四川省人民政府',
+        title: '四川省人民政府办公厅关于印发四川省职业技能提升行动实施方案（2019—2021年）的通知',
+        url: 'http://www.sc.gov.cn/10462/c103042/2019/8/27/1c447a2c2614481fbf9151789c29a5cc.shtml'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '培育',
+            content: '重点培育新能源汽车、节能环保、生物医药、轨道交通、动力及储能电池等具有核心竞争力的新兴产业'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '培育',
+            content:
+              '培育国内领先的集成电路、新型显示、信息安全、航空航天、清洁发电设备、新能源汽车、节能环保、轨道交通、生物医药、绿色食品等产业集群'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '研发',
+            content: '建设新能源汽车基地、油气化工基地、丝纺服装设计研发生产基地'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '培育',
+            content: '重点培育新能源汽车、节能环保、生物医药、轨道交通、动力及储能电池等具有核心竞争力的新兴产业'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '培育',
+            content:
+              '培育国内领先的集成电路、新型显示、信息安全、航空航天、清洁发电设备、新能源汽车、节能环保、轨道交通、生物医药、绿色食品等产业集群'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '研发',
+            content: '建设新能源汽车基地、油气化工基地、丝纺服装设计研发生产基地'
+          }
+        ],
+        rpt: 'NaN//',
+        region: '四川省',
+        org: '四川省人民政府',
+        title: '四川省人民政府办公厅关于优化区域产业布局的指导意见',
+        url: 'http://www.sc.gov.cn/10462/c103042/2018/12/15/c1ec984ee8464d1ab3b10449b8878180.shtml'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推动',
+            content: '推动新能源汽车普及应用'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推动',
+            content: '推动新能源汽车普及应用'
+          }
+        ],
+        rpt: 'NaN//',
+        region: '四川省',
+        org: '四川省人民政府',
+        title: '四川省人民政府关于推动城市基础设施改造加强城市生态环境建设的指导意见',
+        url: 'http://www.sc.gov.cn/10462/c103042/2020/1/22/b649bd3b07144692b994a3b91a630521.shtml'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '重点发展智能终端、人工智能、智能汽车、新能源汽车等前沿科技产业'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '大力发展',
+            content:
+              '大力发展大数据云计算、智能终端、机器人、虚拟现实、人工智能、3D打印、新材料、生物医药、新能源汽车、光电技术等十大前沿科技产业集群'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '大力发展',
+            content: '大力发展智能装备、节能环保、新一代信息、新材料、生物医药、新能源汽车等战略性新兴产业集群'
+          }
+        ],
+        rpt: '2017/05/25',
+        region: '重庆市',
+        org: '重庆市卫生健康委员会',
+        title: '印发重庆临空经济示范区建设总体方案的通知',
+        url: 'http://wsjkw.cq.gov.cn/zwgk_242/fdzdgknr/zcwj/qtwj/201705/t20170525_2933722.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加强|研发',
+            content: '加强清洁能源、新能源汽车、信息网络、遥感与导航、生物等领域的部署和研发'
+          }
+        ],
+        rpt: '2015/03/31',
+        region: '四川省',
+        org: '四川省科学技术厅',
+        title: '中共科学技术部党组关于落实创新驱动发展战略 加快科技改革发展的意见',
+        url: 'http://kjt.sc.gov.cn/kjt/gfwj/2015/3/31/c9667eb5ac6a42c49b3e7eaad689e286.shtml'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '着力发展新能源汽车、先进核电、分布式能源、智能电网、动力及储能电池、节能环保产品等'
+          }
+        ],
+        rpt: '2018/11/20',
+        region: '四川省',
+        org: '四川省经济和信息化厅',
+        title: '中共四川省委 四川省人民政府关于加快构建“5+1”现代产业体系推动工业高质量发展的意见',
+        url: 'https://jxt.sc.gov.cn/scjxt/xzgfxwj/2018/11/20/abb17349181e4bd59e94ad373a98b583.shtml'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推进|建立',
+            content: '推进四川新能源汽车产业技术创新联盟与匈牙利汽车联盟建立战略合作关系'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推进|建立',
+            content: '推进四川新能源汽车产业技术创新联盟与匈牙利汽车联盟建立战略合作关系'
+          }
+        ],
+        rpt: '2015/12/02',
+        region: '四川省',
+        org: '四川省科学技术厅',
+        title: '中共四川省委关于全面创新改革驱动转型发展的决定',
+        url: 'http://kjt.sc.gov.cn/kjt/gfwj/2015/12/2/0780bdc77fe44c10b89c9c3b7d0d0059.shtml'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '积极有序发展新一代信息技术、节能环保、新能源、生物、高端装备制造、新材料、新能源汽车等产业'
+          }
+        ],
+        rpt: '2010/11/16',
+        region: '陕西省',
+        org: '陕西省发展和改革委员会',
+        title: '中共中央关于制定国民经济和社会发展第十二个五年规划的建议',
+        url: 'http://sndrc.shaanxi.gov.cn/zcfg/10053213YvyIz.htm'
+      },
+      {
+        contentList: [
+          {
+            industryName: '节能与新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|促进',
+            content:
+              '促进新一代信息通信技术、高档数控机床和机器人、航空航天装备、海洋工程装备及高技术船舶、先进轨道交通装备、节能与新能源汽车、电力装备、农机装备、新材料、生物医药及高性能医疗器械等产业发展壮大'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '实施新能源汽车推广计划'
+          }
+        ],
+        rpt: '2015/11/05',
+        region: '重庆市',
+        org: '重庆市发展和改革委员会',
+        title: '中共中央关于制定国民经济和社会发展第十三个五年规划的建议',
+        url: 'http://fzggw.cq.gov.cn/zwgk_167/fdzdgknr/fzgh/201511/t20151105_5186658.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快',
+            content:
+              '加快壮大新一代信息技术、生物技术、新能源、新材料、高端装备、新能源汽车、绿色环保以及航空航天、海洋装备等产业'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快',
+            content:
+              '加快壮大新一代信息技术、生物技术、新能源、新材料、高端装备、新能源汽车、绿色环保以及航空航天、海洋装备等产业'
+          }
+        ],
+        rpt: '2020/11/03',
+        region: '中央',
+        org: '中华人民共和国中央人民政府',
+        title: '中共中央关于制定国民经济和社会发展第十四个五年规划和二〇三五年远景目标的建议',
+        url: 'http://www.gov.cn/zhengce/2020-11/03/content_5556991.htm'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广|建立|完善',
+            content: '建立完善节能家电、高效照明产品、节水器具、绿色建材等绿色产品和新能源汽车推广机制'
+          },
+          {
+            industryName: '节能新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持',
+            content: '有条件的区县可对消费者购置节能型家电产品、节能新能源汽车、节水器具等给予适当支持'
+          }
+        ],
+        rpt: '2020/12/11',
+        region: '重庆市',
+        org: '重庆市发展和改革委员会',
+        title: '重庆市发展和改革委员会 重庆市司法局印发《关于加快建立绿色生产和消费法规政策体系的实施意见》的通知',
+        url: 'http://fzggw.cq.gov.cn/zwgk_167/fdzdgknr/zcwj/qtwj/202012/t20201211_8602045.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广|促进',
+            content: '促进电动汽车推广应用'
+          },
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完成',
+            content: '自用充电基础设施的验收可由用户或其委托的电动汽车企业、施工单位会同小区物业完成'
+          }
+        ],
+        rpt: '2017/12/13',
+        region: '重庆市',
+        org: '重庆市发展和改革委员会',
+        title: '重庆市发展和改革委员会重庆市能源局关于印发重庆市电动汽车充电基础设施建设运营管理办法的通知',
+        url: 'http://fzggw.cq.gov.cn/zwgk_167/fdzdgknr/zcwj/xzgfxwj/202004/t20200402_6930920.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '建成|研发',
+            content: '建成国内主要的电动汽车研发及制造基地'
+          }
+        ],
+        rpt: '2006/10/31',
+        region: '重庆市',
+        org: '重庆市发展和改革委员会',
+        title: '重庆市国民经济和社会发展第十一个五年规划科学和技术发展重点专项规划',
+        url: 'http://fzggw.cq.gov.cn/zwgk_167/fdzdgknr/fzgh/200610/t20061031_5186696.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '落实|推广',
+            content:
+              '（四）落实新能源汽车推广应用、电力电煤保障、智博会、软件与信息服务业、智慧园区建设、重点产业政策兑现、产业氛围营造、产教融合以及降本增效等重点项目'
+          }
+        ],
+        rpt: '2020/03/27',
+        region: '重庆市',
+        org: '重庆市经济和信息化委员会',
+        title: '重庆市经济和信息化委员会 重庆市财政局关于印发重庆市工业和信息化专项资金管理办法的通知',
+        url: 'https://jjxxw.cq.gov.cn/zwgk_213/fdzdgknr/zcwj/gfxwj/202003/t20200327_6262921.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|推进',
+            content: '统筹推进全市新能源汽车和智能网联汽车发展'
+          }
+        ],
+        rpt: '2020/09/03',
+        region: '重庆市',
+        org: '重庆市经济和信息化委员会',
+        title:
+          '重庆市经济和信息化委员会 重庆市公安局 重庆市城市管理局 重庆市交通局​关于印发《重庆市自动驾驶道路测试管理办法（试行）》的通知',
+        url: 'https://jjxxw.cq.gov.cn/zwgk_213/fdzdgknr/zcwj/gfxwj/202009/t20200903_7844971.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '建立',
+            content: '新能源汽车生产企业应在市内建立废旧动力蓄电池回收网点并提供网点基本信息'
+          },
+          {
+            industryName: '新能源和智能网联汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content:
+              '对通过形式审查的备案材料自受理之日起5个工作日内转交市新能源和智能网联汽车产业发展联席会议办公室（以下简称“市新能源和智能网联汽车办公室”）审核'
+          }
+        ],
+        rpt: '2020/08/20',
+        region: '重庆市',
+        org: '重庆市经济和信息化委员会',
+        title: '重庆市经济和信息化委员会关于《重庆市新能源汽车推广应用有关备案管理办法（暂行）》的补充通知',
+        url: 'https://jjxxw.cq.gov.cn/zwgk_213/fdzdgknr/zcwj/qtwj/202008/t20200820_7800706.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车及智能网联汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content:
+              '创新中心重点围绕新能源汽车及智能网联汽车、轻量化材料及成型技术与装备、集成电路、印刷及柔性显示、物联网、高端交通装备、高档数控机床、智能装备、能源及环保装备、现代航空装备、智能可穿戴设备、虚拟现实、化工新材料、生物医药等重要创新领域和企业绿色化、智能化、服务化、高端化转型发展的技术领域进行布局'
+          }
+        ],
+        rpt: '2018/01/05',
+        region: '重庆市',
+        org: '重庆市经济和信息化委员会',
+        title: '重庆市经济和信息化委员会关于印发重庆市制造业创新中心建设工程实施方案的通知',
+        url: 'https://jjxxw.cq.gov.cn/zwgk_213/fdzdgknr/zcwj/gfxwj/202003/t20200321_5927591.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|加快',
+            content:
+              '七、对加快新一代信息技术产业、高端装备制造产业、新材料产业、生物产业、新能源汽车产业、绿色环保产业、数字创意产业等战略性新兴产业集群化发展'
+          }
+        ],
+        rpt: '2020/02/19',
+        region: '重庆市',
+        org: '重庆市人民政府',
+        title: '重庆市人民政府办公厅关于对真抓实干成效明显地方进一步加大激励支持力度的通知',
+        url: 'http://www.cq.gov.cn/zwgk/fdzdgknr/lzyj/qtgw/202002/t20200219_5273681.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广|加快',
+            content: '加快新能源汽车推广应用和试点示范'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持',
+            content: '鼓励金融机构对居民购买新能源汽车、绿色智能家电、智能家居、节水器具等绿色智能产品提供信贷支持'
+          }
+        ],
+        rpt: '2020/01/10',
+        region: '重庆市',
+        org: '重庆市人民政府',
+        title: '重庆市人民政府办公厅关于加快发展流通促进商业消费的通知',
+        url: 'http://www.cq.gov.cn/zwgk/fdzdgknr/lzyj/xzgfxwj/szfbgt_38656/202001/t20200115_4754427.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '——新能源汽车快速发展'
+          },
+          {
+            industryName: '新能源和智能网联汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '研发',
+            content: '成为全国重要的新能源和智能网联汽车研发制造基地'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|加快',
+            content: '加快新能源汽车发展'
+          },
+          {
+            industryName: '新能源汽车产品',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推动',
+            content: '推动新能源汽车产品开发与产业化'
+          },
+          {
+            industryName: '纯电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '重点发展纯电动汽车、插电式混合动力汽车'
+          },
+          {
+            industryName: '中高端新能源汽车产品',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持',
+            content: '重点支持企业开发续航里程长、充电时间短、安全性能高的中高端新能源汽车产品'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完善',
+            content: '完善新能源汽车产业链'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提高',
+            content: '逐步提高公共服务领域新能源汽车使用比例'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提升',
+            content: '重点提升共享用车中新能源汽车使用数量'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广|完善',
+            content: '完善新能源汽车推广应用扶持政策'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|建立|促进',
+            content: '建立促进新能源汽车发展的长效机制'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|推广|支持|加快',
+            content: '制定加快新能源和智能网联汽车产业发展、新能源汽车推广应用等支持政策'
+          }
+        ],
+        rpt: '2018/12/21',
+        region: '重庆市',
+        org: '重庆市人民政府',
+        title: '重庆市人民政府办公厅关于加快汽车产业转型升级的指导意见',
+        url: 'http://www.cq.gov.cn/zwgk/fdzdgknr/lzyj/xzgfxwj/szfbgt_38656/202001/t20200115_4754318.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车及配套设施',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '鼓励在公务用车等领域通过融资租赁发展新能源汽车及配套设施'
+          }
+        ],
+        rpt: '2016/05/13',
+        region: '重庆市',
+        org: '重庆市人民政府',
+        title: '重庆市人民政府办公厅关于加快融资租赁业发展的实施意见',
+        url: 'http://www.cq.gov.cn/zwgk/fdzdgknr/lzyj/xzgfxwj/szfbgt_38656/202001/t20200115_4753659.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广|加快',
+            content: '加快新能源汽车推广应用的实施意见'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '落实|发展',
+            content: '贯彻落实国家发展新能源汽车产业的战略部署'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广|加快',
+            content: '加快全市新能源汽车的推广应用步伐'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|促进',
+            content: '促进新能源汽车产业健康快速发展'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '研究制定新能源汽车推广应用规划'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广|发展',
+            content: '健全市新能源汽车推广应用和产业发展联席会议制度'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广|推进',
+            content: '统筹推进全市新能源汽车推广应用工作'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广|加快',
+            content: '着力加快公共服务领域新能源汽车推广应用步伐'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '全市累计推广应用新能源汽车10万辆'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提高',
+            content: '逐年提高新能源汽车应用比例'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '引导',
+            content: '引导主城区公交车、出租车、网约车、物流车、旅游巴士等公共服务领域车辆主动使用新能源汽车'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推进',
+            content: '推进党政机关和公共机构使用新能源汽车'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '落实|推广',
+            content: '落实新能源汽车推广应用优惠政策'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '主城区是全市新能源汽车推广应用的重点区域'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '切实做好新能源汽车推广应用工作'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提高',
+            content: '不断提高现代信息技术在新能源汽车商业运营模式创新中的应用水平'
+          },
+          {
+            industryName: '新能源汽车技术研发和运营服务',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '研发',
+            content: '鼓励互联网企业参与新能源汽车技术研发和运营服务'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完善',
+            content: '完善新能源汽车和充电桩的产品质量保障体系'
+          },
+          {
+            industryName: '新能源汽车技术',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '建立|支持',
+            content: '支持建立行业性新能源汽车技术支撑平台'
+          },
+          {
+            industryName: '新能源汽车产品',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '建立',
+            content: '建立新能源汽车产品抽检制度'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '构建',
+            content: '（十六）构建新能源汽车安全保障体系'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加强',
+            content: '加强新能源汽车安全监管'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加强',
+            content: '有关区县（自治县）人民政府要加强对所在地新能源汽车制造、运营和充电设施等方面的安全监管'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '大力宣传国家关于发展新能源汽车的相关政策'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提高',
+            content: '提高全社会对新能源汽车的认知度和接受度'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '培育',
+            content: '培育新能源汽车消费意识'
+          }
+        ],
+        rpt: '2016/12/16',
+        region: '重庆市',
+        org: '重庆市人民政府',
+        title: '重庆市人民政府办公厅关于加快新能源汽车推广应用的实施意见',
+        url: 'http://www.cq.gov.cn/zwgk/fdzdgknr/lzyj/xzgfxwj/szfbgt_38656/202001/t20200115_4753783.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车及智能汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '培育',
+            content:
+              '引进培育集成电路、新型显示、机器人及智能装备、新材料、节能环保、生物医药、新能源汽车及智能汽车、高端交通装备等新兴产业集群'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '重点发展机器人及智能装备、高端交通装备、集成电路、新型显示、生物医药、新能源汽车及智能汽车等产业'
+          },
+          {
+            industryName: '纯电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '突破',
+            content: '重点围绕纯电动汽车、插电式混合动力汽车所需电池、电机、电控等核心技术突破'
+          },
+          {
+            industryName: '新能源及智能汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '打造',
+            content: '打造国内领先的新能源及智能汽车产业基地'
+          }
+        ],
+        rpt: '2018/03/27',
+        region: '重庆市',
+        org: '重庆市人民政府',
+        title: '重庆市人民政府办公厅关于印发中国（重庆）自由贸易试验区产业发展规划（2018―2020）的通知',
+        url: 'http://www.cq.gov.cn/zwgk/fdzdgknr/lzyj/xzgfxwj/szfbgt_38656/202001/t20200115_4754245.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完善',
+            content: '健全完善新能源汽车和智能汽车标准体系'
+          }
+        ],
+        rpt: '2016/04/29',
+        region: '重庆市',
+        org: '重庆市人民政府',
+        title: '重庆市人民政府办公厅关于印发重庆市标准化体系建设发展规划（2016—2020年）的通知',
+        url: 'http://www.cq.gov.cn/zwgk/fdzdgknr/lzyj/xzgfxwj/szfbgt_38656/202001/t20200115_4753424.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广|完善',
+            content: '进一步完善公共机构推广应用新能源汽车实施方案'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '落实|推广',
+            content: '积极落实新能源汽车推广任务'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提高',
+            content: '“十三五”期间逐步提高配备更新公务用车中新能源汽车的比例'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '实现|广泛应用',
+            content: '实现新能源汽车广泛应用'
+          }
+        ],
+        rpt: '2016/12/19',
+        region: '重庆市',
+        org: '重庆市人民政府',
+        title: '重庆市人民政府办公厅关于印发重庆市公共机构节约能源资源“十三五”规划的通知',
+        url: 'http://www.cq.gov.cn/zwgk/fdzdgknr/lzyj/qtgw/202001/t20200114_4621171.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '构建',
+            content: '按照国家标准统一构建全市电动汽车充换电标准体系'
+          },
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持',
+            content: '为电动汽车提供充电接口互操作性检测及服务平台间数据交换等技术支持'
+          }
+        ],
+        rpt: '2015/12/30',
+        region: '重庆市',
+        org: '重庆市人民政府',
+        title: '重庆市人民政府办公厅关于印发重庆市加快电动汽车充电基础设施建设实施方案的通知',
+        url: 'http://www.cq.gov.cn/zwgk/fdzdgknr/lzyj/xzgfxwj/szfbgt_38656/202001/t20200115_4753285.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广使用|加快',
+            content: '在快递物流领域加快推广使用新能源汽车和满足更高排放标准的燃油汽车'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提高',
+            content: '逐步提高新能源汽车使用比例'
+          }
+        ],
+        rpt: '2018/05/04',
+        region: '重庆市',
+        org: '重庆市人民政府',
+        title: '重庆市人民政府办公厅关于印发重庆市推进电子商务与快递物流协同发展实施方案的通知',
+        url: 'http://www.cq.gov.cn/zwgk/fdzdgknr/lzyj/xzgfxwj/szfbgt_38656/202001/t20200115_4754223.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广|支持',
+            content: '关于印发重庆市支持新能源汽车推广应用激励措施(2020年度)的通知'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广|支持',
+            content: '重庆市支持新能源汽车推广应用激励措施(2020年度)'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快推动|推广',
+            content: '加快推动新能源汽车推广应用'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广|加快',
+            content: '加快新能源汽车推广应用'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|促进',
+            content: '促进我市新能源汽车产业高质量发展'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '鼓励市内车企推广应用新能源汽车3.64万辆'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广|加强',
+            content: '进一步加强新能源汽车推广应用工作的组织领导'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '落实|支持',
+            content: '认真贯彻落实国家和我市新能源汽车相关支持政策'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持',
+            content: '重点支持充电基础设施建设和运营、新能源汽车使用和运营等环节'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广|支持',
+            content: '鼓励各区县配套安排专项资金支持新能源汽车推广应用'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提升',
+            content: '提升市民对新能源汽车的驾乘体验和认知'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '营造新能源汽车推广应用浓厚氛围'
+          }
+        ],
+        rpt: '2020/09/07',
+        region: '重庆市',
+        org: '重庆市人民政府',
+        title: '重庆市人民政府办公厅关于印发重庆市支持新能源汽车推广应用激励措施(2020年度)的通知',
+        url: 'http://www.cq.gov.cn/zwgk/fdzdgknr/lzyj/xzgfxwj/szfbgt_38656/202009/t20200907_7858297.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广|支持',
+            content: '印发重庆市支持新能源汽车推广应用政策措施（2018—2022年）的通知'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广|支持',
+            content: '重庆市支持新能源汽车推广应用政策措施（2018—2022年）'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提高|加快',
+            content: '11．主城区新增和更换公交车、出租车要加快提高使用新能源汽车的比例'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提高',
+            content: '13．逐步提高新增和更换驾驶培训车、驾驶考试车使用新能源汽车比例'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广|支持',
+            content: '市级财政资金配套支持新能源汽车推广应用'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广|落实|支持',
+            content: '16．将支持鼓励新能源汽车推广应用政策贯彻落实情况纳入市政府督查范围'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '17．每年开展新能源汽车推广应用成效评估'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '对作出突出成绩的单位和企业授予年度新能源汽车推广应用示范单位称号'
+          }
+        ],
+        rpt: '2018/12/26',
+        region: '重庆市',
+        org: '重庆市人民政府',
+        title: '重庆市人民政府办公厅关于印发重庆市支持新能源汽车推广应用政策措施（2018—2022年）的通知',
+        url: 'http://www.cq.gov.cn/zwgk/fdzdgknr/lzyj/xzgfxwj/szfbgt_38656/202001/t20200115_4754322.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: -1,
+            typeName: '严禁',
+            content: '23．严禁无资质企业生产、销售电动汽车'
+          }
+        ],
+        rpt: '2013/02/07',
+        region: '重庆市',
+        org: '重庆市人民政府',
+        title: '重庆市人民政府办公厅印发贯彻落实重庆市人民政府关于加强道路交通安全工作意见重点工作分工方案的通知',
+        url: 'http://www.cq.gov.cn/zwgk/fdzdgknr/lzyj/xzgfxwj/szfbgt_38656/202001/t20200115_4752999.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '积极推动',
+            content: '积极推动新能源汽车、摩托车、医疗器械等产业成立专利联盟'
+          }
+        ],
+        rpt: '2010/07/09',
+        region: '重庆市',
+        org: '重庆市人民政府',
+        title: '重庆市人民政府办公厅转发市知识产权局等部门关于发挥专利作用促进产业结构调整意见的通知',
+        url: 'http://www.cq.gov.cn/zwgk/fdzdgknr/lzyj/xzgfxwj/szfbgt_38656/202001/t20200115_4752540.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|引导',
+            content: '积极引导新能源汽车产业健康有序发展'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '研发',
+            content: '新建新能源汽车生产企业须具有动力系统等关键技术和整车研发能力'
+          }
+        ],
+        rpt: '2017/06/02',
+        region: '重庆市',
+        org: '重庆市人民政府',
+        title: '重庆市人民政府关于发布重庆市政府核准的投资项目目录（2017年本）的通知',
+        url: 'http://www.cq.gov.cn/zwgk/fdzdgknr/lzyj/xzgfxwj/szf_38655/202001/t20200115_4753920.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加大|支持',
+            content: '加大对我市自主品牌、自主知识产权和电子信息、新能源汽车等战略性新兴产业的支持力度'
+          }
+        ],
+        rpt: '2014/12/24',
+        region: '重庆市',
+        org: '重庆市人民政府',
+        title: '重庆市人民政府关于加快发展现代保险服务业的实施意见',
+        url: 'http://www.cq.gov.cn/zwgk/fdzdgknr/lzyj/xzgfxwj/szf_38655/202001/t20200115_4753420.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: -1,
+            typeName: '严禁',
+            content: '严禁无资质企业生产、销售电动汽车'
+          }
+        ],
+        rpt: '2013/01/02',
+        region: '重庆市',
+        org: '重庆市人民政府',
+        title: '重庆市人民政府关于加强道路交通安全工作的意见',
+        url: 'http://www.cq.gov.cn/zwgk/fdzdgknr/lzyj/xzgfxwj/szf_38655/202001/t20200115_4753280.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '节能与新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '打造',
+            content:
+              '通过建设国内最大笔记本电脑生产基地、国内最大离岸数据开发和处理中心以及集中打造通信设备、高性能集成电路、节能与新能源汽车、生物医药等10大重点产业集群'
+          }
+        ],
+        rpt: '2011/10/25',
+        region: '重庆市',
+        org: '重庆市人民政府',
+        title: '重庆市人民政府关于进一步做好普通高等学校毕业生就业工作的通知',
+        url: 'http://www.cq.gov.cn/zwgk/fdzdgknr/lzyj/xzgfxwj/szf_38655/202001/t20200115_4752952.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '落实',
+            content: '严格落实国家新能源汽车购置补贴和免征车辆购置税政策'
+          }
+        ],
+        rpt: '2020/04/14',
+        region: '重庆市',
+        org: '重庆市人民政府',
+        title: '重庆市人民政府关于新形势下推动服务业高质量发展的意见',
+        url: 'http://www.cq.gov.cn/zwgk/fdzdgknr/lzyj/xzgfxwj/szf_38655/202004/t20200414_7051917.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content:
+              '重点发展笔记本电脑、离岸数据开发处理、轨道装备、新能源、新能源汽车、环保装备、仪器仪表、生物医药及高技术服务业'
+          },
+          {
+            industryName: '节能和新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '推广应用节能和新能源汽车'
+          }
+        ],
+        rpt: '2012/09/21',
+        region: '重庆市',
+        org: '重庆市人民政府',
+        title: '重庆市人民政府关于印发“十二五”控制温室气体排放和低碳试点工作方案的通知',
+        url: 'http://www.cq.gov.cn/zwgk/fdzdgknr/lzyj/xzgfxwj/szf_38655/202001/t20200115_4753097.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '重点发展智能终端、人工智能、智能汽车、新能源汽车等前沿科技产业'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '大力发展',
+            content:
+              '大力发展大数据云计算、智能终端、机器人、虚拟现实、人工智能、3D打印、新材料、生物医药、新能源汽车、光电技术等十大前沿科技产业集群'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '大力发展',
+            content: '大力发展智能装备、节能环保、新一代信息、新材料、生物医药、新能源汽车等战略性新兴产业集群'
+          }
+        ],
+        rpt: '2017/05/25',
+        region: '重庆市',
+        org: '重庆市人民政府',
+        title: '重庆市人民政府关于印发重庆临空经济示范区建设总体方案的通知',
+        url: 'http://www.cq.gov.cn/zwgk/fdzdgknr/lzyj/qtgw/202001/t20200114_4621722.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '累计推广10万辆新能源汽车'
+          }
+        ],
+        rpt: '2017/03/16',
+        region: '重庆市',
+        org: '重庆市人民政府',
+        title: '重庆市人民政府关于印发重庆市“十三五”控制温室气体排放工作方案的通知',
+        url: 'http://www.cq.gov.cn/zwgk/fdzdgknr/lzyj/xzgfxwj/szf_38655/202001/t20200115_4753971.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车制造',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '大力发展',
+            content: '鼓励长安集团、重庆力帆集团等大型龙头企业大力发展无人驾驶、新能源汽车制造'
+          }
+        ],
+        rpt: '2016/09/10',
+        region: '重庆市',
+        org: '重庆市人民政府',
+        title: '重庆市人民政府关于印发重庆市建设互联网经济高地 “十三五”规划的通知',
+        url: 'http://www.cq.gov.cn/zwgk/fdzdgknr/lzyj/xzgfxwj/szf_38655/202001/t20200115_4753881.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推进|研发',
+            content: '重点推进新能源汽车研发生产'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推进|研发',
+            content: '重点推进新能源汽车研发生产'
+          }
+        ],
+        rpt: '2016/12/24',
+        region: '重庆市',
+        org: '重庆市人民政府',
+        title: '重庆市人民政府关于印发重庆市内陆开放高地建设“十三五”规划的通知',
+        url: 'http://www.cq.gov.cn/zwgk/fdzdgknr/lzyj/qtgw/202001/t20200114_4619438.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提升',
+            content: '努力提升新能源汽车“大小三电”、先进汽车电子、辅助驾驶系统、网联终端系统等关键零部件本地配套能力'
+          },
+          {
+            industryName: '中高端新能源汽车产品',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推动|加快',
+            content: '推动现有整车企业加快开发中高端新能源汽车产品'
+          },
+          {
+            industryName: '纯电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '重点发展纯电动汽车、增程式纯电动汽车'
+          },
+          {
+            industryName: '增程式纯电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '重点发展纯电动汽车、增程式纯电动汽车'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '大力发展',
+            content:
+              '大力发展动力电池单体及电池系统、驱动电机及控制器、整车控制系统以及电制动、电转向、电空调等新能源汽车“大小三电”'
+          },
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推动',
+            content: '推动摩托车企业有序向电动汽车企业转型升级'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '公共领域新能源汽车推广工程：市级单位通过政府集中采购新增和更换车辆中新能源汽车占比不低于50%'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提高|加快',
+            content: '主城区新增和更换公交车、出租车要加快提高使用新能源汽车的比例'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提高',
+            content: '逐步提高新增和更换驾驶培训车、驾驶考试车使用新能源汽车比例'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提升',
+            content: '努力提升新能源汽车“大小三电”、先进汽车电子、辅助驾驶系统、网联终端系统等关键零部件本地配套能力'
+          },
+          {
+            industryName: '中高端新能源汽车产品',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推动|加快',
+            content: '推动现有整车企业加快开发中高端新能源汽车产品'
+          },
+          {
+            industryName: '纯电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '重点发展纯电动汽车、增程式纯电动汽车'
+          },
+          {
+            industryName: '增程式纯电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '重点发展纯电动汽车、增程式纯电动汽车'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '大力发展',
+            content:
+              '大力发展动力电池单体及电池系统、驱动电机及控制器、整车控制系统以及电制动、电转向、电空调等新能源汽车“大小三电”'
+          },
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推动',
+            content: '推动摩托车企业有序向电动汽车企业转型升级'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '公共领域新能源汽车推广工程：市级单位通过政府集中采购新增和更换车辆中新能源汽车占比不低于50%'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提高|加快',
+            content: '主城区新增和更换公交车、出租车要加快提高使用新能源汽车的比例'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提高',
+            content: '逐步提高新增和更换驾驶培训车、驾驶考试车使用新能源汽车比例'
+          }
+        ],
+        rpt: '2019/05/10',
+        region: '重庆市',
+        org: '重庆市人民政府',
+        title: '重庆市人民政府关于印发重庆市推动制造业高质量发展专项行动方案（2019—2022年）的通知',
+        url: 'http://www.cq.gov.cn/zwgk/fdzdgknr/ghxx/zxgh/202001/t20200114_4605138.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|研发',
+            content:
+              '重点扩大我市新一代电子信息、新能源汽车、节能环保和新材料等战略性新兴产业发展需要的集成电路、新型半导体、离岸云计算数据处理和软件开发、精密模具制造、新型显示、高性能动力电池等核心研发、先进技术引进以及高新技术装备和重要零部件进口'
+          }
+        ],
+        rpt: '2012/08/24',
+        region: '重庆市',
+        org: '重庆市人民政府',
+        title: '重庆市人民政府贯彻落实国务院关于加强进口促进对外贸易平衡发展指导意见的实施意见',
+        url: 'http://www.cq.gov.cn/zwgk/fdzdgknr/lzyj/xzgfxwj/szf_38655/202001/t20200115_4753104.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '发展新能源汽车产业'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '重点发展新能源汽车及智能网联汽车'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推动',
+            content: '推动汽车产业向智能网联汽车和新能源汽车升级'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content:
+              '重点发展农畜产品加工、现代煤化工、精细化工、现代装备、铁合金、铝压延加工、稀土等新材料、新能源、环保装备、电子信息、新能源汽车及零部件等产业'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快|发展',
+            content:
+              '加快发展新一代信息技术、智能机器人、智能制造装备、高端交通装备、新材料、生物医药、新能源汽车及智能网联汽车、数字创意等战略性新兴产业'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '培育',
+            content:
+              '积极培育智能机器人、智能制造装备、新能源汽车、精细化工、新材料、生物医药、智能终端、产业用纺织品等新兴产业'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '打造',
+            content:
+              '打造国内领先的新型显示、集成电路、信息安全、大数据、新一代移动通信、北斗卫星应用、超高清视频、航空航天、轨道交通、高效发电设备及燃气轮机、石油钻采设备、智能装备、新能源汽车、动力及储能电池、生物医药、新材料等产业集群'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|培育',
+            content: '培育发展新能源汽车、生物医药、新材料等新兴产业'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content:
+              '重点发展不锈钢深加工、煤机装备、纺织机械、人工智能、传感器、轨道交通、新能源汽车、新材料、医药、食品、节能环保等产业'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content:
+              '重点发展汽车及零部件、新能源汽车、智能装备、航空、纺织服装、电子信息、半导体照明（LED）、生物医药、食品、无机非金属材料、玻纤复合材料等产业'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '重点发展新一代信息技术、智能制造装备、新能源汽车、节能环保、新材料等高精尖产业'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '重点发展新一代信息技术、新能源汽车、航空航天、生物医药、新能源、新材料等新兴产业'
+          },
+          {
+            industryName: '节能与新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快|发展',
+            content:
+              '加快高端装备、电子信息、大数据、生物医药、节能与新能源汽车、智能网联汽车、汽车零部件等产业创新发展'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content:
+              '重点发展新能源、新材料、新医药、高端装备、节能环保、新一代信息技术、新能源汽车、空天海洋装备等战略性新兴产业'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '大力发展',
+            content: '大力发展新能源汽车、无人机、船舶与海工装备、轻工机械、电子信息等装备制造业产业集群'
+          },
+          {
+            industryName: '节能与新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快|发展',
+            content: '重点加快节能与新能源汽车、高端装备、新能源、空气动力装备等先进制造业发展'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '打造',
+            content: '全力打造新能源汽车、化工新材料、纺织服装、高端机床、高档特种纸等特色优势产业基地'
+          }
+        ],
+        rpt: '2018/12/29',
+        region: '中央',
+        org: '中华人民共和国工业和信息化部',
+        title: '《产业发展与转移指导目录（2018年本）》',
+        url: 'https://www.miit.gov.cn/zwgk/zcwj/wjfb/gg/art/2020/art_4ee07684f00f407c9c988b2f4100e43e.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '甲醇增程式电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持|研发',
+            content: '鼓励和支持企业研发甲醇混合动力汽车、甲醇增程式电动汽车、甲醇燃料电池汽车产品'
+          }
+        ],
+        rpt: '2019/03/19',
+        region: '中央',
+        org: '中华人民共和国工业和信息化部',
+        title: '八部门关于在部分地区开展甲醇汽车应用的指导意见',
+        url: 'https://www.miit.gov.cn/zwgk/zcwj/wjfb/zh/art/2020/art_8a39c51488544dba924e641efb81d511.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|推动',
+            content: '推动新能源汽车产业健康可持续发展'
+          },
+          {
+            industryName: '节能与新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '相关进展情况及时报送节能与新能源汽车产业发展部际联席会议办公室'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '是新能源汽车产业发展的关键'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '但是目前动力电池产品性能、质量和成本仍然难以满足新能源汽车推广普及需求'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '落实|发展',
+            content: '落实新能源汽车发展战略目标'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完善',
+            content: '调整完善动力电池行业规范条件、新能源汽车生产企业及产品准入管理规则等管理措施'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完善',
+            content: '发布实施并不断完善新能源汽车标准化路线图'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加强',
+            content: '鼓励研究机构、检测认证机构以及动力电池、新能源汽车生产企业加强产品测试验证等相关数据积累'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完善',
+            content: '完善新能源汽车安全监管体系建设'
+          }
+        ],
+        rpt: '2017/03/02',
+        region: '中央',
+        org: '中华人民共和国科学技术部',
+        title: '工业和信息化部 发展改革委 科技部 财政部 关于印发《促进汽车动力电池产业发展行动方案》的通知',
+        url: 'http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/fgzc/gfxwj/gfxwj2017/201703/t20170302_131554.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '新能源汽车发展取得重大进展'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '突破|发展',
+            content: '新能源汽车和智能网联汽车有望成为抢占先机、赶超发展的突破口'
+          },
+          {
+            industryName: '新能源汽车技术',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提升',
+            content: '我国新能源汽车技术水平大幅提升'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '突破',
+            content: '以新能源汽车和智能网联汽车为突破口'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '培育',
+            content: '培育形成若干家进入世界前十的新能源汽车企业'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提升',
+            content: '新能源汽车骨干企业在全球的影响力和市场份额进一步提升'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完善',
+            content: '形成新能源汽车、智能网联汽车和先进节能汽车梯次合理的产业格局以及完善的产业配套体系'
+          },
+          {
+            industryName: '新能源汽车技术',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快|研发',
+            content: '加快新能源汽车技术研发及产业化'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加大|推广',
+            content: '加大新能源汽车推广应用力度'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提高',
+            content: '逐步提高公共服务领域新能源汽车使用比例'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完善|推广',
+            content: '完善新能源汽车推广应用、尤其是使用环节的扶持政策体系'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '建立|发展|促进',
+            content: '建立促进新能源汽车发展的长效机制'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '引导|提高',
+            content: '引导生产企业不断提高新能源汽车产销比例'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完善',
+            content: '不断完善新能源汽车标准体系'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提高',
+            content: '提高新能源汽车生产企业及产品准入门槛'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '强化',
+            content: '强化新能源汽车生产监管'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '建立',
+            content: '建立健全新能源汽车分类注册登记、交通管理、税收保险、车辆维修、二手车管理等政策体系'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|推广',
+            content: '探索新能源汽车与可再生能源、智能电网的深度融合和协同发展的商业化推广模式'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持|加大',
+            content: '加大对汽车关键零部件、新能源汽车、智能网联汽车等重点领域的支持力度'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完善',
+            content: '优化完善新能源汽车标准体系'
+          }
+        ],
+        rpt: '2017/05/10',
+        region: '中央',
+        org: '中华人民共和国科学技术部',
+        title: '工业和信息化部 国家发展改革委 科技部关于印发《汽车产业中长期发展规划》的通知',
+        url: 'http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/fgzc/gfxwj/gfxwj2017/201705/t20170517_132856.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '促进|发展',
+            content: '促进新能源汽车行业持续健康发展'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '建立',
+            content:
+              '新能源汽车售后服务机构、电池租赁等运营企业应在溯源信息系统中建立动力蓄电池编码与新能源汽车的动态联系'
+          }
+        ],
+        rpt: '2018/02/26',
+        region: '中央',
+        org: '中华人民共和国工业和信息化部',
+        title:
+          '工业和信息化部 科技部 环境保护部 交通运输部 商务部 质检总局 能源局关于印发《新能源汽车动力蓄电池回收利用管理暂行办法》的通知',
+        url: 'https://www.miit.gov.cn/zwgk/zcwj/wjfb/zh/art/2020/art_459b0eb972964f68930bb39be9e92688.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '1.新能源汽车及动力蓄电池产业发展情况'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持',
+            content: '3.现有新能源汽车及动力蓄电池产业相关支持政策'
+          }
+        ],
+        rpt: '2018/03/02',
+        region: '中央',
+        org: '中华人民共和国工业和信息化部',
+        title:
+          '工业和信息化部 科技部 环境保护部 交通运输部 商务部 质检总局 能源局关于组织开展新能源汽车动力蓄电池回收利用试点工作的通知',
+        url: 'https://www.miit.gov.cn/zwgk/zcwj/wjfb/zh/art/2020/art_f2b827336c514c7abb77a55aec6b25e3.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持',
+            content: '支持两国企业、行业协会和科研院所围绕增材制造、机器人、新能源汽车、装备制造等行业开展合作'
+          }
+        ],
+        rpt: '2019/08/09',
+        region: '中央',
+        org: '中华人民共和国工业和信息化部',
+        title: '工业和信息化部办公厅关于组织开展2019年制造业与互联网融合发展试点示范工作的通知',
+        url: 'https://www.miit.gov.cn/zwgk/zcwj/wjfb/rjy/art/2020/art_4b4b16f9e5ca4547b608666645b31ad3.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '（十一）推广新能源汽车'
+          }
+        ],
+        rpt: '2018/07/25',
+        region: '中央',
+        org: '中华人民共和国工业和信息化部',
+        title: '工业和信息化部关于印发坚决打好工业和通信业污染防治攻坚战三年行动计划的通知',
+        url: 'https://www.miit.gov.cn/zwgk/zcwj/wjfb/zh/art/2020/art_4f3ef95924dd487eaab5d46bdfbc8926.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持',
+            content:
+              '重点支持5G、工业互联网、集成电路、工业机器人、增材制造、智能制造、新型显示、新能源汽车、节能环保等战略性新兴产业'
+          }
+        ],
+        rpt: '2020/02/25',
+        region: '中央',
+        org: '中华人民共和国工业和信息化部',
+        title: '工业和信息化部印发《关于有序推动工业通信业企业复工复产的指导意见》',
+        url: 'https://www.miit.gov.cn/zwgk/zcwj/wjfb/zh/art/2020/art_67d558d8e9de4dc3929797491a04cdc9.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '节能和新能源汽车产品',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持',
+            content: '积极支持节能和新能源汽车产品出口'
+          },
+          {
+            industryName: '节能和新能源汽车产品',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '引导',
+            content: '（二）积极引导节能和新能源汽车产品出口'
+          },
+          {
+            industryName: '纯电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持|推广',
+            content: '支持推广纯电动汽车'
+          }
+        ],
+        rpt: '2009/10/23',
+        region: '中央',
+        org: '中华人民共和国商务部',
+        title: '关于促进我国汽车产品出口持续健康发展的意见',
+        url: 'http://file.mofcom.gov.cn/article/gkml/200911/20091198714205.shtml'
+      },
+      {
+        contentList: [
+          {
+            industryName: '节能与新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '研发|加强',
+            content: '加强节能与新能源汽车研发和应用示范'
+          }
+        ],
+        rpt: '2007/09/29',
+        region: '中央',
+        org: '中华人民共和国科学技术部',
+        title: '关于发布《节能减排全民科技行动方案》的通知',
+        url: 'http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/fgzc/gfxwj/gfxwj2010before/200711/t20071108_143693.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '落实|推广',
+            content: '贯彻落实国家关于新能源汽车推广应用的战略部署'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '研究制定在城市公交、出租汽车、城市配送等领域推广应用新能源汽车的指导意见'
+          }
+        ],
+        rpt: '2014/06/05',
+        region: '中央',
+        org: '中华人民共和国交通运输部',
+        title: '关于交通运输行业贯彻落实《2014—2015年节能减排低碳发展行动方案》的实施意见',
+        url: 'http://xxgk.mot.gov.cn/2020/jigou/fgs/202006/t20200623_3307640.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加强|推广',
+            content: '为进一步规范和加强新能源汽车推广应用财政补助资金管理'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '逐级报省级新能源汽车推广牵头部门'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '省级新能源汽车推广牵头部门会同其他相关部门'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '地方政府根据国务院有关文件要求承担新能源汽车推广应用主体责任'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '要明确新能源汽车推广牵头部门'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '地方新能源汽车推广牵头部门会同同级其他部门对本地新能源汽车资金申请报告和推广审核核查结果负责'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content:
+              '有关各级新能源汽车推广主管部门、其他相关部门及其工作人员存在未按照上级要求进行分配审批、审核把关不严、核查工作组织不力、擅自超出政策规定范围或标准分配资金'
+          }
+        ],
+        rpt: '2017/01/03',
+        region: '中央',
+        org: '中华人民共和国财政部',
+        title: '关于新能源汽车推广应用审批责任有关事项的通知',
+        url: 'http://jjs.mof.gov.cn/tongzhigonggao/201612/t20161215_2482658.htm'
+      },
+      {
+        contentList: [
+          {
+            industryName: '节能与新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '为了适应我国节能与新能源汽车产业发展的需要'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content:
+              '增加一款作为第二十二条第四款：“工业和信息化部可以根据汽车行业发展情况决定延长抵偿期限和调整2020年度新能源汽车正积分结转比例'
+          }
+        ],
+        rpt: '2020/06/22',
+        region: '中央',
+        org: '中华人民共和国工业和信息化部',
+        title: '关于修改《乘用车企业平均燃料消耗量与新能源汽车积分并行管理办法》的决定',
+        url: 'https://www.miit.gov.cn/zwgk/zcwj/wjfb/zbgy/art/2020/art_a9bf4365bb194150a71b1d6eb91138ba.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提升',
+            content: '全面提升新能源汽车充电保障能力'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提升',
+            content: '提升新能源汽车充电保障能力行动计划'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '我国新能源汽车正处于市场化发展的关键时期'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '充电基础设施是新能源汽车推广应用的重要基础之一'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '新能源汽车和充电设施尚处于发展过程中'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '仍是制约新能源汽车发展的短板之一'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提升',
+            content: '新能源汽车充电保障能力亟待提升'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快|落实|发展',
+            content: '落实党中央、国务院关于加快新能源汽车发展的决策部署'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '以新能源汽车推广应用为出发点'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '为新能源汽车发展提供坚实能源保障'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '促进',
+            content: '促进新能源汽车与充电设施行业标准间的协调统一'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持',
+            content: '逐渐将地方财政购置补贴转向支持充电基础设施建设和运营、新能源汽车使用和运营等环节'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快',
+            content: '加快与国家新能源汽车监管平台的信息互联互通'
+          }
+        ],
+        rpt: '2018/12/12',
+        region: '中央',
+        org: '中华人民共和国财政部',
+        title: '关于印发《提升新能源汽车充电保障能力行动计划》的通知',
+        url: 'http://www.mof.gov.cn/zhengwuxinxi/zhengcefabu/201812/t20181212_3088828.htm'
+      },
+      {
+        contentList: [
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|加快推动',
+            content: '加快推动电动汽车科技发展'
+          }
+        ],
+        rpt: '2012/04/20',
+        region: '中央',
+        org: '中华人民共和国科学技术部',
+        title: '关于印发电动汽车科技发展“十二五”专项规划的通知',
+        url: 'http://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/fgzc/gfxwj/gfxwj2012/201204/t20120424_93860.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持',
+            content: '应将除公交车外的新能源汽车地方购置补贴资金集中用于支持充电基础设施“短板”建设和配套运营服务等环节'
+          }
+        ],
+        rpt: '2019/05/08',
+        region: '中央',
+        org: '中华人民共和国财政部',
+        title: '关于支持新能源公交车推广应用的通知',
+        url: 'http://jjs.mof.gov.cn/zhengcefagui/201905/t20190508_3251282.htm'
+      },
+      {
+        contentList: [
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '引导',
+            content: '鼓励并引导电动汽车有序充电'
+          }
+        ],
+        rpt: '2018/12/04',
+        region: '中央',
+        org: '中华人民共和国国家发展和改革委员会',
+        title: '国家发展改革委 国家能源局关于印发《清洁能源消纳行动计划（2018-2020年）》的通知',
+        url: 'https://www.ndrc.gov.cn/xxgk/zcfb/ghxwj/201812/t20181204_960958.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快',
+            content: '新能源汽车产业化进程加快'
+          }
+        ],
+        rpt: '2017/01/17',
+        region: '中央',
+        org: '中华人民共和国国家发展和改革委员会',
+        title: '国家发展改革委 国家能源局关于印发能源发展“十三五”规划的通知',
+        url: 'https://www.ndrc.gov.cn/xxgk/zcfb/ghwb/201701/t20170117_962221.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '大力推广新能源汽车'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广|推动',
+            content: '推动新能源汽车等新技术、新产品在北京2022冬奥会和冬残奥会推广利用'
+          }
+        ],
+        rpt: '2019/08/06',
+        region: '中央',
+        org: '中华人民共和国国家发展和改革委员会',
+        title:
+          '国家发展改革委 河北省人民政府关于印发《张家口首都水源涵养功能区和生态环境支撑区建设规划（2019-2035年）》的通知',
+        url: 'https://www.ndrc.gov.cn/xxgk/zcfb/ghwb/201908/t20190806_962255.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快',
+            content:
+              '加快形成电子核心部件、新材料、物联网、机器人及智能装备、高端交通装备、新能源汽车及智能汽车、生物医药等战略性新兴产业集群'
+          },
+          {
+            industryName: '纯电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '积极发展纯电动汽车和插电式混合动力汽车'
+          }
+        ],
+        rpt: '2016/05/04',
+        region: '中央',
+        org: '中华人民共和国国家发展和改革委员会',
+        title: '国家发展改革委 住房城乡建设部关于印发成渝城市群发展规划的通知',
+        url: 'https://www.ndrc.gov.cn/xxgk/zcfb/ghwb/201605/t20160504_962182.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '纯电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '积极发展纯电动汽车和插电式混合动力汽车'
+          }
+        ],
+        rpt: '2016/06/03',
+        region: '中央',
+        org: '中华人民共和国国家发展和改革委员会',
+        title: '国家发展改革委 住房城乡建设部关于印发长江三角洲城市群发展规划的通知',
+        url: 'https://www.ndrc.gov.cn/xxgk/zcfb/ghwb/201606/t20160603_962187.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '培育',
+            content: '积极培育新能源汽车、电子信息、高端装备制造、生物医药、新材料等产业'
+          }
+        ],
+        rpt: '2018/11/12',
+        region: '中央',
+        org: '中华人民共和国国家发展和改革委员会',
+        title: '国家发展改革委关于印发《汉江生态经济带发展规划》的通知',
+        url: 'https://www.ndrc.gov.cn/xxgk/zcfb/ghwb/201811/t20181112_962253.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '带动示范区内外信息产业、智能电网、新能源汽车、新材料、现代服务业等新兴产业发展'
+          },
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广使用',
+            content: '率先在公共交通、出租车、旅游观光等领域推广使用电动汽车'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content:
+              '重点发展并网智能控制设备、新能源汽车、高转换率光伏组件、太阳能热电聚光器等可再生能源高端装备制造业'
+          }
+        ],
+        rpt: '2015/07/29',
+        region: '中央',
+        org: '中华人民共和国国家发展和改革委员会',
+        title: '国家发展改革委关于印发《河北省张家口市可再生能源示范区发展规划》的通知',
+        url: 'https://www.ndrc.gov.cn/xxgk/zcfb/ghwb/201507/t20150729_962159.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '联合有关地区发展新能源汽车、专用车'
+          }
+        ],
+        rpt: '2018/11/07',
+        region: '中央',
+        org: '中华人民共和国国家发展和改革委员会',
+        title: '国家发展改革委关于印发《淮河生态经济带发展规划》的通知',
+        url: 'https://www.ndrc.gov.cn/xxgk/zcfb/ghwb/201811/t20181107_962252.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持|发展',
+            content:
+              '支持新一代信息技术、新能源汽车、高端装备和材料、数字创意、绿色低碳和生态环保等领域的新兴产业发展壮大'
+          }
+        ],
+        rpt: '2016/12/19',
+        region: '中央',
+        org: '中华人民共和国国家发展和改革委员会',
+        title: '国家发展改革委关于印发东北振兴“十三五”规划的通知',
+        url: 'https://www.ndrc.gov.cn/xxgk/zcfb/ghwb/201612/t20161219_962212.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '积极发展载重汽车、乘用车、新能源汽车、智能机械、轨道交通装备'
+          }
+        ],
+        rpt: '2018/03/06',
+        region: '中央',
+        org: '中华人民共和国国家发展和改革委员会',
+        title: '国家发展改革委关于印发呼包鄂榆城市群发展规划的通知',
+        url: 'https://www.ndrc.gov.cn/xxgk/zcfb/ghwb/201803/t20180306_962247.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快',
+            content: '加快电动汽车等节能环保和新能源汽车应用'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快',
+            content: '加快电动汽车等节能环保和新能源汽车应用'
+          }
+        ],
+        rpt: '2017/01/19',
+        region: '中央',
+        org: '中华人民共和国国家发展和改革委员会',
+        title: '国家发展改革委关于印发石油天然气发展“十三五”规划的通知',
+        url: 'https://www.ndrc.gov.cn/xxgk/zcfb/ghwb/201701/t20170119_962222.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快|培育',
+            content: '加快培育形成生物医药、先进材料、机器人、新能源、新能源汽车等产业集群'
+          }
+        ],
+        rpt: '2017/01/05',
+        region: '中央',
+        org: '中华人民共和国国家发展和改革委员会',
+        title: '国家发展改革委关于印发中原城市群发展规划的通知',
+        url: 'https://www.ndrc.gov.cn/xxgk/zcfb/ghwb/201701/t20170105_962218.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '是发展新能源汽车产业的重要保障'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '坚持以纯电驱动为新能源汽车发展的主要战略取向'
+          },
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '促进|发展',
+            content: '促进电动汽车产业发展和电力消费'
+          },
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '着眼于电动汽车未来发展'
+          },
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '促进',
+            content: '促进电动汽车与智能电网间能量和信息的双向互动'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '各地要结合新能源汽车推广应用需要'
+          },
+          {
+            industryName: '节能与新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '依托节能与新能源汽车产业发展部际联席会议制度'
+          }
+        ],
+        rpt: '2019/05/23',
+        region: '中央',
+        org: '中华人民共和国自然资源部',
+        title: '国务院办公厅关于加快电动汽车充电基础设施建设的指导意见',
+        url: 'http://f.mnr.gov.cn/201905/t20190523_2412886.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持',
+            content: '有条件的地方对购置新能源汽车给予积极支持'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持',
+            content: '鼓励金融机构对居民购买新能源汽车、绿色智能家电、智能家居、节水器具等绿色智能产品提供信贷支持'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持',
+            content: '有条件的地方对购置新能源汽车给予积极支持'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持',
+            content: '鼓励金融机构对居民购买新能源汽车、绿色智能家电、智能家居、节水器具等绿色智能产品提供信贷支持'
+          }
+        ],
+        rpt: '2019/08/27',
+        region: '中央',
+        org: '中华人民共和国自然资源部',
+        title: '国务院办公厅关于加快发展流通促进商业消费的意见',
+        url: 'http://f.mnr.gov.cn/201912/t20191220_2490927.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快|推广',
+            content: '加快新能源汽车的推广应用'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '落实|发展',
+            content: '贯彻落实发展新能源汽车的国家战略'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '以纯电驱动为新能源汽车发展的主要战略取向'
+          },
+          {
+            industryName: '纯电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '重点发展纯电动汽车、插电式（含增程式）混合动力汽车和燃料电池汽车'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '建立|发展',
+            content: '建立长期稳定的新能源汽车发展政策体系'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '促进|发展',
+            content: '促进新能源汽车产业健康快速发展'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '突破',
+            content: '新能源汽车生产企业和充电设施生产建设运营企业要着力突破关键核心技术'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '地方政府要相应制定新能源汽车推广应用规划'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '突破|推广',
+            content: '把公共服务领域用车作为新能源汽车推广应用的突破口'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '地方政府承担新能源汽车推广应用主体责任'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提高',
+            content: '新能源汽车生产企业要积极提高售后服务水平'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提高',
+            content: '不断提高现代信息技术在新能源汽车商业运营模式创新中的应用水平'
+          },
+          {
+            industryName: '新能源汽车技术研发和运营服务',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '研发',
+            content: '鼓励互联网企业参与新能源汽车技术研发和运营服务'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '为新能源汽车推广应用带来更多便利和实惠'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加大|推广',
+            content:
+              '各地区、各有关部门要在公交车、出租车等城市客运以及环卫、物流、机场通勤、公安巡逻等领域加大新能源汽车推广应用力度'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提高',
+            content: '不断提高新能源汽车运营比重'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '比例不低于|推广',
+            content: '新能源汽车推广应用城市新增或更新车辆中的新能源汽车比例不低于30%'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推进',
+            content: '（十四）推进党政机关和公共机构、企事业单位使用新能源汽车'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '比例不低于|推广',
+            content:
+              '中央国家机关以及新能源汽车推广应用城市的政府机关及公共机构购买的新能源汽车占当年配备更新车辆总量的比例不低于30%'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完善|推广',
+            content: '（十五）完善新能源汽车推广补贴政策'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '中央财政安排资金对新能源汽车推广应用规模较大和配套基础设施建设较好的城市或企业给予奖励'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持|推广',
+            content: '有关方面要抓紧研究确定2016—2020年新能源汽车推广应用的财政支持政策'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '城市公交车行业是新能源汽车推广的优先领域'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持|发展',
+            content: '（十八）多渠道筹集支持新能源汽车发展的资金'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '建立|发展',
+            content: '建立长期稳定的发展新能源汽车的资金来源'
+          },
+          {
+            industryName: '新能源汽车技术',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持|研发|推广',
+            content: '重点支持新能源汽车技术研发、检验测试和推广应用'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '建立',
+            content: '建立适应新能源汽车行业特点的信贷管理和贷款评审制度'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持',
+            content: '增加其支持个人购买新能源汽车的资金来源'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持',
+            content: '支持社会资本和具有技术创新能力的企业参与新能源汽车科研生产'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '研发',
+            content: '鼓励新能源汽车的研发生产和销售使用'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加强',
+            content: '有关部门要加强对新能源汽车市场的监管'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推进',
+            content: '推进建设统一开放、有序竞争的新能源汽车市场'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: -1,
+            typeName: '清理|发展',
+            content: '坚决清理取消各地区不利于新能源汽车市场发展的违规政策措施'
+          },
+          {
+            industryName: '新能源汽车技术和产品',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快',
+            content: '加快研究和开发适应市场需求、有竞争力的新能源汽车技术和产品'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快|建立',
+            content: '加快建立新能源汽车产业技术创新体系'
+          },
+          {
+            industryName: '新能源汽车产品',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完善',
+            content: '（二十七）完善新能源汽车产品质量保障体系'
+          },
+          {
+            industryName: '新能源汽车技术',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持|建立',
+            content: '支持建立行业性新能源汽车技术支撑平台'
+          },
+          {
+            industryName: '新能源汽车产品',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '建立',
+            content: '建立新能源汽车产品抽检制度'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '建立',
+            content: '建立由主要负责同志牵头、各职能部门参加的新能源汽车工作联席会议制度'
+          },
+          {
+            industryName: '节能与新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|推广',
+            content: '节能与新能源汽车产业发展部际联席会议及其办公室要及时协调解决新能源汽车推广应用中的重大问题'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|推广',
+            content: '节能与新能源汽车产业发展部际联席会议及其办公室要及时协调解决新能源汽车推广应用中的重大问题'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '建立|推广',
+            content: '建立新能源汽车推广城市退出机制'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提高',
+            content: '提高全社会对新能源汽车的认知度和接受度'
+          }
+        ],
+        rpt: '2019/05/22',
+        region: '中央',
+        org: '中华人民共和国自然资源部',
+        title: '国务院办公厅关于加快新能源汽车推广应用的指导意见',
+        url: 'http://f.mnr.gov.cn/201905/t20190522_2412477.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完善',
+            content: '完善燃油经济性标准和新能源汽车技术标准'
+          }
+        ],
+        rpt: 'NaN//',
+        region: '中央',
+        org: '中华人民共和国自然资源部',
+        title: '国务院办公厅关于加强节能标准化工作的意见',
+        url: 'http://f.mnr.gov.cn/201702/t20170206_1437059.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快|推广使用',
+            content: '（国家邮政局、交通运输部负责）鼓励快递物流领域加快推广使用新能源汽车和满足更高排放标准的燃油汽车'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提高',
+            content: '逐步提高新能源汽车使用比例'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快|推广使用',
+            content: '（国家邮政局、交通运输部负责）鼓励快递物流领域加快推广使用新能源汽车和满足更高排放标准的燃油汽车'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提高',
+            content: '逐步提高新能源汽车使用比例'
+          }
+        ],
+        rpt: '2018/01/23',
+        region: '中央',
+        org: '中华人民共和国中央人民政府',
+        title: '国务院办公厅关于推进电子商务与快递物流协同发展的意见',
+        url: 'http://www.gov.cn/zhengce/content/2018-01/23/content_5259695.htm'
+      },
+      {
+        contentList: [
+          {
+            industryName: '纯电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快|发展',
+            content: '加快发展纯电动汽车、混合动力汽车和船舶、天然气汽车和船舶'
+          }
+        ],
+        rpt: 'NaN//',
+        region: '中央',
+        org: '中华人民共和国自然资源部',
+        title: '国务院办公厅关于印发能源发展战略行动计划（2014-2020年）的通知',
+        url: 'http://f.mnr.gov.cn/201702/t20170206_1436370.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '建立',
+            content: '电动汽车及动力电池生产企业应负责建立废旧电池回收网络'
+          }
+        ],
+        rpt: '2017/01/03',
+        region: '中央',
+        org: '中华人民共和国中央人民政府',
+        title: '国务院办公厅关于印发生产者责任延伸制度推行方案的通知',
+        url: 'http://www.gov.cn/zhengce/content/2017-01/03/content_5156043.htm'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: -1,
+            typeName: '淘汰|推广',
+            content: '对大力淘汰老旧车辆、推广应用新能源汽车的有关企业和人员依照有关政策及时给予经济补偿'
+          }
+        ],
+        rpt: '2018/10/09',
+        region: '中央',
+        org: '中华人民共和国中央人民政府',
+        title: '国务院办公厅关于印发推进运输结构调整三年行动计划（2018—2020年）的通知',
+        url: 'http://www.gov.cn/zhengce/content/2018-10/09/content_5328817.htm'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完善',
+            content: '完善新能源汽车积分管理制度'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '落实',
+            content: '落实好乘用车企业平均燃料消耗量与新能源汽车积分并行管理办法'
+          }
+        ],
+        rpt: '2018/10/11',
+        region: '中央',
+        org: '中华人民共和国中央人民政府',
+        title: '国务院办公厅关于印发完善促进消费体制机制实施方案（2018—2020年）的通知',
+        url: 'http://www.gov.cn/zhengce/content/2018-10/11/content_5329516.htm'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '新能源汽车产业发展规划（2021—2035年）'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '发展新能源汽车是我国从汽车大国迈向汽车强国的必由之路'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '新能源汽车产业发展取得了巨大成就'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完善|发展',
+            content:
+              '我国新能源汽车发展也面临核心技术创新能力不强、质量保障体系有待完善、基础设施建设仍显滞后、产业生态尚不健全、市场竞争日益加剧等问题'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|推动',
+            content: '为推动新能源汽车产业高质量发展'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '第一节新能源汽车为世界经济发展注入新动能'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '促进|发展',
+            content: '新能源汽车已成为全球汽车产业转型发展的主要方向和促进世界经济持续增长的重要引擎'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '第二节我国新能源汽车进入加速发展新阶段'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '为新能源汽车产业提供了前所未有的发展机遇'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完善|增强|提升',
+            content: '我国新能源汽车产业技术水平显著提升、产业体系日趋完善、企业竞争力大幅增强'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|推动',
+            content: '推动新能源汽车产业高质量可持续发展'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '第三节融合开放成为新能源汽车发展的新特征'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '研发',
+            content: '新能源汽车产业生态正由零部件、整车研发生产及营销服务企业之间的“链式关系”'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '跨行业、跨领域融合创新和更加开放包容的国际合作成为新能源汽车产业发展的时代特征'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '深入实施发展新能源汽车国家战略'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|推动',
+            content: '推动我国新能源汽车产业高质量可持续发展'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '促进',
+            content: '促进新能源汽车与能源、交通、信息通信深度融合'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '培育',
+            content: '培育新能源汽车产业新优势'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '增强',
+            content: '我国新能源汽车市场竞争力明显增强'
+          },
+          {
+            industryName: '新能源汽车整',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提高',
+            content: '提高新能源汽车整车综合性能'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '建立',
+            content: '建立面向未来出行的新能源汽车与智慧能源、智能交通融合创新平台'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提升',
+            content: '提升新能源汽车及关联产业融合创新能力'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|培育',
+            content: '培育若干上下游协同创新、大中小企业融通发展、具有国际影响力和竞争力的新能源汽车产业集群'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '研发|推进',
+            content: '推进智能化技术在新能源汽车研发设计、生产制造、仓储物流、经营管理、售后服务等关键环节的深度应用'
+          },
+          {
+            industryName: '新能源汽车智能制造',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快',
+            content: '加快新能源汽车智能制造仿真、管理、控制等核心工业软件开发和集成'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提升',
+            content: '提升新能源汽车全产业链智能化水平'
+          },
+          {
+            industryName: '新能源汽车产品',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提升',
+            content: '开展新能源汽车产品质量提升行动'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|推动',
+            content: '第一节推动新能源汽车与能源融合发展'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加强',
+            content: '加强新能源汽车与电网（V2G）能量互动'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '实现',
+            content: '实现新能源汽车与电网能量高效互动'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '促进',
+            content: '促进新能源汽车与可再生能源高效协同'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推动',
+            content: '推动新能源汽车与气象、可再生能源电力预测预报系统信息共享与融合'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|推动',
+            content: '第二节推动新能源汽车与交通融合发展'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快',
+            content: '加快新能源汽车在分时租赁、城市公交、出租汽车、场地用车等领域的应用'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推动',
+            content: '推动新能源汽车在城市配送、港口作业等领域应用'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|推动',
+            content: '第三节推动新能源汽车与信息通信融合发展'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '促进',
+            content: '促进新能源汽车与信息通信融合应用服务创新'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '强化',
+            content: '强化新能源汽车数据分级分类和合规应用管理'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '建立|发展',
+            content: '建立新能源汽车与相关产业融合发展的综合标准体系'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '促进',
+            content: '促进形成开放、透明、包容的新能源汽车国际化市场环境'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完善',
+            content: '完善企业平均燃料消耗量与新能源汽车积分并行管理办法'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '落实',
+            content: '落实新能源汽车相关税收优惠政策'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '比例不低于',
+            content:
+              '国家生态文明试验区、大气污染防治重点区域的公共领域新增或更新公交、出租、物流配送等车辆中新能源汽车比例不低于80%'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '研发',
+            content: '制定将新能源汽车研发投入纳入国有企业考核体系的具体办法'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快|建立|发展|培养',
+            content: '加快建立适应新能源汽车与相关产业融合发展需要的人才培养机制'
+          },
+          {
+            industryName: '节能与新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '充分发挥节能与新能源汽车产业发展部际联席会议制度和地方协调机制作用'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加强',
+            content: '加强新能源汽车与能源、交通、信息通信等行业在政策规划、标准法规等方面的统筹'
+          }
+        ],
+        rpt: '2020/11/02',
+        region: '中央',
+        org: '中华人民共和国中央人民政府',
+        title: '国务院办公厅关于印发新能源汽车产业发展规划（2021—2035年）的通知',
+        url: 'http://www.gov.cn/zhengce/content/2020-11/02/content_5556716.htm'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '培育',
+            content: '培育壮大节能环保、新一代信息技术、新能源汽车等战略性新兴产业'
+          }
+        ],
+        rpt: '2019/05/24',
+        region: '中央',
+        org: '中华人民共和国自然资源部',
+        title: '国务院关于积极发挥新消费引领作用加快培育形成新供给新动力的指导意见',
+        url: 'http://f.mnr.gov.cn/201905/t20190524_2413440.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加强',
+            content: '加强先进重大装备、新材料、新能源汽车等领域的第三方检验检测服务'
+          }
+        ],
+        rpt: '2019/05/24',
+        region: '中央',
+        org: '中华人民共和国自然资源部',
+        title: '国务院关于加快发展生产性服务业促进产业结构调整升级的指导意见',
+        url: 'http://f.mnr.gov.cn/201905/t20190524_2413451.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '大力发展',
+            content:
+              '大力发展新一代信息技术、高端装备、新材料、生物、新能源汽车、新能源、节能环保、数字创意等战略性新兴产业'
+          }
+        ],
+        rpt: '2017/02/06',
+        region: '中央',
+        org: '中华人民共和国中央人民政府',
+        title: '国务院关于印发“十三五”促进就业规划的通知',
+        url: 'http://www.gov.cn/zhengce/content/2017-02/06/content_5165797.htm'
+      },
+      {
+        contentList: [
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '突破',
+            content:
+              '高速铁路、水电装备、特高压输变电、杂交水稻、第四代移动通信（4G）、对地观测卫星、北斗导航、电动汽车等重大装备和战略产品取得重大突破'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '培育',
+            content: '培育新能源汽车、高端轨道交通、民用航空等新兴产业'
+          },
+          {
+            industryName: '电动汽车智能化',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '重点发展电动汽车智能化、网联化、轻量化技术及自动驾驶技术'
+          },
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '突破',
+            content:
+              '高速铁路、水电装备、特高压输变电、杂交水稻、第四代移动通信（4G）、对地观测卫星、北斗导航、电动汽车等重大装备和战略产品取得重大突破'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '培育',
+            content: '培育新能源汽车、高端轨道交通、民用航空等新兴产业'
+          },
+          {
+            industryName: '电动汽车智能化',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '重点发展电动汽车智能化、网联化、轻量化技术及自动驾驶技术'
+          }
+        ],
+        rpt: '2016/08/08',
+        region: '中央',
+        org: '中华人民共和国中央人民政府',
+        title: '国务院关于印发“十三五”国家科技创新规划的通知',
+        url: 'http://www.gov.cn/zhengce/content/2016-08/08/content_5098072.htm'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content:
+              '我国节能环保、新一代信息技术、生物、高端装备制造、新能源、新材料和新能源汽车等战略性新兴产业快速发展'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content:
+              '进一步发展壮大新一代信息技术、高端装备、新材料、生物、新能源汽车、新能源、节能环保、数字创意等战略性新兴产业'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '面向航空航天、轨道交通、电力电子、新能源汽车等产业发展需求'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推动',
+            content: '五、推动新能源汽车、新能源和节能环保产业快速壮大'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提升',
+            content: '大幅提升新能源汽车和新能源的应用比例'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推动',
+            content: '推动新能源汽车、新能源和节能环保等绿色低碳产业成为支柱产业'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '实现',
+            content: '（一）实现新能源汽车规模应用'
+          },
+          {
+            industryName: '纯电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提升',
+            content: '提升纯电动汽车和插电式混合动力汽车产业化水平'
+          },
+          {
+            industryName: '电动汽车整车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提升',
+            content: '全面提升电动汽车整车品质与性能'
+          },
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快',
+            content: '加快电动汽车安全标准制定和应用'
+          },
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|推动',
+            content: '推动电动汽车与智能电网、新能源、储能、智能驾驶等融合发展'
+          },
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '促进',
+            content: '促进电动汽车重大关键技术协同创新'
+          },
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完善',
+            content: '完善电动汽车生产准入政策'
+          },
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '电动汽车力争具备商业化推广的市场竞争力'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完善|推广',
+            content: '调整完善新能源汽车推广补贴政策'
+          }
+        ],
+        rpt: '2016/12/19',
+        region: '中央',
+        org: '中华人民共和国中央人民政府',
+        title: '国务院关于印发“十三五”国家战略性新兴产业发展规划的通知',
+        url: 'http://www.gov.cn/zhengce/content/2016-12/19/content_5150090.htm'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快|发展',
+            content:
+              '加快发展壮大新一代信息技术、高端装备、新材料、生物、新能源、新能源汽车、节能环保、数字创意等战略性新兴产业'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '突破',
+            content: '节能环保、新能源装备、新能源汽车等绿色低碳产业总产值突破10万亿元'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '大力推广节能环保汽车、新能源汽车、天然气（CNG/LNG）清洁能源汽车、液化天然气动力船舶等'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广|提高',
+            content:
+              '中央国家机关、新能源汽车推广应用城市的政府部门及公共机构购买新能源汽车占当年配备更新车辆总量的比例提高到50%以上'
+          },
+          {
+            industryName: '节能与新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '引导',
+            content: '积极引导消费者购买节能与新能源汽车、高效家电、节水型器具等节能环保低碳产品'
+          }
+        ],
+        rpt: '2017/01/05',
+        region: '中央',
+        org: '中华人民共和国中央人民政府',
+        title: '国务院关于印发“十三五”节能减排综合工作方案的通知',
+        url: 'http://www.gov.cn/zhengce/content/2017-01/05/content_5156789.htm'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提高',
+            content: '提高公共车辆中新能源汽车占比'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '继续实施新能源汽车推广'
+          }
+        ],
+        rpt: '2016/12/05',
+        region: '中央',
+        org: '中华人民共和国中央人民政府',
+        title: '国务院关于印发“十三五”生态环境保护规划的通知',
+        url: 'http://www.gov.cn/zhengce/content/2016-12/05/content_5143290.htm'
+      },
+      {
+        contentList: [
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '研发',
+            content: '电动汽车、特种船舶、国产大型客机、中低速磁悬浮轨道交通等领域技术研发和应用取得进展'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '城市公共交通、出租车和城市配送领域新能源汽车快速发展'
+          }
+        ],
+        rpt: '2017/02/28',
+        region: '中央',
+        org: '中华人民共和国中央人民政府',
+        title: '国务院关于印发“十三五”现代综合交通运输体系发展规划的通知',
+        url: 'http://www.gov.cn/zhengce/content/2017-02/28/content_5171345.htm'
+      },
+      {
+        contentList: [
+          {
+            industryName: '氢能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持',
+            content: '支持外商投资企业参与氢能源汽车标准制定'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持|发展',
+            content: '支持在自贸试验区内发展新能源汽车产业'
+          }
+        ],
+        rpt: '2019/08/26',
+        region: '中央',
+        org: '中华人民共和国中央人民政府',
+        title: '国务院关于印发6个新设自由贸易试验区总体方案的通知',
+        url: 'http://www.gov.cn/zhengce/content/2019-08/26/content_5424522.htm'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持',
+            content: '支持将生物医药、高端智能装备、新能源汽车、硅基新材料等产业纳入新一批国家战略性新兴产业集群'
+          }
+        ],
+        rpt: '2020/09/21',
+        region: '中央',
+        org: '中华人民共和国中央人民政府',
+        title: '国务院关于印发北京、湖南、安徽自由贸易试验区总体方案及浙江自由贸易试验区扩展区域方案的通知',
+        url: 'http://www.gov.cn/zhengce/content/2020-09/21/content_5544926.htm'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广使用',
+            content: '推广使用新能源汽车'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '建成',
+            content: '重点区域的直辖市、省会城市、计划单列市建成区公交车全部更换为新能源汽车'
+          }
+        ],
+        rpt: '2018/07/03',
+        region: '中央',
+        org: '中华人民共和国中央人民政府',
+        title: '国务院关于印发打赢蓝天保卫战三年行动计划的通知',
+        url: 'http://www.gov.cn/zhengce/content/2018-07/03/content_5303158.htm'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '培养',
+            content:
+              '扩大节能环保、新一代信息技术、生物、高端装备制造、新能源、新材料和新能源汽车等战略性新兴产业人才培养规模'
+          }
+        ],
+        rpt: '2017/01/19',
+        region: '中央',
+        org: '中华人民共和国中央人民政府',
+        title: '国务院关于印发国家教育事业发展“十三五”规划的通知',
+        url: 'http://www.gov.cn/zhengce/content/2017-01/19/content_5161341.htm'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|推动',
+            content: '推动节能环保、新一代信息技术、生物、高端装备制造、新能源、新材料、新能源汽车等战略性新兴产业发展'
+          },
+          {
+            industryName: '节能与新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '积极推广',
+            content: '积极推广节能与新能源汽车'
+          },
+          {
+            industryName: '节能和新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '推广节能和新能源汽车'
+          },
+          {
+            industryName: '节能与新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '民用领域重点推广高效照明产品、节能家用电器、节能与新能源汽车等'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content:
+              '示范推广低品位余能利用、高效环保煤粉工业锅炉、稀土永磁电机、新能源汽车、半导体照明、太阳能光伏发电、零排放和产业链接等一批重大、关键节能技术'
+          }
+        ],
+        rpt: 'NaN//',
+        region: '中央',
+        org: '中华人民共和国自然资源部',
+        title: '国务院关于印发节能减排“十二五”规划的通知',
+        url: 'http://f.mnr.gov.cn/201702/t20170206_1436692.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '增强',
+            content: '着力增强电网对新能源发电、分布式能源、电动汽车等能源利用方式的承载和适应能力'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '为新能源汽车产业化发展提供必要的条件和支撑'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '结合充电式混合动力、纯电动、天然气（CNG/LNG）等新能源汽车发展'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '在北京、上海、重庆等新能源汽车示范推广城市'
+          }
+        ],
+        rpt: 'NaN//',
+        region: '中央',
+        org: '中华人民共和国自然资源部',
+        title: '国务院关于印发能源发展“十二五”规划的通知',
+        url: 'http://f.mnr.gov.cn/201702/t20170206_1436371.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快|培育',
+            content:
+              '加快培育壮大节能环保、新一代信息通信技术、生物、高端装备制造、新能源、新材料、新能源汽车、数字创意等战略性新兴产业'
+          }
+        ],
+        rpt: '2017/02/04',
+        region: '中央',
+        org: '中华人民共和国中央人民政府',
+        title: '国务院关于印发全国国土规划纲要（2016—2030年）的通知',
+        url: 'http://www.gov.cn/zhengce/content/2017-02/04/content_5165309.htm'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车制造',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加大',
+            content:
+              '在种业、医疗、教育、旅游、电信、互联网、文化、金融、航空、海洋经济、新能源汽车制造等重点领域加大开放力度'
+          }
+        ],
+        rpt: '2018/10/16',
+        region: '中央',
+        org: '中华人民共和国中央人民政府',
+        title: '国务院关于印发中国（海南）自由贸易试验区总体方案的通知',
+        url: 'http://www.gov.cn/zhengce/content/2018-10/16/content_5331180.htm'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '襄阳片区重点发展高端装备制造、新能源汽车、大数据、云计算、商贸物流、检验检测等产业'
+          }
+        ],
+        rpt: '2017/03/31',
+        region: '中央',
+        org: '中华人民共和国中央人民政府',
+        title: '国务院关于印发中国（湖北）自由贸易试验区总体方案的通知',
+        url: 'http://www.gov.cn/zhengce/content/2017-03/31/content_5182299.htm'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车及智能汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快|研发',
+            content:
+              '加快形成电子核心部件、新材料、物联网、航空器及零部件研发制造、高端交通装备、新能源汽车及智能汽车、生物医药、能源环保装备、智能终端等战略性新兴产业集群'
+          }
+        ],
+        rpt: '2017/03/31',
+        region: '中央',
+        org: '中华人民共和国中央人民政府',
+        title: '国务院关于印发中国（重庆）自由贸易试验区总体方案的通知',
+        url: 'http://www.gov.cn/zhengce/content/2017-03/31/content_5182300.htm'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content:
+              '重点发展新一代信息技术、轨道交通、新能源汽车、新材料、航空航天、生物医药、文化旅游等新兴产业和先进产品'
+          }
+        ],
+        rpt: '2017/09/11',
+        region: '中央',
+        org: '中华人民共和国中央人民政府',
+        title: '国务院关于支持山西省进一步深化改革促进资源型经济转型发展的意见',
+        url: 'http://www.gov.cn/zhengce/content/2017-09/11/content_5224274.htm'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快|推广',
+            content: '新疆生产建设兵团交通局、财务局、工业和信息化委员会：为进一步加快新能源汽车在公交领域的推广应用'
+          }
+        ],
+        rpt: '2015/11/10',
+        region: '中央',
+        org: '中华人民共和国交通运输部',
+        title: '交通运输部 财政部 工业和信息化部关于印发《新能源公交车推广应用考核办法（试行）》的通知',
+        url: 'http://xxgk.mot.gov.cn/2020/jigou/ysfws/202006/t20200623_3315218.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '促进|推广',
+            content: '促进新能源汽车的推广应用'
+          }
+        ],
+        rpt: '2017/02/08',
+        region: '中央',
+        org: '中华人民共和国交通运输部',
+        title:
+          '交通运输部 财政部 国家铁路局 中国民用航空局 国家邮政局 中国铁路总公司关于鼓励支持运输企业创新发展的指导意见',
+        url: 'http://xxgk.mot.gov.cn/2020/jigou/ysfws/202006/t20200623_3315352.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '并按照新能源汽车发展有关政策在充电基础设施布局和建设方面给予扶持'
+          }
+        ],
+        rpt: '2017/08/08',
+        region: '中央',
+        org: '中华人民共和国交通运输部',
+        title: '交通运输部 住房城乡建设部关于促进小微型客车租赁健康发展的指导意见',
+        url: 'http://xxgk.mot.gov.cn/2020/jigou/ysfws/202006/t20200623_3315420.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '深化',
+            content: '组织在江苏、浙江、湖北、山东、广东、贵州等6省及若干新能源汽车生产企业深化开展试点工作'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完成',
+            content: '完成与各主要汽车生产企业（含新能源汽车）所属品牌授权维修体系（4S店体系）的技术方案对接'
+          }
+        ],
+        rpt: '2017/05/12',
+        region: '中央',
+        org: '中华人民共和国交通运输部',
+        title: '交通运输部办公厅关于开展汽车维修电子健康档案系统建设工作的通知',
+        url: 'http://xxgk.mot.gov.cn/2020/jigou/ysfws/202006/t20200623_3315379.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '建立',
+            content: '研究建立道路运输领域新能源汽车使用安全和运维保养相关标准规范'
+          }
+        ],
+        rpt: '2020/06/08',
+        region: '中央',
+        org: '中华人民共和国交通运输部',
+        title: '交通运输部办公厅关于做好交通运输促进消费扩容提质有关工作的通知',
+        url: 'http://xxgk.mot.gov.cn/2020/jigou/zhghs/202006/t20200630_3321350.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '积极发展新能源汽车和智能网联汽车产业'
+          }
+        ],
+        rpt: '2020/11/30',
+        region: '中央',
+        org: '中华人民共和国交通运输部',
+        title: '交通运输部关于安徽省开展推进皖南交旅融合发展等交通强国建设试点工作的意见',
+        url: 'http://xxgk.mot.gov.cn/2020/jigou/zhghs/202011/t20201130_3497129.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快|推进|推广',
+            content: '加快推进新能源汽车在交通运输行业的推广应用'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '发展新能源汽车'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '党中央、国务院高度重视新能源汽车产业发展'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '将发展新能源汽车确定为国家战略'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '针对我国新能源汽车发展现状'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推进|发展',
+            content: '明确了推进新能源汽车发展的指导思想、基本原则、发展政策和保障机制'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快|推广',
+            content: '是加快新能源汽车推广应用的重要纲领'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '交通运输行业是新能源汽车推广应用的重要领域之一'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '落实|完善|推广',
+            content: '完善和落实对新能源汽车推广应用的扶持政策'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '营造有利于新能源汽车在交通运输行业推广应用的政策环境'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '引导',
+            content: '引导交通运输企业主动、更多选择新能源汽车'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '实现',
+            content: '实现新能源汽车在交通运输行业的可持续应用'
+          },
+          {
+            industryName: '纯电动汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '重点推广应用插电式（含增程式）混合动力汽车、纯电动汽车'
+          },
+          {
+            industryName: '其他新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '研究推广应用储能式超级电容汽车等其他新能源汽车'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推进|推广',
+            content: '积极稳妥地推进新能源汽车在交通运输行业的推广应用工作'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提升',
+            content: '新能源汽车运营效率和安全水平明显提升'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提升',
+            content: '新能源汽车占城市公交车、出租汽车和城市物流配送车辆的比例显著提升'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '比例不低于',
+            content: '新能源汽车比例不低于30%;京津冀地区新增或更新城市公交车、出租汽车和城市物流配送车辆中'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '比例不低于',
+            content: '新能源汽车比例不低于35%'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提升',
+            content: '新能源汽车在交通运输行业的运营效率明显提升'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '增强',
+            content: '投入交通运输行业的新能源汽车可靠性显著增强'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '基本建立|推广',
+            content: '新能源汽车在交通运输行业推广应用的法规政策和标准规范体系基本建立'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '增强',
+            content: '交通运输企业购买使用新能源汽车的主动性明显增强'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '将新能源汽车推广应用纳入城市公共交通规划和城市综合交通运输体系规划'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '明确新能源汽车推广应用目标、技术路线、重点任务和配套政策'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '编制交通运输行业新能源汽车推广应用实施方案和年度实施计划'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完善',
+            content: '鼓励集约化程度高、管理制度完善、运营规范的交通运输企业投资使用新能源汽车和建设充换电设施'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提高',
+            content: '提高新能源汽车的运营效率'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持|推广',
+            content: '制定本地区新能源汽车推广应用的支持政策'
+          },
+          {
+            industryName: '新能源汽车运营',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完善',
+            content: '9.完善新能源汽车运营政策'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '并向新能源汽车推广应用程度高的交通运输企业倾斜或成立专门的新能源汽车运输企业'
+          },
+          {
+            industryName: '新能源汽车运营',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加强',
+            content: '加强新能源汽车运营安全监控'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '建立',
+            content: '督促交通运输企业建立健全新能源汽车定期检查、维护和修理制度'
+          },
+          {
+            industryName: '新能源汽车技术',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加强',
+            content: '加强新能源汽车技术管理'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '建立',
+            content: '建立新能源汽车全生命周期运营档案'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '按照各地新能源汽车推广应用工作联席会议制度的有关要求'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持|推广|推动',
+            content: '推动细化新能源汽车在交通运输行业推广应用的支持政策和配套措施'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推进|发展',
+            content: '推进新能源汽车在交通运输行业的健康发展'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持|推广',
+            content: '为新能源汽车推广应用的方案编制、设施建设、车辆准入、驾驶员培训、安全管理和政策支持提供法制保障'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加强|推广',
+            content: '加强新能源汽车推广应用技术支撑'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完善|建立',
+            content: '建立完善新能源汽车使用环节的技术标准规范体系'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加强',
+            content: '加强新能源汽车日常维护工作'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加强',
+            content: '加强对新能源汽车运行数据的采集和分析'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '建立',
+            content: '建立交通运输行业新能源汽车应用效果评估和反馈机制'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '建立',
+            content: '建立新能源汽车召回机制'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '引导|加快建设',
+            content: '引导新能源汽车生产企业加快建设售后服务体系'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content:
+              '并分别于每年6月底和12月底前向部报送新能源汽车推广应用情况（含分类保有量、分类新增数量及采取的主要措施）'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '部将适时组织对各省、自治区、直辖市在交通运输行业推广应用新能源汽车的情况进行监督检查'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '大力宣传新能源汽车推广应用在环境改善、能源节约等方面的显著效果和重大作用'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广|提高',
+            content: '提高公众对交通运输行业推广应用新能源汽车的认知度和接受度'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '形成有利于新能源汽车大规模推广应用的良好氛围'
+          }
+        ],
+        rpt: '2015/03/18',
+        region: '中央',
+        org: '中华人民共和国交通运输部',
+        title: '交通运输部关于加快推进新能源汽车在交通运输行业推广应用的实施意见',
+        url: 'http://xxgk.mot.gov.cn/2020/jigou/ysfws/202006/t20200623_3315133.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '结合新能源汽车用户规模和发展需求'
+          }
+        ],
+        rpt: '2014/10/14',
+        region: '中央',
+        org: '中华人民共和国交通运输部',
+        title: '交通运输部关于进一步提升高速公路服务区服务质量的意见',
+        url: 'http://xxgk.mot.gov.cn/2020/jigou/glj/202006/t20200623_3312198.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '建成',
+            content: '重点区域的直辖市、省会城市、计划单列市建成区公交车全部更换为新能源汽车'
+          }
+        ],
+        rpt: '2018/07/10',
+        region: '中央',
+        org: '中华人民共和国交通运输部',
+        title: '交通运输部关于全面加强生态环境保护坚决打好污染防治攻坚战的实施意见',
+        url: 'http://xxgk.mot.gov.cn/2020/jigou/zhghs/202006/t20200630_3320224.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源智能汽车车型',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快',
+            content: '加快研制新能源智能汽车车型'
+          }
+        ],
+        rpt: '2020/11/30',
+        region: '中央',
+        org: '中华人民共和国交通运输部',
+        title: '交通运输部关于上海市开展推进长三角交通一体化等交通强国建设试点工作的意见',
+        url: 'http://xxgk.mot.gov.cn/2020/jigou/zhghs/202011/t20201130_3497007.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '节能与新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|推动',
+            content: '要大力推动先进轨道交通装备、海洋工程装备及高技术船舶、节能与新能源汽车等优势和战略产业快速发展'
+          }
+        ],
+        rpt: '2015/07/07',
+        region: '中央',
+        org: '中华人民共和国交通运输部',
+        title: '交通运输部关于以“四个全面”战略布局为统领当好经济社会发展先行官的指导意见',
+        url: 'http://xxgk.mot.gov.cn/2020/jigou/zhghs/202006/t20200630_3320281.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快|推广',
+            content: '（二十二）加快新能源汽车和节能环保汽车推广应用'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加大|推广',
+            content: '进一步加大新能源汽车在交通运输行业的推广应用'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '引导',
+            content: '积极引导新能源汽车用于出租汽车和小微型客车租赁等服务'
+          }
+        ],
+        rpt: '2018/07/25',
+        region: '中央',
+        org: '中华人民共和国交通运输部',
+        title: '交通运输部贯彻落实《中共中央 国务院关于支持海南全面深化改革开放的指导意见》实施方案',
+        url: 'http://xxgk.mot.gov.cn/2020/jigou/zhghs/202006/t20200630_3320244.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推进',
+            content:
+              '重点推进节能环保、新兴信息产业、生物产业、新能源、新能源汽车、高端装备制造、新材料以及教育信息化等领域的协同创新'
+          }
+        ],
+        rpt: 'NaN//',
+        region: '中央',
+        org: '中华人民共和国教育部',
+        title: '教育部 财政部关于印发《2011协同创新中心建设发展规划》等三个文件的通知',
+        url: 'http://www.moe.gov.cn/srcsite/A16/kjs_2011jh/201404/t20140411_167787.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content:
+              '兼顾三次产业分布和节能环保、新一代信息技术、生物、高端装备制造、新能源、新材料、新能源汽车等战略性新兴产业发展需要'
+          }
+        ],
+        rpt: 'NaN//',
+        region: '中央',
+        org: '中华人民共和国教育部',
+        title: '教育部关于印发《全国职业院校技能大赛三年规划（2013-2015年）》的通知',
+        url: 'http://www.moe.gov.cn/srcsite/A07/zcs_yxds/s3069/201301/t20130128_147481.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '大力发展',
+            content: '大力发展满足高端装备、应用电子、物联网、新能源汽车、新一代信息技术需求的核心基础元器件'
+          }
+        ],
+        rpt: '2017/01/16',
+        region: '中央',
+        org: '中华人民共和国工业和信息化部',
+        title: '两部委关于印发信息产业发展指南的通知',
+        url: 'https://www.miit.gov.cn/zwgk/zcwj/wjfb/zh/art/2020/art_60d8ff07cfc243f0a2980c6b60aacf7e.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '促进|推广',
+            content: '为促进农村地区新能源汽车推广应用'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持',
+            content: '（三）活动期间地方人民政府发布本地区支持新能源汽车下乡等有关政策'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '为新能源汽车推广应用营造良好舆论环境'
+          }
+        ],
+        rpt: '2020/07/15',
+        region: '中央',
+        org: '中华人民共和国工业和信息化部',
+        title: '三部门关于开展新能源汽车下乡活动的通知',
+        url: 'https://www.miit.gov.cn/zwgk/zcwj/wjfb/zbgy/art/2020/art_79e301a67f5842c08fc032cf609db8ee.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '重点围绕京津冀、长三角、珠三角等新能源汽车发展集聚区域'
+          }
+        ],
+        rpt: '2017/01/25',
+        region: '中央',
+        org: '中华人民共和国工业和信息化部',
+        title: '三部委关于加快推进再生资源产业发展的指导意见',
+        url: 'https://www.miit.gov.cn/zwgk/zcwj/wjfb/zh/art/2020/art_c5099740636643a0b85d7fdc81d9fe13.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '新能源汽车发展取得重大进展'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '突破|发展',
+            content: '新能源汽车和智能网联汽车有望成为抢占先机、赶超发展的突破口'
+          },
+          {
+            industryName: '新能源汽车技术',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提升',
+            content: '我国新能源汽车技术水平大幅提升'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '突破',
+            content: '以新能源汽车和智能网联汽车为突破口'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '培育',
+            content: '培育形成若干家进入世界前十的新能源汽车企业'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提升',
+            content: '新能源汽车骨干企业在全球的影响力和市场份额进一步提升'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完善',
+            content: '形成新能源汽车、智能网联汽车和先进节能汽车梯次合理的产业格局以及完善的产业配套体系'
+          },
+          {
+            industryName: '新能源汽车技术',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快|研发',
+            content: '加快新能源汽车技术研发及产业化'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加大|推广',
+            content: '加大新能源汽车推广应用力度'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提高',
+            content: '逐步提高公共服务领域新能源汽车使用比例'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完善|推广',
+            content: '完善新能源汽车推广应用、尤其是使用环节的扶持政策体系'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '建立|发展|促进',
+            content: '建立促进新能源汽车发展的长效机制'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '引导|提高',
+            content: '引导生产企业不断提高新能源汽车产销比例'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完善',
+            content: '不断完善新能源汽车标准体系'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '提高',
+            content: '提高新能源汽车生产企业及产品准入门槛'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '强化',
+            content: '强化新能源汽车生产监管'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '建立',
+            content: '建立健全新能源汽车分类注册登记、交通管理、税收保险、车辆维修、二手车管理等政策体系'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|推广',
+            content: '探索新能源汽车与可再生能源、智能电网的深度融合和协同发展的商业化推广模式'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持|加大',
+            content: '加大对汽车关键零部件、新能源汽车、智能网联汽车等重点领域的支持力度'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完善',
+            content: '优化完善新能源汽车标准体系'
+          }
+        ],
+        rpt: '2017/04/25',
+        region: '中央',
+        org: '中华人民共和国工业和信息化部',
+        title: '三部委关于印发《汽车产业中长期发展规划》的通知',
+        url: 'https://www.miit.gov.cn/zwgk/zcwj/wjfb/zbgy/art/2020/art_52eeb9d6f2bf484398fc2505e747afc9.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '鼓励采用',
+            content: '鼓励采用新能源汽车和符合标准的电动三轮车'
+          }
+        ],
+        rpt: '2016/03/17',
+        region: '中央',
+        org: '中华人民共和国商务部',
+        title: '商务部等六部门关于印发《全国电子商务物流发展专项规划（2016-2020年）》的通知',
+        url: 'http://file.mofcom.gov.cn/article/gkml/201603/20160301280799.shtml'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展|推动',
+            content: '推动新能源汽车产业健康可持续发展'
+          },
+          {
+            industryName: '节能与新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '相关进展情况及时报送节能与新能源汽车产业发展部际联席会议办公室'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '是新能源汽车产业发展的关键'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '但是目前动力电池产品性能、质量和成本仍然难以满足新能源汽车推广普及需求'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '落实|发展',
+            content: '落实新能源汽车发展战略目标'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完善',
+            content: '调整完善动力电池行业规范条件、新能源汽车生产企业及产品准入管理规则等管理措施'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完善',
+            content: '发布实施并不断完善新能源汽车标准化路线图'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加强',
+            content: '鼓励研究机构、检测认证机构以及动力电池、新能源汽车生产企业加强产品测试验证等相关数据积累'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '完善',
+            content: '完善新能源汽车安全监管体系建设'
+          }
+        ],
+        rpt: '2017/03/01',
+        region: '中央',
+        org: '中华人民共和国工业和信息化部',
+        title: '四部委关于印发《促进汽车动力电池产业发展行动方案》的通知',
+        url: 'https://www.miit.gov.cn/zwgk/zcwj/wjfb/zbgy/art/2020/art_9e46501d77f949b0bd6edabbf7bc54b8.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '发展',
+            content: '重点发展新能源汽车'
+          },
+          {
+            industryName: '电动汽车智能化技术',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '支持|研发',
+            content:
+              '重点支持动力电池与电池管理系统、驱动电机及控制系统、整车控制和信息系统、电动汽车智能化技术、快速充电等关键技术研发'
+          }
+        ],
+        rpt: '2017/07/27',
+        region: '中央',
+        org: '中华人民共和国工业和信息化部',
+        title: '五部委关于加强长江经济带工业绿色发展的指导意见',
+        url: 'https://www.miit.gov.cn/zwgk/zcwj/wjfb/zh/art/2020/art_a41475d78c534dc4b3e9cffd02fb4523.html'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快|推广',
+            content: '加快推广新能源汽车和节能环保汽车'
+          }
+        ],
+        rpt: '2018/04/14',
+        region: '中央',
+        org: '中华人民共和国中央人民政府',
+        title: '中共中央 国务院关于支持海南全面深化改革开放的指导意见',
+        url: 'http://www.gov.cn/zhengce/2018-04/14/content_5282456.htm'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '研发|推动',
+            content: '推动新能源汽车、智能电网等技术的研发应用'
+          }
+        ],
+        rpt: '2016/05/19',
+        region: '中央',
+        org: '中华人民共和国中央人民政府',
+        title: '中共中央 国务院印发《国家创新驱动发展战略纲要》',
+        url: 'http://www.gov.cn/xinwen/2016-05/19/content_5074812.htm'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '培育',
+            content: '培育壮大新能源、节能环保、新能源汽车等产业'
+          }
+        ],
+        rpt: '2019/02/18',
+        region: '中央',
+        org: '中华人民共和国中央人民政府',
+        title: '中共中央 国务院印发《粤港澳大湾区发展规划纲要》',
+        url: 'http://www.gov.cn/zhengce/2019-02/18/content_5366593.htm'
+      },
+      {
+        contentList: [
+          {
+            industryName: '节能与新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '大力发展',
+            content: '大力发展节能与新能源汽车'
+          },
+          {
+            industryName: '节能与新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '引导',
+            content: '积极引导消费者购买节能与新能源汽车、高能效家电、节水型器具等节能环保低碳产品'
+          }
+        ],
+        rpt: '2015/05/06',
+        region: '中央',
+        org: '中华人民共和国农业农村部',
+        title: '中共中央、国务院出台文件加快推进生态文明建设附：《意见》(全文)',
+        url: 'http://www.moa.gov.cn/gk/zcfg/qnhnzc/201505/t20150506_4581636.htm'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '加快|推广',
+            content: '加快推广新能源汽车和节能环保汽车'
+          }
+        ],
+        rpt: '2019/05/12',
+        region: '中央',
+        org: '中华人民共和国中央人民政府',
+        title: '中共中央办公厅 国务院办公厅印发《国家生态文明试验区（海南）实施方案》',
+        url: 'http://www.gov.cn/zhengce/2019-05/12/content_5390904.htm'
+      },
+      {
+        contentList: [
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '打造',
+            content: '打造一批航空、中医药、新型光电、新材料、新能源汽车、节能环保等产业创新平台和载体'
+          },
+          {
+            industryName: '新能源汽车',
+            industryCode: 'AC003005',
+            emotion: 1,
+            typeName: '推广',
+            content: '实施新能源汽车推广计划'
+          }
+        ],
+        rpt: '2017/10/02',
+        region: '中央',
+        org: '中华人民共和国中央人民政府',
+        title:
+          '中共中央办公厅 国务院办公厅印发《国家生态文明试验区（江西）实施方案》和《国家生态文明试验区（贵州）实施方案》',
+        url: 'http://www.gov.cn/zhengce/2017-10/02/content_5229318.htm'
+      }
+    ]
+  }
+  if (data.region) {
+    let regions = ['全国', '重庆市', '四川省', '陕西省', '贵州省']
+    reponse.result = reponse.result.filter((item) => item.region === regions[data.region])
+  }
+  if (data.st) {
+    let startDate = new Date(data.st).getTime()
+    let endDate = new Date(data.et).getTime()
+    reponse.result = reponse.result.filter((item) => {
+      let rptStamp = new Date(item.rpt).getTime()
+      return startDate <= rptStamp && endDate >= rptStamp
+    })
+  }
+  if (data.org) {
+    reponse.result = []
+  }
+  return reponse
+  return http.get(`/policy/industry/${data.industryCode}`, data)
+}
+
+// 竞争格局
+export const competitionIndex = async (data) => {
+  await sleep(500)
+  return {
+    result: [
+      {
+        rpt: '2014',
+        value: 4458.423413
+      },
+      {
+        rpt: '2015',
+        value: 3749.710449
+      },
+      {
+        rpt: '2016',
+        value: 2625.667108
+      },
+      {
+        rpt: '2017',
+        value: 3803.225506
+      },
+      {
+        rpt: '2018',
+        value: 3447.894387
+      },
+      {
+        rpt: '2018',
+        value: 5159.804469
+      }
+    ]
+  }
 }

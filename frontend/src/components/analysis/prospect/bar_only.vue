@@ -52,7 +52,7 @@ export default {
       this.chartOption_bar.tooltip = Object.assign({}, this.chartOption_bar.tooltip, this.tooltip)
       this.chartOption_bar.series = {
         name: this.name,
-        type: 'bar',
+        type: 'line',
         barWidth: '16%',
         data: []
       }

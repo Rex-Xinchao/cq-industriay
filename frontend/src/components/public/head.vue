@@ -12,7 +12,11 @@
         size="medium"
         placeholder="请输入关键词"
         @select="onSelectChange"
-      ></el-autocomplete>
+      >
+        <template slot-scope="{ item }">
+          <div class="name" :title="item.value">{{ item.value }}</div>
+        </template>
+      </el-autocomplete>
       <div class="user-info">用户A</div>
     </div>
   </div>

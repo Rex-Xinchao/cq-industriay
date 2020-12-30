@@ -85,7 +85,6 @@ export default {
     setChartOption() {},
     setChartEvent() {},
     async getChartData() {
-      const sleep = (time) => new Promise((res) => setTimeout(() => res(), time))
       if (this.request) {
         let result = []
         this.response = await this.request(this.urlOptions)
@@ -95,7 +94,6 @@ export default {
         this.noData = result.length === 0
         return result
       } else {
-        await sleep(300)
         return []
       }
     },

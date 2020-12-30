@@ -89,6 +89,7 @@ export default {
       return result
     },
     setChartOption() {
+      console.log(111)
       this.chartId_c = `complexChart_${this.timeStamp}`
       this.chartOption_complex.tooltip = Object.assign({}, this.chartOption_complex.tooltip, this.tooltip)
       this.chartOption_complex.series = this.series
@@ -106,8 +107,6 @@ export default {
         })
       } else {
         this.complexData.forEach((item) => {
-          max1 = Math.max(item.value3, max1)
-          max2 = Math.max(item.value4, max2)
           this.chartOption_complex.xAxis.data.push(item.rpt)
           this.chartOption_complex.series[0].data.push(item.value3)
           this.chartOption_complex.series[1].data.push(item.value4)

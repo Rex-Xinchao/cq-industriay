@@ -1,9 +1,6 @@
 <template>
   <div class="main">
-    <h1 class="main-title">
-      支柱产业
-      <span class="sign">汽车行业</span>
-    </h1>
+    <h1 class="main-title">支柱产业</h1>
     <div class="map" id="map" v-loading="loading"></div>
     <div class="rank">
       <div class="card" v-for="item in regions" :class="item.class" :key="item.class" v-loading="loading">

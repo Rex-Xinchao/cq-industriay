@@ -119,7 +119,7 @@ export default {
       if (this.type === 'ratio') {
         this.chartOption_bar.yAxis.axisLabel.formatter = '{value}%'
       } else {
-        this.chartOption_bar.yAxis.axisLabel.formatter = (d) => converUnit(d, 'zh', 0)
+        this.chartOption_bar.yAxis.axisLabel.formatter = (d) => converUnit(d, 'zh', 0) + this.unit
       }
 
       this.chartOption_bar.grid.left = '60px'

@@ -18,8 +18,8 @@
         <span class="high">高</span>
         <span class="middle">中</span>
         <span class="low">低</span>
-        <span class="point" :style="getRoute(2360)"></span>
-        <span class="num">2360</span>
+        <span class="point" :style="getRoute(indexNum)"></span>
+        <span class="num">{{ indexNum }}</span>
       </div>
       <div class="chart-main" id="lineChart_M"></div>
       <no-data-show v-loading="loading" class="chart-nodata" :show="noData"></no-data-show>
@@ -30,16 +30,17 @@
 <script>
 import resize from '@/mixins/resize'
 import line from '@/mixins/line'
+import { competitionIndex } from '@/api/analysis'
 export default {
-  name: '',
   data() {
     let vm = this
     return {
+      indexNum: 0,
       noData: false,
       loading: false,
       tooltip: {
         trigger: 'axis',
-        formatter: `{a}<br/>${vm.title}：{c}`
+        formatter: `${vm.title}：{c}`
       },
       grid: {
         left: '100px',
@@ -71,7 +72,8 @@ export default {
       series: {
         type: 'line',
         data: []
-      }
+      },
+      request: competitionIndex
     }
   },
   mixins: [resize, line],
@@ -80,13 +82,15 @@ export default {
   },
   methods: {
     setChartOption() {
+      console.log(this.lineData)
       this.chartId_line = 'lineChart_M'
       this.chartOption_line.tooltip = Object.assign({}, this.chartOption_line.tooltip, this.tooltip)
       this.chartOption_line.grid = this.grid
       this.chartOption_line.visualMap = this.visualMap
       this.chartOption_line.series = this.series
-      this.chartOption_line.xAxis.data = ['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020']
-      this.chartOption_line.series.data = [50, 10, 1058, 1058, 30, 2018, 1582, 5, 8]
+      this.indexNum = this.lineData[0] ? parseInt(this.lineData[0].value) : 0
+      this.chartOption_line.xAxis.data = this.lineData.map((item) => item.rpt)
+      this.chartOption_line.series.data = this.lineData.map((item) => item.value.toFixed(2))
       return this.chartOption_line
     },
     getRoute(num) {
