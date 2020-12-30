@@ -24,7 +24,7 @@
           >
             <el-submenu v-for="(item, index) in menu" :index="item.code" :key="`${item.code}`">
               <template slot="title">
-                <span>{{ item.name }}</span>
+                <span class="menu-item" :title="item.name">{{ item.name }}</span>
               </template>
               <el-menu-item
                 v-for="(child, index) in item.children"
@@ -52,7 +52,7 @@
             {{ item.name }}
           </span>
         </div>
-        <toggle-chart ref="chart" :activeName="activeHeadName"></toggle-chart>
+        <toggle-chart :envData="envData" ref="chart" :activeName="activeHeadName"></toggle-chart>
       </div>
     </div>
   </div>
@@ -62,6 +62,7 @@ import resize from '@/mixins/resize'
 import toggleChart from '@/components/analysis/env/toggle'
 import { menuData, headData } from '@/mockData/env'
 import { mapGetters } from 'vuex'
+import { envMenu, envChart } from '@/api/analysis'
 export default {
   data() {
     const vm = this
@@ -78,14 +79,16 @@ export default {
       dateTime: [],
       nameMap: {
         up: '上游',
-        down: '下游'
-      }
+        down: '下游',
+        mid: '中游'
+      },
+      envData: {}
     }
   },
   mixins: [resize],
   components: { toggleChart },
   computed: {
-    ...mapGetters(['industry']),
+    ...mapGetters(['industry', 'industryCode']),
     activeHeadName() {
       if (!this.activeHead) return null
       let obj = this.heads.find((item) => item.value === this.activeHead)
@@ -101,23 +104,25 @@ export default {
     },
     keyword(data) {
       this.filterMenu(data)
-    },
-    activeMenu() {
-      this.getHead()
     }
   },
   methods: {
     initMenu() {
       this.menuLoding = false
-      setTimeout(() => {
-        this.menuLoding = false
-        this.menu = menuData.map((item) => {
-          item.name = this.nameMap[item.code] || this.industry
-          item.children.forEach((child) => (child.show = true))
-          return item
+      envMenu({ code: this.industryCode })
+        .then((res) => {
+          this.menuLoding = false
+          this.menu = res.result.map((item) => {
+            item.name = this.nameMap[item.code] || this.industry
+            item.children.forEach((child) => (child.show = true))
+            return item
+          })
+          this.activeMenu = this.menu[0].children[0].code
+          this.getHead(this.activeMenu)
         })
-        this.activeMenu = this.menu[0].children[0].code
-      }, 100)
+        .catch((err) => {
+          this.menuLoding = false
+        })
     },
     filterMenu(data) {
       this.menu.forEach((item) => {
@@ -130,13 +135,20 @@ export default {
         })
       })
     },
-    getHead() {
+    getHead(data) {
       this.headLoding = true
-      setTimeout(() => {
-        this.headLoding = false
-        this.heads = headData
-        this.activeHead = this.heads[0].value
-      }, 500)
+      envChart({ code: data })
+        .then((res) => {
+          this.headLoding = false
+          this.heads = res.names || []
+          this.activeHead = this.heads[0].value
+          this.envData = res
+        })
+        .catch((err) => {
+          this.headLoding = false
+          this.heads = []
+          this.envData = {}
+        })
     }
   },
   mounted() {
@@ -196,6 +208,13 @@ export default {
 
       .el-icon-s-unfold {
         margin-top: 20px;
+      }
+
+      .menu-item {
+        display: inline-block;
+        width: 80%;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
 

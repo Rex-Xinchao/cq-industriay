@@ -3,7 +3,7 @@ const sleep = (time) => new Promise((res) => setTimeout(() => res(), time))
 
 // 基准指标
 export const standard = async (data) => {
-  await sleep(1000)
+  await sleep(300)
   return {
     result: [
       {
@@ -109,7 +109,7 @@ export const standard = async (data) => {
 
 // 指标趋势
 export const tendency = async (data) => {
-  await sleep(1000)
+  await sleep(300)
   return {
     result: [
       {
@@ -128,7 +128,7 @@ export const tendency = async (data) => {
 
 // 龙头财务
 export const leading_financial = async (data) => {
-  await sleep(1000)
+  await sleep(300)
   return {
     result: [
       {

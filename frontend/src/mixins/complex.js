@@ -113,7 +113,7 @@ export default {
     setChartEvent() {},
     async getChartData() {
       const sleep = (time) => new Promise((res) => setTimeout(() => res(), time))
-      await sleep(1000)
+      await sleep(300)
     },
     async drawChart() {
       this.loading = true

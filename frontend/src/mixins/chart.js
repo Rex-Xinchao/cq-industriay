@@ -310,7 +310,7 @@ export default {
         })
       if (this.type === 'boom') {
         Product.append('text')
-          .attr('class', (d) => (d.depth ? '' : 'remove'))
+          .attr('class', (d) => (d.depth && d.data.isRisk ? '' : 'remove'))
           .attr('x', (d) => ($pos ? -114 : 90))
           .attr('y', 5)
           .attr('text-anchor', 'middle')
@@ -318,7 +318,7 @@ export default {
           .style('fill', 'black')
           .append('tspan')
           .text((d) => {
-            return '7.12%'
+            if (d.data.isRisk) return '7.12%'
           })
           .on('mouseover', (d) => {
             this.showMenu(d3.event, d.data)
@@ -328,7 +328,7 @@ export default {
           })
         Product.append('image')
           .attr('xlink:href', require(`@/assets/imgs/icons/up.svg`))
-          .attr('class', (d) => (d.depth ? '' : 'remove'))
+          .attr('class', (d) => (d.depth && d.data.isRisk ? '' : 'remove'))
           .attr('x', (d) => ($pos ? -90 : 114))
           .attr('y', -6)
           .attr('height', '14px')

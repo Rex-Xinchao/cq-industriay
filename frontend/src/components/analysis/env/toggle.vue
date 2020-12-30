@@ -11,7 +11,9 @@
         <time-select v-model="dateTime" :options="options" startValue="1Y"></time-select>
       </span>
     </h1>
-    <p class="right-main-tip">来源：国家统计局&nbsp;&nbsp;&nbsp;&nbsp;频率：月&nbsp;&nbsp;&nbsp;&nbsp;单位：万辆</p>
+    <p class="right-main-tip">
+      来源：国家统计局&nbsp;&nbsp;&nbsp;&nbsp;频率：{{ rate }}&nbsp;&nbsp;&nbsp;&nbsp;单位：{{ unit }}
+    </p>
     <div class="right-main-chart">
       <div v-loading="loading" id="toggleChart"></div>
       <no-data-show v-loading="loading" class="chart-nodata" :show="noData"></no-data-show>
@@ -29,8 +31,7 @@
 </template>
 <script>
 const echarts = require('echarts')
-import { chartData, tableData } from '@/mockData/env'
-import { getTimeLine } from '@/libs/utils'
+import { getTimeLine, converUnit } from '@/libs/utils'
 import resize from '@/mixins/resize'
 import bar from '@/mixins/bar'
 import line from '@/mixins/line'
@@ -38,19 +39,23 @@ export default {
   data() {
     const vm = this
     return {
+      rate: '--',
+      unit: '--',
       tableHead: [],
       tableData: [],
       color: ['#5B8FF9'],
       chartType: 'line',
       tooltip: {
         formatter: (data) => {
-          return `${data[0].name}<br/>${vm.activeName}：${data[0].value}万辆`
+          return `${data[0].name}<br/>${vm.activeName}：${converUnit(data[0].value)}${vm.unit}`
         }
       },
       dataZoom: [{ show: true }, { type: 'inside' }],
       grid: {
         bottom: '80px',
-        top: '20px'
+        top: '20px',
+        left: '50px',
+        right: '50px'
       },
       series: {
         type: 'line',
@@ -104,7 +109,8 @@ export default {
   },
   mixins: [resize, bar, line],
   props: {
-    activeName: String
+    activeName: String,
+    envData: Object
   },
   watch: {
     chartType() {
@@ -133,26 +139,30 @@ export default {
       chartOption.tooltip = Object.assign({}, chartOption.tooltip, this.tooltip)
       chartOption.grid = Object.assign({}, chartOption.grid, this.grid)
       let map = {}
-      chartData.forEach((item) => {
-        map[item[0]] = item[1]
+      if (!this.envData.names) return {}
+      const activeItem = this.envData.names.find((item) => item.name === this.activeName)
+      let key = activeItem.value
+      this.rate = activeItem.rate
+      this.unit = activeItem.unit
+      this.envData.chart.forEach((item) => {
+        map[item.rpt] = item[key] || 0
       })
-      let timeLine = getTimeLine(chartData[0][0], chartData[chartData.length - 1][0])
-      chartOption.xAxis.data = timeLine
-      chartOption.series.data = timeLine.map((item) => map[item] || 0)
+      // let timeLine = getTimeLine(this.envData.chart[0].rpt, this.envData.chart[this.envData.chart.length - 1].rpt)
+      chartOption.xAxis.data = Object.keys(map)
+      chartOption.series.data = Object.values(map)
+      chartOption.yAxis.axisLabel.formatter = (d) => converUnit(d, 'zh', 0)
+      chartOption.yAxis.min = null
       chartOption.dataZoom = this.dataZoom
       return chartOption
     },
     getTableData() {
-      this.loading = true
-      setTimeout(() => {
-        this.loading = false
-        this.tableHead = tableData.map((item) => item.year)
-        let data = {}
-        tableData.forEach((item) => {
-          data[item.year] = item.value
-        })
-        this.tableData = [data]
-      }, 1000)
+      let tableData = this.envData.table || []
+      this.tableHead = tableData.map((item) => item.rpt)
+      let data = {}
+      tableData.forEach((item) => {
+        data[item.rpt] = item.value ? converUnit(item.value) : '--'
+      })
+      this.tableData = [data]
     }
   }
 }

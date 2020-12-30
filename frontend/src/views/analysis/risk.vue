@@ -3,7 +3,7 @@
     <div class="item-menu">
       <h1 class="main-title">
         行业风险
-        <span class="sign">汽车行业</span>
+        <span class="sign">{{ industry }}</span>
         <el-button class="fr" @click="pageTo('/industrial/risk', true, true)">查看上下游风险</el-button>
       </h1>
     </div>
@@ -24,6 +24,7 @@ import financeTable from '@/components/analysis/risk/financeTable'
 import barTable from '@/components/analysis/risk/bar'
 import tableCom from '@/components/analysis/risk/table'
 import pageTo from '@/mixins/pageTo'
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -31,6 +32,9 @@ export default {
       bond: {},
       stock: {}
     }
+  },
+  computed: {
+    ...mapGetters(['industry'])
   },
   mixins: [pageTo],
   components: { packChart, financeTable, barTable, tableCom },

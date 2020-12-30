@@ -95,7 +95,7 @@ export default {
         this.noData = result.length === 0
         return result
       } else {
-        await sleep(1000)
+        await sleep(300)
         return []
       }
     },

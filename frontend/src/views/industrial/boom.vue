@@ -44,11 +44,11 @@
             <el-table-column prop="changeIndex" label="变动值"></el-table-column>
             <el-table-column label="变动率">
               <template slot-scope="scope">
-                <span :class="scope.row.indexRatio < 0 ? 'postive' : 'negative'">{{ scope.row.indexRatio }}</span>
+                <span :class="scope.row.indexRatio > 0 ? 'postive' : 'negative'">{{ scope.row.indexRatio }}%</span>
                 <i
-                  :class="scope.row.indexRatio < 0 ? 'postive' : 'negative'"
+                  :class="scope.row.indexRatio > 0 ? 'postive' : 'negative'"
                   class="icon"
-                  :title="scope.row.indexRatio < 0 ? '增加' : '减少'"
+                  :title="scope.row.indexRatio > 0 ? '增加' : '减少'"
                 ></i>
               </template>
             </el-table-column>
@@ -86,14 +86,14 @@ export default {
         bottom: 0
       },
       chartOption: {
-        // color: ['#5B8FF9'],
+        color: ['#5B8FF9', '#5AD8A6', '#5D7092', '#F6BD16', '#E8684A'],
         tooltip: {
           trigger: 'axis',
           formatter: function (data) {
             let time = data[0].axisValue + '月'
             let result = `${time}<br/>`
             data.forEach((item) => {
-              result += `${item.seriesName}：${item.value}<br/>`
+              result += `${item.seriesName}：${item.value.toFixed(2)}<br/>`
             })
             return result
           }
@@ -101,7 +101,7 @@ export default {
         grid: {
           left: '38px',
           right: '20px',
-          bottom: '50px',
+          bottom: '55px',
           top: '32px'
         },
         xAxis: {
@@ -181,7 +181,8 @@ export default {
         this.loading = true
         this.current = data
         boomDialog({
-          industryCode: data.code
+          industryCode: data.code,
+          code: this.industryCode
         })
           .then((res) => {
             this.loading = false
@@ -195,24 +196,6 @@ export default {
     },
     initDialog(data = []) {
       let series = []
-      series.push({
-        name: '占比',
-        type: 'line',
-        smooth: true,
-        data: data.map((item) => item.ratio),
-        areaStyle: {
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            {
-              offset: 0,
-              color: '#5B8FF9'
-            },
-            {
-              offset: 1,
-              color: '#ffe'
-            }
-          ])
-        }
-      })
       for (let key in this.keyNames) {
         series.push({
           name: this.keyNames[key],

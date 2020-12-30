@@ -3,7 +3,7 @@ const sleep = (time) => new Promise((res) => setTimeout(() => res(), time))
 
 // 政策导向
 export const policyList = async (data) => {
-  await sleep(1000)
+  await sleep(300)
   let reponse = {
     result: [
       {
@@ -150,7 +150,7 @@ export const policyList = async (data) => {
 
 // 舆情咨询
 export const newsList = async (data) => {
-  await sleep(1000)
+  await sleep(300)
   const result = {
     result: [
       {
@@ -2984,7 +2984,7 @@ export const newsList = async (data) => {
 
 //行业前景
 export const prospectData = async (data) => {
-  await sleep(1000)
+  await sleep(300)
   return {
     cards: [
       {
@@ -3033,4 +3033,411 @@ export const prospectData = async (data) => {
       { rpt: '2019', value1: 7, value2: 0, value3: 0, value4: 4007 }
     ]
   }
+}
+
+// 行业环境
+export const envMenu = async (data) => {
+  await sleep(500)
+  return {
+    result: [
+      {
+        code: 'up',
+        children: [
+          {
+            name: '充电桩',
+            code: 'FA0040010709'
+          }
+        ]
+      },
+      {
+        code: 'mid',
+        children: [
+          {
+            name: '新能源车整车制造（国标）',
+            code: 'AC003005'
+          }
+        ]
+      },
+      {
+        code: 'down',
+        children: [
+          {
+            name: '锂离子电池材料',
+            code: 'EC0010010201'
+          }
+        ]
+      }
+    ]
+  }
+}
+
+export const envChart = async (data) => {
+  let response = {}
+  if (data.code === 'AC003005') {
+    response = {
+      names: [
+        {
+          name: '销量_新能源汽车_当月值',
+          value: 'value1',
+          unit: '辆',
+          rate: '月'
+        },
+        {
+          name: '产量_新能源汽车_当月值',
+          value: 'value2',
+          unit: '辆',
+          rate: '月'
+        },
+        {
+          name: '销量_新能源汽车_混合动力车_累计值',
+          value: 'value3',
+          unit: '辆',
+          rate: '月'
+        },
+        {
+          name: '销量_新能源汽车_纯电动车_累计值',
+          value: 'value4',
+          unit: '辆',
+          rate: '月'
+        }
+      ],
+      chart: [
+        { rpt: '2016-01-31', value1: '6395', value2: '16100', value3: ' 3289', value4: '3106' },
+        { rpt: '2016-02-29', value1: '29331', value2: ' 6889', value3: '10891', value4: ' 24835' },
+        { rpt: '2016-03-31', value1: '22936', value2: ' 25246', value3: ' 15994', value4: ' 42131' },
+        { rpt: '2016-04-30', value1: '31772', value2: ' 31266', value3: ' 24085', value4: ' 66444' },
+        { rpt: '2016-05-31', value1: '35000', value2: ' 37000', value3: ' 34000', value4: ' 92000' },
+        { rpt: '2016-06-30', value1: '44000', value2: ' 45000', value3: ' 44000', value4: ' 126000' },
+        { rpt: '2016-07-31', value1: '36000', value2: ' 38000', value3: ' 54000', value4: ' 153000' },
+        { rpt: '2016-08-31', value1: '38000', value2: ' 42000', value3: ' 64000', value4: ' 181000' },
+        { rpt: '2016-09-30', value1: '44000', value2: ' 43000', value3: ' 73000', value4: ' 216000' },
+        { rpt: '2016-10-31', value1: '44000', value2: ' 49000', value3: ' 79000', value4: ' 258000' },
+        { rpt: '2016-11-30', value1: '65000', value2: ' 72000', value3: ' 86000', value4: ' 316000' },
+        { rpt: '2016-12-31', value1: '105000', value2: '89000', value3: ' 98000', value4: ' 409000' },
+        { rpt: '2017-01-31', value1: '5682', value2: '6889', value3: '704', value4: '4978' },
+        { rpt: '2017-02-28', value1: '17596', value2: ' 17972', value3: ' 5818', value4: '18963' },
+        { rpt: '2017-03-31', value1: '31120', value2: ' 33015', value3: ' 11596', value4: ' 44333' },
+        { rpt: '2017-04-30', value1: '34361', value2: ' 37306', value3: ' 17507', value4: ' 72895' },
+        { rpt: '2017-05-31', value1: '45300', value2: ' 51447', value3: ' 24277', value4: ' 111425' },
+        { rpt: '2017-06-30', value1: '59000', value2: ' 65000', value3: ' 35000', value4: ' 160000' },
+        { rpt: '2017-07-31', value1: '56000', value2: ' 59000', value3: ' 47000', value4: ' 204000' },
+        { rpt: '2017-08-31', value1: '68000', value2: ' 72000', value3: ' 59000', value4: ' 260000' },
+        { rpt: '2017-09-30', value1: '78000', value2: ' 77000', value3: ' 73000', value4: ' 325000' },
+        { rpt: '2017-10-31', value1: '91000', value2: ' 92000', value3: ' 88000', value4: ' 402000' },
+        { rpt: '2017-11-30', value1: '119000', value2: '122000', value3: '105000', value4: '504000' },
+        { rpt: '2017-12-31', value1: '163000', value2: '149000', value3: '125000', value4: '652000' },
+        { rpt: '2018-01-31', value1: '38470', value2: ' 40569', value3: ' 22772', value4: ' 26753' },
+        { rpt: '2018-02-28', value1: '34000', value2: ' 39000', value3: ' 24414', value4: ' 50253' },
+        { rpt: '2018-03-31', value1: '67778', value2: ' 67932', value3: ' 40133', value4: ' 102442' },
+        { rpt: '2018-04-30', value1: '81904', value2: ' 81217', value3: ' 57195', value4: ' 168056' },
+        { rpt: '2018-05-31', value1: '102000', value2: '96000', value3: ' 77000', value4: ' 251000' },
+        { rpt: '2018-06-30', value1: '84000', value2: ' 86000', value3: ' 99000', value4: ' 313000' },
+        { rpt: '2018-07-31', value1: '84000', value2: ' 90000', value3: ' 123000', value4: '373000' },
+        { rpt: '2018-08-31', value1: '101228', value2: '99379', value3: ' 154000', value4: '446639' },
+        { rpt: '2018-09-30', value1: '121224', value2: '127011', value3: '181000', value4: '540547' },
+        { rpt: '2018-10-31', value1: '137863', value2: '137863', value3: '208000', value4: '652642' },
+        { rpt: '2018-11-30', value1: '169343', value2: '173368', value3: '238000', value4: '790892' },
+        { rpt: '2018-12-31', value1: '225000', value2: '214132', value3: '270928', value4: '983740' },
+        { rpt: '2019-01-31', value1: '95696', value2: ' 90738', value3: ' 21000', value4: ' 74853' },
+        { rpt: '2019-02-28', value1: '52867', value2: ' 59188', value3: ' 34000', value4: ' 114462' },
+        { rpt: '2019-03-31', value1: '125631', value2: '128144', value3: '72000', value4: ' 226780' },
+        { rpt: '2019-04-30', value1: '96771', value2: ' 101550', value3: '82000', value4: ' 277630' },
+        { rpt: '2019-05-31', value1: '104422', value2: '112000', value3: '103000', value4: '360897' },
+        { rpt: '2019-06-30', value1: '152062', value2: '133920', value3: '126000', value4: '490152' },
+        { rpt: '2019-07-31', value1: '80000', value2: ' 84000', value3: ' 146000', value4: '551000' },
+        { rpt: '2019-08-31', value1: '85000', value2: ' 87000', value3: ' 163000', value4: '629000' },
+        { rpt: '2019-09-30', value1: '80000', value2: ' 89081', value3: ' 179000', value4: '692000' },
+        { rpt: '2019-10-31', value1: '75000', value2: ' 94617', value3: ' 196000', value4: '750000' },
+        { rpt: '2019-11-30', value1: '95000', value2: ' 110000', value3: '210000', value4: '831714' },
+        { rpt: '2019-12-31', value1: '163448', value2: '149293', value3: '231546', value4: '971678' },
+        { rpt: '2020-01-31', value1: '46373', value2: ' 43009', value3: ' 12749', value4: ' 33453' },
+        { rpt: '2020-02-29', value1: '12908', value2: ' 9951', value3: '14977', value4: ' 44557' },
+        { rpt: '2020-03-31', value1: '52873', value2: ' 49517', value3: ' 29072', value4: ' 84761' },
+        { rpt: '2020-04-30', value1: '71950', value2: ' 80424', value3: ' 49498', value4: ' 155255' },
+        { rpt: '2020-05-31', value1: '81665', value2: ' 84106', value3: ' 67005', value4: ' 221892' },
+        { rpt: '2020-06-30', value1: '103565', value2: '102029', value3: '88173', value4: ' 304201' },
+        { rpt: '2020-07-31', value1: '97854', value2: ' 99605', value3: ' 107599', value4: '377963' },
+        { rpt: '2020-08-31', value1: '109318', value2: '109318', value3: '128886', value4: '466377' },
+        { rpt: '2020-09-30', value1: '137941', value2: '136064', value3: '154441', value4: '578816' },
+        { rpt: '2020-10-31', value1: '160185', value2: '166668', value3: '181165', value4: '719358' },
+        { rpt: '2020-11-30', value1: '200000', value2: '198000', value3: '213687', value4: '894439' }
+      ],
+      table: [
+        {
+          rpt: '2010',
+          value: 1569.332
+        },
+        {
+          rpt: '2011',
+          value: 6319.332
+        },
+        {
+          rpt: '2012',
+          value: 15959.332
+        },
+        {
+          rpt: '2013',
+          value: 30569.332
+        },
+        {
+          rpt: '2014',
+          value: 59400
+        },
+        {
+          rpt: '2015',
+          value: 206119
+        },
+        {
+          rpt: '2016',
+          value: 463119
+        },
+        {
+          rpt: '2017',
+          value: 931119
+        },
+        {
+          rpt: '2018',
+          value: 1746989
+        },
+        {
+          rpt: '2019',
+          value: 2581186
+        }
+      ]
+    }
+  } else if (data.code === 'FA0040010709') {
+    response = {
+      names: [
+        {
+          name: '公共类充电桩数量_全国',
+          value: 'value1',
+          unit: '台',
+          rate: '月'
+        }
+      ],
+      chart: [
+        { rpt: '2016-02-29', value1: '60023' },
+        { rpt: '2016-03-31', value1: '65109' },
+        { rpt: '2016-04-30', value1: '72296' },
+        { rpt: '2016-05-31', value1: '77634' },
+        { rpt: '2016-06-30', value1: '81780' },
+        { rpt: '2016-07-31', value1: '85537' },
+        { rpt: '2016-08-31', value1: '92500' },
+        { rpt: '2016-09-30', value1: '102375' },
+        { rpt: '2016-10-31', value1: '107098' },
+        { rpt: '2016-11-30', value1: '115792' },
+        { rpt: '2016-12-31', value1: '141254' },
+        { rpt: '2017-01-31', value1: '148236' },
+        { rpt: '2017-02-28', value1: '151062' },
+        { rpt: '2017-03-31', value1: '156192' },
+        { rpt: '2017-04-30', value1: '161193' },
+        { rpt: '2017-05-31', value1: '166946' },
+        { rpt: '2017-06-30', value1: '171609' },
+        { rpt: '2017-07-31', value1: '180684' },
+        { rpt: '2017-08-31', value1: '185990' },
+        { rpt: '2017-09-30', value1: '190559' },
+        { rpt: '2017-10-31', value1: '194594' },
+        { rpt: '2017-11-30', value1: '204729' },
+        { rpt: '2017-12-31', value1: '213903' },
+        { rpt: '2018-01-31', value1: '225071' },
+        { rpt: '2018-02-28', value1: '244023' },
+        { rpt: '2018-03-31', value1: '253074' },
+        { rpt: '2018-04-30', value1: '262058' },
+        { rpt: '2018-05-31', value1: '266231' },
+        { rpt: '2018-06-30', value1: '271751' },
+        { rpt: '2018-07-31', value1: '274777' },
+        { rpt: '2018-08-31', value1: '278736' },
+        { rpt: '2018-09-30', value1: '284652' },
+        { rpt: '2018-10-31', value1: '284638' },
+        { rpt: '2018-11-30', value1: '289724' },
+        { rpt: '2018-12-31', value1: '299752' },
+        { rpt: '2019-01-31', value1: '341765' },
+        { rpt: '2019-02-28', value1: '347624' },
+        { rpt: '2019-03-31', value1: '383571' },
+        { rpt: '2019-04-30', value1: '391035' },
+        { rpt: '2019-05-31', value1: '400693' },
+        { rpt: '2019-06-30', value1: '411619' },
+        { rpt: '2019-07-31', value1: '446640' },
+        { rpt: '2019-08-31', value1: '455808' },
+        { rpt: '2019-09-30', value1: '466101' },
+        { rpt: '2019-10-31', value1: '478132' },
+        { rpt: '2019-11-30', value1: '495502' },
+        { rpt: '2019-12-31', value1: '516396' },
+        { rpt: '2020-01-31', value1: '531118' },
+        { rpt: '2020-02-29', value1: '531313' },
+        { rpt: '2020-03-31', value1: '541672' },
+        { rpt: '2020-04-30', value1: '546764' },
+        { rpt: '2020-05-31', value1: '550588' },
+        { rpt: '2020-06-30', value1: '558000' },
+        { rpt: '2020-07-31', value1: '566000' },
+        { rpt: '2020-08-31', value1: '592000' },
+        { rpt: '2020-09-30', value1: '606000' },
+        { rpt: '2020-10-31', value1: '667000' },
+        { rpt: '2020-11-30', value1: '695000' }
+      ],
+      table: [
+        {
+          rpt: '2010',
+          value: null
+        },
+        {
+          rpt: '2011',
+          value: null
+        },
+        {
+          rpt: '2012',
+          value: null
+        },
+        {
+          rpt: '2013',
+          value: null
+        },
+        {
+          rpt: '2014',
+          value: null
+        },
+        {
+          rpt: '2015',
+          value: null
+        },
+        {
+          rpt: '2016',
+          value: null
+        },
+        {
+          rpt: '2017',
+          value: null
+        },
+        {
+          rpt: '2018',
+          value: null
+        },
+        {
+          rpt: '2019',
+          value: null
+        }
+      ]
+    }
+  } else if (data.code === 'EC0010010201') {
+    response = {
+      names: [
+        {
+          name: '动力电池装机量_环比',
+          value: 'value1',
+          unit: '%',
+          rate: '月'
+        },
+        {
+          name: '动力电池装机量_当月同比',
+          value: 'value2',
+          unit: '%',
+          rate: '月'
+        },
+        {
+          name: '动力电池装机量_当月值',
+          value: 'value3',
+          unit: '百万千瓦时',
+          rate: '月'
+        },
+        {
+          name: '动力电池装机量_累计值',
+          value: 'value4',
+          unit: '百万千瓦时',
+          rate: '月'
+        }
+      ],
+      chart: [
+        { rpt: '2017-01-31', value1: 'null', value2: 'null', value3: '0.11', value4: '0.11' },
+        { rpt: '2017-02-28', value1: '109.09', value2: 'null', value3: '0.23', value4: '0.34' },
+        { rpt: '2017-03-31', value1: '308.7', value2: 'null', value3: '0.94', value4: '1.28' },
+        { rpt: '2017-04-30', value1: '-1.06', value2: 'null', value3: '0.93', value4: '2.21' },
+        { rpt: '2017-05-31', value1: '54.84', value2: 'null', value3: '1.44', value4: '3.65' },
+        { rpt: '2017-06-30', value1: '50', value2: 'null', value3: '2.16', value4: '5.81' },
+        { rpt: '2017-07-31', value1: '19.91', value2: 'null', value3: '2.59', value4: '8.4' },
+        { rpt: '2017-08-31', value1: '11.97', value2: 'null', value3: '2.9', value4: '11.3' },
+        { rpt: '2017-09-30', value1: '18.62', value2: 'null', value3: '3.44', value4: '14.74' },
+        { rpt: '2017-10-31', value1: '-14.83', value2: 'null', value3: '2.93', value4: '17.67' },
+        { rpt: '2017-11-30', value1: '138.23', value2: 'null', value3: '6.98', value4: '24.65' },
+        { rpt: '2017-12-31', value1: '68.91', value2: 'null', value3: '11.79', value4: '36.44' },
+        { rpt: '2018-01-31', value1: '-88.89', value2: '1090.91', value3: '1.31', value4: '1.31' },
+        { rpt: '2018-02-28', value1: '-21.37', value2: '347.83', value3: '1.03', value4: '2.34' },
+        { rpt: '2018-03-31', value1: '101.94', value2: '121.28', value3: '2.08', value4: '4.42' },
+        { rpt: '2018-04-30', value1: '80.77', value2: '304.3', value3: '3.76', value4: '8.18' },
+        { rpt: '2018-05-31', value1: '19.68', value2: '212.5', value3: '4.5', value4: '12.68' },
+        { rpt: '2018-06-30', value1: '-36.22', value2: '32.87', value3: '2.87', value4: '15.55' },
+        { rpt: '2018-07-31', value1: '16.38', value2: '28.96', value3: '3.34', value4: '18.89' },
+        { rpt: '2018-08-31', value1: '24.85', value2: '43.79', value3: '4.17', value4: '23.06' },
+        { rpt: '2018-09-30', value1: '37.17', value2: '66.28', value3: '5.72', value4: '28.78' },
+        { rpt: '2018-10-31', value1: '3.67', value2: '102.39', value3: '5.93', value4: '34.71' },
+        { rpt: '2018-11-30', value1: '50.25', value2: '27.65', value3: '8.91', value4: '43.62' },
+        { rpt: '2018-12-31', value1: '49.94', value2: '13.32', value3: '13.36', value4: '56.98' },
+        { rpt: '2019-01-31', value1: '-62.72', value2: '280.15', value3: '4.98', value4: '4.98' },
+        { rpt: '2019-02-28', value1: '-55.02', value2: '117.48', value3: '2.24', value4: '7.22' },
+        { rpt: '2019-03-31', value1: '127.23', value2: '144.71', value3: '5.09', value4: '12.31' },
+        { rpt: '2019-04-30', value1: '6.29', value2: '43.88', value3: '5.41', value4: '17.72' },
+        { rpt: '2019-05-31', value1: '4.99', value2: '26.22', value3: '5.68', value4: '23.4' },
+        { rpt: '2019-06-30', value1: '16.37', value2: '130.31', value3: '6.61', value4: '30.01' },
+        { rpt: '2019-07-31', value1: '-28.9', value2: '40.72', value3: '4.7', value4: '34.71' },
+        { rpt: '2019-08-31', value1: '-22.55', value2: '-12.71', value3: '3.64', value4: '38.35' },
+        { rpt: '2019-09-30', value1: '8.52', value2: '-30.94', value3: '3.95', value4: '42.3' },
+        { rpt: '2019-10-31', value1: '3.04', value2: '-31.37', value3: '4.07', value4: '46.37' },
+        { rpt: '2019-11-30', value1: '54.55', value2: '-29.41', value3: '6.29', value4: '52.66' },
+        { rpt: '2019-12-31', value1: '54.37', value2: '-27.32', value3: '9.71', value4: '62.37' },
+        { rpt: '2020-01-31', value1: '-76.11', value2: '-53.41', value3: '2.32', value4: '2.32' },
+        { rpt: '2020-02-29', value1: '-74.14', value2: '-73.21', value3: '0.6', value4: '2.92' },
+        { rpt: '2020-03-31', value1: '360', value2: '-45.78', value3: '2.76', value4: '5.68' },
+        { rpt: '2020-04-30', value1: '30.43', value2: '-33.46', value3: '3.6', value4: '9.28' },
+        { rpt: '2020-05-31', value1: '-2.5', value2: '-38.2', value3: '3.51', value4: '12.79' },
+        { rpt: '2020-06-30', value1: '34.19', value2: '-28.74', value3: '4.71', value4: '17.5' },
+        { rpt: '2020-07-31', value1: '5.94', value2: '6.17', value3: '4.99', value4: '22.49' },
+        { rpt: '2020-08-31', value1: '2.4', value2: '40.38', value3: '5.11', value4: '27.6' },
+        { rpt: '2020-09-30', value1: '28.38', value2: '66.08', value3: '6.56', value4: '34.16' },
+        { rpt: '' }
+      ],
+      table: [
+        {
+          rpt: '2010',
+          value: null
+        },
+        {
+          rpt: '2011',
+          value: null
+        },
+        {
+          rpt: '2012',
+          value: null
+        },
+        {
+          rpt: '2013',
+          value: null
+        },
+        {
+          rpt: '2014',
+          value: null
+        },
+        {
+          rpt: '2015',
+          value: null
+        },
+        {
+          rpt: '2016',
+          value: null
+        },
+        {
+          rpt: '2017',
+          value: null
+        },
+        {
+          rpt: '2018',
+          value: null
+        },
+        {
+          rpt: '2019',
+          value: null
+        }
+      ]
+    }
+  }
+
+  return response
 }

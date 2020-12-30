@@ -8,7 +8,7 @@ export const base_region = (data) => {
 
 // 机构列表
 export const base_org = async (data) => {
-  await sleep(1000)
+  await sleep(300)
   return {
     result: [
       {
@@ -26,7 +26,7 @@ export const base_org = async (data) => {
 
 // 资质列表
 export const base_qualification = async (data) => {
-  await sleep(1000)
+  await sleep(300)
   return {
     result: [
       {

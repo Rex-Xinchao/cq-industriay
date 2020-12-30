@@ -60,7 +60,7 @@ export default {
         result = (this.response && this.response.result) || []
         this.noData = result.length === 0
       } else {
-        await sleep(1000)
+        await sleep(300)
         return []
       }
     },

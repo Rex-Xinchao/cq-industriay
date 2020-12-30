@@ -2,7 +2,7 @@ import http from '@/libs/axios'
 const sleep = (time) => new Promise((res) => setTimeout(() => res(), time))
 
 export const getStatusTable = async (data) => {
-  await sleep(1000)
+  await sleep(300)
   const result = {
     1: {
       result: [
@@ -190,7 +190,7 @@ export const getStatusTable = async (data) => {
 }
 
 export const getIncomesTable = async (data) => {
-  await sleep(1000)
+  await sleep(300)
   const result = {
     1: {
       result: [

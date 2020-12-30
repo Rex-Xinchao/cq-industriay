@@ -156,7 +156,7 @@ export default {
       if (!queryString) return cb([])
       this.suggestions = []
       if (this.type === 1) {
-        this.suggestions = [{ value: '长安汽车', code: 'TEST_1001' }]
+        this.suggestions = [{ value: '重庆长安汽车股份有限公司', code: 'TEST_1001' }]
         cb(this.suggestions)
       }
       if (this.type === 2) {
