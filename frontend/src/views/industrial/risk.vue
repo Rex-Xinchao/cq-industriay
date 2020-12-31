@@ -36,7 +36,7 @@
         :before-close="hideMenu"
       >
         <i class="icon-tip" title="异动指标范围是行业宏观经济数据和财务数据"></i>
-        <el-table v-loading="loading" class="table" :data="tableData" height="108px">
+        <el-table v-loading="loading" class="table" :data="tableData" max-height="500px">
           <el-table-column prop="indexName" label=""></el-table-column>
           <el-table-column prop="latestIndex" label="最新值"></el-table-column>
           <el-table-column prop="changeIndex" label="变动值"></el-table-column>
@@ -67,7 +67,7 @@
 </template>
 <script>
 import chart from '@/mixins/chart'
-import pageTo from '@/mixins/chart'
+import pageTo from '@/mixins/pageTo'
 import { riskChain, riskDialog } from '@/api/chain'
 import { mapGetters } from 'vuex'
 export default {
@@ -101,7 +101,9 @@ export default {
       this.interval = setTimeout(() => {
         this.dialogVisible = true
         this.loading = true
-        riskDialog({})
+        riskDialog({
+          industryCode: data.code
+        })
           .then((res) => {
             this.loading = false
             this.current = data

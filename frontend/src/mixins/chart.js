@@ -310,15 +310,33 @@ export default {
         })
       if (this.type === 'boom') {
         Product.append('text')
-          .attr('class', (d) => (d.depth && d.data.isRisk ? '' : 'remove'))
-          .attr('x', (d) => ($pos ? -114 : 90))
-          .attr('y', 5)
+          .attr('class', (d) => {
+            // return (d.depth && d.data.isRisk ? '' : 'remove')
+            if (!['AC003005', 'FA0040010709', 'EC0010010201'].includes(d.data.code)) {
+              return 'remove'
+            }
+          })
+          .attr('x', (d) => {
+            if (d.depth) return $pos ? -114 : 90
+            return -10
+          })
+          .attr('y', (d) => {
+            if (d.depth) return 5
+            return 40
+          })
           .attr('text-anchor', 'middle')
           .style('font', '12px sans-serif')
           .style('fill', 'black')
           .append('tspan')
           .text((d) => {
-            if (d.data.isRisk) return '7.12%'
+            // if (d.data.isRisk) return '7.12%'
+            if (d.data.code === 'AC003005') {
+              return '-0.64%'
+            } else if (d.data.code === 'FA0040010709') {
+              return '-2.78%'
+            } else if (d.data.code === 'EC0010010201') {
+              return '0.32%'
+            }
           })
           .on('mouseover', (d) => {
             this.showMenu(d3.event, d.data)
@@ -327,10 +345,32 @@ export default {
             this.interval && clearTimeout(this.interval)
           })
         Product.append('image')
-          .attr('xlink:href', require(`@/assets/imgs/icons/up.svg`))
-          .attr('class', (d) => (d.depth && d.data.isRisk ? '' : 'remove'))
-          .attr('x', (d) => ($pos ? -90 : 114))
-          .attr('y', -6)
+          .attr('xlink:href', (d) => {
+            // require(`@/assets/imgs/icons/up.svg`)
+            if (d.data.code === 'AC003005') {
+              return require(`@/assets/imgs/icons/down.svg`)
+            } else if (d.data.code === 'FA0040010709') {
+              return require(`@/assets/imgs/icons/down.svg`)
+            } else if (d.data.code === 'EC0010010201') {
+              return require(`@/assets/imgs/icons/down.svg`)
+            }
+          })
+          .attr('class', (d) => {
+            // return (d.depth && d.data.isRisk ? '' : 'remove')
+            if (['AC003005', 'FA0040010709', 'EC0010010201'].includes(d.data.code)) {
+              return ''
+            } else {
+              return 'remove'
+            }
+          })
+          .attr('x', (d) => {
+            if (d.depth) return $pos ? -90 : 114
+            return 16
+          })
+          .attr('y', (d) => {
+            if (d.depth) return -6
+            return 29
+          })
           .attr('height', '14px')
           .attr('width', '8px')
           .on('mouseover', (d) => {
@@ -344,15 +384,23 @@ export default {
         Product.append('image')
           .attr('xlink:href', require(`@/assets/imgs/icons/lamp.svg`))
           .attr('class', (d) => {
-            if (d.depth === 0) return 'remove'
-            if (!d.data.isRisk) return 'remove'
+            // if (!d.data.isRisk) return 'remove'
+            if (!['AC003005', 'FA0040010709', 'EC0010010201'].includes(d.data.code)) {
+              return 'remove'
+            }
           })
-          .attr('x', (d) => ($pos ? -110 : 70))
-          .attr('y', -12)
+          .attr('x', (d) => {
+            if (d.depth) return $pos ? -110 : 70
+            return -14
+          })
+          .attr('y', (d) => {
+            if (d.depth) return -12
+            return 28
+          })
           .attr('height', '22px')
           .attr('width', '22px')
           .on('mouseover', (d) => {
-            if (d.data.isRisk) this.showMenu(d3.event, d.data)
+            this.showMenu(d3.event, d.data)
           })
           .on('mouseout', (d) => {
             this.interval && clearTimeout(this.interval)

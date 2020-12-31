@@ -93,7 +93,7 @@ export default {
             let time = data[0].axisValue + '月'
             let result = `${time}<br/>`
             data.forEach((item) => {
-              result += `${item.seriesName}：${item.value.toFixed(2)}<br/>`
+              result += `${item.seriesName}：${item.value ? item.value.toFixed(2) : '--'}<br/>`
             })
             return result
           }
@@ -181,8 +181,7 @@ export default {
         this.loading = true
         this.current = data
         boomDialog({
-          industryCode: data.code,
-          code: this.industryCode
+          industryCode: data.code
         })
           .then((res) => {
             this.loading = false
