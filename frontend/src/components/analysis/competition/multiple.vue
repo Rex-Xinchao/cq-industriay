@@ -82,13 +82,14 @@ export default {
   },
   methods: {
     setChartOption() {
-      console.log(this.lineData)
       this.chartId_line = 'lineChart_M'
       this.chartOption_line.tooltip = Object.assign({}, this.chartOption_line.tooltip, this.tooltip)
       this.chartOption_line.grid = this.grid
       this.chartOption_line.visualMap = this.visualMap
       this.chartOption_line.series = this.series
-      this.indexNum = this.lineData[0] ? parseInt(this.lineData[0].value) : 0
+      this.indexNum = this.lineData[this.lineData.length - 1]
+        ? parseInt(this.lineData[this.lineData.length - 1].value)
+        : 0
       this.chartOption_line.xAxis.data = this.lineData.map((item) => item.rpt)
       this.chartOption_line.series.data = this.lineData.map((item) => item.value.toFixed(2))
       return this.chartOption_line

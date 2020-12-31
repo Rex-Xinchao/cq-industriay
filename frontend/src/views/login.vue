@@ -164,7 +164,7 @@ export default {
         cb(this.suggestions)
       }
       if (this.type === 3) {
-        getIndustry({ keyword: queryString })
+        getIndustry({ keyword: queryString, limit: 50 })
           .then((res) => {
             this.suggestions = res.result.map((item) => {
               return {

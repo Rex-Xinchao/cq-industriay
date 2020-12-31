@@ -31,7 +31,6 @@
                 :index="child.code"
                 :key="`${index}_child`"
                 v-show="child.show"
-                :disabled="child.disabled"
               >
                 {{ child.name }}
               </el-menu-item>
@@ -137,6 +136,7 @@ export default {
       })
     },
     getHead(data) {
+      if (!['FA0040010709', 'AC003005', 'EC0010010201'].includes(data)) return
       this.headLoding = true
       envChart({ code: data })
         .then((res) => {

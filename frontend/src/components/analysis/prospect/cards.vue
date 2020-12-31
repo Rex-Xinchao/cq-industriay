@@ -7,7 +7,7 @@
           <i class="icon-img icon-card"></i>
           <span class="title" :title="item.name">{{ item.name }}</span>
           <span class="num">
-            <span :style="{ color: item.type === 'up' ? 'red' : 'green' }">
+            <span :style="{ color: item.type === 'up' ? '#EA444E' : '#08A24C' }">
               {{ item.unit === '元' ? getNumUnit(item.value).num : item.value }}
             </span>
             <span class="unit">
@@ -18,7 +18,7 @@
           </span>
           <span class="tip">
             {{ item.type === 'up' ? '较去年增加' : '较去年减少' }}
-            <strong>{{ item.change }}</strong>
+            <strong :class="`text-${item.type}`">{{ item.change }}</strong>
             <i class="icon-img" :class="`icon-${item.type}`" :title="item.type === 'up' ? '增加' : '减少'"></i>
           </span>
         </div>
@@ -182,6 +182,13 @@ export default {
 
     .icon-down {
       background-image: url(~@/assets/imgs/icons/down.svg);
+    }
+    .text-up {
+      color: #ea444e;
+    }
+
+    .text-down {
+      color: #08a24c;
     }
   }
 }

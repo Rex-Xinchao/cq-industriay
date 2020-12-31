@@ -53,7 +53,7 @@
             </template>
           </el-table-column>
         </el-table>
-        <h1 class="tooltip-title" style="margin-top: 12px" v-if="tags.length">
+        <h1 class="tooltip-title" style="margin-top: 12px" v-if="tags && tags.length">
           高发事件
           <i class="icon-tip" title="异动指标范围是行业宏观经济数据和财务数据"></i>
         </h1>

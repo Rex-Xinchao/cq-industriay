@@ -35,7 +35,7 @@ export default {
   methods: {
     querySearchAsync(queryString, cb) {
       if (!queryString) return cb([])
-      getIndustry({ keyword: queryString })
+      getIndustry({ keyword: queryString, limit: 50 })
         .then((res) => {
           this.suggestions = res.result.map((item) => {
             return {

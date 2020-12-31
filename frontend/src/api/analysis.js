@@ -2932,7 +2932,6 @@ export const testList = async (data) => {
             id: null,
             oid: 26569936,
             batch: null,
-            name: '汽车',
             code: 'AC005',
             remark: null,
             state: null,
@@ -4652,7 +4651,6 @@ export const testList = async (data) => {
             id: null,
             oid: 25994625,
             batch: null,
-            name: '汽车',
             code: 'AC005',
             remark: null,
             state: null,
@@ -4671,7 +4669,6 @@ export const testList = async (data) => {
             id: null,
             oid: 25994625,
             batch: null,
-            name: '新能源汽车',
             code: 'AC003005',
             remark: null,
             state: null,
@@ -4689,7 +4686,6 @@ export const testList = async (data) => {
             id: null,
             oid: 25994625,
             batch: null,
-            name: '乘用车',
             code: 'AC003002',
             remark: null,
             state: null,
@@ -10740,7 +10736,7 @@ export const competitionIndex = async (data) => {
         value: 3447.894387
       },
       {
-        rpt: '2018',
+        rpt: '2019',
         value: 5159.804469
       }
     ]
