@@ -54,9 +54,9 @@ export default {
   data() {
     return {
       form: {},
-      dateTime: new Date(),
       loading: false,
       tableData: [],
+      dateTime: new Date().setFullYear(new Date().getFullYear() - 1),
       timeType: 'Q4',
       options: [
         {
@@ -70,7 +70,7 @@ export default {
       ],
       pickerOptions: {
         disabledDate(time) {
-          return time.getTime() > new Date().getTime()
+          return time.getTime() > new Date().getTime() - 3600 * 24 * 365 * 1000
         }
       }
     }

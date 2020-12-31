@@ -35,7 +35,14 @@
         </div>
         <div class="line" v-for="(item, index) in sliderData" :key="index">
           <span>{{ item.name }}：</span>
-          <el-slider class="slider" v-model="item.value" :marks="marks" :disabled="false"></el-slider>
+          <el-slider
+            class="slider"
+            v-model="item.value"
+            :marks="item.marks"
+            :disabled="true"
+            :show-tooltip="false"
+            :title="item.number + '%'"
+          ></el-slider>
         </div>
       </div>
     </div>
@@ -171,11 +178,13 @@
       </h1>
       <div class="filter-main">
         <div class="tag-list">
+          <span>产量冻结</span>
+          <span>出售资产</span>
+          <span>机构减持</span>
+          <span>个股下跌</span>
           <span>大盘下跌</span>
           <span>利润减少</span>
-          <span>机构减持</span>
           <span>董事辞职</span>
-          <span>个股下跌</span>
         </div>
       </div>
       <div v-loading="loading" class="news-list-main_loading" :style="{ 'min-height': height }">
@@ -468,39 +477,7 @@ export default {
           return time.getTime() > new Date().getTime() - 3600 * 24 * 365 * 1000
         }
       },
-      sliderData: [],
-      marks: {
-        18: {
-          style: {
-            color: '#94979B'
-          },
-          label: '优秀23%'
-        },
-        36: {
-          style: {
-            color: '#94979B'
-          },
-          label: '良好19%'
-        },
-        54: {
-          style: {
-            color: '#94979B'
-          },
-          label: '平均12%'
-        },
-        72: {
-          style: {
-            color: '#94979B'
-          },
-          label: '较低8%'
-        },
-        90: {
-          style: {
-            color: '#94979B'
-          },
-          label: '较差3%'
-        }
-      }
+      sliderData: []
     }
   },
   watch: {
@@ -511,18 +488,55 @@ export default {
           .filter((item) => item.type === data)
           .map((item) => {
             let status = statusList.find((status) => status.name === item.name).list
+            let sumList = [15, 32.5, 50, 67.5, 85, 100]
+            item.number = item.value
+            let statusMapList = status
+              .map((item, index) => {
+                const namsList = ['优秀', '良好', '平均', '较低', '较差']
+                return {
+                  style: {
+                    color: '#94979B'
+                  },
+                  label: `${namsList[index]}${item.toFixed(1)}%`,
+                  value: item
+                }
+              })
+              .sort((a, b) => {
+                return b.value - a.value
+              })
+            item.marks = {
+              15: {
+                style: statusMapList[0].style,
+                label: statusMapList[0].label
+              },
+              32.5: {
+                style: statusMapList[1].style,
+                label: statusMapList[1].label
+              },
+              50: {
+                style: statusMapList[2].style,
+                label: statusMapList[2].label
+              },
+              67.5: {
+                style: statusMapList[3].style,
+                label: statusMapList[3].label
+              },
+              85: {
+                style: statusMapList[4].style,
+                label: statusMapList[4].label
+              }
+            }
             let max = 99999
             let index = 0
-            status.forEach((num, i) => {
-              if (num > item.value && num < max) {
-                max = num
+            statusMapList.forEach((num, i) => {
+              if (num.value > item.value && num.value < max) {
+                max = num.value
                 index = i
               }
             })
-            let sumList = [18, 36, 54, 72, 90, 100]
             let sum = sumList[index] || 0
-            let min = status[index + 1] || 0
-            item.value = 18 - (Math.abs(max / item.value) / (max - min)) * 18 + sum
+            let min = statusMapList[index + 1].value || 0
+            item.value = ((max - item.value) / (max - min)) * 17.5 + sum
             return item
           })
       }

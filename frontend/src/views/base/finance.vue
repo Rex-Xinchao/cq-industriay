@@ -8,6 +8,20 @@
     </div>
     <div class="main-body">
       <div class="filter">
+        <span class="filter-label">报告期：</span>
+        <span class="filter-item" style="width: 328px">
+          <el-date-picker
+            style="width: 160px"
+            v-model="dateTime"
+            type="year"
+            :clearable="false"
+            placeholder="请选择年份"
+            :picker-options="pickerOptions"
+          ></el-date-picker>
+          <el-select style="width: 160px; margin-left: 8px" v-model="timeType" placeholder="请选择">
+            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+          </el-select>
+        </span>
         <span class="filter-label">指标：</span>
         <span class="filter-item">
           <el-select v-model="norm" collapse-tags multiple placeholder="请选择">
@@ -16,11 +30,11 @@
         </span>
         <span class="filter-label">市场：</span>
         <span class="filter-item">
-          <el-select v-model="market" multiple placeholder="请选择">
+          <el-select v-model="market" collapse-tags multiple placeholder="请选择">
             <el-option v-for="item in markets" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
         </span>
-        <span class="filter-label fr">披露期：{{ time || '--' }}</span>
+        <span class="filter-label fr">披露期：{{ `${new Date(dateTime).getFullYear()} ${timeType}` || '--' }}</span>
       </div>
       <el-table v-loading="loading" class="table-head-grey" :data="tableData" height="calc(100% - 120px)">
         <el-table-column prop="comName" label="龙头企业" align="center">
@@ -124,6 +138,23 @@ export default {
       page: {
         total: 100,
         count: 1
+      },
+      dateTime: new Date().setFullYear(new Date().getFullYear() - 1),
+      timeType: 'Q4',
+      options: [
+        {
+          label: '年度',
+          value: 'Q4'
+        },
+        {
+          label: '半年度',
+          value: 'Q2'
+        }
+      ],
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() > new Date().getTime() - 3600 * 24 * 365 * 1000
+        }
       }
     }
   },
@@ -131,6 +162,12 @@ export default {
     ...mapGetters(['industryCode', 'industry'])
   },
   watch: {
+    dateTime() {
+      this.getData()
+    },
+    timeType() {
+      this.getData()
+    },
     norm() {
       this.getData()
     },
@@ -142,13 +179,14 @@ export default {
     getData() {
       this.loading = true
       let params = {
+        rpt: new Date(this.dateTime).getFullYear(),
+        timeType: this.timeType,
         industryCode: this.industryCode,
         standardType: this.norm,
         mkt: this.market,
         page: this.page.count,
         size: 20
       }
-      console.log(params)
       leading_financial(params)
         .then((res) => {
           this.loading = false
