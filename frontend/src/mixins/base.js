@@ -19,12 +19,12 @@ export const Regions = {
           regions_map[item.name] = item
         })
         res.result.forEach((item) => {
-          if (item.parent) {
+          if (item.parent && map[item.parent]) {
             map[item.parent].children.push(map[item.code])
           }
         })
         this.regions_map = regions_map
-        this.regions = res.result.filter((item) => item.level === 1)
+        this.regions = res.result.filter((item) => !item.parent || (item.parent && !map[item.parent]))
       })
     }
   },

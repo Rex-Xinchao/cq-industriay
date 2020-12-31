@@ -136,7 +136,7 @@ export default {
       })
     },
     getHead(data) {
-      if (!['FA0040010709', 'AC003005', 'EC0010010201'].includes(data)) return
+      if (!['FA0040010709', 'AC003005', 'EC001001130201'].includes(data)) return
       this.headLoding = true
       envChart({ code: data })
         .then((res) => {

@@ -312,7 +312,7 @@ export default {
         Product.append('text')
           .attr('class', (d) => {
             // return (d.depth && d.data.isRisk ? '' : 'remove')
-            if (!['AC003005', 'FA0040010709', 'EC0010010201'].includes(d.data.code)) {
+            if (!['AC003005', 'FA0040010709', 'EC001001130201'].includes(d.data.code)) {
               return 'remove'
             }
           })
@@ -334,7 +334,7 @@ export default {
               return '-0.64%'
             } else if (d.data.code === 'FA0040010709') {
               return '-2.78%'
-            } else if (d.data.code === 'EC0010010201') {
+            } else if (d.data.code === 'EC001001130201') {
               return '0.32%'
             }
           })
@@ -351,13 +351,13 @@ export default {
               return require(`@/assets/imgs/icons/down.svg`)
             } else if (d.data.code === 'FA0040010709') {
               return require(`@/assets/imgs/icons/down.svg`)
-            } else if (d.data.code === 'EC0010010201') {
+            } else if (d.data.code === 'EC001001130201') {
               return require(`@/assets/imgs/icons/down.svg`)
             }
           })
           .attr('class', (d) => {
             // return (d.depth && d.data.isRisk ? '' : 'remove')
-            if (['AC003005', 'FA0040010709', 'EC0010010201'].includes(d.data.code)) {
+            if (['AC003005', 'FA0040010709', 'EC001001130201'].includes(d.data.code)) {
               return ''
             } else {
               return 'remove'
@@ -385,7 +385,7 @@ export default {
           .attr('xlink:href', require(`@/assets/imgs/icons/lamp.svg`))
           .attr('class', (d) => {
             // if (!d.data.isRisk) return 'remove'
-            if (!['AC003005', 'FA0040010709', 'EC0010010201'].includes(d.data.code)) {
+            if (!['AC003005', 'FA0040010709', 'EC001001130201'].includes(d.data.code)) {
               return 'remove'
             }
           })

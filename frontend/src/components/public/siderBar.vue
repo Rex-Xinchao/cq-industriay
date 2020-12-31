@@ -121,7 +121,7 @@ export default {
           children: [
             {
               page: 'index',
-              name: '存量客户图像'
+              name: '存量客户画像'
             }
           ]
         }

@@ -4887,7 +4887,7 @@ export const envMenu = async (data) => {
         children: [
           {
             name: '锂离子电池',
-            code: 'EC0010010201'
+            code: 'EC001001130201'
           },
           {
             name: '汽车生产设备',
@@ -5190,7 +5190,7 @@ export const envChart = async (data) => {
         }
       ]
     }
-  } else if (data.code === 'EC0010010201') {
+  } else if (data.code === 'EC001001130201') {
     response = {
       names: [
         {

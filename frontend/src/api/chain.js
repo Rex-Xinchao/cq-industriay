@@ -40,7 +40,7 @@ export const riskDialog = async (data) => {
     reponse = {
       indexes: []
     }
-  } else if (data.industryCode === 'EC0010010201') {
+  } else if (data.industryCode === 'EC001001130201') {
     reponse = {
       indexes: [
         {
@@ -273,7 +273,7 @@ export const boomDialog = async (data) => {
       ],
       indexes: []
     }
-  } else if (data.industryCode === 'EC0010010201') {
+  } else if (data.industryCode === 'EC001001130201') {
     reponse = {
       prosperities: [
         {
