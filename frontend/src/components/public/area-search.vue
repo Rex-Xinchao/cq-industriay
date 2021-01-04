@@ -13,15 +13,17 @@
       <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
     </el-select>
     <el-popover placement="bottom" width="200" trigger="click">
-      <el-tree
-        ref="tree"
-        @check="check"
-        :data="regions"
-        show-checkbox
-        check-strictly
-        node-key="value"
-        :props="defaultProps"
-      ></el-tree>
+      <div style="max-height: 280px; overflow: auto">
+        <el-tree
+          ref="tree"
+          @check="check"
+          :data="regions"
+          show-checkbox
+          check-strictly
+          node-key="value"
+          :props="defaultProps"
+        ></el-tree>
+      </div>
       <i class="icon-more el-icon-s-operation" style="color: #94979b" slot="reference"></i>
     </el-popover>
     <el-button v-if="showBtn" class="search-btn fr" type="primary" @click="search">查询</el-button>

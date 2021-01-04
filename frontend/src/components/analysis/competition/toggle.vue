@@ -11,13 +11,20 @@
       </div>
     </h1>
     <div v-loading="loading" v-if="!noData" class="chart-main" id="chart"></div>
-    <no-data-show v-loading="loading" class="chart-nodata" :show="noData"></no-data-show>
+    <no-data-show
+      v-loading="loading"
+      class="chart-nodata"
+      style="height: calc(100% - 100px); top: 80px"
+      :show="noData"
+    ></no-data-show>
   </div>
 </template>
 
 <script>
 const echarts = require('echarts')
 import resize from '@/mixins/resize'
+import { competitionPieData, competitionBarData } from '@/api/analysis'
+import { converUnit } from '@/libs/utils'
 import bar from '@/mixins/bar'
 import pie from '@/mixins/pie'
 export default {
@@ -29,8 +36,9 @@ export default {
       isBar: true,
       color_bar: ['#3398DB'],
       data: [],
-      color_pie: ['#147AD6', '#79D2DE', '#EC6666'],
-      legend: ['2年以下', '2~5年', '5年以上']
+      color_pie: ['#147AD6', '#79D2DE', '#EC6666', '#F6BD16'],
+      legend: ['2年以下', '2~5年', '5年以上'],
+      dataZoom: [{ show: true }, { type: 'inside' }]
     }
   },
   props: {
@@ -43,35 +51,51 @@ export default {
     }
   },
   methods: {
+    async getChartData() {
+      let result = []
+      if (this.isBar) {
+        this.response = await competitionBarData(this.urlOptions)
+          .then((res) => res)
+          .catch((e) => {})
+        result = (this.response && this.response.result) || []
+        result = result.reverse()
+      } else {
+        let result = []
+        this.response = await competitionPieData(this.urlOptions)
+          .then((res) => res)
+          .catch((e) => {})
+        result = (this.response && this.response.result) || []
+      }
+      this.noData = result.length === 0
+      return result
+    },
     setChartOption() {
       const vm = this
       if (this.isBar) {
         this.chartOption_bar.color = this.color_bar
         this.chartOption_bar.grid.top = '20px'
+        this.chartOption_bar.grid.bottom = '55px'
+        this.chartOption_bar.dataZoom = this.dataZoom
         this.chartOption_bar.series = {
           type: 'bar',
-          barWidth: '36%',
           data: []
         }
         this.chartOption_bar.tooltip.formatter = function (data) {
           let time = data[0].axisValue
-          let text = vm.isScale ? '贷款余额规模' : '贷款企业数量'
-          let unit = vm.isScale ? '元' : '个'
           let result = `${time}<br/>`
           data.forEach((item) => {
-            result += `${text}：${item.value} ${unit}<br/>`
+            result += `企业数量：${item.value} 个<br/>`
           })
           return result
         }
-        this.chartOption_bar.xAxis.data = ['2020 Q1', '2020 Q2', '2020 Q3', '2020 Q4']
-        this.chartOption_bar.series.data = [100, 200, 80, 99]
-        const max = 200
-        this.chartOption_bar.yAxis.minInterval = max < 10 ? 1 : 10
-        this.chartOption_bar.yAxis.max = max ? max : 10
+        this.chartOption_bar.xAxis.data = this.pieData.map((item) => converUnit(item.key, 'zh', 0))
+        this.chartOption_bar.series.data = this.pieData.map((item) => item.value)
+
         return this.chartOption_bar
       } else {
         this.chartOption_pie.color = this.color_pie
-        this.chartOption_pie.legend.data = this.legend
+        this.chartOption_pie.legend.data = this.pieData.map((item) => item.name)
+        this.chartOption_pie.legend.top = 'center'
         this.chartOption_pie.legend.formatter = function (name) {
           let number = vm.data.find((item) => item.name === name).value
           return '{a|' + name + '}' + '{b|' + number + ' 家}'
@@ -90,12 +114,10 @@ export default {
             }
           }
         }
-        let data = [335, 248, 368]
-        this.data = this.legend.map((item, index) => {
+        this.data = this.pieData.map((item, index) => {
           return {
-            name: item,
-            value: data[index],
-            amount: Math.ceil(Math.random() * 100000)
+            name: item.name,
+            value: item.value
           }
         })
         this.chartOption_pie.series[0].data = this.data
