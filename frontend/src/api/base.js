@@ -1,129 +1,18 @@
 import http from '@/libs/axios'
 const sleep = (time) => new Promise((res) => setTimeout(() => res(), time))
 
+export const getBaseItem = (data) => {
+  return http.get(`/base/item`, data)
+}
+
 // 基准指标
-export const standard = async (data) => {
-  await sleep(300)
-  return {
-    result: [
-      {
-        name: '毛利率',
-        greateValue: '87.20',
-        goodValue: '75.23',
-        averageValue: '54.30',
-        lowerValue: '40.20',
-        badValue: '20.16'
-      },
-      {
-        name: '毛利率',
-        greateValue: '87.20',
-        goodValue: '75.23',
-        averageValue: '54.30',
-        lowerValue: '40.20',
-        badValue: '20.16'
-      },
-      {
-        name: '毛利率',
-        greateValue: '87.20',
-        goodValue: '75.23',
-        averageValue: '54.30',
-        lowerValue: '40.20',
-        badValue: '20.16'
-      },
-      {
-        name: '毛利率',
-        greateValue: '87.20',
-        goodValue: '75.23',
-        averageValue: '54.30',
-        lowerValue: '40.20',
-        badValue: '20.16'
-      },
-      {
-        name: '毛利率',
-        greateValue: '87.20',
-        goodValue: '75.23',
-        averageValue: '54.30',
-        lowerValue: '40.20',
-        badValue: '20.16'
-      },
-      {
-        name: '毛利率',
-        greateValue: '87.20',
-        goodValue: '75.23',
-        averageValue: '54.30',
-        lowerValue: '40.20',
-        badValue: '20.16'
-      },
-      {
-        name: '毛利率',
-        greateValue: '87.20',
-        goodValue: '75.23',
-        averageValue: '54.30',
-        lowerValue: '40.20',
-        badValue: '20.16'
-      },
-      {
-        name: '毛利率',
-        greateValue: '87.20',
-        goodValue: '75.23',
-        averageValue: '54.30',
-        lowerValue: '40.20',
-        badValue: '20.16'
-      },
-      {
-        name: '毛利率',
-        greateValue: '87.20',
-        goodValue: '75.23',
-        averageValue: '54.30',
-        lowerValue: '40.20',
-        badValue: '20.16'
-      },
-      {
-        name: '毛利率',
-        greateValue: '87.20',
-        goodValue: '75.23',
-        averageValue: '54.30',
-        lowerValue: '40.20',
-        badValue: '20.16'
-      },
-      {
-        name: '毛利率',
-        greateValue: '87.20',
-        goodValue: '75.23',
-        averageValue: '54.30',
-        lowerValue: '40.20',
-        badValue: '20.16'
-      },
-      {
-        name: '毛利率',
-        greateValue: '87.20',
-        goodValue: '75.23',
-        averageValue: '54.30',
-        lowerValue: '40.20',
-        badValue: '20.16'
-      }
-    ]
-  }
-  return http.get(`/base/${data.industryCode}/standard`, data)
+export const standard = (data) => {
+  return http.get(`/base/industry/${data.industryCode}/fin_standard`, data)
 }
 
 // 指标趋势
-export const tendency = async (data) => {
-  await sleep(300)
-  return {
-    result: [
-      {
-        rpt: '2019',
-        name: '毛利率',
-        greateValue: '87.20',
-        goodValue: '75.23',
-        averageValue: '54.30',
-        lowerValue: '40.20',
-        badValue: '20.16'
-      }
-    ]
-  }
-  return http.get(`/base/${data.industryCode}/tendency`, data)
+export const tendency = (data) => {
+  return http.get(`/base/industry/${data.industryCode}/tendency`, data)
 }
 
 // 龙头财务
@@ -711,5 +600,5 @@ export const leading_financial = async (data) => {
   return {
     result: response
   }
-  return http.get(`/base/${data.industryCode}/leading_financial`, data)
+  return http.get(`/base/industry/${data.industryCode}/leading_financial`, data)
 }

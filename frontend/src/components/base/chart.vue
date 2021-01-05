@@ -18,7 +18,7 @@
   </div>
 </template>
 <script>
-import { tendency } from '@/api/base'
+import { tendency, getBaseItem } from '@/api/base'
 import resize from '@/mixins/resize'
 import line from '@/mixins/line'
 import { mapGetters } from 'vuex'
@@ -29,7 +29,7 @@ export default {
       time: [],
       noData: false,
       loading: false,
-      activeHead: 1,
+      activeHead: null,
       color: ['#5B8FF9', '#5AD8A6', '#5D7092', '#F6BD16', '#E8684A'],
       legends: [
         {
@@ -71,22 +71,26 @@ export default {
     urlOptions() {
       return {
         industryCode: this.industryCode,
-        indexType: this.activeHead,
-        type: this.type
+        itemCode: this.activeHead,
+        quarter: 'Q4'
       }
     }
   },
   mixins: [resize, line],
   props: {
-    type: String,
+    finType: Number,
     heads: Array
   },
   watch: {
     activeHead() {
       this.drawChart()
     },
-    type() {
-      this.drawChart()
+    heads: {
+      immediate: true,
+      handler(data) {
+        if (!data) return
+        this.activeHead = this.heads[0].value
+      }
     }
   },
   methods: {
@@ -105,12 +109,9 @@ export default {
       })
       this.chartOption_line.yAxis.axisLabel.formatter = '{value}%'
       this.chartOption_line.series = series
-      this.chartOption_line.xAxis.data = this.lineData.map((data) => data.rpt)
+      this.chartOption_line.xAxis.data = this.lineData.map((data) => data.year)
       return this.chartOption_line
     }
-  },
-  mounted() {
-    this.drawChart()
   }
 }
 </script>

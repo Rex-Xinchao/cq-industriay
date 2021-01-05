@@ -8,7 +8,8 @@ export default new Vuex.Store({
     industry: null,
     industryCode: null,
     regionCode: null,
-    regionName: null
+    regionName: null,
+    baseMenu: []
   },
   getters: {
     industry: (state) => {
@@ -22,6 +23,9 @@ export default new Vuex.Store({
     },
     regionName: (state) => {
       return state.regionName
+    },
+    baseMenu: (state) => {
+      return state.baseMenu
     }
   },
   actions: {
@@ -30,6 +34,9 @@ export default new Vuex.Store({
     },
     setRegion({ commit }, data) {
       commit('SET_REGION', data)
+    },
+    setMenu({ commit }, data) {
+      commit('SET_MENU', data)
     }
   },
   mutations: {
@@ -40,6 +47,17 @@ export default new Vuex.Store({
     SET_REGION: (state, data) => {
       state.regionCode = data.code
       state.regionName = data.name
+    },
+    SET_MENU: (state, data) => {
+      const path = ['grow', 'profit', 'repay', 'business', 'product']
+      state.baseMenu = data.map((item, i) => {
+        return {
+          page: path[i],
+          name: item.finTypeName,
+          type: item.finType,
+          items: item.items
+        }
+      })
     }
   }
 })

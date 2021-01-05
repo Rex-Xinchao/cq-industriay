@@ -27,108 +27,108 @@
 </template>
 <script>
 import pageTo from '@/mixins/pageTo'
+import { mapGetters } from 'vuex'
 export default {
   data() {
     const vm = this
     return {
       activeName: vm.$route.path,
-      menu: [
-        {
-          name: '行业分析',
-          imgName: 'analysisMain',
-          page: 'analysis',
-          children: [
-            {
-              page: 'env',
-              name: '产业环境'
-            },
-            {
-              page: 'prospect',
-              name: '行业前景'
-            },
-            {
-              page: 'policy',
-              name: '政策导向'
-            },
-            {
-              page: 'compete',
-              name: '竞争格局'
-            },
-            {
-              page: 'risk',
-              name: '行业风险'
-            },
-            {
-              page: 'customer',
-              name: '行业货客'
-            },
-            {
-              page: 'information',
-              name: '行业舆情'
-            }
-          ]
-        },
-        {
-          name: '行业基准',
-          imgName: 'baseMain',
-          page: 'base',
-          children: [
-            {
-              page: 'grow',
-              name: '成长能力'
-            },
-            {
-              page: 'profit',
-              name: '盈利能力'
-            },
-            {
-              page: 'repay',
-              name: '偿还能力'
-            },
-            {
-              page: 'business',
-              name: '运营能力'
-            },
-            {
-              page: 'product',
-              name: '业务指标'
-            },
-            {
-              page: 'finance',
-              name: '龙头财务'
-            }
-          ]
-        },
-        {
-          name: '产业链图谱',
-          imgName: 'industrialMain',
-          page: 'industrial',
-          children: [
-            {
-              page: 'boom',
-              name: '景气图谱'
-            },
-            {
-              page: 'risk',
-              name: '风险图谱'
-            }
-          ]
-        },
-        {
-          name: '存量客户',
-          imgName: 'stockMain',
-          page: 'stockCustom',
-          children: [
-            {
-              page: 'index',
-              name: '存量客户画像'
-            }
-          ]
-        }
-      ]
+      menu: []
     }
   },
   mixins: [pageTo],
+  computed: {
+    ...mapGetters(['baseMenu'])
+  },
+  watch: {
+    baseMenu: {
+      immediate: true,
+      handler(data) {
+        if (!data) return
+        const baseMenu = data.map((item) => {
+          return {
+            page: item.page,
+            name: item.name
+          }
+        })
+        this.menu = [
+          {
+            name: '行业分析',
+            imgName: 'analysisMain',
+            page: 'analysis',
+            children: [
+              {
+                page: 'env',
+                name: '产业环境'
+              },
+              {
+                page: 'prospect',
+                name: '行业前景'
+              },
+              {
+                page: 'policy',
+                name: '政策导向'
+              },
+              {
+                page: 'compete',
+                name: '竞争格局'
+              },
+              {
+                page: 'risk',
+                name: '行业风险'
+              },
+              {
+                page: 'customer',
+                name: '行业货客'
+              },
+              {
+                page: 'information',
+                name: '行业舆情'
+              }
+            ]
+          },
+          {
+            name: '行业基准',
+            imgName: 'baseMain',
+            page: 'base',
+            children: [
+              ...baseMenu,
+              {
+                page: 'finance',
+                name: '龙头财务'
+              }
+            ]
+          },
+          {
+            name: '产业链图谱',
+            imgName: 'industrialMain',
+            page: 'industrial',
+            children: [
+              {
+                page: 'boom',
+                name: '景气图谱'
+              },
+              {
+                page: 'risk',
+                name: '风险图谱'
+              }
+            ]
+          },
+          {
+            name: '存量客户',
+            imgName: 'stockMain',
+            page: 'stockCustom',
+            children: [
+              {
+                page: 'index',
+                name: '存量客户画像'
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
   methods: {
     onSelectChange(path) {
       if (path === this.$route.path) return

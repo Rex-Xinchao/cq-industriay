@@ -163,7 +163,7 @@ export default {
       this.tableHead = tableData.map((item) => item.rpt.substring(0, 7))
       let data = {}
       tableData.forEach((item) => {
-        data[item.rpt.substring(0, 7)] = !!item[key] ? converUnit(item[key]) : '--'
+        data[item.rpt.substring(0, 7)] = item[key] ? converUnit(item[key]) : '--'
       })
       this.tableData = [data]
     }

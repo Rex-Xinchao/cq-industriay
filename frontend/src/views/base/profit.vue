@@ -8,48 +8,43 @@
       </el-tabs>
     </div>
     <div class="item-box">
-      <base-table :type="activeType" class="item_100 height_lg"></base-table>
-      <line-chart :heads="headers" :type="activeType" class="item_100 item_last height_lg"></line-chart>
+      <base-table :type="activeType" :finType="finType" class="item_100 height_lg"></base-table>
+      <line-chart :finType="finType" :heads="headers" class="item_100 item_last height_lg"></line-chart>
     </div>
   </div>
 </template>
 <script>
 import baseTable from '@/components/base/table'
 import lineChart from '@/components/base/chart'
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
       activeType: '1',
-      headers: [
-        {
-          value: 1,
-          name: '毛利率'
-        },
-        {
-          value: 2,
-          name: '营业利润率'
-        },
-        {
-          value: 3,
-          name: '净利率'
-        },
-        {
-          value: 4,
-          name: '税息折旧及摊销前利润率'
-        },
-        {
-          value: 5,
-          name: '息税前利润率'
-        },
-        {
-          value: 6,
-          name: '资产收益率（ROA）'
-        },
-        {
-          value: 7,
-          name: '净资产收益率（ROE）'
-        }
-      ]
+      headers: [],
+      finType: null
+    }
+  },
+  computed: {
+    ...mapGetters(['baseMenu'])
+  },
+  watch: {
+    baseMenu: {
+      immediate: true,
+      handler(data) {
+        if (!data) return
+        data.forEach((item) => {
+          if (this.$route.path === `/base/${item.page}`) {
+            this.finType = item.type
+            this.headers = item.items.map((item) => {
+              return {
+                name: item.itemName,
+                value: item.itemCode
+              }
+            })
+          }
+        })
+      }
     }
   },
   components: { baseTable, lineChart }

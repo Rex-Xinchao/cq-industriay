@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import { getBaseItem } from '@/api/base'
+import store from '../store'
 const Login = () => import('@/views/login')
 const Test = () => import('@/views/test')
 const Layout = () => import('@/views/layout/Index')
@@ -210,6 +212,18 @@ const routes = [
 const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  getBaseItem({})
+    .then((res) => {
+      store.dispatch('setMenu', res.result)
+      next()
+    })
+    .catch((err) => {
+      store.dispatch('setMenu', [])
+      next()
+    })
 })
 
 export default router

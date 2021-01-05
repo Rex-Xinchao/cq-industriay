@@ -80,7 +80,7 @@ export default {
   },
   props: {
     type: String,
-    standardType: String
+    finType: Number
   },
   watch: {
     type() {
@@ -96,10 +96,10 @@ export default {
   methods: {
     search() {
       let params = {
-        industryCode: this.industryCode,
-        standardType: this.standardType,
-        dateTime: formatDate(this.dateTime, 'yyyy'),
-        timeType: this.timeType
+        productCode: this.industryCode,
+        year: formatDate(this.dateTime, 'yyyy'),
+        quarter: this.timeType,
+        finType: this.finType
       }
       this.loading = true
       standard(params)

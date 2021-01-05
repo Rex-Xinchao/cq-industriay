@@ -40,7 +40,7 @@ module.exports = {
         }
       },
       '/base': {
-        target: '/cqb/index/industry/',
+        target: '/cqb/index/',
         changeOrigin: true,
         pathRewrite: {
           '^/base': ''
