@@ -12,7 +12,7 @@ export const standard = (data) => {
 
 // 指标趋势
 export const tendency = (data) => {
-  return http.get(`/base/industry/${data.industryCode}/tendency`, data)
+  return http.get(`/base/industry/${data.industryCode}/fin_tendency`, data)
 }
 
 // 龙头财务

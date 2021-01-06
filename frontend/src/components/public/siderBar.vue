@@ -12,15 +12,28 @@
         <span>{{ item.name }}</span>
       </template>
       <el-menu-item
+        :class="`menu-${item.page}`"
         v-for="(child, index) in item.children"
         :index="`/${item.page}/${child.page}`"
-        :key="`/${item.page}/${child.page}`"
+        :key="index"
       >
         <i
           class="icon-img icon-sub"
-          :class="`icon-${child.page} ${$route.path === '/' + item.page + '/' + child.page ? 'active' : ''}`"
+          :class="{
+            active:
+              `${$route.path}${$route.query.abilityType ? `?${$route.query.abilityType}` : ''}` ===
+              `/${item.page}/${child.page}`
+          }"
         ></i>
-        {{ child.name }}
+        <span
+          :class="{
+            active:
+              `${$route.path}${$route.query.abilityType ? `?${$route.query.abilityType}` : ''}` ===
+              `/${item.page}/${child.page}`
+          }"
+        >
+          {{ child.name }}
+        </span>
       </el-menu-item>
     </el-submenu>
   </el-menu>
@@ -32,7 +45,7 @@ export default {
   data() {
     const vm = this
     return {
-      activeName: vm.$route.path,
+      activeName: `${vm.$route.path}${vm.$route.query.abilityType ? `?${vm.$route.query.abilityType}` : ''}`,
       menu: []
     }
   },
@@ -132,7 +145,12 @@ export default {
   methods: {
     onSelectChange(path) {
       if (path === this.$route.path) return
-      this.pageTo(path, true)
+      if (path.includes('/ability')) {
+        let [p, type] = path.split('?')
+        this.pageTo(p, { abilityType: type })
+      } else {
+        this.pageTo(path, true)
+      }
     }
   },
   updated() {
@@ -162,116 +180,148 @@ export default {
   width: 16px;
   height: 18px;
   margin-right: 8px;
-  &.icon-env {
-    background-image: url(~@/assets/imgs/siderbar/env.svg);
-    &.active {
-      background-image: url(~@/assets/imgs/siderbar/env-active.svg);
+}
+.active {
+  color: #409eff;
+}
+</style>
+<style lang="scss" scoped>
+@import '~@/assets/styles/common/sider';
+.menu-analysis {
+  &:nth-of-type(1) {
+    .icon-sub {
+      background-image: url(~@/assets/imgs/siderbar/env.svg);
+      &.active {
+        background-image: url(~@/assets/imgs/siderbar/env-active.svg);
+      }
     }
   }
-  &.icon-prospect {
-    background-image: url(~@/assets/imgs/siderbar/prospect.svg);
-    &.active {
-      background-image: url(~@/assets/imgs/siderbar/prospect-active.svg);
+  &:nth-of-type(2) {
+    .icon-sub {
+      background-image: url(~@/assets/imgs/siderbar/prospect.svg);
+      &.active {
+        background-image: url(~@/assets/imgs/siderbar/prospect-active.svg);
+      }
     }
   }
-  &.icon-policy {
-    background-image: url(~@/assets/imgs/siderbar/policy.svg);
-    &.active {
-      background-image: url(~@/assets/imgs/siderbar/policy-active.svg);
+  &:nth-of-type(3) {
+    .icon-sub {
+      background-image: url(~@/assets/imgs/siderbar/policy.svg);
+      &.active {
+        background-image: url(~@/assets/imgs/siderbar/policy-active.svg);
+      }
     }
   }
-  &.icon-compete {
-    background-image: url(~@/assets/imgs/siderbar/compete.svg);
-    &.active {
-      background-image: url(~@/assets/imgs/siderbar/compete-active.svg);
+  &:nth-of-type(4) {
+    .icon-sub {
+      background-image: url(~@/assets/imgs/siderbar/compete.svg);
+      &.active {
+        background-image: url(~@/assets/imgs/siderbar/compete-active.svg);
+      }
     }
   }
-  &.icon-risk {
-    background-image: url(~@/assets/imgs/siderbar/risk.svg);
-    &.active {
-      background-image: url(~@/assets/imgs/siderbar/risk-active.svg);
+  &:nth-of-type(5) {
+    .icon-sub {
+      background-image: url(~@/assets/imgs/siderbar/risk.svg);
+      &.active {
+        background-image: url(~@/assets/imgs/siderbar/risk-active.svg);
+      }
     }
   }
-  &.icon-customer {
-    background-image: url(~@/assets/imgs/siderbar/customer.svg);
-    &.active {
-      background-image: url(~@/assets/imgs/siderbar/customer-active.svg);
+  &:nth-of-type(6) {
+    .icon-sub {
+      background-image: url(~@/assets/imgs/siderbar/customer.svg);
+      &.active {
+        background-image: url(~@/assets/imgs/siderbar/customer-active.svg);
+      }
     }
   }
-  &.icon-information {
-    background-image: url(~@/assets/imgs/siderbar/information.svg);
-    &.active {
-      background-image: url(~@/assets/imgs/siderbar/information-active.svg);
+  &:nth-of-type(7) {
+    .icon-sub {
+      background-image: url(~@/assets/imgs/siderbar/information.svg);
+      &.active {
+        background-image: url(~@/assets/imgs/siderbar/information-active.svg);
+      }
     }
   }
-  &.icon-grow {
-    background-image: url(~@/assets/imgs/siderbar/grow.svg);
-    &.active {
-      background-image: url(~@/assets/imgs/siderbar/grow-active.svg);
+}
+.menu-base {
+  &:nth-of-type(1) {
+    .icon-sub {
+      background-image: url(~@/assets/imgs/siderbar/icon-product.svg);
+      &.active {
+        background-image: url(~@/assets/imgs/siderbar/icon-product_active.svg);
+      }
     }
   }
-  &.icon-profit {
-    background-image: url(~@/assets/imgs/siderbar/profit.svg);
-    &.active {
-      background-image: url(~@/assets/imgs/siderbar/profit-active.svg);
+  &:nth-of-type(2) {
+    .icon-sub {
+      background-image: url(~@/assets/imgs/siderbar/grow.svg);
+      &.active {
+        background-image: url(~@/assets/imgs/siderbar/grow-active.svg);
+      }
     }
   }
-  &.icon-repay {
-    background-image: url(~@/assets/imgs/siderbar/repay.svg);
-    &.active {
-      background-image: url(~@/assets/imgs/siderbar/repay-active.svg);
+  &:nth-of-type(3) {
+    .icon-sub {
+      background-image: url(~@/assets/imgs/siderbar/profit.svg);
+      &.active {
+        background-image: url(~@/assets/imgs/siderbar/profit-active.svg);
+      }
     }
   }
-  &.icon-business {
-    background-image: url(~@/assets/imgs/siderbar/business.svg);
-    &.active {
-      background-image: url(~@/assets/imgs/siderbar/business-active.svg);
+  &:nth-of-type(4) {
+    .icon-sub {
+      background-image: url(~@/assets/imgs/siderbar/repay.svg);
+      &.active {
+        background-image: url(~@/assets/imgs/siderbar/repay-active.svg);
+      }
     }
   }
-  &.icon-finance {
-    background-image: url(~@/assets/imgs/siderbar/finance.svg);
-    &.active {
-      background-image: url(~@/assets/imgs/siderbar/finance-active.svg);
+  &:nth-of-type(5) {
+    .icon-sub {
+      background-image: url(~@/assets/imgs/siderbar/business.svg);
+      &.active {
+        background-image: url(~@/assets/imgs/siderbar/business-active.svg);
+      }
     }
   }
-  &.icon-boom {
-    background-image: url(~@/assets/imgs/siderbar/boomChart.svg);
-    &.active {
-      background-image: url(~@/assets/imgs/siderbar/boomChart-active.svg);
+  &:last-of-type {
+    .icon-sub {
+      background-image: url(~@/assets/imgs/siderbar/finance.svg);
+      &.active {
+        background-image: url(~@/assets/imgs/siderbar/finance-active.svg);
+      }
     }
   }
-  &.icon-risk {
-    background-image: url(~@/assets/imgs/siderbar/riskChart.svg);
-    &.active {
-      background-image: url(~@/assets/imgs/siderbar/riskChart-active.svg);
+}
+.menu-industrial {
+  &:nth-of-type(1) {
+    .icon-sub {
+      background-image: url(~@/assets/imgs/siderbar/boomChart.svg);
+      &.active {
+        background-image: url(~@/assets/imgs/siderbar/boomChart-active.svg);
+      }
     }
   }
-  &.icon-index {
-    background-image: url(~@/assets/imgs/siderbar/stockCustom.svg);
-    &.active {
-      background-image: url(~@/assets/imgs/siderbar/stockCustom-active.svg);
+  &:nth-of-type(2) {
+    .icon-sub {
+      background-image: url(~@/assets/imgs/siderbar/riskChart.svg);
+      &.active {
+        background-image: url(~@/assets/imgs/siderbar/riskChart-active.svg);
+      }
     }
   }
-  &.icon-status {
-    background-image: url(~@/assets/imgs/siderbar/status.svg);
-    &.active {
-      background-image: url(~@/assets/imgs/siderbar/status_active.svg);
-    }
-  }
-  &.icon-incomes {
-    background-image: url(~@/assets/imgs/siderbar/incomes.svg);
-    &.active {
-      background-image: url(~@/assets/imgs/siderbar/incomes_active.svg);
-    }
-  }
-  &.icon-product {
-    background-image: url(~@/assets/imgs/siderbar/icon-product.svg);
-    &.active {
-      background-image: url(~@/assets/imgs/siderbar/icon-product_active.svg);
+}
+.menu-stockCustom {
+  &:nth-of-type(1) {
+    .icon-sub {
+      background-image: url(~@/assets/imgs/siderbar/stockCustom.svg);
+      &.active {
+        background-image: url(~@/assets/imgs/siderbar/stockCustom-active.svg);
+      }
     }
   }
 }
 </style>
-<style lang="scss">
-@import '~@/assets/styles/common/sider';
-</style>
+      

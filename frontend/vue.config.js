@@ -45,6 +45,13 @@ module.exports = {
         pathRewrite: {
           '^/base': ''
         }
+      },
+      '/industry': {
+        target: '/cqb/industry/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/industry': ''
+        }
       }
     }
   }

@@ -96,7 +96,7 @@ export default {
   methods: {
     search() {
       let params = {
-        productCode: this.industryCode,
+        industryCode: this.industryCode,
         year: formatDate(this.dateTime, 'yyyy'),
         quarter: this.timeType,
         finType: this.finType

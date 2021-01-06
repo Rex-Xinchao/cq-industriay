@@ -49,10 +49,9 @@ export default new Vuex.Store({
       state.regionName = data.name
     },
     SET_MENU: (state, data) => {
-      const path = ['grow', 'profit', 'repay', 'business', 'product']
       state.baseMenu = data.map((item, i) => {
         return {
-          page: path[i],
+          page: `ability?${item.finType}`,
           name: item.finTypeName,
           type: item.finType,
           items: item.items

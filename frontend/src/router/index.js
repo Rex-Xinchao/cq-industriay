@@ -15,11 +15,7 @@ const IndustryCompete = () => import('@/views/analysis/competition')
 const IndustryRisk = () => import('@/views/analysis/risk')
 const IndustryCustomer = () => import('@/views/analysis/customer')
 const IndustryInformation = () => import('@/views/analysis/information')
-const BaseGrow = () => import('@/views/base/grow')
-const BaseProfit = () => import('@/views/base/profit')
-const BaseProduct = () => import('@/views/base/product')
-const BaseRepay = () => import('@/views/base/repay')
-const BaseBusiness = () => import('@/views/base/business')
+const BaseAbility = () => import('@/views/base/ability')
 const BaseFinance = () => import('@/views/base/finance')
 const Boom = () => import('@/views/industrial/boom')
 const Risk = () => import('@/views/industrial/risk')
@@ -89,29 +85,9 @@ const routes = [
     component: LayoutWithSider,
     children: [
       {
-        path: 'grow',
-        name: 'BaseGrow',
-        component: BaseGrow
-      },
-      {
-        path: 'profit',
-        name: 'BaseProfit',
-        component: BaseProfit
-      },
-      {
-        path: 'repay',
-        name: 'BaseRepay',
-        component: BaseRepay
-      },
-      {
-        path: 'product',
-        name: 'BaseProduct',
-        component: BaseProduct
-      },
-      {
-        path: 'business',
-        name: 'BaseBusiness',
-        component: BaseBusiness
+        path: 'ability',
+        name: 'BaseAbility',
+        component: BaseAbility
       },
       {
         path: 'finance',

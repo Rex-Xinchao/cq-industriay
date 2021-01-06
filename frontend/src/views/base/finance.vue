@@ -24,8 +24,15 @@
         </span>
         <span class="filter-label">指标：</span>
         <span class="filter-item">
-          <el-select v-model="norm" collapse-tags multiple placeholder="请选择">
-            <el-option v-for="item in norms" :key="item.value" :label="item.label" :value="item.value"></el-option>
+          <el-select v-model="norm" collapse-tags multiple placeholder="请选择" @change="onNormChange">
+            <el-option label="全部指标" value=""></el-option>
+            <el-option
+              v-for="item in norms"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+              :disabled="norm.includes('')"
+            ></el-option>
           </el-select>
         </span>
         <span class="filter-label">市场：</span>
@@ -47,6 +54,14 @@
             {{ scope.row.market ? scope.row.market : '--' }}
           </template>
         </el-table-column>
+        <el-table-column
+          v-for="item in keyList"
+          :prop="item.itemCode"
+          :label="item.itemName"
+          :key="item.itemCode"
+          align="center"
+          sortable
+        ></el-table-column>
         <el-table-column prop="income" label="业务线收入" align="center" sortable>
           <template slot-scope="scope">
             {{ scope.row.income ? converUnit(scope.row.income) : '--' }}
@@ -96,7 +111,8 @@ export default {
   data() {
     return {
       time: null,
-      norm: [],
+      keyList: [],
+      norm: [''],
       norms: [
         {
           label: '业务指标',
@@ -160,7 +176,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['industryCode', 'industry'])
+    ...mapGetters(['industryCode', 'industry', 'baseMenu'])
   },
   watch: {
     dateTime() {
@@ -195,6 +211,13 @@ export default {
           this.tableData = res.result
           this.time = res.time
           // todo page && size && total
+          let keyList = []
+          this.baseMenu.forEach((item) => {
+            if (this.norm.includes('') || this.norm.includes(item.finType)) {
+              keyList = keyList.concat(item.items)
+            }
+          })
+          this.keyList = keyList
         })
         .catch((err) => {
           this.loading = false
@@ -205,6 +228,11 @@ export default {
     currentChange(data) {
       this.page.count = data
       this.getData()
+    },
+    onNormChange(data) {
+      if (data.includes('')) {
+        this.norm = ['']
+      }
     }
   },
   mounted() {

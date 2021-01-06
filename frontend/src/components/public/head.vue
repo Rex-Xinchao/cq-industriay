@@ -39,7 +39,7 @@ export default {
         .then((res) => {
           this.suggestions = res.result.map((item) => {
             return {
-              value: `${item.name}${item.type === 1 ? '（国标）' : ''}`,
+              value: `${item.name}${item.type === 1 ? `（国标${item.level}级）` : ''}`,
               code: item.code,
               type: item.type
             }

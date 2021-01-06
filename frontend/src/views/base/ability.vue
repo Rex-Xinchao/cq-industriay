@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="item-menu">
-      <h1 class="main-title">成长能力</h1>
+      <h1 class="main-title">{{ title }}</h1>
       <el-tabs class="item_100 crumbs" v-model="activeType">
         <el-tab-pane label="绩效评价（国资委）" name="1"></el-tab-pane>
         <el-tab-pane label="财务基准" name="2"></el-tab-pane>
@@ -19,10 +19,12 @@ import lineChart from '@/components/base/chart'
 import { mapGetters } from 'vuex'
 export default {
   data() {
+    const vm = this
     return {
       activeType: '1',
       headers: [],
-      finType: null
+      finType: null,
+      title: null
     }
   },
   computed: {
@@ -34,8 +36,9 @@ export default {
       handler(data) {
         if (!data) return
         data.forEach((item) => {
-          if (this.$route.path === `/base/${item.page}`) {
+          if (this.$route.query.abilityType == item.type) {
             this.finType = item.type
+            this.title = item.name
             this.headers = item.items.map((item) => {
               return {
                 name: item.itemName,

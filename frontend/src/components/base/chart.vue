@@ -149,4 +149,8 @@ export default {
     }
   }
 }
+.chart-nodata {
+  height: calc(100% - 100px);
+  top: 100px;
+}
 </style>
