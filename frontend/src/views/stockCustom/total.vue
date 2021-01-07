@@ -27,7 +27,17 @@
         </div>
       </div>
       <distribution-main style="height: 560px" class="item_100 height_lg"></distribution-main>
-      <risk-table class="item_100 item_last height_mid" title="全行存量客户舆情风险事件"></risk-table>
+      <risk-table class="item_100 height_mid" title="全行存量客户舆情风险事件"></risk-table>
+      <risk-rank-com
+        class="item_50 item_last height_mid"
+        :barList="barList_1"
+        title="全行存量授信客户行内风险"
+      ></risk-rank-com>
+      <risk-rank-com
+        class="item_50 item_last height_mid"
+        :barList="barList_2"
+        title="全行存量授信客户外部风险"
+      ></risk-rank-com>
     </div>
   </div>
 </template>
@@ -38,11 +48,48 @@ import stackChart from '@components/stockCustom/stack'
 import circleChart from '@components/stockCustom/circle'
 import distributionMain from '@components/stockCustom/total/distribution'
 import riskTable from '@components/stockCustom/total/risk_information_list'
+import riskRankCom from '@components/stockCustom/total/risk_rank_com'
 export default {
   data() {
     return {
       legendData_1: ['500万以下', '500~2000万', '2000~3000万', '3000万以上'],
-      legendData_2: ['500万以下', '500~2000万', '2000~5000万', '5000万~1亿', '1亿以上']
+      legendData_2: ['500万以下', '500~2000万', '2000~5000万', '5000万~1亿', '1亿以上'],
+      barList_1: [
+        {
+          name: '逾期客户',
+          value: 1
+        },
+        {
+          name: '黑名单',
+          value: 2
+        },
+        {
+          name: '账户状态异常',
+          value: 3
+        }
+      ],
+      barList_2: [
+        {
+          name: '负面舆情',
+          value: 1
+        },
+        {
+          name: '裁判文书',
+          value: 2
+        },
+        {
+          name: '被执行人',
+          value: 3
+        },
+        {
+          name: '失信被执行人',
+          value: 4
+        },
+        {
+          name: '股权冻结',
+          value: 5
+        }
+      ]
     }
   },
   components: {
@@ -50,7 +97,8 @@ export default {
     stackChart,
     circleChart,
     riskTable,
-    distributionMain
+    distributionMain,
+    riskRankCom
   },
   methods: {
     loan_balance,

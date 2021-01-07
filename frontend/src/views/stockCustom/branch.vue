@@ -23,16 +23,16 @@
         <div class="card-box">
           <ratio-line
             color="#344CE9"
-            title="行业不良率"
-            legend="行业不良率"
+            title="行业存量授信客户不良率"
+            legend="行业存量授信客户不良率"
             class="card_lg"
             :rejectData="rejectData"
             keyName="rejectRate"
           ></ratio-line>
           <ratio-line
             color="#72AF78"
-            title="行业违约率"
-            legend="行业违约率"
+            title="行业存量授信客户违约率"
+            legend="行业存量授信客户违约率"
             class="card_lg"
             :rejectData="rejectData"
             keyName="defaultRate"
@@ -65,10 +65,11 @@
       </div>
       <table-com title="行业客户及行内风险状况" class="item_100 height_mid" :request="customer_statistics"></table-com>
       <doucle-circle-chart
-        class="item_100 item_last height_mid"
+        class="item_100 height_mid"
         title="行业存量授信客户负面舆情事件"
         subTitle="汽车行业"
       ></doucle-circle-chart>
+      <risk-table-com class="item_100 item_last height_mid" title="行业存量授信客户的外部风险"></risk-table-com>
     </div>
   </div>
 </template>
@@ -91,6 +92,7 @@ import lineChart from '@components/stockCustom/branch/line'
 import tableCom from '@components/stockCustom/branch/risk_status_table'
 import doucleCircleChart from '@components/stockCustom/branch/circle_double'
 import ratioLine from '@/components/stockCustom/branch/ratio_line'
+import riskTableCom from '@/components/stockCustom/branch/external_risk_table'
 import pageTo from '@/mixins/pageTo'
 import { mapGetters } from 'vuex'
 export default {
@@ -115,7 +117,8 @@ export default {
     lineChart,
     tableCom,
     doucleCircleChart,
-    ratioLine
+    ratioLine,
+    riskTableCom
   },
   methods: {
     loan_balance,
