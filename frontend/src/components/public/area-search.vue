@@ -35,10 +35,11 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'area-search',
   data() {
+    const vm = this
     return {
       area: null,
       loading: false,
-      options: [],
+      options: vm.regions_all,
       defaultProps: {
         children: 'children',
         label: 'label'
@@ -58,7 +59,11 @@ export default {
     value: {
       reuired: true
     },
-    startCode: Object
+    startCode: Object,
+    isArea: {
+      type: Boolean,
+      default: () => false
+    }
   },
   watch: {
     area(data) {
@@ -93,20 +98,8 @@ export default {
     remoteMethod(query) {
       if (!query) return
       this.loading = true
-      // todo update
-      setTimeout(() => {
-        this.loading = false
-        this.options = [
-          {
-            label: '上海',
-            value: 'shanghai'
-          },
-          {
-            label: '北京',
-            value: 'beijing'
-          }
-        ]
-      }, 200)
+      this.options = this.regions_all.filter((item) => item.label.indexOf(query) >= 0)
+      this.loading = false
     }
   }
 }

@@ -79,6 +79,7 @@
   </div>
 </template>
 <script>
+import { Regions } from '@/mixins/base'
 import { getIndustry } from '@/api/index'
 import pageTo from '@/mixins/pageTo'
 export default {
@@ -97,7 +98,7 @@ export default {
       suggestions: []
     }
   },
-  mixins: [pageTo],
+  mixins: [pageTo, Regions],
   watch: {
     type(data) {
       this.keyword = null
@@ -121,7 +122,7 @@ export default {
         this.list = [
           {
             name: '重庆',
-            code: 'GS955525'
+            code: 'CSF_CN_500000'
           }
         ]
       } else {
@@ -181,7 +182,14 @@ export default {
           })
       }
       if (this.type === 4) {
-        this.suggestions = [{ value: '重庆', code: 'GS955525' }]
+        this.suggestions = this.regions_all
+          .filter((item) => item.label.indexOf(queryString) >= 0)
+          .map((item) => {
+            return {
+              value: item.name,
+              code: item.code
+            }
+          })
         cb(this.suggestions)
       }
     },

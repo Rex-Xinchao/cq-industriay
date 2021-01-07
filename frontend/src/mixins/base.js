@@ -3,6 +3,7 @@ export const Regions = {
   data() {
     return {
       regions: [],
+      regions_all: [],
       regions_map: {}
     }
   },
@@ -24,7 +25,25 @@ export const Regions = {
           }
         })
         this.regions_map = regions_map
+        this.regions_all = res.result
         this.regions = res.result.filter((item) => !item.parent || (item.parent && !map[item.parent]))
+        if (this.isArea) {
+          const areaList = ['CSF_CN_500000', 'CSF_CN_510000', 'CSF_CN_520000', 'CSF_CN_610000']
+          this.regions = this.regions.filter((item) => areaList.includes(item.value))
+          let list = []
+          this.regions.forEach((re_1) => {
+            list.push(re_1)
+            re_1.children &&
+              re_1.children.forEach((re_2) => {
+                list.push(re_2)
+                re_2.children &&
+                  re_2.children.forEach((re_3) => {
+                    list.push(re_3)
+                  })
+              })
+          })
+          this.regions_all = list
+        }
       })
     }
   },

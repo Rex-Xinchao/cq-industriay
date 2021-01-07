@@ -1,7 +1,7 @@
 <template>
   <div class="map-com">
     <div class="chart-main" id="map"></div>
-    <area-search></area-search>
+    <area-search :isArea="true"></area-search>
     <el-breadcrumb class="breadcrumb" v-show="activeType !== 'all'">
       <el-breadcrumb-item><span style="cursor: pointer" @click="resetActive">三省一市</span></el-breadcrumb-item>
       <el-breadcrumb-item style="font-size: 16px">
