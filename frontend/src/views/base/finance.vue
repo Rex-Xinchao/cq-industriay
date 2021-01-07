@@ -24,8 +24,7 @@
         </span>
         <span class="filter-label">指标：</span>
         <span class="filter-item">
-          <el-select v-model="norm" collapse-tags multiple placeholder="请选择" @change="onNormChange">
-            <el-option label="全部指标" value=""></el-option>
+          <el-select v-model="norm" collapse-tags multiple placeholder="请选择">
             <el-option
               v-for="item in norms"
               :key="item.value"
@@ -61,6 +60,7 @@
           :key="item.itemCode"
           align="center"
           sortable
+          width="250"
         ></el-table-column>
       </el-table>
       <el-pagination
@@ -82,7 +82,7 @@ export default {
     return {
       time: null,
       keyList: [],
-      norm: [''],
+      norm: [1, 2, 3, 4, 5],
       norms: [
         {
           label: '业务指标',
@@ -140,7 +140,10 @@ export default {
       ],
       pickerOptions: {
         disabledDate(time) {
-          return time.getTime() > new Date().getTime() - 3600 * 24 * 365 * 1000
+          return (
+            time.getTime() > new Date().getTime() - 3600 * 24 * 365 * 1000 ||
+            time.getTime() < new Date('2015').getTime()
+          )
         }
       }
     }
@@ -183,7 +186,7 @@ export default {
           // todo page && size && total
           let keyList = []
           this.baseMenu.forEach((item) => {
-            if (this.norm.includes('') || this.norm.includes(item.finType)) {
+            if (this.norm.includes(Number(item.type))) {
               keyList = keyList.concat(item.items)
             }
           })
@@ -198,11 +201,6 @@ export default {
     currentChange(data) {
       this.page.count = data
       this.getData()
-    },
-    onNormChange(data) {
-      if (data.includes('')) {
-        this.norm = ['']
-      }
     }
   },
   mounted() {

@@ -42,9 +42,13 @@
         style="width: 100%"
       >
         <el-table-column type="index" width="50" label="序号" align="center"></el-table-column>
-        <el-table-column label="证券代码 " align="center"></el-table-column>
-        <el-table-column label="证券简称 " align="center"></el-table-column>
-        <el-table-column label="公司名称 " align="center"></el-table-column>
+        <el-table-column prop="a" label="证券代码 " align="center"></el-table-column>
+        <el-table-column prop="b" label="证券简称 " align="center"></el-table-column>
+        <el-table-column prop="c" label="业务收入 " align="center">
+          <template slot-scope="scope">
+            {{ scope.row.c ? numberFormat(scope.row.c) : '--' }}
+          </template>
+        </el-table-column>
       </el-table>
     </div>
   </div>
@@ -57,7 +61,7 @@ export default {
     return {
       loading: false,
       tableData: [],
-      sum: 16,
+      sum: 0,
       ratio: 2.28
     }
   },
@@ -66,7 +70,28 @@ export default {
   },
   watch: {},
   methods: {
-    numberFormat
+    numberFormat,
+    getData() {
+      if (this.type === 1) {
+      } else {
+        this.tableData = [
+          {
+            a: '002418_SZ_EQ',
+            b: 'ST康盛',
+            c: 106564795.6
+          },
+          {
+            a: '002176_SZ_EQ',
+            b: 'ST江特',
+            c: 538258454.8
+          }
+        ]
+        this.sum = this.tableData.length
+      }
+    }
+  },
+  mounted() {
+    this.getData()
   }
 }
 </script>

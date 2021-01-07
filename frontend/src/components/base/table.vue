@@ -70,7 +70,10 @@ export default {
       ],
       pickerOptions: {
         disabledDate(time) {
-          return time.getTime() > new Date().getTime() - 3600 * 24 * 365 * 1000
+          return (
+            time.getTime() > new Date().getTime() - 3600 * 24 * 365 * 1000 ||
+            time.getTime() < new Date('2015').getTime()
+          )
         }
       }
     }

@@ -6,17 +6,25 @@
     </h1>
     <el-table v-loading="loading" class="table" :data="tableData" height="200px">
       <el-table-column prop="name" label=""></el-table-column>
-      <el-table-column prop="last" align="center" label="最新值"></el-table-column>
-      <el-table-column prop="change" align="center" label="变动值"></el-table-column>
+      <el-table-column prop="last" align="center" label="最新值">
+        <template slot-scope="scope">
+          {{ scope.row.last ? numberFormat(scope.row.last) : '--' }}
+        </template>
+      </el-table-column>
+      <el-table-column prop="change" align="center" label="变动值">
+        <template slot-scope="scope">
+          {{ scope.row.change ? numberFormat(scope.row.change) : '--' }}
+        </template>
+      </el-table-column>
       <el-table-column label="变动率" align="center">
         <template slot-scope="scope">
-          <span :class="scope.row.ratio && scope.row.ratio.indexOf('-') < 0 ? 'postive' : 'negative'">
-            {{ scope.row.ratio }}
+          <span :class="scope.row.ratio && scope.row.ratio >= 0 ? 'postive' : 'negative'">
+            {{ scope.row.ratio ? numberFormat(scope.row.ratio) : '--' }}
           </span>
           <i
-            :class="scope.row.ratio && scope.row.ratio.indexOf('-') < 0 ? 'postive' : 'negative'"
+            :class="scope.row.ratio && scope.row.ratio >= 0 ? 'postive' : 'negative'"
             class="icon"
-            :title="scope.row.ratio && scope.row.ratio.indexOf('-') < 0 ? '增加' : '减少'"
+            :title="scope.row.ratio && scope.row.ratio >= 0 ? '增加' : '减少'"
           ></i>
         </template>
       </el-table-column>
@@ -24,6 +32,7 @@
   </div>
 </template>
 <script>
+import { numberFormat } from '@/libs/utils'
 import { tableData } from '@/mockData/risk'
 export default {
   data() {
@@ -36,6 +45,7 @@ export default {
     title: String
   },
   methods: {
+    numberFormat,
     getData() {
       this.loading = true
       setTimeout(() => {

@@ -16,19 +16,23 @@ export const Regions = {
           item.children = item.children || []
           item.label = item.name
           item.value = item.code
-          map[item.code] = item
-          regions_map[item.name] = item
+          if (this.isArea && item.level === 1) {
+            map[item.code] = null
+            regions_map[item.name] = null
+          } else {
+            map[item.code] = item
+            regions_map[item.name] = item
+          }
         })
         res.result.forEach((item) => {
-          if (item.parent && map[item.parent]) {
+          if (item.parent && map[item.parent] && map[item.code]) {
             map[item.parent].children.push(map[item.code])
           }
         })
         this.regions_map = regions_map
-        this.regions_all = res.result
-        this.regions = res.result.filter((item) => !item.parent || (item.parent && !map[item.parent]))
         if (this.isArea) {
           const areaList = ['CSF_CN_500000', 'CSF_CN_510000', 'CSF_CN_520000', 'CSF_CN_610000']
+          this.regions = res.result.filter((item) => !item.parent || (item.parent && !map[item.parent]))
           this.regions = this.regions.filter((item) => areaList.includes(item.value))
           let list = []
           this.regions.forEach((re_1) => {
@@ -43,6 +47,9 @@ export const Regions = {
               })
           })
           this.regions_all = list
+        } else {
+          this.regions_all = res.result
+          this.regions = res.result.filter((item) => !item.parent || (item.parent && !map[item.parent]))
         }
       })
     }
