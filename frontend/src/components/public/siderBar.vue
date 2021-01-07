@@ -20,16 +20,12 @@
         <i
           class="icon-img icon-sub"
           :class="{
-            active:
-              `${$route.path}${$route.query.abilityType ? `?${$route.query.abilityType}` : ''}` ===
-              `/${item.page}/${child.page}`
+            active: defaultActive === `/${item.page}/${child.page}`
           }"
         ></i>
         <span
           :class="{
-            active:
-              `${$route.path}${$route.query.abilityType ? `?${$route.query.abilityType}` : ''}` ===
-              `/${item.page}/${child.page}`
+            active: defaultActive === `/${item.page}/${child.page}`
           }"
         >
           {{ child.name }}
@@ -45,13 +41,16 @@ export default {
   data() {
     const vm = this
     return {
-      activeName: `${vm.$route.path}${vm.$route.query.abilityType ? `?${vm.$route.query.abilityType}` : ''}`,
+      activeName: vm.defaultActive,
       menu: []
     }
   },
   mixins: [pageTo],
   computed: {
-    ...mapGetters(['baseMenu'])
+    ...mapGetters(['baseMenu']),
+    defaultActive() {
+      return `${this.$route.path}${this.$route.query.abilityType ? `?${this.$route.query.abilityType}` : ''}`
+    }
   },
   watch: {
     baseMenu: {
@@ -154,7 +153,7 @@ export default {
     }
   },
   updated() {
-    this.activeName = this.$route.path
+    this.activeName = `${this.$route.path}${this.$route.query.abilityType ? `?${this.$route.query.abilityType}` : ''}`
   }
 }
 </script>

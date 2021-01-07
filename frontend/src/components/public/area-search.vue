@@ -64,14 +64,6 @@ export default {
     area(data) {
       this.$emit('update', data)
     },
-    // startCode: {
-    //   immediate: true,
-    //   handler(data) {
-    //     if (!data) return
-    //     this.options = [data]
-    //     this.area = data.value
-    //   }
-    // },
     regionCode: {
       immediate: true,
       handler(data) {
@@ -101,6 +93,7 @@ export default {
     remoteMethod(query) {
       if (!query) return
       this.loading = true
+      // todo update
       setTimeout(() => {
         this.loading = false
         this.options = [

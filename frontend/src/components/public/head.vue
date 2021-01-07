@@ -47,7 +47,7 @@ export default {
           cb(this.suggestions)
         })
         .catch((err) => {
-          this.suggestions = [{ value: '新能源车整车制造（国标）', code: 'AC003005', type: 1 }]
+          this.suggestions = [{ value: '新能源车整车制造（国标4级）', code: 'AC003005', type: 1 }]
           cb(this.suggestions)
         })
     },

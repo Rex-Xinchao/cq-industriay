@@ -4910,7 +4910,7 @@ export const envMenu = async (data) => {
         code: 'mid',
         children: [
           {
-            name: '新能源车整车制造（国标）',
+            name: '新能源车整车制造（国标4级）',
             code: 'AC003005'
           }
         ]

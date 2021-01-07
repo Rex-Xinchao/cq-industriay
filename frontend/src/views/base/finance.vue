@@ -62,36 +62,6 @@
           align="center"
           sortable
         ></el-table-column>
-        <el-table-column prop="income" label="业务线收入" align="center" sortable>
-          <template slot-scope="scope">
-            {{ scope.row.income ? converUnit(scope.row.income) : '--' }}
-          </template>
-        </el-table-column>
-        <el-table-column prop="grossMargin" label="业务线毛利" align="center" sortable>
-          <template slot-scope="scope">
-            {{ scope.row.grossMargin ? converUnit(scope.row.grossMargin) : '--' }}
-          </template>
-        </el-table-column>
-        <el-table-column prop="growth" label="业务线收入增速" align="center" sortable>
-          <template slot-scope="scope">
-            {{ scope.row.growth ? `${converUnit(scope.row.growth)}%` : '--' }}
-          </template>
-        </el-table-column>
-        <el-table-column prop="gpr" label="业务线毛利率" align="center" sortable>
-          <template slot-scope="scope">
-            {{ scope.row.gpr ? `${converUnit(scope.row.gpr)}%` : '--' }}
-          </template>
-        </el-table-column>
-        <el-table-column prop="businessIncome" label="营业收入" align="center" sortable>
-          <template slot-scope="scope">
-            {{ scope.row.businessIncome ? converUnit(scope.row.businessIncome) : '--' }}
-          </template>
-        </el-table-column>
-        <el-table-column prop="netIncome" label="净利润" align="center" sortable>
-          <template slot-scope="scope">
-            {{ scope.row.netIncome ? converUnit(scope.row.netIncome) : '--' }}
-          </template>
-        </el-table-column>
       </el-table>
       <el-pagination
         class="pagination fr"
