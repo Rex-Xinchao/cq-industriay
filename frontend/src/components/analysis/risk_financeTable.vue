@@ -42,7 +42,16 @@ export default {
     }
   },
   props: {
+    industryCode: String,
     title: String
+  },
+  watch: {
+    industryCode: {
+      immediate: true,
+      handler() {
+        this.getData()
+      }
+    }
   },
   methods: {
     converUnit,
@@ -53,9 +62,6 @@ export default {
         this.tableData = tableData
       }, 1000)
     }
-  },
-  mounted() {
-    this.getData()
   }
 }
 </script>

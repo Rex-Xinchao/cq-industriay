@@ -45,6 +45,7 @@ export default {
   },
   mixins: [resize, bar],
   props: {
+    industryCode: String,
     title: String,
     legends: Array
   },
@@ -54,6 +55,12 @@ export default {
     },
     areaSelect() {
       this.drawChart()
+    },
+    industryCode: {
+      immediate: true,
+      handler() {
+        this.drawChart()
+      }
     }
   },
   methods: {
@@ -85,9 +92,6 @@ export default {
       this.chartOption_bar.yAxis.axisLabel.formatter = `{value} ${this.unit}`
       return this.chartOption_bar
     }
-  },
-  mounted() {
-    this.drawChart()
   }
 }
 </script>

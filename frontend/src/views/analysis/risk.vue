@@ -8,21 +8,30 @@
       </h1>
     </div>
     <div class="item-box">
-      <pack-chart class="item_100 pack-main"></pack-chart>
-      <finance-table class="item_40 finance-table-main" title="财务及经济指标异动"></finance-table>
-      <bar-table title="行业司法诉讼风险" :legends="['行业司法诉讼风险']" class="item_60 bar-chart-main"></bar-table>
-      <table-com class="item_50 last" :type="1"></table-com>
-      <table-com class="item_50 last" :type="2"></table-com>
+      <pack-chart class="item_100 pack-main" :industryCode="industryCode"></pack-chart>
+      <finance-table
+        class="item_40 finance-table-main"
+        title="财务及经济指标异动"
+        :industryCode="industryCode"
+      ></finance-table>
+      <bar-table
+        title="行业司法诉讼风险"
+        :legends="['行业司法诉讼风险']"
+        class="item_60 bar-chart-main"
+        :industryCode="industryCode"
+      ></bar-table>
+      <table-com class="item_50 last" :type="1" :industryCode="industryCode"></table-com>
+      <table-com class="item_50 last" :type="2" :industryCode="industryCode"></table-com>
     </div>
   </div>
 </template>
 <script>
 const echarts = require('echarts')
 import { bond, stock } from '@/mockData/risk'
-import packChart from '@/components/analysis/risk/pack'
-import financeTable from '@/components/analysis/risk/financeTable'
-import barTable from '@/components/analysis/risk/bar'
-import tableCom from '@/components/analysis/risk/table'
+import packChart from '@/components/analysis/risk_pack'
+import financeTable from '@/components/analysis/risk_financeTable'
+import barTable from '@/components/analysis/risk_bar'
+import tableCom from '@/components/analysis/risk_table'
 import pageTo from '@/mixins/pageTo'
 import { mapGetters } from 'vuex'
 export default {
@@ -34,7 +43,15 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['industry'])
+    ...mapGetters(['industry', 'industryCode'])
+  },
+  watch: {
+    industryCode: {
+      immediate: true,
+      handler() {
+        this.getData()
+      }
+    }
   },
   mixins: [pageTo],
   components: { packChart, financeTable, barTable, tableCom },
@@ -47,9 +64,6 @@ export default {
         this.stock = stock
       }, 1000)
     }
-  },
-  mounted() {
-    this.getData()
   }
 }
 </script>

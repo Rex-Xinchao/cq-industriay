@@ -11,9 +11,9 @@
   </div>
 </template>
 <script>
+import { graph } from '@/mockData/risk'
 const echarts = require('echarts')
 import resize from '@/mixins/resize'
-import { graph } from '@/mockData/risk'
 export default {
   data() {
     return {
@@ -88,15 +88,24 @@ export default {
       }
     }
   },
-  mixins: [resize],
+  props: {
+    industryCode: String
+  },
   watch: {
     typeSelect() {
       this.init()
     },
     dateTime() {
       this.init()
+    },
+    industryCode: {
+      immediate: true,
+      handler() {
+        this.init()
+      }
     }
   },
+  mixins: [resize],
   methods: {
     init() {
       this.loading = true
@@ -114,9 +123,6 @@ export default {
         this.myChart.setOption(this.chartOption, true)
       }, 1000)
     }
-  },
-  mounted() {
-    this.init()
   }
 }
 </script>

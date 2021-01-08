@@ -66,9 +66,17 @@ export default {
     }
   },
   props: {
+    industryCode: String,
     type: Number
   },
-  watch: {},
+  watch: {
+    industryCode: {
+      immediate: true,
+      handler() {
+        this.getData()
+      }
+    }
+  },
   methods: {
     converUnit,
     getData() {
@@ -89,9 +97,6 @@ export default {
         this.sum = this.tableData.length
       }
     }
-  },
-  mounted() {
-    this.getData()
   }
 }
 </script>
