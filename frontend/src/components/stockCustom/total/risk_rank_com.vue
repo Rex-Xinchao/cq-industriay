@@ -138,14 +138,4 @@ export default {
     }
   }
 }
-.com-chart {
-  width: 100%;
-  flex: 1;
-  position: relative;
-
-  .chart-main {
-    width: 100%;
-    height: 100%;
-  }
-}
 </style>

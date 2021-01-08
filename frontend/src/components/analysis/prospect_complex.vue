@@ -1,5 +1,5 @@
 <template>
-  <div class="com-main" v-loading="loading">
+  <div class="com-main">
     <h1 class="com-title">
       {{ title }}
       <i class="icon-tip" :title="tip"></i>
@@ -7,48 +7,21 @@
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
       </el-select>
     </h1>
-    <div v-if="!noData" class="chart-main" :id="`complexChart_${timeStamp}`"></div>
-    <no-data-show class="chart-nodata" :show="noData"></no-data-show>
+    <div class="com-chart" v-loading="loading">
+      <div v-if="!noData" class="chart-main" :id="`complexChart_${timeStamp}`"></div>
+      <no-data-show class="chart-nodata" :show="noData"></no-data-show>
+    </div>
   </div>
 </template>
-
 <script>
+import { converUnit } from '@/libs/utils'
+import { prospectData } from '@/api/analysis'
 import resize from '@/mixins/resize'
 import complex from '@/mixins/complex'
-import { prospectData } from '@/api/analysis'
-import { converUnit } from '@/libs/utils'
 export default {
   data() {
-    let vm = this
     return {
       timeStamp: new Date().getTime(),
-      series: [
-        {
-          type: 'bar',
-          barWidth: '25%',
-          yAxisIndex: 0,
-          color: ['#4A84FF'],
-          data: []
-        },
-        {
-          type: 'line',
-          color: ['#F6BD16'],
-          yAxisIndex: 1,
-          data: []
-        }
-      ],
-      tooltip: {
-        formatter: function (data) {
-          let time = data[0].axisValue
-          let result = `${time}<br/>`
-          data.forEach((item) => {
-            let type = vm.types[item.seriesIndex]
-            let value = type === 'ratio' ? `${item.value}%` : `${converUnit(item.value)}${vm.unit}`
-            result += `${item.seriesName}：${value}<br/>`
-          })
-          return result
-        }
-      },
       barType: 0,
       options: [
         {
@@ -59,11 +32,20 @@ export default {
           label: '行业资产',
           value: 1
         }
-      ]
+      ],
+      formatter: (data) => {
+        let result = `${data[0].axisValue}<br/>`
+        data.forEach((item) => {
+          let type = this.types[item.seriesIndex]
+          let value = type === 'ratio' ? `${item.value}%` : `${converUnit(item.value)}${this.unit}`
+          result += `${item.seriesName}：${value}<br/>`
+        })
+        return result
+      }
     }
   },
-  mixins: [resize, complex],
   props: {
+    industryCode: String,
     requestPath: String,
     title: String,
     tip: String,
@@ -77,10 +59,17 @@ export default {
     }
   },
   watch: {
+    industryCode: {
+      immediate: true,
+      handler() {
+        this.drawChart()
+      }
+    },
     barType() {
       this.drawChart()
     }
   },
+  mixins: [resize, complex],
   methods: {
     async getChartData() {
       let data = await prospectData()
@@ -90,14 +79,27 @@ export default {
     },
     setChartOption() {
       this.chartId_c = `complexChart_${this.timeStamp}`
-      this.chartOption_complex.tooltip = Object.assign({}, this.chartOption_complex.tooltip, this.tooltip)
-      this.chartOption_complex.series = this.series
+      this.chartOption_complex.grid.left = '60px'
+      this.chartOption_complex.grid.right = '80px'
+      this.chartOption_complex.tooltip.formatter = this.formatter
       this.chartOption_complex.xAxis.data = []
-      this.chartOption_complex.series[1].data = []
-      this.chartOption_complex.series[1].name = this.options[this.barType].label + '增速'
-      this.chartOption_complex.series[0].data = []
-      this.chartOption_complex.series[0].name = this.options[this.barType].label
-
+      this.chartOption_complex.series = [
+        {
+          type: 'bar',
+          barWidth: '25%',
+          yAxisIndex: 0,
+          color: ['#4A84FF'],
+          name: this.options[this.barType].label,
+          data: []
+        },
+        {
+          type: 'line',
+          color: ['#F6BD16'],
+          yAxisIndex: 1,
+          name: this.options[this.barType].label + '增速',
+          data: []
+        }
+      ]
       if (this.barType === 0) {
         this.complexData.forEach((item) => {
           this.chartOption_complex.xAxis.data.push(item.rpt)
@@ -121,13 +123,8 @@ export default {
       } else {
         this.chartOption_complex.yAxis[1].axisLabel.formatter = (d) => converUnit(d, 'zh', 0)
       }
-      this.chartOption_complex.grid.left = '60px'
-      this.chartOption_complex.grid.right = '80px'
       return this.chartOption_complex
     }
-  },
-  mounted() {
-    this.drawChart()
   }
 }
 </script>
