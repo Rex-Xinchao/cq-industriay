@@ -1,4 +1,4 @@
-import { base_region, base_org, base_qualification } from '@/api/index'
+import { base_region, base_org, base_qualification, base_event } from '@/api/index'
 export const Regions = {
   data() {
     return {
@@ -102,5 +102,35 @@ export const Qualifications = {
   },
   mounted() {
     this.getQualifications()
+  }
+}
+
+export const Events = {
+  data() {
+    return {
+      eventOptions: []
+    }
+  },
+  methods: {
+    getEvents() {
+      base_event().then((res) => {
+        let map = {}
+        res.result.forEach((item) => {
+          item.label = item.name
+          item.value = item.code
+          map[item.code] = item
+        })
+        res.result.forEach((item) => {
+          if (item.parentCode) {
+            map[item.parentCode].children = map[item.parentCode].children || []
+            map[item.parentCode].children.push(item)
+          }
+        })
+        this.eventOptions = res.result.filter((item) => item.level === 1)
+      })
+    }
+  },
+  mounted() {
+    this.getEvents()
   }
 }

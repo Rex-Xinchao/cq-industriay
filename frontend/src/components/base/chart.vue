@@ -9,6 +9,7 @@
         :title="item.name"
         :class="{ active: activeHead === item.value }"
         @click="activeHead = item.value"
+        style="font-size: 14px"
       >
         {{ item.name }}
       </span>

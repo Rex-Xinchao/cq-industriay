@@ -18,14 +18,15 @@
               </el-select>
             </el-form-item>
             <el-form-item label="事件：">
-              <el-select v-model="events" multiple collapse-tags placeholder="请选择事件">
-                <el-option
-                  v-for="item in eventOptions.filter((item) => type === '' || item.type === type)"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                ></el-option>
-              </el-select>
+              <el-cascader
+                v-model="events"
+                :options="eventOptions"
+                :show-all-levels="false"
+                :props="props"
+                collapse-tags
+                clearable
+                placeholder="请选择事件"
+              ></el-cascader>
             </el-form-item>
             <el-form-item label="标签：">
               <el-select v-model="tags" :options="options" multiple collapse-tags :props="{ multiple: true }">
@@ -112,16 +113,18 @@
 import { mapGetters } from 'vuex'
 import { newsList } from '@/api/analysis'
 import scroll from '@/mixins/scroll'
+import { Events } from '@/mixins/base'
 export default {
   data() {
     return {
+      props: { multiple: true },
       tableId: 'newsTable',
       noData: false,
       loading: false,
       height: '500px',
+      events: [],
       tableData: [],
       tags: ['company', 'people', 'industry', 'product', 'event'],
-      events: [],
       options: [
         {
           value: 'company',
@@ -147,13 +150,6 @@ export default {
           value: 'event',
           label: '事件',
           class: 'label_event'
-        }
-      ],
-      eventOptions: [
-        {
-          label: '事件',
-          value: 1,
-          type: 1
         }
       ],
       type: '',
@@ -186,9 +182,15 @@ export default {
       handler() {
         this.search()
       }
+    },
+    events: {
+      deep: true,
+      handler() {
+        this.search()
+      }
     }
   },
-  mixins: [scroll],
+  mixins: [scroll, Events],
   methods: {
     pageTo(URL) {
       window.open(URL)

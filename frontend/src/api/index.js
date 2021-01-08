@@ -43,6 +43,11 @@ export const base_qualification = async (data) => {
 }
 
 // 行业查询
-export const getIndustry = async (data) => {
+export const getIndustry = (data) => {
   return http.get(`/api/product`, data)
+}
+
+// 事件列表
+export const base_event = (data) => {
+  return http.get(`/api/event`, data)
 }
