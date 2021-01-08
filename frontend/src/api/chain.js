@@ -1,6 +1,11 @@
 import http from '@/libs/axios'
 const sleep = (time) => new Promise((res) => setTimeout(() => res(), time))
 
+// 节点映射
+export const nodeMapping = (data) => {
+  return http.get('/chain', data)
+}
+
 // 风险图谱
 export const riskChain = (data) => {
   data.importance = '3, 4'
@@ -68,6 +73,7 @@ export const boomChain = (data) => {
   data.importance = '3, 4'
   return http.get(`/chain/${data.industryCode}/risk/graph`, data)
 }
+
 export const boomDialog = async (data) => {
   await sleep(1000)
   let reponse = {}

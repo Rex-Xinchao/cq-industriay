@@ -5,6 +5,9 @@
       <span class="sign">{{ industry }}</span>
     </h1>
     <div class="chart-body" v-loading="tableLoading">
+      <el-select v-model="code" placeholder="请选择" class="code-select" v-if="mappings.length > 1">
+        <el-option v-for="item in mappings" :key="item.value" :label="item.label" :value="item.value"></el-option>
+      </el-select>
       <div class="graph-box"></div>
       <no-data-show :show="noData"></no-data-show>
       <div ref="tooltip" class="chart-tooltip" @mouseleave="hideTip">
@@ -62,12 +65,14 @@
 const echarts = require('echarts')
 import { mapGetters } from 'vuex'
 import { boomChain, boomDialog } from '@/api/chain'
+import { Mappings } from '@/mixins/base'
 import chart from '@/mixins/chart'
 import pageTo from '@/mixins/pageTo'
 export default {
   data() {
     const vm = this
     return {
+      code: null,
       chartData: null,
       dialogVisible: false,
       loading: false,
@@ -168,14 +173,14 @@ export default {
     ...mapGetters(['industryCode', 'industry'])
   },
   watch: {
-    industryCode: {
+    code: {
       immediate: true,
       handler() {
         this.getData()
       }
     }
   },
-  mixins: [chart, pageTo],
+  mixins: [chart, pageTo, Mappings],
   methods: {
     hideMenu() {
       this.dialogVisible = false
@@ -241,7 +246,7 @@ export default {
     getData() {
       this.tableLoading = true
       boomChain({
-        industryCode: this.industryCode
+        industryCode: this.code
       })
         .then((res) => {
           this.tableLoading = false
@@ -309,6 +314,12 @@ export default {
   .boom-com_table {
     width: 55%;
   }
+}
+.code-select {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  z-index: 1000;
 }
 </style>
 <style lang="scss">

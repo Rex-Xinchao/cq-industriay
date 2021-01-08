@@ -5,6 +5,9 @@
       <span class="sign">{{ industry }}</span>
     </h1>
     <div class="chart-body" v-loading="tableLoading">
+      <el-select v-model="code" placeholder="请选择" class="code-select" v-if="mappings.length > 1">
+        <el-option v-for="item in mappings" :key="item.value" :label="item.label" :value="item.value"></el-option>
+      </el-select>
       <div class="graph-box"></div>
       <no-data-show :show="noData"></no-data-show>
       <div ref="tooltip" class="chart-tooltip" @mouseleave="hideTip">
@@ -68,11 +71,13 @@
 <script>
 import { mapGetters } from 'vuex'
 import { riskChain, riskDialog } from '@/api/chain'
+import { Mappings } from '@/mixins/base'
 import chart from '@/mixins/chart'
 import pageTo from '@/mixins/pageTo'
 export default {
   data() {
     return {
+      code: null,
       chartData: null,
       dialogVisible: false,
       noData: false,
@@ -92,14 +97,14 @@ export default {
     ...mapGetters(['industryCode', 'industry'])
   },
   watch: {
-    industryCode: {
+    code: {
       immediate: true,
       handler() {
         this.getData()
       }
     }
   },
-  mixins: [chart, pageTo],
+  mixins: [chart, pageTo, Mappings],
   methods: {
     hideMenu() {
       this.dialogVisible = false

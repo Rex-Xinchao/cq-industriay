@@ -1,4 +1,5 @@
 import { base_region, base_org, base_qualification, base_event } from '@/api/index'
+import { nodeMapping } from '@/api/chain'
 export const Regions = {
   data() {
     return {
@@ -132,5 +133,42 @@ export const Events = {
   },
   mounted() {
     this.getEvents()
+  }
+}
+
+export const Mappings = {
+  data() {
+    return {
+      mappings: []
+    }
+  },
+  methods: {
+    getMappings() {
+      if (this.$route.query.name.indexOf('国标') >= 0) {
+        nodeMapping({
+          code: this.$route.query.code,
+          isSam: true
+        }).then((res) => {
+          this.mappings = res.gb4[0].products.map((item) => {
+            return {
+              label: item.samName,
+              value: item.samCode
+            }
+          })
+          this.code = this.mappings[0].value
+        })
+      } else {
+        this.mappings = [
+          {
+            label: this.$route.query.name,
+            value: this.$route.query.code
+          }
+        ]
+        this.code = this.mappings[0].value
+      }
+    }
+  },
+  mounted() {
+    this.getMappings()
   }
 }
