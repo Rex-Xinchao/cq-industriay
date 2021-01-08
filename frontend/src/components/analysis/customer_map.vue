@@ -144,6 +144,19 @@ export default {
       dialogTable: [{}]
     }
   },
+  props: {
+    industryCode: String
+  },
+  watch: {
+    industryCode: {
+      immediate: true,
+      handler() {
+        this.$nextTick(() => {
+          this.drawChart()
+        })
+      }
+    }
+  },
   mixins: [resize],
   methods: {
     resetActive() {
@@ -252,9 +265,6 @@ export default {
       this.dialogForm.amountRange2 = [0, 100]
       this.search()
     }
-  },
-  mounted() {
-    this.drawChart()
   }
 }
 </script>

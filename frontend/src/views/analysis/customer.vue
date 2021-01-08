@@ -4,7 +4,7 @@
       <h1 class="main-title">行业获客</h1>
     </div>
     <div class="main-body">
-      <map-chart class="map-chart"></map-chart>
+      <map-chart class="map-chart" :industryCode="industryCode"></map-chart>
       <el-button @click="handleOpen" type="primary" class="btn-show-more">推荐企业</el-button>
       <el-dialog
         modal-append-to-body
@@ -86,9 +86,10 @@
   </div>
 </template>
 <script>
-import mapChart from '@/components/analysis/customer/map'
-import resize from '@/mixins/resize'
 import { tableData_1, tableData_2, tableData_3 } from '@/mockData/customer'
+import { mapGetters } from 'vuex'
+import resize from '@/mixins/resize'
+import mapChart from '@/components/analysis/customer_map'
 export default {
   data() {
     return {
@@ -103,12 +104,21 @@ export default {
       titles: ['政府部门认定的区域内资质企业', '上市、三板、发债企业在区域内的供应商', '区域内产业园区入驻的企业']
     }
   },
-  components: { mapChart },
+  computed: {
+    ...mapGetters(['industry', 'industryCode'])
+  },
   watch: {
+    industryCode: {
+      immediate: true,
+      handler() {
+        this.getData()
+      }
+    },
     type() {
       this.getData()
     }
   },
+  components: { mapChart },
   methods: {
     getData() {
       this.loading = true
@@ -130,9 +140,6 @@ export default {
     handleClose() {
       this.dialogVisible = false
     }
-  },
-  mounted() {
-    this.getData()
   }
 }
 </script>
