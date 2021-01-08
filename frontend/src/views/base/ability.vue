@@ -1,7 +1,10 @@
 <template>
   <div class="main">
     <div class="item-menu">
-      <h1 class="main-title">{{ title }}</h1>
+      <h1 class="main-title">
+        {{ title }}
+        <span class="sign">{{ industry }}</span>
+      </h1>
       <el-tabs class="item_100 crumbs" v-model="activeType">
         <el-tab-pane label="财务基准" name="1"></el-tab-pane>
         <el-tab-pane label="绩效评价（国资委）" name="2"></el-tab-pane>
@@ -27,7 +30,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['baseMenu'])
+    ...mapGetters(['baseMenu', 'industry'])
   },
   watch: {
     baseMenu: {

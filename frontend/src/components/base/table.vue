@@ -17,7 +17,7 @@
       <el-button class="filter-item btn" type="primary" @click="search">查询</el-button>
     </div>
     <el-table v-loading="loading" class="table-main table-head-grey" :data="tableData" height="300">
-      <el-table-column prop="name" label="科目" align="center"></el-table-column>
+      <el-table-column prop="name" label="科目" align="left"></el-table-column>
       <el-table-column prop="greateValue" label="优秀值" align="right">
         <template slot-scope="scope">
           <span v-html="getValue(scope.row.greateValue, scope.row.valueType)"></span>
@@ -53,12 +53,14 @@ import { mapGetters } from 'vuex'
 import { formatDate } from '@/libs/utils'
 export default {
   data() {
+    const vm = this
     return {
       form: {},
       loading: false,
       tableData: [],
-      dateTime: new Date().setFullYear(new Date().getFullYear() - 1),
+      dateTime: null,
       timeType: 'Q4',
+      maxDate: null,
       options: [
         {
           label: '年度',
@@ -71,10 +73,7 @@ export default {
       ],
       pickerOptions: {
         disabledDate(time) {
-          return (
-            time.getTime() > new Date().getTime() - 3600 * 24 * 365 * 1000 ||
-            time.getTime() < new Date('2015').getTime()
-          )
+          return time.getTime() > new Date().getTime(vm.maxDate) || time.getTime() < new Date('2015').getTime()
         }
       }
     }
@@ -113,6 +112,8 @@ export default {
         .then((res) => {
           this.loading = false
           this.tableData = res.result || []
+          this.dateTime = this.tableData[0].year
+          this.maxDate = this.tableData[0].year
         })
         .catch((err) => {
           this.loading = false

@@ -13,7 +13,7 @@
         {{ item.name }}
       </span>
     </div>
-    <div v-loading="loading" v-if="!noData" class="chart-main" id="lineChart"></div>
+    <div v-loading="loading" v-show="!noData" class="chart-main" id="lineChart"></div>
     <no-data-show v-loading="loading" class="chart-nodata" :show="noData"></no-data-show>
   </div>
 </template>
