@@ -4944,6 +4944,7 @@ export const envMenu = async (data) => {
 }
 
 export const envChart = async (data) => {
+  await sleep(500)
   let response = {}
   if (data.code === 'AC003005') {
     response = {
