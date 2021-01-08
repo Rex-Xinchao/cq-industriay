@@ -4,7 +4,7 @@
       <head-com></head-com>
     </el-header>
     <el-container style="height: calc(100% - 60px); position: relative">
-      <el-aside width="200px" v-if="showSiderbar">
+      <el-aside width="200px">
         <sider-com></sider-com>
         <div class="tool-main">
           <div class="item" @click="pageTo('/stockCustom/all', false, true)">
@@ -30,11 +30,6 @@ import footCom from '@components/public/foot'
 import siderCom from '@components/public/siderBar'
 import pageTo from '@/mixins/pageTo'
 export default {
-  computed: {
-    showSiderbar() {
-      return !['/stockCustom/all', '/pillar/index', '/pillar/chart'].includes(this.$route.path)
-    }
-  },
   mixins: [pageTo],
   components: {
     headCom,

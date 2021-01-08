@@ -58,7 +58,6 @@ export default {
           ])
         }
       }
-      console.log(this.chartOption_line)
       let max = 0
       this.chartOption_line.xAxis.data = []
       this.rejectData.forEach((item) => {

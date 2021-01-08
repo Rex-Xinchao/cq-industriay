@@ -49,7 +49,6 @@ export default {
       tooltip: {
         formatter: (data) => {
           let value = data[0].value ? converUnit(data[0].value) : '--'
-          console.log(data[0].value)
           return `${data[0].name}<br/>${vm.activeName}：${value}${vm.unit}`
         }
       },

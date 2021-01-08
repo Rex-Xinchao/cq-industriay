@@ -89,7 +89,6 @@ export default {
       return result
     },
     setChartOption() {
-      console.log(111)
       this.chartId_c = `complexChart_${this.timeStamp}`
       this.chartOption_complex.tooltip = Object.assign({}, this.chartOption_complex.tooltip, this.tooltip)
       this.chartOption_complex.series = this.series

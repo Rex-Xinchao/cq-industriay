@@ -105,10 +105,18 @@ export default {
       legendData_2: ['500万以下', '500~2000万', '2000~5000万', '5000万~1亿', '1亿以上']
     }
   },
-  mixins: [pageTo],
   computed: {
     ...mapGetters(['industryCode', 'industry'])
   },
+  watch: {
+    industryCode: {
+      immediate: true,
+      handler() {
+        this.getData()
+      }
+    }
+  },
+  mixins: [pageTo],
   components: {
     barChart,
     stackChart,
@@ -158,9 +166,6 @@ export default {
           this.rejectData = []
         })
     }
-  },
-  mounted() {
-    this.getData()
   }
 }
 </script>

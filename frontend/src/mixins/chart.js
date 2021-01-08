@@ -84,7 +84,6 @@ export default {
       })
       data[0].children = map_UP[this.industryCode].children
       data[1].children = map_DOWN[this.industryCode].children
-      console.log(data)
       return data
     },
     initChartOptions() {
@@ -440,7 +439,7 @@ export default {
           }
         })
         .on('click', (d) => {
-          console.log('hello world')
+          console.log('onClicked')
           let show = !d.children
           if (show) {
             d.children = d._children

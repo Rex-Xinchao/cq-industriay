@@ -44,7 +44,6 @@ export default {
       ]
     }
   },
-  mixins: [ViewChart],
   watch: {
     form: {
       deep: true,
@@ -53,6 +52,7 @@ export default {
       }
     }
   },
+  mixins: [ViewChart],
   methods: {
     backTo() {
       this.$router.go(-1)

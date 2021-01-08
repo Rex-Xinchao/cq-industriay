@@ -17,13 +17,13 @@
 </template>
 <script>
 const echarts = require('echarts')
+import { industryList } from '@/api/pillar'
 import sum from '@/libs/map/all'
 import cq from '@/libs/map/chongqing'
 import gz from '@/libs/map/guizhou'
 import sx from '@/libs/map/shanxi'
 import sc from '@/libs/map/sichuan'
 import resize from '@/mixins/resize'
-import { industryList } from '@/api/pillar'
 import pageTo from '@/mixins/pageTo'
 export default {
   data() {

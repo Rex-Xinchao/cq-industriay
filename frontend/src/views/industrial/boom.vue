@@ -60,13 +60,11 @@
 </template>
 <script>
 const echarts = require('echarts')
-import { boomChain, boomDialog } from '@/api/chain'
 import { mapGetters } from 'vuex'
+import { boomChain, boomDialog } from '@/api/chain'
 import chart from '@/mixins/chart'
 import pageTo from '@/mixins/pageTo'
-import noDataShow from '../../components/public/no-data-show.vue'
 export default {
-  components: { noDataShow },
   data() {
     const vm = this
     return {
@@ -169,6 +167,14 @@ export default {
   computed: {
     ...mapGetters(['industryCode', 'industry'])
   },
+  watch: {
+    industryCode: {
+      immediate: true,
+      handler() {
+        this.getData()
+      }
+    }
+  },
   mixins: [chart, pageTo],
   methods: {
     hideMenu() {
@@ -256,9 +262,6 @@ export default {
       let type = 2
       this.pageTo(path, { name, code, type }, true)
     }
-  },
-  mounted() {
-    this.getData()
   }
 }
 </script>

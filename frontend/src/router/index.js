@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 import { getBaseItem } from '@/api/base'
 import store from '../store'
 const Login = () => import('@/views/login')
-const Test = () => import('@/views/test')
 const Layout = () => import('@/views/layout/Index')
 const StockCustom_All = () => import('@/views/stockCustom/total')
 const Pillar = () => import('@/views/pillar/index')
@@ -168,18 +167,6 @@ const routes = [
         path: 'incomes',
         name: 'FinanceIncomes',
         component: FinanceIncomes
-      }
-    ]
-  },
-  {
-    path: '/test',
-    name: 'Layout',
-    component: Layout,
-    children: [
-      {
-        path: '',
-        name: 'Test',
-        component: Test
       }
     ]
   }

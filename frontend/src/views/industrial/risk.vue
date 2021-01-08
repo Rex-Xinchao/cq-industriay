@@ -66,10 +66,10 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+import { riskChain, riskDialog } from '@/api/chain'
 import chart from '@/mixins/chart'
 import pageTo from '@/mixins/pageTo'
-import { riskChain, riskDialog } from '@/api/chain'
-import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -90,6 +90,14 @@ export default {
   },
   computed: {
     ...mapGetters(['industryCode', 'industry'])
+  },
+  watch: {
+    industryCode: {
+      immediate: true,
+      handler() {
+        this.getData()
+      }
+    }
   },
   mixins: [chart, pageTo],
   methods: {
@@ -164,9 +172,6 @@ export default {
       let type = 2
       this.pageTo(path, { name, code, type }, true)
     }
-  },
-  mounted() {
-    this.getData()
   }
 }
 </script>
