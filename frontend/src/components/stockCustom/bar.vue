@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { converUnit_w, numberFormat } from '@/libs/utils'
+import { converUnit, numberFormat } from '@/libs/utils'
 import resize from '@/mixins/resize'
 import bar from '@/mixins/bar'
 import { mapGetters } from 'vuex'
@@ -67,7 +67,7 @@ export default {
       this.chartOption_bar.series.data = []
       let max = 0
       data.forEach((item) => {
-        let value = this.isScale ? converUnit_w(item.loanBalance.amount) : item.comNum
+        let value = this.isScale ? converUnit(item.loanBalance.amount) : item.comNum
         max = Math.max(max, Number(value))
         this.chartOption_bar.series.data.push(value)
         this.chartOption_bar.xAxis.data.push(item.rpt)

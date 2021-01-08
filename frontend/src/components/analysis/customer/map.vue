@@ -63,6 +63,7 @@
 </template>
 <script>
 const echarts = require('echarts')
+import { converUnit } from '@/libs/utils'
 import 'echarts/map/js/china.js'
 import qc from '@/libs/map/chongqing'
 import sc from '@/libs/map/sichuan'
@@ -80,7 +81,7 @@ export default {
           trigger: 'item',
           formatter: (data) => {
             if (!data.value) return
-            return `${data.name}<br/> ${data.value} 家`
+            return `${data.name}<br/> ${converUnit(data.value, 'zh', 0)} 家`
           }
         },
         visualMap: {

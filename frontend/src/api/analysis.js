@@ -5263,8 +5263,7 @@ export const envChart = async (data) => {
         { rpt: '2020-06-30', value1: '34.19', value2: '-28.74', value3: '4.71', value4: '17.5' },
         { rpt: '2020-07-31', value1: '5.94', value2: '6.17', value3: '4.99', value4: '22.49' },
         { rpt: '2020-08-31', value1: '2.4', value2: '40.38', value3: '5.11', value4: '27.6' },
-        { rpt: '2020-09-30', value1: '28.38', value2: '66.08', value3: '6.56', value4: '34.16' },
-        { rpt: '' }
+        { rpt: '2020-09-30', value1: '28.38', value2: '66.08', value3: '6.56', value4: '34.16' }
       ],
       table: [
         {

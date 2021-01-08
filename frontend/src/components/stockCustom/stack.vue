@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { converUnit_w, numberFormat } from '@/libs/utils'
+import { converUnit, numberFormat } from '@/libs/utils'
 import resize from '@/mixins/resize'
 import bar from '@/mixins/bar'
 import { mapGetters } from 'vuex'
@@ -77,7 +77,7 @@ export default {
         let sum = 0
         item.badList.forEach((bad) => {
           badMap[bad.badloanType] = badMap[bad.badloanType] || []
-          let value = this.isScale ? converUnit_w(bad[key].amount) : bad[key]
+          let value = this.isScale ? converUnit(bad[key].amount) : bad[key]
           badMap[bad.badloanType].push(value)
           sum += Number(value)
         })

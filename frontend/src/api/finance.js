@@ -179,7 +179,7 @@ export const getStatusTable = async (data) => {
       ]
     }
   }
-  if (data.type && data.area === 'GS955525') {
+  if (data.type) {
     return result[data.type]
   } else {
     return {
@@ -384,7 +384,7 @@ export const getIncomesTable = async (data) => {
       ]
     }
   }
-  if (data.type && data.area === 'GS955525') {
+  if (data.type) {
     return result[data.type]
   } else {
     return {

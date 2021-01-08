@@ -117,7 +117,6 @@ export default {
   },
   watch: {
     chartType() {
-      this.tableData = []
       this.drawChart()
     },
     dateTime() {

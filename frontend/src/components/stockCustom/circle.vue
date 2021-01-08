@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { numberFormat, converUnit_w } from '@/libs/utils'
+import { numberFormat, converUnit } from '@/libs/utils'
 import resize from '@/mixins/resize'
 import pie from '@/mixins/pie'
 import { mapGetters } from 'vuex'
@@ -95,7 +95,7 @@ export default {
         this.data.push({
           name: this.map[key],
           value: data[key].comNum,
-          amount: converUnit_w(data[key].amount.amount)
+          amount: converUnit(data[key].amount.amount)
         })
       }
       this.chartOption_pie.series[0].data = this.data

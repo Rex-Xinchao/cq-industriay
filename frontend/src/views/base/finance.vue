@@ -58,7 +58,7 @@
           :prop="item.itemCode"
           :label="item.itemName"
           :key="item.itemCode"
-          align="center"
+          align="right"
           sortable
           width="250"
         ></el-table-column>

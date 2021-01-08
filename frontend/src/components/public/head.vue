@@ -54,7 +54,7 @@ export default {
     onSelectChange(data) {
       if (!this.keyword) return
       let { code, value, type } = { ...this.suggestions.find((item) => item.value === this.keyword) }
-      this.pageTo('/analysis/env', { code, name: value, type })
+      this.pageTo(this.$route.path, { code, name: value, type })
     }
   }
 }

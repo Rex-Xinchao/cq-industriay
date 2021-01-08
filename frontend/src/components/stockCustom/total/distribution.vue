@@ -16,7 +16,7 @@
       <el-select class="select" v-model="typeSelect">
         <el-option v-for="item in typeOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
       </el-select>
-      <el-select class="select" v-model="classifySelect">
+      <el-select class="select" v-model="classifySelect" v-if="type === 1">
         <el-option
           v-for="item in classifyOptions"
           :key="item.value"

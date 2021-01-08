@@ -6,7 +6,7 @@
   </el-popover>
 </template>
 <script>
-import { converUnit_w, numberFormat } from '@/libs/utils'
+import { numberFormat } from '@/libs/utils'
 import resize from '@/mixins/resize'
 import bar from '@/mixins/bar'
 export default {

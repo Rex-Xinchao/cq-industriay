@@ -44,9 +44,9 @@
         <el-table-column type="index" width="50" label="序号" align="center"></el-table-column>
         <el-table-column prop="a" label="证券代码 " align="center"></el-table-column>
         <el-table-column prop="b" label="证券简称 " align="center"></el-table-column>
-        <el-table-column prop="c" label="业务收入 " align="center">
+        <el-table-column prop="c" label="业务收入 " align="right">
           <template slot-scope="scope">
-            {{ scope.row.c ? numberFormat(scope.row.c) : '--' }}
+            {{ scope.row.c ? converUnit(scope.row.c) : '--' }}
           </template>
         </el-table-column>
       </el-table>
@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { numberFormat } from '@/libs/utils'
+import { converUnit } from '@/libs/utils'
 export default {
   data() {
     return {
@@ -70,7 +70,7 @@ export default {
   },
   watch: {},
   methods: {
-    numberFormat,
+    converUnit,
     getData() {
       if (this.type === 1) {
       } else {

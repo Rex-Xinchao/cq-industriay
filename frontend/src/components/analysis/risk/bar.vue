@@ -4,8 +4,8 @@
       {{ title }}
       <i class="icon-tip" title="数据来源于三省一市的司法数据"></i>
       <div class="com-filter fr">
-        <el-select class="select" v-model="typeSelect">
-          <el-option v-for="item in typeOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
+        <el-select class="select" v-model="areaSelect">
+          <el-option v-for="item in areaOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
         </el-select>
         <time-select class="select" v-model="dateTime"></time-select>
       </div>
@@ -17,16 +17,30 @@
 
 <script>
 const echarts = require('echarts')
+import { numberFormat } from '@/libs/utils'
 import { barData } from '@/mockData/risk'
 import resize from '@/mixins/resize'
 import bar from '@/mixins/bar'
 export default {
   data() {
     return {
-      typeSelect: 1,
-      typeOptions: [{ label: '全国', value: 1 }],
+      areaSelect: 'CSF_CN_500000',
+      areaOptions: [
+        { label: '重庆市', value: 'CSF_CN_500000' },
+        { label: '四川省', value: 'CSF_CN_510000' },
+        { label: '陕西省', value: 'CSF_CN_610000' },
+        { label: '贵州省', value: 'CSF_CN_520000' }
+      ],
       dateTime: [],
-      color: ['#3398DB', '#79D2DE']
+      color: ['#3398DB', '#79D2DE'],
+      unit: '起',
+      tooltip: {
+        formatter: (data) => {
+          let result = `${data.name}<br/>`
+          result += `${data.seriesName}：${numberFormat(data.value, 0)} ${this.unit}<br/>`
+          return result
+        }
+      }
     }
   },
   mixins: [resize, bar],
@@ -38,7 +52,7 @@ export default {
     dateTime() {
       this.drawChart()
     },
-    typeSelect() {
+    areaSelect() {
       this.drawChart()
     }
   },
@@ -55,8 +69,9 @@ export default {
       })
       this.chartOption_bar.color = this.color
       this.chartOption_bar.series = series
+      this.chartOption_bar.tooltip = this.tooltip
       this.chartOption_bar.legend.show = false
-      this.chartOption_bar.grid.left = '40px'
+      this.chartOption_bar.grid.left = '60px'
       this.chartOption_bar.grid.top = '40px'
       this.chartOption_bar.color = this.color
       let max = 0
@@ -67,8 +82,7 @@ export default {
         this.chartOption_bar.xAxis.data.push(item.time)
         this.chartOption_bar.series[0].data.push(item.value)
       })
-      this.chartOption_bar.yAxis.minInterval = max < 10 ? 1 : 10
-      this.chartOption_bar.yAxis.max = max ? max : 10
+      this.chartOption_bar.yAxis.axisLabel.formatter = `{value} ${this.unit}`
       return this.chartOption_bar
     }
   },

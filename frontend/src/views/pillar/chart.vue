@@ -37,10 +37,10 @@ export default {
         type: ''
       },
       regions: [
-        { label: '重庆市', value: 1 },
-        { label: '四川省', value: 2 },
-        { label: '陕西省', value: 3 },
-        { label: '贵州省', value: 4 }
+        { label: '重庆市', value: 'CSF_CN_500000' },
+        { label: '四川省', value: 'CSF_CN_510000' },
+        { label: '陕西省', value: 'CSF_CN_610000' },
+        { label: '贵州省', value: 'CSF_CN_520000' }
       ]
     }
   },

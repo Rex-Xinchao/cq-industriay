@@ -6,20 +6,20 @@
     </h1>
     <el-table v-loading="loading" class="table" :data="tableData" height="200px">
       <el-table-column prop="name" label=""></el-table-column>
-      <el-table-column prop="last" align="center" label="最新值">
+      <el-table-column prop="last" align="right" label="最新值">
         <template slot-scope="scope">
-          {{ scope.row.last ? numberFormat(scope.row.last) : '--' }}
+          {{ scope.row.last ? converUnit(scope.row.last) : '--' }}
         </template>
       </el-table-column>
-      <el-table-column prop="change" align="center" label="变动值">
+      <el-table-column prop="change" align="right" label="变动值">
         <template slot-scope="scope">
-          {{ scope.row.change ? numberFormat(scope.row.change) : '--' }}
+          {{ scope.row.change ? converUnit(scope.row.change) : '--' }}
         </template>
       </el-table-column>
-      <el-table-column label="变动率" align="center">
+      <el-table-column label="变动率" align="right">
         <template slot-scope="scope">
           <span :class="scope.row.ratio && scope.row.ratio >= 0 ? 'postive' : 'negative'">
-            {{ scope.row.ratio ? numberFormat(scope.row.ratio) : '--' }}
+            {{ scope.row.ratio ? converUnit(scope.row.ratio) : '--' }}
           </span>
           <i
             :class="scope.row.ratio && scope.row.ratio >= 0 ? 'postive' : 'negative'"
@@ -32,7 +32,7 @@
   </div>
 </template>
 <script>
-import { numberFormat } from '@/libs/utils'
+import { converUnit } from '@/libs/utils'
 import { tableData } from '@/mockData/risk'
 export default {
   data() {
@@ -45,7 +45,7 @@ export default {
     title: String
   },
   methods: {
-    numberFormat,
+    converUnit,
     getData() {
       this.loading = true
       setTimeout(() => {

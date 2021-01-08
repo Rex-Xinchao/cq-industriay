@@ -31,6 +31,8 @@
                 :index="child.code"
                 :key="`${index}_child`"
                 v-show="child.show"
+                style="overflow: hidden; text-overflow: ellipsis"
+                :title="child.name"
               >
                 {{ child.name }}
               </el-menu-item>

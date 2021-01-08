@@ -18,27 +18,27 @@
     </div>
     <el-table v-loading="loading" class="table-main table-head-grey" :data="tableData" height="300">
       <el-table-column prop="name" label="科目" align="center"></el-table-column>
-      <el-table-column prop="greateValue" label="优秀值" align="center">
+      <el-table-column prop="greateValue" label="优秀值" align="right">
         <template slot-scope="scope">
           <span v-html="getValue(scope.row.greateValue, scope.row.type)"></span>
         </template>
       </el-table-column>
-      <el-table-column prop="goodValue" label="良好值" align="center">
+      <el-table-column prop="goodValue" label="良好值" align="right">
         <template slot-scope="scope">
           <span v-html="getValue(scope.row.goodValue, scope.row.type)"></span>
         </template>
       </el-table-column>
-      <el-table-column prop="averageValue" label="平均值" align="center">
+      <el-table-column prop="averageValue" label="平均值" align="right">
         <template slot-scope="scope">
           <span v-html="getValue(scope.row.averageValue, scope.row.type)"></span>
         </template>
       </el-table-column>
-      <el-table-column prop="lowerValue" label="较低值" align="center">
+      <el-table-column prop="lowerValue" label="较低值" align="right">
         <template slot-scope="scope">
           <span v-html="getValue(scope.row.lowerValue, scope.row.type)"></span>
         </template>
       </el-table-column>
-      <el-table-column prop="badValue" label="较差值" align="center">
+      <el-table-column prop="badValue" label="较差值" align="right">
         <template slot-scope="scope">
           <span v-html="getValue(scope.row.badValue, scope.row.type)"></span>
         </template>

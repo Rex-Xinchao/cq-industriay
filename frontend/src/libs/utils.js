@@ -39,16 +39,17 @@ function numberFormat($str, $point) {
 }
 
 function converUnit($num, $lang = 'zh', $point = 1) {
-  let _num = Number($num),
+  let index = $num >= 0 ? 1 : -1
+  let _num = Math.abs(Number($num)),
     _unit = ''
   if (!isNaN(_num)) {
     if ($lang === 'en') {
-      if ($num < 10000) {
+      if (_num < 10000) {
         _unit = ''
-      } else if ($num < 1000000) {
+      } else if (_num < 1000000) {
         _num = _num / 1000
         _unit = 'Thousands'
-      } else if ($num < 1000000000) {
+      } else if (_num < 1000000000) {
         _num = _num / 1000000
         _unit = 'Millions'
       } else {
@@ -56,9 +57,9 @@ function converUnit($num, $lang = 'zh', $point = 1) {
         _unit = 'Billions'
       }
     } else {
-      if ($num < 10000) {
+      if (_num < 10000) {
         _unit = ''
-      } else if ($num < 100000000) {
+      } else if (_num < 100000000) {
         _num = _num / 10000
         _unit = '万'
       } else {
@@ -66,6 +67,7 @@ function converUnit($num, $lang = 'zh', $point = 1) {
         _unit = '亿'
       }
     }
+    _num *= index
     return numberFormat(_num, $point) + ' ' + _unit
   }
   return $num
@@ -93,15 +95,6 @@ function getNumUnit($num, $point = 1) {
     num: $num,
     unit: _unit
   }
-}
-
-function converUnit_w($num) {
-  let _num = Number($num)
-  if (!isNaN(_num)) {
-    _num = _num / 10000
-    return _num
-  }
-  return $num
 }
 
 function format(time) {
@@ -178,7 +171,6 @@ export {
   isEmail,
   isUrl,
   converUnit,
-  converUnit_w,
   formatDate,
   getTimeLine,
   getAxisMax,

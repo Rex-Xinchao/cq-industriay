@@ -81,12 +81,12 @@
             <span class="amount">{{ scope.row.leading.grossMargin }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="leading.growth" label="业务线毛利增速" sortable align="center">
+        <el-table-column prop="leading.growth" label="业务线毛利增速" sortable align="right">
           <template slot-scope="scope">
             {{ scope.row.leading.growth ? `${scope.row.leading.growth}%` : '--' }}
           </template>
         </el-table-column>
-        <el-table-column prop="leading.gpr" label="业务线毛利率" sortable align="center">
+        <el-table-column prop="leading.gpr" label="业务线毛利率" sortable align="right">
           <template slot-scope="scope">
             {{ scope.row.leading.gpr ? `${scope.row.leading.gpr}%` : '--' }}
           </template>
