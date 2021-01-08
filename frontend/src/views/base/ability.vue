@@ -19,11 +19,10 @@ import lineChart from '@/components/base/chart'
 import { mapGetters } from 'vuex'
 export default {
   data() {
-    const vm = this
     return {
       activeType: '1',
       headers: [],
-      finType: null,
+      finType: this.$route.query.abilityType,
       title: null
     }
   },
@@ -37,7 +36,6 @@ export default {
         if (!data) return
         data.forEach((item) => {
           if (this.$route.query.abilityType == item.type) {
-            this.finType = item.type
             this.title = item.name
             this.headers = item.items.map((item) => {
               return {

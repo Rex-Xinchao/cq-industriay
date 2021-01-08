@@ -1,0 +1,40 @@
+@import "~@/assets/styles/common/table";
+.com-tabs {
+    margin: 2px 0 8px 0;
+}
+.com-main {
+    .table-main {
+        margin-top: 20px;
+        flex: 1;
+    }
+}
+.com-filter {
+    .operation-bar {
+        width: auto;
+        margin-right: 8px;
+
+        .last {
+            & + .active {
+                border-right: 1px solid #3a84ff;
+            }
+        }
+    }
+    .radio-group {
+        height: 30px;
+        padding-top: 6px;
+        box-sizing: border-box;
+    }
+}
+.button-export,
+.button-filter {
+    margin-right: 12px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #666666;
+    line-height: 20px;
+    cursor: pointer;
+
+    &:hover {
+        color: #3a84ff;
+    }
+}

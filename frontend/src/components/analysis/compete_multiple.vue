@@ -21,26 +21,28 @@
         <span class="point" :style="getRoute(indexNum)"></span>
         <span class="num">{{ indexNum }}</span>
       </div>
-      <div class="chart-main" id="lineChart_M"></div>
-      <no-data-show v-loading="loading" class="chart-nodata" :show="noData"></no-data-show>
+      <div class="chart-main">
+        <div id="lineChart_M"></div>
+        <no-data-show class="chart-nodata" :show="noData"></no-data-show>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { converUnit } from '@/libs/utils'
+import { competitionIndex } from '@/api/analysis'
 import resize from '@/mixins/resize'
 import line from '@/mixins/line'
-import { competitionIndex } from '@/api/analysis'
 export default {
   data() {
-    let vm = this
     return {
       indexNum: 0,
-      noData: false,
-      loading: false,
       tooltip: {
         trigger: 'axis',
-        formatter: `${vm.title}：{c}`
+        formatter: (data) => {
+          return `${this.title}：${converUnit(data[0].value, 'zh', 2)}`
+        }
       },
       grid: {
         left: '100px',
@@ -76,14 +78,23 @@ export default {
       request: competitionIndex
     }
   },
-  mixins: [resize, line],
   props: {
+    industryCode: String,
     title: String
   },
+  watch: {
+    industryCode: {
+      immediate: true,
+      handler() {
+        this.drawChart()
+      }
+    }
+  },
+  mixins: [resize, line],
   methods: {
     setChartOption() {
       this.chartId_line = 'lineChart_M'
-      this.chartOption_line.tooltip = Object.assign({}, this.chartOption_line.tooltip, this.tooltip)
+      this.chartOption_line.tooltip = this.tooltip
       this.chartOption_line.grid = this.grid
       this.chartOption_line.visualMap = this.visualMap
       this.chartOption_line.series = this.series
@@ -91,7 +102,7 @@ export default {
         ? parseInt(this.lineData[this.lineData.length - 1].value)
         : 0
       this.chartOption_line.xAxis.data = this.lineData.map((item) => item.rpt)
-      this.chartOption_line.series.data = this.lineData.map((item) => item.value.toFixed(2))
+      this.chartOption_line.series.data = this.lineData.map((item) => item.value)
       return this.chartOption_line
     },
     getRoute(num) {
@@ -111,9 +122,6 @@ export default {
       }
       return `transform: rotate(${current}deg)`
     }
-  },
-  mounted() {
-    this.drawChart()
   }
 }
 </script>
@@ -187,9 +195,15 @@ export default {
   vertical-align: top;
   width: calc(100% - 170px);
   height: 100%;
-}
-.chart-nodata {
-  width: calc(100% - 170px);
-  left: 170px;
+  position: relative;
+
+  #lineChart_M {
+    width: 100%;
+    height: 100%;
+  }
+
+  .chart-nodata {
+    left: 25px;
+  }
 }
 </style>

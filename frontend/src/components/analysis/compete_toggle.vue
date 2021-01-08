@@ -22,14 +22,13 @@
 
 <script>
 const echarts = require('echarts')
-import resize from '@/mixins/resize'
-import { competitionPieData, competitionBarData } from '@/api/analysis'
 import { converUnit } from '@/libs/utils'
+import { competitionPieData, competitionBarData } from '@/api/analysis'
+import resize from '@/mixins/resize'
 import bar from '@/mixins/bar'
 import pie from '@/mixins/pie'
 export default {
   data() {
-    let vm = this
     return {
       chartId_pie: 'chart',
       chartId_bar: 'chart',
@@ -42,14 +41,21 @@ export default {
     }
   },
   props: {
+    industryCode: String,
     title: String
   },
-  mixins: [resize, bar, pie],
   watch: {
     isBar() {
       this.drawChart()
+    },
+    industryCode: {
+      immediate: true,
+      handler() {
+        this.drawChart()
+      }
     }
   },
+  mixins: [resize, bar, pie],
   methods: {
     async getChartData() {
       let result = []
@@ -60,7 +66,6 @@ export default {
         result = (this.response && this.response.result) || []
         result = result.reverse()
       } else {
-        let result = []
         this.response = await competitionPieData(this.urlOptions)
           .then((res) => res)
           .catch((e) => {})
@@ -90,7 +95,6 @@ export default {
         }
         this.chartOption_bar.xAxis.data = this.pieData.map((item) => converUnit(item.key, 'zh', 0))
         this.chartOption_bar.series.data = this.pieData.map((item) => item.value)
-
         return this.chartOption_bar
       } else {
         this.chartOption_pie.color = this.color_pie
@@ -127,9 +131,6 @@ export default {
         return this.chartOption_pie
       }
     }
-  },
-  mounted() {
-    this.drawChart()
   }
 }
 </script>
