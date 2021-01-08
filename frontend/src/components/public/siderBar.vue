@@ -145,8 +145,10 @@ export default {
     onSelectChange(path) {
       if (path === this.$route.path) return
       if (path.includes('/ability')) {
-        let [p, type] = path.split('?')
-        this.pageTo(p, { abilityType: type })
+        let [p, abilityType] = path.split('?')
+        let { code, name, type } = { ...this.$route.query }
+        let query = { code, name, type }
+        this.pageTo(p, { abilityType: abilityType, ...query })
       } else {
         this.pageTo(path, true)
       }

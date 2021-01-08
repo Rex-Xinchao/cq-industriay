@@ -163,6 +163,12 @@ export default {
     },
     market() {
       this.getData()
+    },
+    industryCode: {
+      immediate: true,
+      handler() {
+        this.getData()
+      }
     }
   },
   methods: {
@@ -202,9 +208,6 @@ export default {
       this.page.count = data
       this.getData()
     }
-  },
-  mounted() {
-    this.getData()
   }
 }
 </script>

@@ -178,15 +178,19 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  getBaseItem({})
-    .then((res) => {
-      store.dispatch('setMenu', res.result)
-      next()
-    })
-    .catch((err) => {
-      store.dispatch('setMenu', [])
-      next()
-    })
+  if (store.state.baseMenu.length === 0) {
+    getBaseItem({})
+      .then((res) => {
+        store.dispatch('setMenu', res.result)
+        next()
+      })
+      .catch((err) => {
+        store.dispatch('setMenu', [])
+        next()
+      })
+  } else {
+    next()
+  }
 })
 
 export default router

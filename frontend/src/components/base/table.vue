@@ -20,33 +20,34 @@
       <el-table-column prop="name" label="科目" align="center"></el-table-column>
       <el-table-column prop="greateValue" label="优秀值" align="right">
         <template slot-scope="scope">
-          <span v-html="getValue(scope.row.greateValue, scope.row.type)"></span>
+          <span v-html="getValue(scope.row.greateValue, scope.row.valueType)"></span>
         </template>
       </el-table-column>
       <el-table-column prop="goodValue" label="良好值" align="right">
         <template slot-scope="scope">
-          <span v-html="getValue(scope.row.goodValue, scope.row.type)"></span>
+          <span v-html="getValue(scope.row.goodValue, scope.row.valueType)"></span>
         </template>
       </el-table-column>
       <el-table-column prop="averageValue" label="平均值" align="right">
         <template slot-scope="scope">
-          <span v-html="getValue(scope.row.averageValue, scope.row.type)"></span>
+          <span v-html="getValue(scope.row.averageValue, scope.row.valueType)"></span>
         </template>
       </el-table-column>
       <el-table-column prop="lowerValue" label="较低值" align="right">
         <template slot-scope="scope">
-          <span v-html="getValue(scope.row.lowerValue, scope.row.type)"></span>
+          <span v-html="getValue(scope.row.lowerValue, scope.row.valueType)"></span>
         </template>
       </el-table-column>
       <el-table-column prop="badValue" label="较差值" align="right">
         <template slot-scope="scope">
-          <span v-html="getValue(scope.row.badValue, scope.row.type)"></span>
+          <span v-html="getValue(scope.row.badValue, scope.row.valueType)"></span>
         </template>
       </el-table-column>
     </el-table>
   </div>
 </template>
 <script>
+import { converUnit } from '@/libs/utils'
 import { standard } from '@/api/base'
 import { mapGetters } from 'vuex'
 import { formatDate } from '@/libs/utils'
@@ -86,14 +87,17 @@ export default {
     finType: Number
   },
   watch: {
+    finType(data) {
+      this.search()
+    },
     type() {
       this.search()
     },
-    dateTime() {
-      this.search()
-    },
-    timeType() {
-      this.search()
+    industryCode: {
+      immediate: true,
+      handler() {
+        this.search()
+      }
     }
   },
   methods: {
@@ -115,14 +119,11 @@ export default {
           this.tableData = []
         })
     },
-    getValue(value, type = 'ratio') {
+    getValue(value, type = 1) {
       if (!value) return null
-      const unit = type === 'ratio' ? '%' : '万元'
-      return `${value}${unit}`
+      const unit = type === 1 ? '%' : '元'
+      return `${converUnit(value)}${unit}`
     }
-  },
-  mounted() {
-    this.search()
   }
 }
 </script>

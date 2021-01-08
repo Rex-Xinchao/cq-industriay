@@ -18,10 +18,11 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+import { converUnit } from '@/libs/utils'
 import { tendency, getBaseItem } from '@/api/base'
 import resize from '@/mixins/resize'
 import line from '@/mixins/line'
-import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -53,16 +54,6 @@ export default {
           code: 'badValue'
         }
       ],
-      tooltip: {
-        formatter: function (data) {
-          let time = data[0].axisValue
-          let result = `${time}<br/>`
-          data.forEach((item) => {
-            result += `${item.seriesName}：${item.value}%<br/>`
-          })
-          return result
-        }
-      },
       request: tendency
     }
   },
@@ -76,29 +67,33 @@ export default {
       }
     }
   },
-  mixins: [resize, line],
   props: {
-    finType: Number,
     heads: Array
   },
   watch: {
-    activeHead() {
-      this.drawChart()
-    },
     heads: {
       immediate: true,
       handler(data) {
         if (!data) return
         this.activeHead = this.heads[0].value
       }
+    },
+    activeHead() {
+      this.drawChart()
+    },
+    industryCode: {
+      immediate: true,
+      handler() {
+        this.drawChart()
+      }
     }
   },
+  mixins: [resize, line],
   methods: {
     setChartOption() {
-      this.chartOption_line.tooltip = Object.assign({}, this.chartOption_line.tooltip, this.tooltip)
       this.chartOption_line.color = this.color
       this.chartOption_line.legend.left = 0
-      this.chartOption_line.grid.left = '40px'
+      this.chartOption_line.grid.left = '60px'
       const series = []
       this.legends.forEach((item) => {
         series.push({
@@ -107,9 +102,25 @@ export default {
           data: this.lineData.map((data) => data[item.code])
         })
       })
-      this.chartOption_line.yAxis.axisLabel.formatter = '{value}%'
+      let valueType = this.lineData[0].valueType === 1 ? 'ratio' : 'number'
+      if (valueType === 'ratio') {
+        this.chartOption_line.yAxis.axisLabel.formatter = '{value}%'
+      } else {
+        this.chartOption_line.yAxis.axisLabel.formatter = (data) => converUnit(data, 'zh', 0)
+      }
+      this.chartOption_line.tooltip.formatter = (data) => {
+        let time = data[0].axisValue
+        let result = `${time}<br/>`
+        data.forEach((item) => {
+          let value =
+            valueType === 'ratio' ? `${converUnit(item.value, 'zh', 0)}%` : `${converUnit(item.value, 'zh', 0)}元`
+          result += `${item.seriesName}：${value}<br/>`
+        })
+        return result
+      }
       this.chartOption_line.series = series
       this.chartOption_line.xAxis.data = this.lineData.map((data) => data.year)
+      this.chartOption_line.yAxis.min = null
       return this.chartOption_line
     }
   }

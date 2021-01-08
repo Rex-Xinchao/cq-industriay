@@ -8,8 +8,8 @@
       </el-tabs>
     </div>
     <div class="item-box">
-      <base-table :type="activeType" :finType="finType" class="item_100 height_lg"></base-table>
-      <line-chart :finType="finType" :heads="headers" class="item_100 item_last height_lg"></line-chart>
+      <base-table :finType="finType" :type="activeType" class="item_100 height_lg"></base-table>
+      <line-chart :heads="headers" class="item_100 item_last height_lg"></line-chart>
     </div>
   </div>
 </template>
@@ -22,7 +22,7 @@ export default {
     return {
       activeType: '1',
       headers: [],
-      finType: this.$route.query.abilityType,
+      finType: null,
       title: null
     }
   },
@@ -34,21 +34,33 @@ export default {
       immediate: true,
       handler(data) {
         if (!data) return
-        data.forEach((item) => {
-          if (this.$route.query.abilityType == item.type) {
-            this.title = item.name
-            this.headers = item.items.map((item) => {
-              return {
-                name: item.itemName,
-                value: item.itemCode
-              }
-            })
-          }
-        })
+        this.setHeads()
+      }
+    },
+    $route: {
+      deep: true,
+      handler(data) {
+        this.setHeads()
       }
     }
   },
-  components: { baseTable, lineChart }
+  components: { baseTable, lineChart },
+  methods: {
+    setHeads() {
+      this.baseMenu.forEach((item) => {
+        if (this.$route.query.abilityType == item.type) {
+          this.title = item.name
+          this.finType = item.type
+          this.headers = item.items.map((item) => {
+            return {
+              name: item.itemName,
+              value: item.itemCode
+            }
+          })
+        }
+      })
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
