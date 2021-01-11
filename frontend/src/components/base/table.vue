@@ -19,7 +19,7 @@
     <el-table v-loading="loading" class="table-main table-head-grey" :data="tableData" height="300">
       <el-table-column prop="name" label="科目" align="left">
         <template slot-scope="scope">
-          <s>{{ scope.row.name }}</s>
+          <b>{{ scope.row.name }}</b>
         </template>
       </el-table-column>
       <el-table-column prop="greateValue" label="优秀值" align="right">

@@ -5,8 +5,8 @@
       <span class="sign">{{ industry }}</span>
     </h1>
     <div class="chart-body" v-loading="tableLoading">
-      <el-select v-model="code" placeholder="请选择" class="code-select" v-if="mappings.length > 1">
-        <el-option v-for="item in mappings" :key="item.value" :label="item.label" :value="item.value"></el-option>
+      <el-select v-model="code" placeholder="请选择" class="code-select" v-if="sams.length > 1">
+        <el-option v-for="item in sams" :key="item.value" :label="item.label" :value="item.value"></el-option>
       </el-select>
       <div class="graph-box"></div>
       <no-data-show :show="noData"></no-data-show>

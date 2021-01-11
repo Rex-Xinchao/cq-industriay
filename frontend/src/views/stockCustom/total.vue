@@ -43,6 +43,7 @@
 </template>
 <script>
 import { loan_balance, abnormal_loan, total_loan_balance, total_abnormal_loan } from '@/api/custom'
+import { Mappings_GB } from '@/mixins/base'
 import barChart from '@components/stockCustom/bar'
 import stackChart from '@components/stockCustom/stack'
 import circleChart from '@components/stockCustom/circle'
@@ -100,6 +101,7 @@ export default {
     distributionMain,
     riskRankCom
   },
+  mixins: [Mappings_GB],
   methods: {
     loan_balance,
     abnormal_loan,

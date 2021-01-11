@@ -139,7 +139,15 @@ export const Events = {
 export const Mappings = {
   data() {
     return {
-      mappings: []
+      sams: []
+    }
+  },
+  watch: {
+    $route: {
+      deep: true,
+      handler() {
+        this.getMappings()
+      }
     }
   },
   methods: {
@@ -147,25 +155,54 @@ export const Mappings = {
       if (this.$route.query.name.indexOf('国标') >= 0) {
         nodeMapping({
           code: this.$route.query.code,
-          isSam: true
+          isSam: false
         }).then((res) => {
-          this.mappings = res.gb4[0].products.map((item) => {
+          this.sams = res.gb4[0].products.map((item) => {
             return {
               label: item.samName,
               value: item.samCode
             }
           })
-          this.code = this.mappings[0].value
+          this.code = this.sams[0].value
         })
       } else {
-        this.mappings = [
+        this.sams = [
           {
             label: this.$route.query.name,
             value: this.$route.query.code
           }
         ]
-        this.code = this.mappings[0].value
+        this.code = this.sams[0].value
       }
+    }
+  },
+  mounted() {
+    this.getMappings()
+  }
+}
+
+export const Mappings_GB = {
+  data() {
+    return {
+      GBs: []
+    }
+  },
+  watch: {
+    $route: {
+      deep: true,
+      handler() {
+        this.getMappings()
+      }
+    }
+  },
+  methods: {
+    getMappings() {
+      nodeMapping({
+        code: this.$route.query.code,
+        isSam: this.$route.query.name.indexOf('国标') < 0
+      }).then((res) => {
+        this.GBs = res.gb4
+      })
     }
   },
   mounted() {

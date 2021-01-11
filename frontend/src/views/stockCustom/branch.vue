@@ -84,6 +84,7 @@ import {
   customer,
   reject_default
 } from '@/api/custom'
+import { Mappings_GB } from '@/mixins/base'
 import barChart from '@components/stockCustom/bar'
 import stackChart from '@components/stockCustom/stack'
 import circleChart from '@components/stockCustom/circle'
@@ -116,7 +117,7 @@ export default {
       }
     }
   },
-  mixins: [pageTo],
+  mixins: [pageTo, Mappings_GB],
   components: {
     barChart,
     stackChart,
