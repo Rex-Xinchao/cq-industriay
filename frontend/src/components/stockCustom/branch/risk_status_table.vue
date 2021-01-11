@@ -4,16 +4,58 @@
       {{ title }}
       <i class="icon-tip" :title="`来源于重庆银行${industry}授信客户`"></i>
     </h1>
-    <div class="operation-bar">
-      <span class="bar-item" :class="{ active: type === 0 }" @click="type = 0">{{ `全部  (${number_0})` }}</span>
-      <span class="bar-item" :class="{ active: type === 1 }" @click="type = 1">{{ `逾期客户  (${number_1})` }}</span>
-      <span class="bar-item" :class="{ active: type === 2 }" @click="type = 2">
-        {{ `黑名单  (${number_2})` }}
-      </span>
-      <span class="bar-item last" :class="{ active: type === 3 }" @click="type = 3">
-        {{ `账户状态异常  (${number_3})` }}
-      </span>
 
+    <div class="com-cards">
+      <div class="card" :class="{ active: type === 0 }" @click="type = 0">
+        <div class="card-main">
+          <span class="icon icon_1"></span>
+          <span class="line">
+            <p>
+              <b>{{ number_1 }}</b>
+              家
+            </p>
+            <p>全部风险客户</p>
+          </span>
+        </div>
+      </div>
+      <div class="card" :class="{ active: type === 1 }" @click="type = 1">
+        <div class="card-main">
+          <span class="icon icon_2"></span>
+          <span class="line">
+            <p>
+              <b>{{ number_1 }}</b>
+              家
+            </p>
+            <p>逾期客户</p>
+          </span>
+        </div>
+      </div>
+      <div class="card" :class="{ active: type === 2 }" @click="type = 2">
+        <div class="card-main">
+          <span class="icon icon_3"></span>
+          <span class="line">
+            <p>
+              <b>{{ number_2 }}</b>
+              家
+            </p>
+            <p>黑名单客户</p>
+          </span>
+        </div>
+      </div>
+      <div class="card" :class="{ active: type === 3 }" @click="type = 3">
+        <div class="card-main">
+          <span class="icon icon_4"></span>
+          <span class="line">
+            <p>
+              <b>{{ number_3 }}</b>
+              家
+            </p>
+            <p>账户状态异常客户</p>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="operation-bar">
       <span class="button-export fr" @click="exportFile">
         <i class="el-icon-download"></i>
         导出
@@ -49,7 +91,6 @@
         </span>
       </el-popover>
     </div>
-
     <el-table
       v-loading="loading"
       class="table-main table-head-grey"
@@ -98,7 +139,7 @@ export default {
       orgs: [],
       amountRange: [0, 500],
       timeRange: [0, 30],
-      type: 1,
+      type: 0,
       number_0: 18,
       number_1: 6,
       number_2: 6,
@@ -219,5 +260,106 @@ export default {
 .change-tag {
   background-color: #fbe4e8;
   color: #fe6a80;
+}
+.com-cards {
+  padding-top: 16px;
+  width: 100%;
+  height: 76px;
+
+  .card {
+    display: inline-block;
+    width: calc(25% - 20px);
+    height: 100%;
+    box-sizing: border-box;
+    margin: 0 10px;
+    border: 1px solid #cccccc;
+
+    .card-main {
+      padding-top: 10px;
+      width: 160px;
+      height: 100%;
+      margin: 0 auto;
+      cursor: pointer;
+    }
+
+    .icon {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background-repeat: no-repeat;
+      background-size: contain;
+
+      &.icon_1 {
+        background-image: url(~@/assets/imgs/stockCustom/inside_1.svg);
+      }
+      &.icon_2 {
+        background-image: url(~@/assets/imgs/stockCustom/inside_2.svg);
+      }
+      &.icon_3 {
+        background-image: url(~@/assets/imgs/stockCustom/inside_3.svg);
+      }
+      &.icon_4 {
+        background-image: url(~@/assets/imgs/stockCustom/inside_4.svg);
+      }
+    }
+
+    .line {
+      display: inline-block;
+      width: 120px;
+      padding-left: 20px;
+      box-sizing: border-box;
+
+      p {
+        margin: 0;
+        b {
+          font-size: 28px;
+          font-weight: bold;
+          color: #1b253a;
+          line-height: 36px;
+        }
+        &:nth-of-type(1) {
+          font-size: 12px;
+          font-weight: 400;
+          color: #1b253a;
+          line-height: 16px;
+        }
+
+        &:nth-of-type(2) {
+          font-size: 12px;
+          font-weight: 400;
+          color: #94979b;
+          line-height: 16px;
+        }
+      }
+    }
+
+    &.active {
+      background: #fff8f9;
+      border: 1px solid #fd485d;
+      .icon {
+        &.icon_1 {
+          background-image: url(~@/assets/imgs/stockCustom/inside_1_active.svg);
+        }
+        &.icon_2 {
+          background-image: url(~@/assets/imgs/stockCustom/inside_2_active.svg);
+        }
+        &.icon_3 {
+          background-image: url(~@/assets/imgs/stockCustom/inside_3_active.svg);
+        }
+        &.icon_4 {
+          background-image: url(~@/assets/imgs/stockCustom/inside_4_active.svg);
+        }
+      }
+      .line {
+        color: #fd485d;
+        p {
+          color: #fd485d;
+          b {
+            color: #fd485d;
+          }
+        }
+      }
+    }
+  }
 }
 </style>
