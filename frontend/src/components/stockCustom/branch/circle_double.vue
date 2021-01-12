@@ -118,9 +118,11 @@ export default {
   },
   watch: {
     type() {
+      if (!data.length) return
       this.drawChart()
     },
     dataTime() {
+      if (!data.length) return
       this.drawChart()
     },
     industryCode: {

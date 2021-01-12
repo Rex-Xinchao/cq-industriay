@@ -185,6 +185,12 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/styles/common/view';
 @import '~@/assets/styles/industrial';
+.code-select {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  z-index: 1000;
+}
 .table {
   height: 100%;
   .negative {
