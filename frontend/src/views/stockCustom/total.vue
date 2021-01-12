@@ -5,38 +5,42 @@
       <div class="com-main">
         <h1 class="com-title">行业存量授信客户贷款余额情况</h1>
         <div class="card-box">
-          <bar-chart class="card_lg" :request="loan_balance"></bar-chart>
+          <bar-chart class="card_lg" :request="loan_balance" :industryCode="GBs"></bar-chart>
           <circle-chart
             class="card_lg"
             title=""
             :request="total_loan_balance"
             :legendData="legendData_1"
+            :industryCode="GBs"
           ></circle-chart>
         </div>
       </div>
       <div class="com-main">
         <h1 class="com-title">行业存量授信客户不良贷款情况</h1>
         <div class="card-box">
-          <stack-chart class="card_lg" :request="abnormal_loan"></stack-chart>
+          <stack-chart class="card_lg" :request="abnormal_loan" :industryCode="GBs"></stack-chart>
           <circle-chart
             class="card_lg"
             title=""
             :request="total_abnormal_loan"
             :legendData="legendData_2"
+            :industryCode="GBs"
           ></circle-chart>
         </div>
       </div>
-      <distribution-main style="height: 560px" class="item_100 height_lg"></distribution-main>
+      <distribution-main style="height: 560px" class="item_100 height_lg" :industryCode="GBs"></distribution-main>
       <risk-table class="item_100 height_mid" title="全行存量客户舆情风险事件"></risk-table>
       <risk-rank-com
         class="item_50 item_last height_mid"
         :barList="barList_1"
         title="全行存量授信客户行内风险"
+        :industryCode="GBs"
       ></risk-rank-com>
       <risk-rank-com
         class="item_50 item_last height_mid"
         :barList="barList_2"
         title="全行存量授信客户外部风险"
+        :industryCode="GBs"
       ></risk-rank-com>
     </div>
   </div>

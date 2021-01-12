@@ -150,11 +150,15 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['industry', 'industryCode'])
+    ...mapGetters(['industry'])
   },
   props: {
     title: String,
-    request: Function
+    request: Function,
+    industryCode: {
+      require: true,
+      type: Array
+    }
   },
   watch: {
     type() {
@@ -179,7 +183,7 @@ export default {
       })
         .then((res) => {
           this.loading = false
-          this.number_0 = res.count || 0
+          this.number_0 = res.customerCount || 0
           this.number_1 = res.overdueCount || 0
           this.number_2 = res.blacklistCount || 0
           this.number_3 = res.changeCount || 0

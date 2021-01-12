@@ -105,12 +105,16 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['industry', 'industryCode'])
+    ...mapGetters(['industry'])
   },
   mixins: [resize, pie],
   props: {
     title: String,
-    subTitle: String
+    subTitle: String,
+    industryCode: {
+      require: true,
+      type: Array
+    }
   },
   watch: {
     type() {
@@ -141,7 +145,7 @@ export default {
       this.myChart.on('click', (params) => {
         if (params.componentSubType === 'pie') {
           if (params.seriesIndex === 0) {
-            this.tableTitle = `${params.data.name} ${params.data.value} 占比：${params.percent}%`
+            this.tableTitle = `${params.data.name} ${params.data.value}家 占比：${params.percent}%`
             this.tableData = params.data.list
           }
         }
@@ -188,14 +192,14 @@ export default {
         series_in.data.push({
           name: item_p.eventName,
           comCount: item_p.comCount,
-          value: item_p.amountCount
+          value: item_p.comCount
         })
         item_p.negEvents.forEach((item_c, j) => {
           series_out.color.push(colors[i].children[j])
           series_out.data.push({
             name: item_c.eventName,
             comCount: item_c.comCount,
-            value: item_c.amountCount,
+            value: item_c.comCount,
             list: item_c.comList
           })
           if (!this.tableData.length) {
@@ -204,6 +208,9 @@ export default {
           }
         })
       })
+
+      console.log(series_in.data)
+      console.log(series_out.data)
       const isOnly = series_in.data.length === 1
       if (isOnly) {
         series_in.label.position = 'center'
@@ -214,9 +221,6 @@ export default {
       this.chartOption_pie.series[0] = series_out
       return this.chartOption_pie
     }
-  },
-  mounted() {
-    this.drawChart()
   }
 }
 </script>

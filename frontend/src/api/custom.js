@@ -18,11 +18,11 @@ export const total_abnormal_loan = (data) => {
 }
 
 export const core_index = (data) => {
-  return http.get(`/custom/${data.industryCode}/core_index`, data)
+  return http.get(`/custom/core_index`, data)
 }
 
 export const customer_statistics = (data) => {
-  return http.get(`/custom/${data.industryCode}/customer_statistics`, data)
+  return http.get(`/custom/customer_statistics`, data)
 }
 
 export const customer = (data) => {
@@ -30,7 +30,7 @@ export const customer = (data) => {
 }
 
 export const neg_events = (data) => {
-  return http.get(`/custom/${data.industryCode}/neg_events`, data)
+  return http.get(`/custom/neg_events`, data)
 }
 
 export const industry_map = (data) => {
@@ -46,5 +46,5 @@ export const risk_event = (data) => {
 }
 
 export const reject_default = (data) => {
-  return http.get(`/custom/${data.industryCode}/reject_default`, data)
+  return http.get(`/custom/reject_default`, data)
 }

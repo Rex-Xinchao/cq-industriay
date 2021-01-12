@@ -230,9 +230,15 @@ export default {
       selectAreaName: null
     }
   },
+  props: {
+    industryCode: {
+      require: true,
+      type: Array
+    }
+  },
   mixins: [resize, Regions],
   computed: {
-    ...mapGetters(['industry', 'industryCode']),
+    ...mapGetters(['industry']),
     title() {
       return this.type === 1 ? '全行存量客户的行业分布' : '全行存量客户的管护机构分布'
     }

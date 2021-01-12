@@ -24,10 +24,10 @@ export default {
       tooltip: {
         formatter: function (data) {
           let time = data[0].axisValue
-          let unit = vm.isScale ? '万元' : '个'
+          let unit = vm.isScale ? '元' : '个'
           let result = `${time}<br/>`
           data.forEach((item) => {
-            result += `${item.seriesName}：${numberFormat(item.value)} ${unit}<br/>`
+            result += `${item.seriesName}：${converUnit(item.value, 'zh', 0)}${unit}<br/>`
           })
           return result
         }
@@ -49,10 +49,21 @@ export default {
     request: {
       require: true,
       type: Function
+    },
+    industryCode: {
+      require: true,
+      type: Array
     }
   },
   computed: {
-    ...mapGetters(['industry'])
+    ...mapGetters(['industry']),
+    urlOptions() {
+      return {
+        industryCode: this.industryCode,
+        buCode: null,
+        limit: null
+      }
+    }
   },
   mixins: [resize, bar],
   watch: {
@@ -64,6 +75,7 @@ export default {
     setChartOption() {
       const data = this.barData
       this.chartId_bar = 'stackChart'
+      this.chartOption_bar.grid.left = '60px'
       this.chartOption_bar.color = this.color
       this.chartOption_bar.legend = this.legend
       this.chartOption_bar.tooltip = Object.assign({}, this.chartOption_bar.tooltip, this.tooltip)
@@ -77,7 +89,7 @@ export default {
         let sum = 0
         item.badList.forEach((bad) => {
           badMap[bad.badloanType] = badMap[bad.badloanType] || []
-          let value = this.isScale ? converUnit(bad[key].amount) : bad[key]
+          let value = this.isScale ? bad[key].amount : bad[key]
           badMap[bad.badloanType].push(value)
           sum += Number(value)
         })
@@ -97,6 +109,7 @@ export default {
           data: badMap[key]
         })
       }
+      this.chartOption_bar.yAxis.axisLabel.formatter = (d) => converUnit(d, 'zh', 0)
       return this.chartOption_bar
     }
   },

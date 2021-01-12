@@ -53,7 +53,13 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['industry'])
+    ...mapGetters(['industry']),
+    urlOptions() {
+      return {
+        industryCode: this.industryCode,
+        buCode: null
+      }
+    }
   },
   mixins: [resize, pie],
   props: {
@@ -62,27 +68,25 @@ export default {
     request: {
       require: true,
       type: Function
+    },
+    industryCode: {
+      require: true,
+      type: Array
     }
   },
   methods: {
     async getChartData() {
-      const sleep = (time) => new Promise((res) => setTimeout(() => res(), time))
-      if (this.request) {
-        let result = []
-        this.response = await this.request(this.urlOptions)
-          .then((res) => res)
-          .catch((e) => {})
-        result = this.response
-        if (result) {
-          this.noData = !result.big
-        } else {
-          this.noData = true
-        }
-        return result
+      let result = []
+      this.response = await this.request(this.urlOptions)
+        .then((res) => res)
+        .catch((e) => {})
+      result = this.response
+      if (result) {
+        this.noData = !result.big
       } else {
-        await sleep(300)
-        return []
+        this.noData = true
       }
+      return result
     },
     setChartOption() {
       const data = this.pieData

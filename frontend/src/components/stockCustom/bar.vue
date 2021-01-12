@@ -19,21 +19,27 @@ export default {
   data() {
     return {
       isScale: true,
-      color: ['#3398DB'],
-      urlOptions: {
-        industryCode: null,
+      color: ['#3398DB']
+    }
+  },
+  computed: {
+    ...mapGetters(['industry']),
+    urlOptions() {
+      return {
+        industryCode: this.industryCode,
         buCode: null,
         limit: null
       }
     }
   },
-  computed: {
-    ...mapGetters(['industry'])
-  },
   props: {
     request: {
       require: true,
       type: Function
+    },
+    industryCode: {
+      require: true,
+      type: Array
     }
   },
   mixins: [resize, bar],
@@ -48,6 +54,7 @@ export default {
       const vm = this
       this.chartOption_bar.color = this.color
       this.chartOption_bar.grid.top = '20px'
+      this.chartOption_bar.grid.left = '60px'
       this.chartOption_bar.series = {
         type: 'bar',
         barWidth: '36%',
@@ -56,10 +63,10 @@ export default {
       this.chartOption_bar.tooltip.formatter = function (data) {
         let time = data[0].axisValue
         let text = vm.isScale ? '贷款余额规模' : '贷款企业数量'
-        let unit = vm.isScale ? '万元' : '个'
+        let unit = vm.isScale ? '元' : '个'
         let result = `${time}<br/>`
         data.forEach((item) => {
-          result += `${text}：${numberFormat(item.value)} ${unit}<br/>`
+          result += `${text}：${converUnit(item.value, 'zh', 0)}${unit}<br/>`
         })
         return result
       }
@@ -67,11 +74,12 @@ export default {
       this.chartOption_bar.series.data = []
       let max = 0
       data.forEach((item) => {
-        let value = this.isScale ? converUnit(item.loanBalance.amount) : item.comNum
+        let value = this.isScale ? item.loanBalance.amount : item.comNum
         max = Math.max(max, Number(value))
         this.chartOption_bar.series.data.push(value)
         this.chartOption_bar.xAxis.data.push(item.rpt)
       })
+      this.chartOption_bar.yAxis.axisLabel.formatter = (d) => converUnit(d, 'zh', 0)
       return this.chartOption_bar
     }
   },

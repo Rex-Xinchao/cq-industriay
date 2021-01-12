@@ -42,34 +42,46 @@
       <div class="com-main">
         <h1 class="com-title">行业存量授信客户贷款余额情况</h1>
         <div class="card-box">
-          <bar-chart class="card_lg" :request="loan_balance"></bar-chart>
+          <bar-chart class="card_lg" :request="loan_balance" :industryCode="GBs"></bar-chart>
           <circle-chart
             class="card_lg"
             title="贷款余额分布"
             :request="total_loan_balance"
             :legendData="legendData_1"
+            :industryCode="GBs"
           ></circle-chart>
         </div>
       </div>
       <div class="com-main">
         <h1 class="com-title">行业存量授信客户不良贷款情况</h1>
         <div class="card-box">
-          <stack-chart class="card_lg" :request="abnormal_loan"></stack-chart>
+          <stack-chart class="card_lg" :request="abnormal_loan" :industryCode="GBs"></stack-chart>
           <circle-chart
             class="card_lg"
             title="不良贷款余额分布"
             :request="total_abnormal_loan"
             :legendData="legendData_2"
+            :industryCode="GBs"
           ></circle-chart>
         </div>
       </div>
-      <table-com title="行业客户及行内风险状况" class="item_100 height_mid" :request="customer_statistics"></table-com>
+      <table-com
+        title="行业客户及行内风险状况"
+        class="item_100 height_mid"
+        :request="customer_statistics"
+        :industryCode="GBs"
+      ></table-com>
       <doucle-circle-chart
         class="item_100 height_mid"
         title="行业存量授信客户负面舆情事件"
         subTitle="汽车行业"
+        :industryCode="GBs"
       ></doucle-circle-chart>
-      <risk-table-com class="item_100 item_last height_mid" title="行业存量授信客户的外部风险"></risk-table-com>
+      <risk-table-com
+        class="item_100 item_last height_mid"
+        title="行业存量授信客户的外部风险"
+        :industryCode="GBs"
+      ></risk-table-com>
     </div>
   </div>
 </template>
@@ -139,7 +151,7 @@ export default {
     getData() {
       this.loading = true
       core_index({
-        industryCode: this.industryCode,
+        industryCode: this.GBs,
         buCode: null,
         limit: null
       })
@@ -155,7 +167,7 @@ export default {
           this.dataList = [{}, {}, {}, {}]
         })
       reject_default({
-        industryCode: this.industryCode
+        industryCode: this.GBs
       })
         .then((res) => {
           this.rejectData = res.result || []
