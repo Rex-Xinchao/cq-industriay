@@ -124,7 +124,8 @@ export default {
   watch: {
     industryCode: {
       immediate: true,
-      handler() {
+      handler(data) {
+        if (!data.length) return
         this.getData()
       }
     }

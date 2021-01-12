@@ -74,6 +74,15 @@ export default {
       type: Array
     }
   },
+  watch: {
+    industryCode: {
+      immediate: true,
+      handler(data) {
+        if (!data.length) return
+        this.drawChart()
+      }
+    }
+  },
   methods: {
     async getChartData() {
       let result = []
@@ -114,9 +123,6 @@ export default {
       }
       return this.chartOption_pie
     }
-  },
-  mounted() {
-    this.drawChart()
   }
 }
 </script>

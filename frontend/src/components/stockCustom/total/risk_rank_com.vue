@@ -87,6 +87,13 @@ export default {
     },
     barType() {
       this.drawChart()
+    },
+    industryCode: {
+      immediate: true,
+      handler(data) {
+        if (!data.length) return
+        this.drawChart()
+      }
     }
   },
   mixins: [resize, bar],
@@ -104,9 +111,6 @@ export default {
       this.chartOption_bar.series = this.series
       return this.chartOption_bar
     }
-  },
-  mounted() {
-    this.drawChart()
   }
 }
 </script>

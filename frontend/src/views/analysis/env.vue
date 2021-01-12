@@ -259,7 +259,7 @@ export default {
     },
     getHead(data) {
       // todo 静态数据特殊处理
-      if (!['FA0040010709', 'AC003005', 'EC001001130201'].includes(data)) return
+      if (!['FA0040010709', 'GB_C3612', 'EC001001130201'].includes(data)) return
       this.loading = true
       envChart({ code: data })
         .then((res) => {

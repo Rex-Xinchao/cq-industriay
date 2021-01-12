@@ -122,6 +122,13 @@ export default {
     },
     dataTime() {
       this.drawChart()
+    },
+    industryCode: {
+      immediate: true,
+      handler(data) {
+        if (!data.length) return
+        this.drawChart()
+      }
     }
   },
   methods: {

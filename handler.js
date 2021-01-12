@@ -1831,7 +1831,7 @@ const data = [
         oid: 25994625,
         batch: null,
         name: '新能源汽车',
-        code: 'AC003005',
+        code: 'GB_C3612',
         remark: null,
         state: null,
         dt: null,

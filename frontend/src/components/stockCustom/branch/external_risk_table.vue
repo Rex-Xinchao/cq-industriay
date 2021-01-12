@@ -156,7 +156,19 @@ export default {
     }
   },
   props: {
-    title: String
+    title: String,
+    industryCode: {
+      require: true,
+      type: Array
+    }
+  },
+  watch: {
+    industryCode: {
+      immediate: true,
+      handler(data) {
+        if (!data.length) return
+      }
+    }
   },
   methods: {
     handleClose() {

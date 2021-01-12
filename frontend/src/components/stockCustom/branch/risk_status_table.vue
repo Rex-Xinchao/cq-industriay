@@ -163,6 +163,13 @@ export default {
   watch: {
     type() {
       this.init()
+    },
+    industryCode: {
+      immediate: true,
+      handler(data) {
+        if (!data.length) return
+        this.init()
+      }
     }
   },
   methods: {
@@ -207,9 +214,6 @@ export default {
     exportFile() {
       this.$message.info('功能开发中')
     }
-  },
-  mounted() {
-    this.init()
   }
 }
 </script>

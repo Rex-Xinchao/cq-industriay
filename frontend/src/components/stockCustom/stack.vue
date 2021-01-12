@@ -69,6 +69,13 @@ export default {
   watch: {
     isScale() {
       this.updateChart()
+    },
+    industryCode: {
+      immediate: true,
+      handler(data) {
+        if (!data.length) return
+        this.drawChart()
+      }
     }
   },
   methods: {
@@ -112,9 +119,6 @@ export default {
       this.chartOption_bar.yAxis.axisLabel.formatter = (d) => converUnit(d, 'zh', 0)
       return this.chartOption_bar
     }
-  },
-  mounted() {
-    this.drawChart()
   }
 }
 </script>

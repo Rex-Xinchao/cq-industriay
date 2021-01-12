@@ -96,6 +96,13 @@ export default {
       this.tags = []
       this.companys = []
       this.search()
+    },
+    industryCode: {
+      immediate: true,
+      handler(data) {
+        if (!data.length) return
+        this.search()
+      }
     }
   },
   methods: {

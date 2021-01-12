@@ -155,7 +155,7 @@ export const newsList = async (data) => {
             id: null,
             oid: 27375056,
             batch: null,
-            code: 'AC003005',
+            code: 'GB_C3612',
             remark: null,
             state: null,
             dt: null,
@@ -435,7 +435,7 @@ export const newsList = async (data) => {
             id: null,
             oid: 27374197,
             batch: null,
-            code: 'AC003005',
+            code: 'GB_C3612',
             remark: null,
             state: null,
             dt: null,
@@ -1012,7 +1012,7 @@ export const newsList = async (data) => {
             id: null,
             oid: 27372596,
             batch: null,
-            code: 'AC003005',
+            code: 'GB_C3612',
             remark: null,
             state: null,
             dt: null,
@@ -1666,7 +1666,7 @@ export const newsList = async (data) => {
             id: null,
             oid: 27362690,
             batch: null,
-            code: 'AC003005',
+            code: 'GB_C3612',
             remark: null,
             state: null,
             dt: null,
@@ -1899,7 +1899,7 @@ export const newsList = async (data) => {
             id: null,
             oid: 27356223,
             batch: null,
-            code: 'AC003005',
+            code: 'GB_C3612',
             remark: null,
             state: null,
             dt: null,
@@ -2187,7 +2187,7 @@ export const newsList = async (data) => {
             id: null,
             oid: 27292627,
             batch: null,
-            code: 'AC003005',
+            code: 'GB_C3612',
             remark: null,
             state: null,
             dt: null,
@@ -2409,7 +2409,7 @@ export const newsList = async (data) => {
             id: null,
             oid: 27178047,
             batch: null,
-            code: 'AC003005',
+            code: 'GB_C3612',
             remark: null,
             state: null,
             dt: null,
@@ -2521,7 +2521,7 @@ export const newsList = async (data) => {
             id: null,
             oid: 27135781,
             batch: null,
-            code: 'AC003005',
+            code: 'GB_C3612',
             remark: null,
             state: null,
             dt: null,
@@ -4669,7 +4669,7 @@ export const testList = async (data) => {
             id: null,
             oid: 25994625,
             batch: null,
-            code: 'AC003005',
+            code: 'GB_C3612',
             remark: null,
             state: null,
             dt: null,
@@ -4911,7 +4911,7 @@ export const envMenu = async (data) => {
         children: [
           {
             name: '新能源车整车制造（国标4级）',
-            code: 'AC003005'
+            code: 'GB_C3612'
           }
         ]
       },
@@ -4946,7 +4946,7 @@ export const envMenu = async (data) => {
 export const envChart = async (data) => {
   await sleep(500)
   let response = {}
-  if (data.code === 'AC003005') {
+  if (data.code === 'GB_C3612') {
     response = {
       names: [
         {
@@ -5376,7 +5376,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广使用',
             content: '推广使用新能源汽车'
@@ -5392,14 +5392,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广使用',
             content: '推广使用新能源汽车'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广使用',
             content: '公交、城市出租、环卫等行业和政府机关推广使用纯电动等新能源汽车'
@@ -5415,7 +5415,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快',
             content:
@@ -5423,7 +5423,7 @@ export const policyList = async (data) => {
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快',
             content:
@@ -5431,14 +5431,14 @@ export const policyList = async (data) => {
           },
           {
             industryName: '新能源汽车配套',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '培育',
             content: '培育以汽车动力电池为代表的新能源汽车配套产业链'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '打造',
             content: '打造国家新能源汽车产业基地'
@@ -5454,7 +5454,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|引导',
             content:
@@ -5462,7 +5462,7 @@ export const policyList = async (data) => {
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '研发|支持',
             content:
@@ -5470,14 +5470,14 @@ export const policyList = async (data) => {
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '培育',
             content: '培育以汽车动力电池为代表的新能源汽车产业链'
           },
           {
             industryName: '民营新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完成',
             content: '民营新能源汽车重点项目累计完成投资3.5亿元'
@@ -5493,7 +5493,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|加快',
             content: '加快发展北斗卫星导航、新能源汽车、无人机等产业'
@@ -5509,7 +5509,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '大力发展',
             content: '大力发展航空航天、智能终端、精密仪器、高端数控机床、新能源汽车等制造业'
@@ -5525,14 +5525,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车配套',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '培育',
             content: '大力培育动力电池、电机、电控等新能源汽车配套产业'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广使用',
             content: '推广使用纯电动、插电式混合动力等新能源汽车'
@@ -5548,14 +5548,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '发展新材料、电子及新一代信息技术、生物技术、新能源汽车等新兴产业'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '研发',
             content: '建设光伏产品研发及新能源汽车产业基地'
@@ -5571,7 +5571,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '引导',
             content:
@@ -5588,7 +5588,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车购置',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '落实',
             content: '7.落实新能源汽车购置补贴和免征车辆购置税优惠政策'
@@ -5604,7 +5604,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '实施新能源汽车推广计划'
@@ -5620,7 +5620,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '节能与新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|加快',
             content:
@@ -5628,7 +5628,7 @@ export const policyList = async (data) => {
           },
           {
             industryName: '电动汽车智能化',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '研发',
             content:
@@ -5636,21 +5636,21 @@ export const policyList = async (data) => {
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '研发',
             content: '目标：形成新能源汽车及智能网联汽车产业的研发体系'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '突破',
             content: '新能源汽车产业总产值力争突破1000亿元'
           },
           {
             industryName: '新能源汽车及智能网联汽车整车制造和关键零部',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '建成',
             content: '建成我国重要的新能源汽车及智能网联汽车整车制造和关键零部制造基地'
@@ -5666,112 +5666,112 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推进|研发',
             content: '（四）推进新能源汽车研发与应用'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|支持',
             content: '抓住国家支持发展新能源汽车的机遇'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '积极推动|加大|研发',
             content: '积极推动省内科研院所和企业加大新能源汽车的研发与应用'
           },
           {
             industryName: '电动汽车整车开发',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|培育',
             content: '重点培育发展电动汽车整车开发?动力电池?驱动电机?电子控制系统?充（换）电系统?电动汽车应用产业链'
           },
           {
             industryName: '电动汽车应用',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|培育',
             content: '重点培育发展电动汽车整车开发?动力电池?驱动电机?电子控制系统?充（换）电系统?电动汽车应用产业链'
           },
           {
             industryName: '纯电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '打造',
             content: '打造形成纯电动汽车、混合动力汽车、燃气汽车3条新能源汽车产品链'
           },
           {
             industryName: '新能源汽车产',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '打造',
             content: '打造形成纯电动汽车、混合动力汽车、燃气汽车3条新能源汽车产品链'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广|积极开展',
             content: '积极开展新能源汽车推广示范运用工作'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '建立',
             content: '（五）建立新能源汽车产业链联盟'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '建立',
             content: '组织省内高校、科研机构和企业建立全省新能源汽车产业链联盟'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|推动',
             content: '推动新能源汽车产业标准化、规模化发展'
           },
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '建立',
             content: '重点建立电动汽车产业链联盟'
           },
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持',
             content: '支持重点企业组建电动汽车企业技术中心或工程技术中心'
           },
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '形成电动汽车产业发展技术创新平台'
           },
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '（六）实施电动汽车推广应用示范工程'
           },
           {
             industryName: '节能和新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广|支持',
             content: '支持成都市争取成为国家级节能和新能源汽车示范推广试点城市'
@@ -5787,7 +5787,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '促进',
             content: '促进港澳台创业交流、军转民技术转移以及新能源汽车、第三代半导体、创客、人工智能等专业领域创新创业'
@@ -5803,14 +5803,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持',
             content: '积极支持省内企业生产的新能源汽车进入交通运输部道路运输车辆达标车型公告'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广|加大',
             content: '加大新能源汽车推广应用力度'
@@ -5826,14 +5826,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车车辆',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '落实',
             content: '落实国家新能源汽车车辆购置税优惠政策'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '在公共服务领域、党政机关和企事业单位推广应用新能源汽车'
@@ -5849,7 +5849,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加强',
             content: '加强航空与燃机、信息安全、新能源汽车、轨道交通、生物医学、石墨烯、人工智能等领域新职业新技能培训'
@@ -5865,14 +5865,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '培育',
             content: '重点培育新能源汽车、节能环保、生物医药、轨道交通、动力及储能电池等具有核心竞争力的新兴产业'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '培育',
             content:
@@ -5880,21 +5880,21 @@ export const policyList = async (data) => {
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '研发',
             content: '建设新能源汽车基地、油气化工基地、丝纺服装设计研发生产基地'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '培育',
             content: '重点培育新能源汽车、节能环保、生物医药、轨道交通、动力及储能电池等具有核心竞争力的新兴产业'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '培育',
             content:
@@ -5902,7 +5902,7 @@ export const policyList = async (data) => {
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '研发',
             content: '建设新能源汽车基地、油气化工基地、丝纺服装设计研发生产基地'
@@ -5918,14 +5918,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推动',
             content: '推动新能源汽车普及应用'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推动',
             content: '推动新能源汽车普及应用'
@@ -5941,14 +5941,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '重点发展智能终端、人工智能、智能汽车、新能源汽车等前沿科技产业'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '大力发展',
             content:
@@ -5956,7 +5956,7 @@ export const policyList = async (data) => {
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '大力发展',
             content: '大力发展智能装备、节能环保、新一代信息、新材料、生物医药、新能源汽车等战略性新兴产业集群'
@@ -5972,7 +5972,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加强|研发',
             content: '加强清洁能源、新能源汽车、信息网络、遥感与导航、生物等领域的部署和研发'
@@ -5988,7 +5988,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '着力发展新能源汽车、先进核电、分布式能源、智能电网、动力及储能电池、节能环保产品等'
@@ -6004,14 +6004,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推进|建立',
             content: '推进四川新能源汽车产业技术创新联盟与匈牙利汽车联盟建立战略合作关系'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推进|建立',
             content: '推进四川新能源汽车产业技术创新联盟与匈牙利汽车联盟建立战略合作关系'
@@ -6027,7 +6027,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '积极有序发展新一代信息技术、节能环保、新能源、生物、高端装备制造、新材料、新能源汽车等产业'
@@ -6043,7 +6043,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '节能与新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|促进',
             content:
@@ -6051,7 +6051,7 @@ export const policyList = async (data) => {
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '实施新能源汽车推广计划'
@@ -6067,7 +6067,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快',
             content:
@@ -6075,7 +6075,7 @@ export const policyList = async (data) => {
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快',
             content:
@@ -6092,14 +6092,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广|建立|完善',
             content: '建立完善节能家电、高效照明产品、节水器具、绿色建材等绿色产品和新能源汽车推广机制'
           },
           {
             industryName: '节能新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持',
             content: '有条件的区县可对消费者购置节能型家电产品、节能新能源汽车、节水器具等给予适当支持'
@@ -6115,14 +6115,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广|促进',
             content: '促进电动汽车推广应用'
           },
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完成',
             content: '自用充电基础设施的验收可由用户或其委托的电动汽车企业、施工单位会同小区物业完成'
@@ -6138,7 +6138,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '建成|研发',
             content: '建成国内主要的电动汽车研发及制造基地'
@@ -6154,7 +6154,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '落实|推广',
             content:
@@ -6171,7 +6171,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|推进',
             content: '统筹推进全市新能源汽车和智能网联汽车发展'
@@ -6188,14 +6188,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '建立',
             content: '新能源汽车生产企业应在市内建立废旧动力蓄电池回收网点并提供网点基本信息'
           },
           {
             industryName: '新能源和智能网联汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content:
@@ -6212,7 +6212,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车及智能网联汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content:
@@ -6229,7 +6229,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|加快',
             content:
@@ -6246,14 +6246,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广|加快',
             content: '加快新能源汽车推广应用和试点示范'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持',
             content: '鼓励金融机构对居民购买新能源汽车、绿色智能家电、智能家居、节水器具等绿色智能产品提供信贷支持'
@@ -6269,84 +6269,84 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '——新能源汽车快速发展'
           },
           {
             industryName: '新能源和智能网联汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '研发',
             content: '成为全国重要的新能源和智能网联汽车研发制造基地'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|加快',
             content: '加快新能源汽车发展'
           },
           {
             industryName: '新能源汽车产品',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推动',
             content: '推动新能源汽车产品开发与产业化'
           },
           {
             industryName: '纯电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '重点发展纯电动汽车、插电式混合动力汽车'
           },
           {
             industryName: '中高端新能源汽车产品',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持',
             content: '重点支持企业开发续航里程长、充电时间短、安全性能高的中高端新能源汽车产品'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完善',
             content: '完善新能源汽车产业链'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提高',
             content: '逐步提高公共服务领域新能源汽车使用比例'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提升',
             content: '重点提升共享用车中新能源汽车使用数量'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广|完善',
             content: '完善新能源汽车推广应用扶持政策'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|建立|促进',
             content: '建立促进新能源汽车发展的长效机制'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|推广|支持|加快',
             content: '制定加快新能源和智能网联汽车产业发展、新能源汽车推广应用等支持政策'
@@ -6362,7 +6362,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车及配套设施',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '鼓励在公务用车等领域通过融资租赁发展新能源汽车及配套设施'
@@ -6378,182 +6378,182 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广|加快',
             content: '加快新能源汽车推广应用的实施意见'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '落实|发展',
             content: '贯彻落实国家发展新能源汽车产业的战略部署'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广|加快',
             content: '加快全市新能源汽车的推广应用步伐'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|促进',
             content: '促进新能源汽车产业健康快速发展'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '研究制定新能源汽车推广应用规划'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广|发展',
             content: '健全市新能源汽车推广应用和产业发展联席会议制度'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广|推进',
             content: '统筹推进全市新能源汽车推广应用工作'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广|加快',
             content: '着力加快公共服务领域新能源汽车推广应用步伐'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '全市累计推广应用新能源汽车10万辆'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提高',
             content: '逐年提高新能源汽车应用比例'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '引导',
             content: '引导主城区公交车、出租车、网约车、物流车、旅游巴士等公共服务领域车辆主动使用新能源汽车'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推进',
             content: '推进党政机关和公共机构使用新能源汽车'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '落实|推广',
             content: '落实新能源汽车推广应用优惠政策'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '主城区是全市新能源汽车推广应用的重点区域'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '切实做好新能源汽车推广应用工作'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提高',
             content: '不断提高现代信息技术在新能源汽车商业运营模式创新中的应用水平'
           },
           {
             industryName: '新能源汽车技术研发和运营服务',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '研发',
             content: '鼓励互联网企业参与新能源汽车技术研发和运营服务'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完善',
             content: '完善新能源汽车和充电桩的产品质量保障体系'
           },
           {
             industryName: '新能源汽车技术',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '建立|支持',
             content: '支持建立行业性新能源汽车技术支撑平台'
           },
           {
             industryName: '新能源汽车产品',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '建立',
             content: '建立新能源汽车产品抽检制度'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '构建',
             content: '（十六）构建新能源汽车安全保障体系'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加强',
             content: '加强新能源汽车安全监管'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加强',
             content: '有关区县（自治县）人民政府要加强对所在地新能源汽车制造、运营和充电设施等方面的安全监管'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '大力宣传国家关于发展新能源汽车的相关政策'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提高',
             content: '提高全社会对新能源汽车的认知度和接受度'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '培育',
             content: '培育新能源汽车消费意识'
@@ -6569,7 +6569,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车及智能汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '培育',
             content:
@@ -6577,21 +6577,21 @@ export const policyList = async (data) => {
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '重点发展机器人及智能装备、高端交通装备、集成电路、新型显示、生物医药、新能源汽车及智能汽车等产业'
           },
           {
             industryName: '纯电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '突破',
             content: '重点围绕纯电动汽车、插电式混合动力汽车所需电池、电机、电控等核心技术突破'
           },
           {
             industryName: '新能源及智能汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '打造',
             content: '打造国内领先的新能源及智能汽车产业基地'
@@ -6607,7 +6607,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完善',
             content: '健全完善新能源汽车和智能汽车标准体系'
@@ -6623,28 +6623,28 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广|完善',
             content: '进一步完善公共机构推广应用新能源汽车实施方案'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '落实|推广',
             content: '积极落实新能源汽车推广任务'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提高',
             content: '“十三五”期间逐步提高配备更新公务用车中新能源汽车的比例'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '实现|广泛应用',
             content: '实现新能源汽车广泛应用'
@@ -6660,14 +6660,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '构建',
             content: '按照国家标准统一构建全市电动汽车充换电标准体系'
           },
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持',
             content: '为电动汽车提供充电接口互操作性检测及服务平台间数据交换等技术支持'
@@ -6683,14 +6683,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广使用|加快',
             content: '在快递物流领域加快推广使用新能源汽车和满足更高排放标准的燃油汽车'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提高',
             content: '逐步提高新能源汽车使用比例'
@@ -6706,84 +6706,84 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广|支持',
             content: '关于印发重庆市支持新能源汽车推广应用激励措施(2020年度)的通知'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广|支持',
             content: '重庆市支持新能源汽车推广应用激励措施(2020年度)'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快推动|推广',
             content: '加快推动新能源汽车推广应用'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广|加快',
             content: '加快新能源汽车推广应用'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|促进',
             content: '促进我市新能源汽车产业高质量发展'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '鼓励市内车企推广应用新能源汽车3.64万辆'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广|加强',
             content: '进一步加强新能源汽车推广应用工作的组织领导'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '落实|支持',
             content: '认真贯彻落实国家和我市新能源汽车相关支持政策'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持',
             content: '重点支持充电基础设施建设和运营、新能源汽车使用和运营等环节'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广|支持',
             content: '鼓励各区县配套安排专项资金支持新能源汽车推广应用'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提升',
             content: '提升市民对新能源汽车的驾乘体验和认知'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '营造新能源汽车推广应用浓厚氛围'
@@ -6799,56 +6799,56 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广|支持',
             content: '印发重庆市支持新能源汽车推广应用政策措施（2018—2022年）的通知'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广|支持',
             content: '重庆市支持新能源汽车推广应用政策措施（2018—2022年）'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提高|加快',
             content: '11．主城区新增和更换公交车、出租车要加快提高使用新能源汽车的比例'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提高',
             content: '13．逐步提高新增和更换驾驶培训车、驾驶考试车使用新能源汽车比例'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广|支持',
             content: '市级财政资金配套支持新能源汽车推广应用'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广|落实|支持',
             content: '16．将支持鼓励新能源汽车推广应用政策贯彻落实情况纳入市政府督查范围'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '17．每年开展新能源汽车推广应用成效评估'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '对作出突出成绩的单位和企业授予年度新能源汽车推广应用示范单位称号'
@@ -6864,7 +6864,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: -1,
             typeName: '严禁',
             content: '23．严禁无资质企业生产、销售电动汽车'
@@ -6880,7 +6880,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '积极推动',
             content: '积极推动新能源汽车、摩托车、医疗器械等产业成立专利联盟'
@@ -6896,14 +6896,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|引导',
             content: '积极引导新能源汽车产业健康有序发展'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '研发',
             content: '新建新能源汽车生产企业须具有动力系统等关键技术和整车研发能力'
@@ -6919,7 +6919,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加大|支持',
             content: '加大对我市自主品牌、自主知识产权和电子信息、新能源汽车等战略性新兴产业的支持力度'
@@ -6935,7 +6935,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: -1,
             typeName: '严禁',
             content: '严禁无资质企业生产、销售电动汽车'
@@ -6951,7 +6951,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '节能与新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '打造',
             content:
@@ -6968,7 +6968,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '落实',
             content: '严格落实国家新能源汽车购置补贴和免征车辆购置税政策'
@@ -6984,7 +6984,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content:
@@ -6992,7 +6992,7 @@ export const policyList = async (data) => {
           },
           {
             industryName: '节能和新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '推广应用节能和新能源汽车'
@@ -7008,14 +7008,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '重点发展智能终端、人工智能、智能汽车、新能源汽车等前沿科技产业'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '大力发展',
             content:
@@ -7023,7 +7023,7 @@ export const policyList = async (data) => {
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '大力发展',
             content: '大力发展智能装备、节能环保、新一代信息、新材料、生物医药、新能源汽车等战略性新兴产业集群'
@@ -7039,7 +7039,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '累计推广10万辆新能源汽车'
@@ -7055,7 +7055,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车制造',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '大力发展',
             content: '鼓励长安集团、重庆力帆集团等大型龙头企业大力发展无人驾驶、新能源汽车制造'
@@ -7071,14 +7071,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推进|研发',
             content: '重点推进新能源汽车研发生产'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推进|研发',
             content: '重点推进新能源汽车研发生产'
@@ -7094,35 +7094,35 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提升',
             content: '努力提升新能源汽车“大小三电”、先进汽车电子、辅助驾驶系统、网联终端系统等关键零部件本地配套能力'
           },
           {
             industryName: '中高端新能源汽车产品',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推动|加快',
             content: '推动现有整车企业加快开发中高端新能源汽车产品'
           },
           {
             industryName: '纯电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '重点发展纯电动汽车、增程式纯电动汽车'
           },
           {
             industryName: '增程式纯电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '重点发展纯电动汽车、增程式纯电动汽车'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '大力发展',
             content:
@@ -7130,63 +7130,63 @@ export const policyList = async (data) => {
           },
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推动',
             content: '推动摩托车企业有序向电动汽车企业转型升级'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '公共领域新能源汽车推广工程：市级单位通过政府集中采购新增和更换车辆中新能源汽车占比不低于50%'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提高|加快',
             content: '主城区新增和更换公交车、出租车要加快提高使用新能源汽车的比例'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提高',
             content: '逐步提高新增和更换驾驶培训车、驾驶考试车使用新能源汽车比例'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提升',
             content: '努力提升新能源汽车“大小三电”、先进汽车电子、辅助驾驶系统、网联终端系统等关键零部件本地配套能力'
           },
           {
             industryName: '中高端新能源汽车产品',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推动|加快',
             content: '推动现有整车企业加快开发中高端新能源汽车产品'
           },
           {
             industryName: '纯电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '重点发展纯电动汽车、增程式纯电动汽车'
           },
           {
             industryName: '增程式纯电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '重点发展纯电动汽车、增程式纯电动汽车'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '大力发展',
             content:
@@ -7194,28 +7194,28 @@ export const policyList = async (data) => {
           },
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推动',
             content: '推动摩托车企业有序向电动汽车企业转型升级'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '公共领域新能源汽车推广工程：市级单位通过政府集中采购新增和更换车辆中新能源汽车占比不低于50%'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提高|加快',
             content: '主城区新增和更换公交车、出租车要加快提高使用新能源汽车的比例'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提高',
             content: '逐步提高新增和更换驾驶培训车、驾驶考试车使用新能源汽车比例'
@@ -7231,7 +7231,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|研发',
             content:
@@ -7248,28 +7248,28 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '发展新能源汽车产业'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '重点发展新能源汽车及智能网联汽车'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推动',
             content: '推动汽车产业向智能网联汽车和新能源汽车升级'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content:
@@ -7277,7 +7277,7 @@ export const policyList = async (data) => {
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快|发展',
             content:
@@ -7285,7 +7285,7 @@ export const policyList = async (data) => {
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '培育',
             content:
@@ -7293,7 +7293,7 @@ export const policyList = async (data) => {
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '打造',
             content:
@@ -7301,14 +7301,14 @@ export const policyList = async (data) => {
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|培育',
             content: '培育发展新能源汽车、生物医药、新材料等新兴产业'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content:
@@ -7316,7 +7316,7 @@ export const policyList = async (data) => {
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content:
@@ -7324,21 +7324,21 @@ export const policyList = async (data) => {
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '重点发展新一代信息技术、智能制造装备、新能源汽车、节能环保、新材料等高精尖产业'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '重点发展新一代信息技术、新能源汽车、航空航天、生物医药、新能源、新材料等新兴产业'
           },
           {
             industryName: '节能与新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快|发展',
             content:
@@ -7346,7 +7346,7 @@ export const policyList = async (data) => {
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content:
@@ -7354,21 +7354,21 @@ export const policyList = async (data) => {
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '大力发展',
             content: '大力发展新能源汽车、无人机、船舶与海工装备、轻工机械、电子信息等装备制造业产业集群'
           },
           {
             industryName: '节能与新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快|发展',
             content: '重点加快节能与新能源汽车、高端装备、新能源、空气动力装备等先进制造业发展'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '打造',
             content: '全力打造新能源汽车、化工新材料、纺织服装、高端机床、高档特种纸等特色优势产业基地'
@@ -7384,7 +7384,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '甲醇增程式电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持|研发',
             content: '鼓励和支持企业研发甲醇混合动力汽车、甲醇增程式电动汽车、甲醇燃料电池汽车产品'
@@ -7400,63 +7400,63 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|推动',
             content: '推动新能源汽车产业健康可持续发展'
           },
           {
             industryName: '节能与新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '相关进展情况及时报送节能与新能源汽车产业发展部际联席会议办公室'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '是新能源汽车产业发展的关键'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '但是目前动力电池产品性能、质量和成本仍然难以满足新能源汽车推广普及需求'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '落实|发展',
             content: '落实新能源汽车发展战略目标'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完善',
             content: '调整完善动力电池行业规范条件、新能源汽车生产企业及产品准入管理规则等管理措施'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完善',
             content: '发布实施并不断完善新能源汽车标准化路线图'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加强',
             content: '鼓励研究机构、检测认证机构以及动力电池、新能源汽车生产企业加强产品测试验证等相关数据积累'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完善',
             content: '完善新能源汽车安全监管体系建设'
@@ -7472,140 +7472,140 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '新能源汽车发展取得重大进展'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '突破|发展',
             content: '新能源汽车和智能网联汽车有望成为抢占先机、赶超发展的突破口'
           },
           {
             industryName: '新能源汽车技术',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提升',
             content: '我国新能源汽车技术水平大幅提升'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '突破',
             content: '以新能源汽车和智能网联汽车为突破口'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '培育',
             content: '培育形成若干家进入世界前十的新能源汽车企业'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提升',
             content: '新能源汽车骨干企业在全球的影响力和市场份额进一步提升'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完善',
             content: '形成新能源汽车、智能网联汽车和先进节能汽车梯次合理的产业格局以及完善的产业配套体系'
           },
           {
             industryName: '新能源汽车技术',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快|研发',
             content: '加快新能源汽车技术研发及产业化'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加大|推广',
             content: '加大新能源汽车推广应用力度'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提高',
             content: '逐步提高公共服务领域新能源汽车使用比例'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完善|推广',
             content: '完善新能源汽车推广应用、尤其是使用环节的扶持政策体系'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '建立|发展|促进',
             content: '建立促进新能源汽车发展的长效机制'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '引导|提高',
             content: '引导生产企业不断提高新能源汽车产销比例'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完善',
             content: '不断完善新能源汽车标准体系'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提高',
             content: '提高新能源汽车生产企业及产品准入门槛'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '强化',
             content: '强化新能源汽车生产监管'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '建立',
             content: '建立健全新能源汽车分类注册登记、交通管理、税收保险、车辆维修、二手车管理等政策体系'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|推广',
             content: '探索新能源汽车与可再生能源、智能电网的深度融合和协同发展的商业化推广模式'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持|加大',
             content: '加大对汽车关键零部件、新能源汽车、智能网联汽车等重点领域的支持力度'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完善',
             content: '优化完善新能源汽车标准体系'
@@ -7621,14 +7621,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '促进|发展',
             content: '促进新能源汽车行业持续健康发展'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '建立',
             content:
@@ -7646,14 +7646,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '1.新能源汽车及动力蓄电池产业发展情况'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持',
             content: '3.现有新能源汽车及动力蓄电池产业相关支持政策'
@@ -7670,7 +7670,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持',
             content: '支持两国企业、行业协会和科研院所围绕增材制造、机器人、新能源汽车、装备制造等行业开展合作'
@@ -7686,7 +7686,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '（十一）推广新能源汽车'
@@ -7702,7 +7702,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持',
             content:
@@ -7719,21 +7719,21 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '节能和新能源汽车产品',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持',
             content: '积极支持节能和新能源汽车产品出口'
           },
           {
             industryName: '节能和新能源汽车产品',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '引导',
             content: '（二）积极引导节能和新能源汽车产品出口'
           },
           {
             industryName: '纯电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持|推广',
             content: '支持推广纯电动汽车'
@@ -7749,7 +7749,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '节能与新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '研发|加强',
             content: '加强节能与新能源汽车研发和应用示范'
@@ -7765,14 +7765,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '落实|推广',
             content: '贯彻落实国家关于新能源汽车推广应用的战略部署'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '研究制定在城市公交、出租汽车、城市配送等领域推广应用新能源汽车的指导意见'
@@ -7788,49 +7788,49 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加强|推广',
             content: '为进一步规范和加强新能源汽车推广应用财政补助资金管理'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '逐级报省级新能源汽车推广牵头部门'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '省级新能源汽车推广牵头部门会同其他相关部门'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '地方政府根据国务院有关文件要求承担新能源汽车推广应用主体责任'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '要明确新能源汽车推广牵头部门'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '地方新能源汽车推广牵头部门会同同级其他部门对本地新能源汽车资金申请报告和推广审核核查结果负责'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content:
@@ -7847,14 +7847,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '节能与新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '为了适应我国节能与新能源汽车产业发展的需要'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content:
@@ -7871,91 +7871,91 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提升',
             content: '全面提升新能源汽车充电保障能力'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提升',
             content: '提升新能源汽车充电保障能力行动计划'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '我国新能源汽车正处于市场化发展的关键时期'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '充电基础设施是新能源汽车推广应用的重要基础之一'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '新能源汽车和充电设施尚处于发展过程中'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '仍是制约新能源汽车发展的短板之一'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提升',
             content: '新能源汽车充电保障能力亟待提升'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快|落实|发展',
             content: '落实党中央、国务院关于加快新能源汽车发展的决策部署'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '以新能源汽车推广应用为出发点'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '为新能源汽车发展提供坚实能源保障'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '促进',
             content: '促进新能源汽车与充电设施行业标准间的协调统一'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持',
             content: '逐渐将地方财政购置补贴转向支持充电基础设施建设和运营、新能源汽车使用和运营等环节'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快',
             content: '加快与国家新能源汽车监管平台的信息互联互通'
@@ -7971,7 +7971,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|加快推动',
             content: '加快推动电动汽车科技发展'
@@ -7987,7 +7987,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持',
             content: '应将除公交车外的新能源汽车地方购置补贴资金集中用于支持充电基础设施“短板”建设和配套运营服务等环节'
@@ -8003,7 +8003,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '引导',
             content: '鼓励并引导电动汽车有序充电'
@@ -8019,7 +8019,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快',
             content: '新能源汽车产业化进程加快'
@@ -8035,14 +8035,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '大力推广新能源汽车'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广|推动',
             content: '推动新能源汽车等新技术、新产品在北京2022冬奥会和冬残奥会推广利用'
@@ -8059,7 +8059,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快',
             content:
@@ -8067,7 +8067,7 @@ export const policyList = async (data) => {
           },
           {
             industryName: '纯电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '积极发展纯电动汽车和插电式混合动力汽车'
@@ -8083,7 +8083,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '纯电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '积极发展纯电动汽车和插电式混合动力汽车'
@@ -8099,7 +8099,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '培育',
             content: '积极培育新能源汽车、电子信息、高端装备制造、生物医药、新材料等产业'
@@ -8115,21 +8115,21 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '带动示范区内外信息产业、智能电网、新能源汽车、新材料、现代服务业等新兴产业发展'
           },
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广使用',
             content: '率先在公共交通、出租车、旅游观光等领域推广使用电动汽车'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content:
@@ -8146,7 +8146,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '联合有关地区发展新能源汽车、专用车'
@@ -8162,7 +8162,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持|发展',
             content:
@@ -8179,7 +8179,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '积极发展载重汽车、乘用车、新能源汽车、智能机械、轨道交通装备'
@@ -8195,14 +8195,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快',
             content: '加快电动汽车等节能环保和新能源汽车应用'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快',
             content: '加快电动汽车等节能环保和新能源汽车应用'
@@ -8218,7 +8218,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快|培育',
             content: '加快培育形成生物医药、先进材料、机器人、新能源、新能源汽车等产业集群'
@@ -8234,49 +8234,49 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '是发展新能源汽车产业的重要保障'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '坚持以纯电驱动为新能源汽车发展的主要战略取向'
           },
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '促进|发展',
             content: '促进电动汽车产业发展和电力消费'
           },
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '着眼于电动汽车未来发展'
           },
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '促进',
             content: '促进电动汽车与智能电网间能量和信息的双向互动'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '各地要结合新能源汽车推广应用需要'
           },
           {
             industryName: '节能与新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '依托节能与新能源汽车产业发展部际联席会议制度'
@@ -8292,28 +8292,28 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持',
             content: '有条件的地方对购置新能源汽车给予积极支持'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持',
             content: '鼓励金融机构对居民购买新能源汽车、绿色智能家电、智能家居、节水器具等绿色智能产品提供信贷支持'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持',
             content: '有条件的地方对购置新能源汽车给予积极支持'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持',
             content: '鼓励金融机构对居民购买新能源汽车、绿色智能家电、智能家居、节水器具等绿色智能产品提供信贷支持'
@@ -8329,105 +8329,105 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快|推广',
             content: '加快新能源汽车的推广应用'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '落实|发展',
             content: '贯彻落实发展新能源汽车的国家战略'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '以纯电驱动为新能源汽车发展的主要战略取向'
           },
           {
             industryName: '纯电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '重点发展纯电动汽车、插电式（含增程式）混合动力汽车和燃料电池汽车'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '建立|发展',
             content: '建立长期稳定的新能源汽车发展政策体系'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '促进|发展',
             content: '促进新能源汽车产业健康快速发展'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '突破',
             content: '新能源汽车生产企业和充电设施生产建设运营企业要着力突破关键核心技术'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '地方政府要相应制定新能源汽车推广应用规划'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '突破|推广',
             content: '把公共服务领域用车作为新能源汽车推广应用的突破口'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '地方政府承担新能源汽车推广应用主体责任'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提高',
             content: '新能源汽车生产企业要积极提高售后服务水平'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提高',
             content: '不断提高现代信息技术在新能源汽车商业运营模式创新中的应用水平'
           },
           {
             industryName: '新能源汽车技术研发和运营服务',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '研发',
             content: '鼓励互联网企业参与新能源汽车技术研发和运营服务'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '为新能源汽车推广应用带来更多便利和实惠'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加大|推广',
             content:
@@ -8435,28 +8435,28 @@ export const policyList = async (data) => {
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提高',
             content: '不断提高新能源汽车运营比重'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '比例不低于|推广',
             content: '新能源汽车推广应用城市新增或更新车辆中的新能源汽车比例不低于30%'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推进',
             content: '（十四）推进党政机关和公共机构、企事业单位使用新能源汽车'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '比例不低于|推广',
             content:
@@ -8464,168 +8464,168 @@ export const policyList = async (data) => {
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完善|推广',
             content: '（十五）完善新能源汽车推广补贴政策'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '中央财政安排资金对新能源汽车推广应用规模较大和配套基础设施建设较好的城市或企业给予奖励'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持|推广',
             content: '有关方面要抓紧研究确定2016—2020年新能源汽车推广应用的财政支持政策'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '城市公交车行业是新能源汽车推广的优先领域'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持|发展',
             content: '（十八）多渠道筹集支持新能源汽车发展的资金'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '建立|发展',
             content: '建立长期稳定的发展新能源汽车的资金来源'
           },
           {
             industryName: '新能源汽车技术',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持|研发|推广',
             content: '重点支持新能源汽车技术研发、检验测试和推广应用'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '建立',
             content: '建立适应新能源汽车行业特点的信贷管理和贷款评审制度'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持',
             content: '增加其支持个人购买新能源汽车的资金来源'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持',
             content: '支持社会资本和具有技术创新能力的企业参与新能源汽车科研生产'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '研发',
             content: '鼓励新能源汽车的研发生产和销售使用'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加强',
             content: '有关部门要加强对新能源汽车市场的监管'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推进',
             content: '推进建设统一开放、有序竞争的新能源汽车市场'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: -1,
             typeName: '清理|发展',
             content: '坚决清理取消各地区不利于新能源汽车市场发展的违规政策措施'
           },
           {
             industryName: '新能源汽车技术和产品',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快',
             content: '加快研究和开发适应市场需求、有竞争力的新能源汽车技术和产品'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快|建立',
             content: '加快建立新能源汽车产业技术创新体系'
           },
           {
             industryName: '新能源汽车产品',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完善',
             content: '（二十七）完善新能源汽车产品质量保障体系'
           },
           {
             industryName: '新能源汽车技术',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持|建立',
             content: '支持建立行业性新能源汽车技术支撑平台'
           },
           {
             industryName: '新能源汽车产品',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '建立',
             content: '建立新能源汽车产品抽检制度'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '建立',
             content: '建立由主要负责同志牵头、各职能部门参加的新能源汽车工作联席会议制度'
           },
           {
             industryName: '节能与新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|推广',
             content: '节能与新能源汽车产业发展部际联席会议及其办公室要及时协调解决新能源汽车推广应用中的重大问题'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|推广',
             content: '节能与新能源汽车产业发展部际联席会议及其办公室要及时协调解决新能源汽车推广应用中的重大问题'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '建立|推广',
             content: '建立新能源汽车推广城市退出机制'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提高',
             content: '提高全社会对新能源汽车的认知度和接受度'
@@ -8641,7 +8641,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完善',
             content: '完善燃油经济性标准和新能源汽车技术标准'
@@ -8657,28 +8657,28 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快|推广使用',
             content: '（国家邮政局、交通运输部负责）鼓励快递物流领域加快推广使用新能源汽车和满足更高排放标准的燃油汽车'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提高',
             content: '逐步提高新能源汽车使用比例'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快|推广使用',
             content: '（国家邮政局、交通运输部负责）鼓励快递物流领域加快推广使用新能源汽车和满足更高排放标准的燃油汽车'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提高',
             content: '逐步提高新能源汽车使用比例'
@@ -8694,7 +8694,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '纯电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快|发展',
             content: '加快发展纯电动汽车、混合动力汽车和船舶、天然气汽车和船舶'
@@ -8710,7 +8710,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '建立',
             content: '电动汽车及动力电池生产企业应负责建立废旧电池回收网络'
@@ -8726,7 +8726,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: -1,
             typeName: '淘汰|推广',
             content: '对大力淘汰老旧车辆、推广应用新能源汽车的有关企业和人员依照有关政策及时给予经济补偿'
@@ -8742,14 +8742,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完善',
             content: '完善新能源汽车积分管理制度'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '落实',
             content: '落实好乘用车企业平均燃料消耗量与新能源汽车积分并行管理办法'
@@ -8765,28 +8765,28 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '新能源汽车产业发展规划（2021—2035年）'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '发展新能源汽车是我国从汽车大国迈向汽车强国的必由之路'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '新能源汽车产业发展取得了巨大成就'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完善|发展',
             content:
@@ -8794,273 +8794,273 @@ export const policyList = async (data) => {
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|推动',
             content: '为推动新能源汽车产业高质量发展'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '第一节新能源汽车为世界经济发展注入新动能'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '促进|发展',
             content: '新能源汽车已成为全球汽车产业转型发展的主要方向和促进世界经济持续增长的重要引擎'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '第二节我国新能源汽车进入加速发展新阶段'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '为新能源汽车产业提供了前所未有的发展机遇'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完善|增强|提升',
             content: '我国新能源汽车产业技术水平显著提升、产业体系日趋完善、企业竞争力大幅增强'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|推动',
             content: '推动新能源汽车产业高质量可持续发展'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '第三节融合开放成为新能源汽车发展的新特征'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '研发',
             content: '新能源汽车产业生态正由零部件、整车研发生产及营销服务企业之间的“链式关系”'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '跨行业、跨领域融合创新和更加开放包容的国际合作成为新能源汽车产业发展的时代特征'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '深入实施发展新能源汽车国家战略'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|推动',
             content: '推动我国新能源汽车产业高质量可持续发展'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '促进',
             content: '促进新能源汽车与能源、交通、信息通信深度融合'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '培育',
             content: '培育新能源汽车产业新优势'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '增强',
             content: '我国新能源汽车市场竞争力明显增强'
           },
           {
             industryName: '新能源汽车整',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提高',
             content: '提高新能源汽车整车综合性能'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '建立',
             content: '建立面向未来出行的新能源汽车与智慧能源、智能交通融合创新平台'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提升',
             content: '提升新能源汽车及关联产业融合创新能力'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|培育',
             content: '培育若干上下游协同创新、大中小企业融通发展、具有国际影响力和竞争力的新能源汽车产业集群'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '研发|推进',
             content: '推进智能化技术在新能源汽车研发设计、生产制造、仓储物流、经营管理、售后服务等关键环节的深度应用'
           },
           {
             industryName: '新能源汽车智能制造',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快',
             content: '加快新能源汽车智能制造仿真、管理、控制等核心工业软件开发和集成'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提升',
             content: '提升新能源汽车全产业链智能化水平'
           },
           {
             industryName: '新能源汽车产品',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提升',
             content: '开展新能源汽车产品质量提升行动'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|推动',
             content: '第一节推动新能源汽车与能源融合发展'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加强',
             content: '加强新能源汽车与电网（V2G）能量互动'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '实现',
             content: '实现新能源汽车与电网能量高效互动'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '促进',
             content: '促进新能源汽车与可再生能源高效协同'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推动',
             content: '推动新能源汽车与气象、可再生能源电力预测预报系统信息共享与融合'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|推动',
             content: '第二节推动新能源汽车与交通融合发展'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快',
             content: '加快新能源汽车在分时租赁、城市公交、出租汽车、场地用车等领域的应用'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推动',
             content: '推动新能源汽车在城市配送、港口作业等领域应用'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|推动',
             content: '第三节推动新能源汽车与信息通信融合发展'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '促进',
             content: '促进新能源汽车与信息通信融合应用服务创新'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '强化',
             content: '强化新能源汽车数据分级分类和合规应用管理'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '建立|发展',
             content: '建立新能源汽车与相关产业融合发展的综合标准体系'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '促进',
             content: '促进形成开放、透明、包容的新能源汽车国际化市场环境'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完善',
             content: '完善企业平均燃料消耗量与新能源汽车积分并行管理办法'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '落实',
             content: '落实新能源汽车相关税收优惠政策'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '比例不低于',
             content:
@@ -9068,28 +9068,28 @@ export const policyList = async (data) => {
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '研发',
             content: '制定将新能源汽车研发投入纳入国有企业考核体系的具体办法'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快|建立|发展|培养',
             content: '加快建立适应新能源汽车与相关产业融合发展需要的人才培养机制'
           },
           {
             industryName: '节能与新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '充分发挥节能与新能源汽车产业发展部际联席会议制度和地方协调机制作用'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加强',
             content: '加强新能源汽车与能源、交通、信息通信等行业在政策规划、标准法规等方面的统筹'
@@ -9105,7 +9105,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '培育',
             content: '培育壮大节能环保、新一代信息技术、新能源汽车等战略性新兴产业'
@@ -9121,7 +9121,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加强',
             content: '加强先进重大装备、新材料、新能源汽车等领域的第三方检验检测服务'
@@ -9137,7 +9137,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '大力发展',
             content:
@@ -9154,7 +9154,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '突破',
             content:
@@ -9162,21 +9162,21 @@ export const policyList = async (data) => {
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '培育',
             content: '培育新能源汽车、高端轨道交通、民用航空等新兴产业'
           },
           {
             industryName: '电动汽车智能化',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '重点发展电动汽车智能化、网联化、轻量化技术及自动驾驶技术'
           },
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '突破',
             content:
@@ -9184,14 +9184,14 @@ export const policyList = async (data) => {
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '培育',
             content: '培育新能源汽车、高端轨道交通、民用航空等新兴产业'
           },
           {
             industryName: '电动汽车智能化',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '重点发展电动汽车智能化、网联化、轻量化技术及自动驾驶技术'
@@ -9207,7 +9207,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content:
@@ -9215,7 +9215,7 @@ export const policyList = async (data) => {
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content:
@@ -9223,91 +9223,91 @@ export const policyList = async (data) => {
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '面向航空航天、轨道交通、电力电子、新能源汽车等产业发展需求'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推动',
             content: '五、推动新能源汽车、新能源和节能环保产业快速壮大'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提升',
             content: '大幅提升新能源汽车和新能源的应用比例'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推动',
             content: '推动新能源汽车、新能源和节能环保等绿色低碳产业成为支柱产业'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '实现',
             content: '（一）实现新能源汽车规模应用'
           },
           {
             industryName: '纯电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提升',
             content: '提升纯电动汽车和插电式混合动力汽车产业化水平'
           },
           {
             industryName: '电动汽车整车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提升',
             content: '全面提升电动汽车整车品质与性能'
           },
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快',
             content: '加快电动汽车安全标准制定和应用'
           },
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|推动',
             content: '推动电动汽车与智能电网、新能源、储能、智能驾驶等融合发展'
           },
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '促进',
             content: '促进电动汽车重大关键技术协同创新'
           },
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完善',
             content: '完善电动汽车生产准入政策'
           },
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '电动汽车力争具备商业化推广的市场竞争力'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完善|推广',
             content: '调整完善新能源汽车推广补贴政策'
@@ -9323,7 +9323,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快|发展',
             content:
@@ -9331,21 +9331,21 @@ export const policyList = async (data) => {
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '突破',
             content: '节能环保、新能源装备、新能源汽车等绿色低碳产业总产值突破10万亿元'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '大力推广节能环保汽车、新能源汽车、天然气（CNG/LNG）清洁能源汽车、液化天然气动力船舶等'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广|提高',
             content:
@@ -9353,7 +9353,7 @@ export const policyList = async (data) => {
           },
           {
             industryName: '节能与新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '引导',
             content: '积极引导消费者购买节能与新能源汽车、高效家电、节水型器具等节能环保低碳产品'
@@ -9369,14 +9369,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提高',
             content: '提高公共车辆中新能源汽车占比'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '继续实施新能源汽车推广'
@@ -9392,14 +9392,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '研发',
             content: '电动汽车、特种船舶、国产大型客机、中低速磁悬浮轨道交通等领域技术研发和应用取得进展'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '城市公共交通、出租车和城市配送领域新能源汽车快速发展'
@@ -9415,14 +9415,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '氢能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持',
             content: '支持外商投资企业参与氢能源汽车标准制定'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持|发展',
             content: '支持在自贸试验区内发展新能源汽车产业'
@@ -9438,7 +9438,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持',
             content: '支持将生物医药、高端智能装备、新能源汽车、硅基新材料等产业纳入新一批国家战略性新兴产业集群'
@@ -9454,14 +9454,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广使用',
             content: '推广使用新能源汽车'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '建成',
             content: '重点区域的直辖市、省会城市、计划单列市建成区公交车全部更换为新能源汽车'
@@ -9477,7 +9477,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '培养',
             content:
@@ -9494,35 +9494,35 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|推动',
             content: '推动节能环保、新一代信息技术、生物、高端装备制造、新能源、新材料、新能源汽车等战略性新兴产业发展'
           },
           {
             industryName: '节能与新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '积极推广',
             content: '积极推广节能与新能源汽车'
           },
           {
             industryName: '节能和新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '推广节能和新能源汽车'
           },
           {
             industryName: '节能与新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '民用领域重点推广高效照明产品、节能家用电器、节能与新能源汽车等'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content:
@@ -9539,28 +9539,28 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '增强',
             content: '着力增强电网对新能源发电、分布式能源、电动汽车等能源利用方式的承载和适应能力'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '为新能源汽车产业化发展提供必要的条件和支撑'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '结合充电式混合动力、纯电动、天然气（CNG/LNG）等新能源汽车发展'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '在北京、上海、重庆等新能源汽车示范推广城市'
@@ -9576,7 +9576,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快|培育',
             content:
@@ -9593,7 +9593,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车制造',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加大',
             content:
@@ -9610,7 +9610,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '襄阳片区重点发展高端装备制造、新能源汽车、大数据、云计算、商贸物流、检验检测等产业'
@@ -9626,7 +9626,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车及智能汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快|研发',
             content:
@@ -9643,7 +9643,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content:
@@ -9660,7 +9660,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快|推广',
             content: '新疆生产建设兵团交通局、财务局、工业和信息化委员会：为进一步加快新能源汽车在公交领域的推广应用'
@@ -9676,7 +9676,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '促进|推广',
             content: '促进新能源汽车的推广应用'
@@ -9693,7 +9693,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '并按照新能源汽车发展有关政策在充电基础设施布局和建设方面给予扶持'
@@ -9709,14 +9709,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '深化',
             content: '组织在江苏、浙江、湖北、山东、广东、贵州等6省及若干新能源汽车生产企业深化开展试点工作'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完成',
             content: '完成与各主要汽车生产企业（含新能源汽车）所属品牌授权维修体系（4S店体系）的技术方案对接'
@@ -9732,7 +9732,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '建立',
             content: '研究建立道路运输领域新能源汽车使用安全和运维保养相关标准规范'
@@ -9748,7 +9748,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '积极发展新能源汽车和智能网联汽车产业'
@@ -9764,329 +9764,329 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快|推进|推广',
             content: '加快推进新能源汽车在交通运输行业的推广应用'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '发展新能源汽车'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '党中央、国务院高度重视新能源汽车产业发展'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '将发展新能源汽车确定为国家战略'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '针对我国新能源汽车发展现状'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推进|发展',
             content: '明确了推进新能源汽车发展的指导思想、基本原则、发展政策和保障机制'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快|推广',
             content: '是加快新能源汽车推广应用的重要纲领'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '交通运输行业是新能源汽车推广应用的重要领域之一'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '落实|完善|推广',
             content: '完善和落实对新能源汽车推广应用的扶持政策'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '营造有利于新能源汽车在交通运输行业推广应用的政策环境'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '引导',
             content: '引导交通运输企业主动、更多选择新能源汽车'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '实现',
             content: '实现新能源汽车在交通运输行业的可持续应用'
           },
           {
             industryName: '纯电动汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '重点推广应用插电式（含增程式）混合动力汽车、纯电动汽车'
           },
           {
             industryName: '其他新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '研究推广应用储能式超级电容汽车等其他新能源汽车'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推进|推广',
             content: '积极稳妥地推进新能源汽车在交通运输行业的推广应用工作'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提升',
             content: '新能源汽车运营效率和安全水平明显提升'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提升',
             content: '新能源汽车占城市公交车、出租汽车和城市物流配送车辆的比例显著提升'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '比例不低于',
             content: '新能源汽车比例不低于30%;京津冀地区新增或更新城市公交车、出租汽车和城市物流配送车辆中'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '比例不低于',
             content: '新能源汽车比例不低于35%'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提升',
             content: '新能源汽车在交通运输行业的运营效率明显提升'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '增强',
             content: '投入交通运输行业的新能源汽车可靠性显著增强'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '基本建立|推广',
             content: '新能源汽车在交通运输行业推广应用的法规政策和标准规范体系基本建立'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '增强',
             content: '交通运输企业购买使用新能源汽车的主动性明显增强'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '将新能源汽车推广应用纳入城市公共交通规划和城市综合交通运输体系规划'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '明确新能源汽车推广应用目标、技术路线、重点任务和配套政策'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '编制交通运输行业新能源汽车推广应用实施方案和年度实施计划'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完善',
             content: '鼓励集约化程度高、管理制度完善、运营规范的交通运输企业投资使用新能源汽车和建设充换电设施'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提高',
             content: '提高新能源汽车的运营效率'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持|推广',
             content: '制定本地区新能源汽车推广应用的支持政策'
           },
           {
             industryName: '新能源汽车运营',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完善',
             content: '9.完善新能源汽车运营政策'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '并向新能源汽车推广应用程度高的交通运输企业倾斜或成立专门的新能源汽车运输企业'
           },
           {
             industryName: '新能源汽车运营',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加强',
             content: '加强新能源汽车运营安全监控'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '建立',
             content: '督促交通运输企业建立健全新能源汽车定期检查、维护和修理制度'
           },
           {
             industryName: '新能源汽车技术',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加强',
             content: '加强新能源汽车技术管理'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '建立',
             content: '建立新能源汽车全生命周期运营档案'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '按照各地新能源汽车推广应用工作联席会议制度的有关要求'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持|推广|推动',
             content: '推动细化新能源汽车在交通运输行业推广应用的支持政策和配套措施'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推进|发展',
             content: '推进新能源汽车在交通运输行业的健康发展'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持|推广',
             content: '为新能源汽车推广应用的方案编制、设施建设、车辆准入、驾驶员培训、安全管理和政策支持提供法制保障'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加强|推广',
             content: '加强新能源汽车推广应用技术支撑'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完善|建立',
             content: '建立完善新能源汽车使用环节的技术标准规范体系'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加强',
             content: '加强新能源汽车日常维护工作'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加强',
             content: '加强对新能源汽车运行数据的采集和分析'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '建立',
             content: '建立交通运输行业新能源汽车应用效果评估和反馈机制'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '建立',
             content: '建立新能源汽车召回机制'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '引导|加快建设',
             content: '引导新能源汽车生产企业加快建设售后服务体系'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content:
@@ -10094,28 +10094,28 @@ export const policyList = async (data) => {
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '部将适时组织对各省、自治区、直辖市在交通运输行业推广应用新能源汽车的情况进行监督检查'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '大力宣传新能源汽车推广应用在环境改善、能源节约等方面的显著效果和重大作用'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广|提高',
             content: '提高公众对交通运输行业推广应用新能源汽车的认知度和接受度'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '形成有利于新能源汽车大规模推广应用的良好氛围'
@@ -10131,7 +10131,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '结合新能源汽车用户规模和发展需求'
@@ -10147,7 +10147,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '建成',
             content: '重点区域的直辖市、省会城市、计划单列市建成区公交车全部更换为新能源汽车'
@@ -10163,7 +10163,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源智能汽车车型',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快',
             content: '加快研制新能源智能汽车车型'
@@ -10179,7 +10179,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '节能与新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|推动',
             content: '要大力推动先进轨道交通装备、海洋工程装备及高技术船舶、节能与新能源汽车等优势和战略产业快速发展'
@@ -10195,21 +10195,21 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快|推广',
             content: '（二十二）加快新能源汽车和节能环保汽车推广应用'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加大|推广',
             content: '进一步加大新能源汽车在交通运输行业的推广应用'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '引导',
             content: '积极引导新能源汽车用于出租汽车和小微型客车租赁等服务'
@@ -10225,7 +10225,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推进',
             content:
@@ -10242,7 +10242,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content:
@@ -10259,7 +10259,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '大力发展',
             content: '大力发展满足高端装备、应用电子、物联网、新能源汽车、新一代信息技术需求的核心基础元器件'
@@ -10275,21 +10275,21 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '促进|推广',
             content: '为促进农村地区新能源汽车推广应用'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持',
             content: '（三）活动期间地方人民政府发布本地区支持新能源汽车下乡等有关政策'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '为新能源汽车推广应用营造良好舆论环境'
@@ -10305,7 +10305,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '重点围绕京津冀、长三角、珠三角等新能源汽车发展集聚区域'
@@ -10321,140 +10321,140 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '新能源汽车发展取得重大进展'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '突破|发展',
             content: '新能源汽车和智能网联汽车有望成为抢占先机、赶超发展的突破口'
           },
           {
             industryName: '新能源汽车技术',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提升',
             content: '我国新能源汽车技术水平大幅提升'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '突破',
             content: '以新能源汽车和智能网联汽车为突破口'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '培育',
             content: '培育形成若干家进入世界前十的新能源汽车企业'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提升',
             content: '新能源汽车骨干企业在全球的影响力和市场份额进一步提升'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完善',
             content: '形成新能源汽车、智能网联汽车和先进节能汽车梯次合理的产业格局以及完善的产业配套体系'
           },
           {
             industryName: '新能源汽车技术',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快|研发',
             content: '加快新能源汽车技术研发及产业化'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加大|推广',
             content: '加大新能源汽车推广应用力度'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提高',
             content: '逐步提高公共服务领域新能源汽车使用比例'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完善|推广',
             content: '完善新能源汽车推广应用、尤其是使用环节的扶持政策体系'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '建立|发展|促进',
             content: '建立促进新能源汽车发展的长效机制'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '引导|提高',
             content: '引导生产企业不断提高新能源汽车产销比例'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完善',
             content: '不断完善新能源汽车标准体系'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '提高',
             content: '提高新能源汽车生产企业及产品准入门槛'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '强化',
             content: '强化新能源汽车生产监管'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '建立',
             content: '建立健全新能源汽车分类注册登记、交通管理、税收保险、车辆维修、二手车管理等政策体系'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|推广',
             content: '探索新能源汽车与可再生能源、智能电网的深度融合和协同发展的商业化推广模式'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持|加大',
             content: '加大对汽车关键零部件、新能源汽车、智能网联汽车等重点领域的支持力度'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完善',
             content: '优化完善新能源汽车标准体系'
@@ -10470,7 +10470,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '鼓励采用',
             content: '鼓励采用新能源汽车和符合标准的电动三轮车'
@@ -10486,63 +10486,63 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展|推动',
             content: '推动新能源汽车产业健康可持续发展'
           },
           {
             industryName: '节能与新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '相关进展情况及时报送节能与新能源汽车产业发展部际联席会议办公室'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '是新能源汽车产业发展的关键'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '但是目前动力电池产品性能、质量和成本仍然难以满足新能源汽车推广普及需求'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '落实|发展',
             content: '落实新能源汽车发展战略目标'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完善',
             content: '调整完善动力电池行业规范条件、新能源汽车生产企业及产品准入管理规则等管理措施'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完善',
             content: '发布实施并不断完善新能源汽车标准化路线图'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加强',
             content: '鼓励研究机构、检测认证机构以及动力电池、新能源汽车生产企业加强产品测试验证等相关数据积累'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '完善',
             content: '完善新能源汽车安全监管体系建设'
@@ -10558,14 +10558,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '发展',
             content: '重点发展新能源汽车'
           },
           {
             industryName: '电动汽车智能化技术',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '支持|研发',
             content:
@@ -10582,7 +10582,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快|推广',
             content: '加快推广新能源汽车和节能环保汽车'
@@ -10598,7 +10598,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '研发|推动',
             content: '推动新能源汽车、智能电网等技术的研发应用'
@@ -10614,7 +10614,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '培育',
             content: '培育壮大新能源、节能环保、新能源汽车等产业'
@@ -10630,14 +10630,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '节能与新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '大力发展',
             content: '大力发展节能与新能源汽车'
           },
           {
             industryName: '节能与新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '引导',
             content: '积极引导消费者购买节能与新能源汽车、高能效家电、节水型器具等节能环保低碳产品'
@@ -10653,7 +10653,7 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '加快|推广',
             content: '加快推广新能源汽车和节能环保汽车'
@@ -10669,14 +10669,14 @@ export const policyList = async (data) => {
         contentList: [
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '打造',
             content: '打造一批航空、中医药、新型光电、新材料、新能源汽车、节能环保等产业创新平台和载体'
           },
           {
             industryName: '新能源汽车',
-            industryCode: 'AC003005',
+            industryCode: 'GB_C3612',
             emotion: 1,
             typeName: '推广',
             content: '实施新能源汽车推广计划'

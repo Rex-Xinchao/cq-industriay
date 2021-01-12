@@ -15,7 +15,7 @@ export const riskChain = (data) => {
 export const riskDialog = async (data) => {
   await sleep(1000)
   let reponse = {}
-  if (data.industryCode === 'AC003005') {
+  if (data.industryCode === 'GB_C3612') {
     reponse = {
       indexes: [
         {
@@ -77,7 +77,7 @@ export const boomChain = (data) => {
 export const boomDialog = async (data) => {
   await sleep(1000)
   let reponse = {}
-  if (data.industryCode === 'AC003005') {
+  if (data.industryCode === 'GB_C3612') {
     reponse = {
       prosperities: [
         {

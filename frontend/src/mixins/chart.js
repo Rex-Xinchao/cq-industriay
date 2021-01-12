@@ -25,7 +25,6 @@ export default {
   },
   methods: {
     initChart() {
-      this.noData = false
       let data = this.handleData()
       let $graphBox = document.querySelector('.graph-box')
       this.params.width = ($graphBox && $graphBox.offsetWidth) || 0
@@ -48,10 +47,10 @@ export default {
     handleData() {
       let map_UP = {}
       let map_DOWN = {}
-      let name = this.chartData.nodes.find((item) => item.code === this.industryCode).name
+      let name = this.chartData.nodes.find((item) => item.code === this.code).name
       let data = [
-        { name: name, code: this.industryCode, root: true, direction: UP, children: [] },
-        { name: name, code: this.industryCode, root: true, direction: DOWN, children: [] }
+        { name: name, code: this.code, root: true, direction: UP, children: [] },
+        { name: name, code: this.code, root: true, direction: DOWN, children: [] }
       ]
       this.chartData.nodes.forEach((item) => {
         map_UP[item.code] = { ...item }
@@ -82,8 +81,8 @@ export default {
           }
         }
       })
-      data[0].children = map_UP[this.industryCode].children
-      data[1].children = map_DOWN[this.industryCode].children
+      data[0].children = map_UP[this.code].children
+      data[1].children = map_DOWN[this.code].children
       return data
     },
     initChartOptions() {
@@ -311,7 +310,7 @@ export default {
         Product.append('text')
           .attr('class', (d) => {
             // return (d.depth && d.data.isRisk ? '' : 'remove')
-            if (!['AC003005', 'FA0040010709', 'EC001001130201'].includes(d.data.code)) {
+            if (!['GB_C3612', 'FA0040010709', 'EC001001130201'].includes(d.data.code)) {
               return 'remove'
             }
           })
@@ -329,7 +328,7 @@ export default {
           .append('tspan')
           .text((d) => {
             // if (d.data.isRisk) return '7.12%'
-            if (d.data.code === 'AC003005') {
+            if (d.data.code === 'GB_C3612') {
               return '-0.64%'
             } else if (d.data.code === 'FA0040010709') {
               return '-2.78%'
@@ -346,7 +345,7 @@ export default {
         Product.append('image')
           .attr('xlink:href', (d) => {
             // require(`@/assets/imgs/icons/up.svg`)
-            if (d.data.code === 'AC003005') {
+            if (d.data.code === 'GB_C3612') {
               return require(`@/assets/imgs/icons/down.svg`)
             } else if (d.data.code === 'FA0040010709') {
               return require(`@/assets/imgs/icons/down.svg`)
@@ -356,7 +355,7 @@ export default {
           })
           .attr('class', (d) => {
             // return (d.depth && d.data.isRisk ? '' : 'remove')
-            if (['AC003005', 'FA0040010709', 'EC001001130201'].includes(d.data.code)) {
+            if (['GB_C3612', 'FA0040010709', 'EC001001130201'].includes(d.data.code)) {
               return ''
             } else {
               return 'remove'
@@ -384,7 +383,7 @@ export default {
           .attr('xlink:href', require(`@/assets/imgs/icons/lamp.svg`))
           .attr('class', (d) => {
             // if (!d.data.isRisk) return 'remove'
-            if (!['AC003005', 'FA0040010709', 'EC001001130201'].includes(d.data.code)) {
+            if (!['GB_C3612', 'FA0040010709', 'EC001001130201'].includes(d.data.code)) {
               return 'remove'
             }
           })

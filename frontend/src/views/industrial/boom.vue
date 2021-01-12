@@ -9,7 +9,7 @@
         <el-option v-for="item in sams" :key="item.value" :label="item.label" :value="item.value"></el-option>
       </el-select>
       <div class="graph-box"></div>
-      <no-data-show :show="noData"></no-data-show>
+      <no-data-show class="chart-nodata" :show="noData"></no-data-show>
       <div ref="tooltip" class="chart-tooltip" @mouseleave="hideTip">
         <h1>行业分析</h1>
         <span @click="onItemClick('/analysis/env')">行业环境</span>
@@ -175,7 +175,9 @@ export default {
   watch: {
     code: {
       immediate: true,
-      handler() {
+      handler(data) {
+        this.noData = true
+        if (!data) return
         this.getData()
       }
     }
@@ -320,6 +322,10 @@ export default {
   left: 8px;
   top: 8px;
   z-index: 1000;
+}
+.chart-nodata {
+  height: calc(100% - 100px);
+  top: 100px;
 }
 </style>
 <style lang="scss">

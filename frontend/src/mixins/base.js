@@ -157,12 +157,16 @@ export const Mappings = {
           code: this.$route.query.code,
           isSam: false
         }).then((res) => {
-          this.sams = res.gb4[0].products.map((item) => {
-            return {
-              label: item.samName,
-              value: item.samCode
-            }
+          let list = []
+          res.gb4.forEach((gb4) => {
+            gb4.products.forEach((item) => {
+              list.push({
+                label: item.samName,
+                value: item.samCode
+              })
+            })
           })
+          this.sams = list
           this.code = this.sams[0].value
         })
       } else {
@@ -201,7 +205,9 @@ export const Mappings_GB = {
         code: this.$route.query.code,
         isSam: this.$route.query.name.indexOf('国标') < 0
       }).then((res) => {
-        this.GBs = res.gb4
+        this.GBs = res.gb4.map((item) => {
+          return item.gbCode
+        })
       })
     }
   },

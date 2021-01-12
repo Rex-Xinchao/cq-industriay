@@ -257,6 +257,13 @@ export default {
       } else {
         this.drawMap()
       }
+    },
+    industryCode: {
+      immediate: true,
+      handler(data) {
+        if (!data.length) return
+        this.drawChart()
+      }
     }
   },
   methods: {
