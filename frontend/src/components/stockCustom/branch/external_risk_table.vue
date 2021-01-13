@@ -220,7 +220,7 @@ export default {
     showDialog(type = 1, data) {
       let typeNameList = ['裁判文书', '被执行情况', '失信被执行情况', '股权冻结情况']
       this.tableConf = null
-      this.dialogTitle = `${data.name} ${typeNameList[type - 1]}`
+      this.dialogTitle = `${data.comName} ${typeNameList[type - 1]}`
       this.dialogVisible = true
       this[`getTypeData_${type}`](data.csfId)
     },

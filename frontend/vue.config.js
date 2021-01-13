@@ -46,11 +46,11 @@ module.exports = {
           '^/base': ''
         }
       },
-      '/industry': {
+      '/pillar': {
         target: '/cqb/industry/',
         changeOrigin: true,
         pathRewrite: {
-          '^/industry': ''
+          '^/pillar': ''
         }
       },
       '/chain': {
