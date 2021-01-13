@@ -86,21 +86,23 @@ export default {
     title: String
   },
   mixins: [scroll],
+  computed: {
+    urlOptions() {
+      return {
+        eventCode: this.typeSelect,
+        st: this.timeSelect[0],
+        et: this.timeSelect[1],
+        page: this.page.pageNo,
+        size: this.page.pageSize
+      }
+    }
+  },
   watch: {
-    typeSelect() {
-      this.tags = []
-      this.companys = []
-      this.search()
-    },
-    timeSelect() {
-      this.tags = []
-      this.companys = []
-      this.search()
-    },
-    industryCode: {
-      immediate: true,
+    urlOptions: {
+      deep: true,
       handler(data) {
-        if (!data.length) return
+        this.tags = []
+        this.companys = []
         this.search()
       }
     }
@@ -109,13 +111,7 @@ export default {
     converUnit,
     search() {
       this.loading = true
-      risk_event({
-        eventCode: this.typeSelect,
-        st: this.timeSelect[0],
-        et: this.timeSelect[1],
-        page: this.page.pageNo,
-        size: this.page.pageSize
-      })
+      risk_event(this.urlOptions)
         .then((res) => {
           this.loading = false
           this.tags = res.eventList

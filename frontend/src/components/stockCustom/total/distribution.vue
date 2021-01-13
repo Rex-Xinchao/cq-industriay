@@ -230,12 +230,6 @@ export default {
       selectAreaName: null
     }
   },
-  props: {
-    industryCode: {
-      require: true,
-      type: Array
-    }
-  },
   mixins: [resize, Regions],
   computed: {
     ...mapGetters(['industry']),
@@ -256,13 +250,6 @@ export default {
         this.drawChart()
       } else {
         this.drawMap()
-      }
-    },
-    industryCode: {
-      immediate: true,
-      handler(data) {
-        if (!data.length) return
-        this.drawChart()
       }
     }
   },

@@ -8,9 +8,9 @@
         <el-option v-for="item in typeOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
       </el-select>
       <div class="filter-item time-select">
-        <span :class="{ active: time === 1 }" @click="time = 1">近3月</span>
-        <span :class="{ active: time === 2 }" @click="time = 2">近1年</span>
-        <span :class="{ active: time === 3 }" @click="time = 3">近3年</span>
+        <span :class="{ active: timeType === 1 }" @click="setTime(1)">近3月</span>
+        <span :class="{ active: timeType === 2 }" @click="setTime(2)">近1年</span>
+        <span :class="{ active: timeType === 3 }" @click="setTime(3)">近3年</span>
       </div>
       <div class="filter-item operation-bar">
         <span
@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import { formatDate } from '@/libs/utils'
 import resize from '@/mixins/resize'
 import bar from '@/mixins/bar'
 export default {
@@ -40,8 +41,10 @@ export default {
       chartId_bar: `barChart_${new Date().getTime()}`,
       noData: false,
       type: 1,
-      time: 1,
       barType: 1,
+      timeType: 1,
+      st: null,
+      et: null,
       typeOptions: [
         {
           label: '风险客户数量',
@@ -65,7 +68,7 @@ export default {
       series: {
         name: '2011年',
         type: 'bar',
-        data: [28, 20, 17, 8, 4],
+        data: [],
         label: {
           show: true,
           position: 'right',
@@ -76,38 +79,67 @@ export default {
   },
   props: {
     title: String,
-    barList: Array
+    barList: Array,
+    request: {
+      require: true,
+      type: Function
+    }
+  },
+  computed: {
+    urlOptions() {
+      return {
+        sourceType: this.type,
+        riskType: this.barType,
+        st: this.st,
+        et: this.et,
+        limit: null
+      }
+    }
   },
   watch: {
-    type() {
-      this.drawChart()
+    urlOptions: {
+      deep: true,
+      handler() {
+        this.drawChart()
+      }
     },
-    time() {
-      this.drawChart()
-    },
-    barType() {
-      this.drawChart()
-    },
-    industryCode: {
+    timeType: {
       immediate: true,
       handler(data) {
-        if (!data.length) return
-        this.drawChart()
+        this.setTime(data)
       }
     }
   },
   mixins: [resize, bar],
   methods: {
+    setTime(timeType) {
+      this.timeType = timeType
+      let start = new Date()
+      switch (timeType) {
+        case 1:
+          start.setMonth(start.getMonth() - 3)
+          break
+        case 2:
+          start.setFullYear(start.getFullYear() - 1)
+          break
+        case 3:
+          start.setFullYear(start.getFullYear() - 3)
+          break
+      }
+      this.st = formatDate(start, 'yyyy-MM-dd')
+      this.et = formatDate(new Date(), 'yyyy-MM-dd')
+    },
     setChartOption() {
       this.chartOption_bar.color = ['#4A84FF']
       this.chartOption_bar.tooltip = Object.assign({}, this.chartOption_bar.tooltip, this.tooltip)
       this.chartOption_bar.grid.top = 16
-      this.chartOption_bar.grid.left = 120
+      this.chartOption_bar.grid.left = 100
+      this.chartOption_bar.grid.right = 100
       this.chartOption_bar.legend.show = false
       this.chartOption_bar.xAxis.type = 'value'
       this.chartOption_bar.yAxis.type = 'category'
-      this.chartOption_bar.yAxis.data = ['资本市场服务', '煤炭开采和洗选业', '汽车制造业', '医药制造业', '食品制造业']
-      this.series.data = [4, 8, 17, 20, 28]
+      this.chartOption_bar.yAxis.data = this.barData.map((item) => item.gbName)
+      this.series.data = this.barData.map((item) => item.customer)
       this.chartOption_bar.series = this.series
       return this.chartOption_bar
     }

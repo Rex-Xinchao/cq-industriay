@@ -122,7 +122,7 @@ export default {
     ...mapGetters(['industryCode', 'industry'])
   },
   watch: {
-    industryCode: {
+    GBs: {
       immediate: true,
       handler(data) {
         if (!data.length) return

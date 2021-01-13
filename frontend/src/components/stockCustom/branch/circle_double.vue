@@ -105,7 +105,15 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['industry'])
+    ...mapGetters(['industry']),
+    urlOptions() {
+      return {
+        industryCode: this.industryCode,
+        buCode: null,
+        st: this.dataTime[0],
+        et: this.dataTime[1]
+      }
+    }
   },
   mixins: [resize, pie],
   props: {
@@ -117,18 +125,10 @@ export default {
     }
   },
   watch: {
-    type() {
-      if (!data.length) return
-      this.drawChart()
-    },
-    dataTime() {
-      if (!data.length) return
-      this.drawChart()
-    },
-    industryCode: {
-      immediate: true,
+    urlOptions: {
+      deep: true,
       handler(data) {
-        if (!data.length) return
+        if (!this.industryCode.length) return
         this.drawChart()
       }
     }
@@ -138,12 +138,7 @@ export default {
     converUnit,
     async getChartData() {
       let result = []
-      this.response = await neg_events({
-        industryCode: this.industryCode,
-        buCode: null,
-        st: this.dataTime[0],
-        et: this.dataTime[1]
-      })
+      this.response = await neg_events(this.urlOptions)
         .then((res) => res)
         .catch((e) => {})
       result = (this.response && this.response.events) || []

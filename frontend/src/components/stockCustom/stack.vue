@@ -51,8 +51,8 @@ export default {
       type: Function
     },
     industryCode: {
-      require: true,
-      type: Array
+      require: false,
+      default: () => null
     }
   },
   computed: {
@@ -73,8 +73,13 @@ export default {
     industryCode: {
       immediate: true,
       handler(data) {
-        if (!data.length) return
-        this.drawChart()
+        if (!data && typeof data != 'undefined' && data != 0) {
+          this.drawChart()
+        } else if (data && data.length) {
+          this.drawChart()
+        } else {
+          this.noData = true
+        }
       }
     }
   },
