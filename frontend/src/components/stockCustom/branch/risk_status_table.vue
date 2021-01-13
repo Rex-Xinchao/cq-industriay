@@ -11,7 +11,7 @@
           <span class="icon icon_1"></span>
           <span class="line">
             <p>
-              <b>{{ number_1 }}</b>
+              <b>{{ number_0 }}</b>
               家
             </p>
             <p>全部风险客户</p>
@@ -140,10 +140,10 @@ export default {
       amountRange: [0, 500],
       timeRange: [0, 30],
       type: 0,
-      number_0: 18,
-      number_1: 6,
-      number_2: 6,
-      number_3: 6,
+      number_0: 0,
+      number_1: 0,
+      number_2: 0,
+      number_3: 0,
       sum: 0,
       tableData: [],
       loading: false
