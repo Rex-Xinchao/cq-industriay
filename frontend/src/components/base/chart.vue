@@ -124,6 +124,12 @@ export default {
       this.chartOption_line.yAxis.min = null
       return this.chartOption_line
     }
+  },
+  mounted() {
+    // this.$eventBus.$on('getShowHeads', (data) => {})
+  },
+  beforeDestroy() {
+    // this.$eventBus.$off('getShowHeads')
   }
 }
 </script>

@@ -15,8 +15,8 @@
         <div class="filter-label">产业链：</div>
         <div class="filter-value">
           <el-select v-model="form.type" placeholder="请选择产业链">
-            <el-option label="区域一" value="shanghai"></el-option>
-            <el-option label="区域二" value="beijing"></el-option>
+            <el-option label="区域一" value="1"></el-option>
+            <el-option label="区域二" value="2"></el-option>
           </el-select>
         </div>
       </div>

@@ -204,12 +204,12 @@ export default {
       }
       industryList({})
         .then((res) => {
-          this.loading = false
           res.result.forEach((item) => {
             map[item.regionCode].tree = item.tree
           })
           this.regions = map
           this.draw()
+          this.loading = false
         })
         .then((err) => {
           this.loading = false

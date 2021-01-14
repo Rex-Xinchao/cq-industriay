@@ -116,6 +116,7 @@ export default {
         .then((res) => {
           this.loading = false
           this.tableData = res.result || []
+          // this.$eventBus.$emit('getShowHeads')
           this.dateTime = this.tableData[0].year
           this.maxDate = this.tableData[0].year
         })
@@ -125,7 +126,7 @@ export default {
         })
     },
     getValue(value, type = 1) {
-      if (!value) return null
+      if (!value) return '--'
       const unit = type === 1 ? '%' : '元'
       return `${converUnit(value)}${unit}`
     }
