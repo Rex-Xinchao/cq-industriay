@@ -75,7 +75,7 @@
 </template>
 <script>
 import { leading_financial } from '@/api/base'
-import { converUnit } from '@/libs/utils'
+import { converUnit, formatDate } from '@/libs/utils'
 import { mapGetters } from 'vuex'
 export default {
   data() {
@@ -123,11 +123,12 @@ export default {
       loading: false,
       tableData: [],
       page: {
-        total: 100,
+        total: 0,
         count: 1
       },
-      dateTime: new Date().setFullYear(new Date().getFullYear() - 1),
+      dateTime: null,
       timeType: 'Q4',
+      maxDate: null,
       options: [
         {
           label: '年度',
@@ -140,10 +141,7 @@ export default {
       ],
       pickerOptions: {
         disabledDate(time) {
-          return (
-            time.getTime() > new Date().getTime() - 3600 * 24 * 365 * 1000 ||
-            time.getTime() < new Date('2015').getTime()
-          )
+          return time.getTime() > new Date().getTime(vm.maxDate) || time.getTime() < new Date('2015').getTime()
         }
       }
     }
@@ -166,7 +164,8 @@ export default {
     },
     industryCode: {
       immediate: true,
-      handler() {
+      handler(data) {
+        if (!idata) return
         this.getData()
       }
     }
@@ -176,11 +175,11 @@ export default {
     getData() {
       this.loading = true
       let params = {
-        rpt: new Date(this.dateTime).getFullYear(),
+        rpt: formatDate(this.dateTime, 'yyyy'),
         timeType: this.timeType,
         industryCode: this.industryCode,
-        standardType: this.norm,
-        mkt: this.market,
+        standardType: this.norm.join(','),
+        mkt: this.market.join(','),
         page: this.page.count,
         size: 20
       }
@@ -189,7 +188,9 @@ export default {
           this.loading = false
           this.tableData = res.result
           this.time = res.time
-          // todo page && size && total
+          this.page.total = res.total
+          this.dateTime = this.tableData[0].year
+          this.maxDate = this.tableData[0].year
           let keyList = []
           this.baseMenu.forEach((item) => {
             if (this.norm.includes(Number(item.type))) {
