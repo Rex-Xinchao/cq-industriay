@@ -43,25 +43,35 @@
         <span class="filter-label fr">披露期：{{ `${new Date(dateTime).getFullYear()} ${timeType}` || '--' }}</span>
       </div>
       <el-table v-loading="loading" class="table-head-grey" :data="tableData" height="calc(100% - 120px)">
-        <el-table-column prop="comName" label="龙头企业" align="center">
+        <el-table-column prop="comName" label="龙头企业" align="center" width="240">
           <template slot-scope="scope">
             {{ scope.row.comName ? scope.row.comName : '--' }}
           </template>
         </el-table-column>
         <el-table-column prop="market" label="市场" align="center">
           <template slot-scope="scope">
-            {{ scope.row.market ? scope.row.market : '--' }}
+            <span v-html="getMarket(scope.row.market)"></span>
           </template>
         </el-table-column>
         <el-table-column
-          v-for="item in keyList"
+          v-for="(item, index) in keyList"
           :prop="item.itemCode"
           :label="item.itemName"
           :key="item.itemCode"
           align="right"
-          sortable
           width="250"
-        ></el-table-column>
+          sortable
+        >
+          <template slot-scope="scope">
+            <template v-if="scope.row[item.itemCode]">
+              <span v-if="scope.row[item.itemCode].valueType === 1">{{ scope.row[item.itemCode].value }}%</span>
+              <span v-else>
+                {{ converUnit(scope.row[item.itemCode].value) }}
+              </span>
+            </template>
+            <span v-else>--</span>
+          </template>
+        </el-table-column>
       </el-table>
       <el-pagination
         class="pagination fr"
@@ -79,6 +89,7 @@ import { converUnit, formatDate } from '@/libs/utils'
 import { mapGetters } from 'vuex'
 export default {
   data() {
+    const vm = this
     return {
       time: null,
       keyList: [],
@@ -106,25 +117,30 @@ export default {
         }
       ],
       market: [],
+      marketsMap: {
+        A: 'A股',
+        N: '三板',
+        B: '发债'
+      },
       markets: [
         {
           label: 'A股',
-          value: 1
+          value: 'A'
         },
         {
           label: '三板',
-          value: 2
+          value: 'N'
         },
         {
           label: '发债',
-          value: 3
+          value: 'B'
         }
       ],
       loading: false,
       tableData: [],
       page: {
         total: 0,
-        count: 1
+        count: 0
       },
       dateTime: null,
       timeType: 'Q4',
@@ -165,13 +181,19 @@ export default {
     industryCode: {
       immediate: true,
       handler(data) {
-        if (!idata) return
+        if (!data) return
         this.getData()
       }
     }
   },
   methods: {
     converUnit,
+    getMarket(list) {
+      if (!list) return '--'
+      if (!list.length) return '--'
+      list = list.map((item) => this.marketsMap[item])
+      return list.join(',')
+    },
     getData() {
       this.loading = true
       let params = {
@@ -179,18 +201,24 @@ export default {
         timeType: this.timeType,
         industryCode: this.industryCode,
         standardType: this.norm.join(','),
-        mkt: this.market.join(','),
+        market: this.market.join(','),
         page: this.page.count,
         size: 20
       }
       leading_financial(params)
         .then((res) => {
           this.loading = false
-          this.tableData = res.result
+          this.tableData = res.result.map((item) => {
+            item.items &&
+              item.items.forEach((itm) => {
+                item[itm.itemCode] = itm
+              })
+            return item
+          })
           this.time = res.time
           this.page.total = res.total
-          this.dateTime = this.tableData[0].year
-          this.maxDate = this.tableData[0].year
+          this.dateTime = res.year
+          this.maxDate = res.year
           let keyList = []
           this.baseMenu.forEach((item) => {
             if (this.norm.includes(Number(item.type))) {
