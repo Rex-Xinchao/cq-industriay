@@ -30,7 +30,7 @@
               :key="item.value"
               :label="item.label"
               :value="item.value"
-              :disabled="norm.includes('')"
+              :disabled="norm.length === 0 && norm.include(item.value)"
             ></el-option>
           </el-select>
         </span>
@@ -66,7 +66,7 @@
           <template slot-scope="scope">
             <template v-if="scope.row.finItem[item.itemCode]">
               <span v-if="scope.row.finItem[item.itemCode].valueType === 1">
-                {{ scope.row.finItem[item.itemCode].value }}%
+                {{ converUnit(scope.row.finItem[item.itemCode].value) }}%
               </span>
               <span v-else>
                 {{ converUnit(scope.row.finItem[item.itemCode].value) }}
@@ -192,8 +192,8 @@ export default {
     getData() {
       this.loading = true
       let params = {
-        rpt: formatDate(this.dateTime, 'yyyy'),
-        timeType: this.timeType,
+        year: formatDate(this.dateTime, 'yyyy'),
+        quarter: this.timeType,
         industryCode: this.industryCode,
         standardType: this.norm.join(','),
         market: this.market.join(','),

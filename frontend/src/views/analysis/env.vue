@@ -78,7 +78,7 @@
             来源：国家统计局&nbsp;&nbsp;&nbsp;&nbsp;频率：{{ rate }}&nbsp;&nbsp;&nbsp;&nbsp;单位：{{ unit }}
           </p>
           <div class="right-main-chart">
-            <div id="toggleChart"></div>
+            <div class="toggleChart" :id="chartId"></div>
             <no-data-show class="chart-nodata" :show="noData"></no-data-show>
           </div>
           <el-table class="right-main-table" :data="tableData" style="width: 100%">
@@ -100,9 +100,7 @@ const echarts = require('echarts')
 import { mapGetters } from 'vuex'
 import { getTimeLine, converUnit } from '@/libs/utils'
 import { envMenu, envChart } from '@/api/analysis'
-import resize from '@/mixins/resize'
-import bar from '@/mixins/bar'
-import line from '@/mixins/line'
+import { Echart_Base, Echart_Axis } from '@/mixins/echarts'
 export default {
   data() {
     return {
@@ -130,19 +128,12 @@ export default {
         chartType: 'line',
         dateTime: []
       },
-      tooltip: {
-        formatter: (data) => {
-          let value = data[0].value ? converUnit(data[0].value) : '--'
-          return `${data[0].name}<br/>${this.activeHeadName}：${value}${this.unit}`
-        }
+      formatter: (data) => {
+        let value = data[0].value ? converUnit(data[0].value) : '--'
+        return `${data[0].name}<br/>${this.activeHeadName}：${value}${this.unit}`
       },
       dataZoom: [{ show: true }, { type: 'inside' }],
-      grid: {
-        bottom: '80px',
-        top: '20px',
-        left: '50px',
-        right: '50px'
-      },
+      grid: { bottom: 80, top: 20, left: 50, right: 50 },
       series: {
         type: 'line',
         data: [],
@@ -192,7 +183,7 @@ export default {
       ]
     }
   },
-  mixins: [resize, bar, line],
+  mixins: [Echart_Base, Echart_Axis],
   computed: {
     ...mapGetters(['industry', 'industryCode']),
     activeHeadName() {
@@ -220,6 +211,7 @@ export default {
     chartParams: {
       deep: true,
       handler() {
+        if (!this.activeHeadName) return
         this.drawChart()
       }
     },
@@ -267,8 +259,6 @@ export default {
           this.heads = res.names || []
           this.activeHead = this.heads[0].value
           this.envData = res
-          this.drawChart()
-          this.getTableData()
         })
         .catch((err) => {
           this.loading = false
@@ -276,15 +266,18 @@ export default {
           this.envData = {}
         })
     },
-    setChartOption() {
-      this.chartId_line = 'toggleChart'
-      this.chartId_bar = 'toggleChart'
-      this.series.type = this.chartParams.chartType
-      const chartOption = this.chartParams.chartType === 'line' ? this.chartOption_line : this.chartOption_bar
+    getChartOption() {
+      const chartOption = { ...this.chartOption }
+      if (this.chartParams.chartType === 'line') {
+        chartOption.tooltip.axisPointer.type = 'line'
+      } else {
+        chartOption.tooltip.axisPointer.type = 'shadow'
+      }
       chartOption.color = this.color
-      chartOption.series = this.series
-      chartOption.tooltip = Object.assign({}, chartOption.tooltip, this.tooltip)
-      chartOption.grid = Object.assign({}, chartOption.grid, this.grid)
+      chartOption.dataZoom = this.dataZoom
+      chartOption.series.type = this.chartParams.chartType
+      chartOption.tooltip.formatter = this.formatter
+      chartOption.yAxis.axisLabel.formatter = (d) => converUnit(d, 'zh', 0)
       let map = {}
       if (!this.envData.names) return {}
       const activeItem = this.envData.names.find((item) => item.name === this.activeHeadName)
@@ -295,12 +288,8 @@ export default {
       this.envData.chart.forEach((item) => {
         map[item.rpt] = item[key] || 0
       })
-      // let timeLine = getTimeLine(this.envData.chart[0].rpt, this.envData.chart[this.envData.chart.length - 1].rpt)
       chartOption.xAxis.data = Object.keys(map)
       chartOption.series.data = Object.values(map)
-      chartOption.yAxis.axisLabel.formatter = (d) => converUnit(d, 'zh', 0)
-      chartOption.yAxis.min = null
-      chartOption.dataZoom = this.dataZoom
       return chartOption
     },
     getTableData() {

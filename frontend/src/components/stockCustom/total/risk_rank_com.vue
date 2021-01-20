@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="com-chart" v-loading="loading">
-      <div v-if="!noData" class="chart-main" :id="chartId_bar"></div>
+      <div v-if="!noData" class="chart-main" :id="chartId"></div>
       <no-data-show class="chart-nodata" :show="noData"></no-data-show>
     </div>
   </div>
@@ -33,8 +33,7 @@
 
 <script>
 import { formatDate } from '@/libs/utils'
-import resize from '@/mixins/resize'
-import bar from '@/mixins/bar'
+import { Echart_Base, Echart_Axis } from '@/mixins/echarts'
 export default {
   data() {
     return {
@@ -55,8 +54,12 @@ export default {
           value: 2
         }
       ],
+      grid: { left: 100, right: 100, bottom: 20, top: 16 },
       tooltip: {
         trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        },
         formatter: function (data) {
           let result = ''
           data.forEach((item) => {
@@ -110,7 +113,7 @@ export default {
       }
     }
   },
-  mixins: [resize, bar],
+  mixins: [Echart_Base, Echart_Axis],
   methods: {
     setTime(timeType) {
       this.timeType = timeType
@@ -129,19 +132,16 @@ export default {
       this.st = formatDate(start, 'yyyy-MM-dd')
       this.et = formatDate(new Date(), 'yyyy-MM-dd')
     },
-    setChartOption() {
-      this.chartOption_bar.color = ['#4A84FF']
-      this.chartOption_bar.tooltip = Object.assign({}, this.chartOption_bar.tooltip, this.tooltip)
-      this.chartOption_bar.grid.top = 16
-      this.chartOption_bar.grid.left = 100
-      this.chartOption_bar.grid.right = 100
-      this.chartOption_bar.legend.show = false
-      this.chartOption_bar.xAxis.type = 'value'
-      this.chartOption_bar.yAxis.type = 'category'
-      this.chartOption_bar.yAxis.data = this.barData.map((item) => item.gbName)
+    getChartOption() {
+      const chartOption = { ...this.chartOption }
+      chartOption.color = ['#4A84FF']
+      chartOption.legend.show = false
+      chartOption.xAxis.type = 'value'
+      chartOption.yAxis.type = 'category'
+      chartOption.yAxis.data = this.barData.map((item) => item.gbName)
       this.series.data = this.barData.map((item) => item.customer)
-      this.chartOption_bar.series = this.series
-      return this.chartOption_bar
+      chartOption.series = this.series
+      return chartOption
     }
   }
 }

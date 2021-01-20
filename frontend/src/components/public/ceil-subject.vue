@@ -2,60 +2,63 @@
   <el-popover placement="bottom-start" popper-class="event-subject-popover" width="336" trigger="hover">
     <slot slot="reference"></slot>
     <p>{{ name }}</p>
-    <div v-loading="loading" class="chart-main" :id="chartId_bar"></div>
+    <div v-loading="loading" class="chart-main" :id="chartId"></div>
   </el-popover>
 </template>
 <script>
 import { numberFormat } from '@/libs/utils'
-import resize from '@/mixins/resize'
-import bar from '@/mixins/bar'
+import { Echart_Base, Echart_Axis } from '@/mixins/echarts'
 export default {
   data() {
+    const vm = this
     return {
       color: ['#3398DB'],
       loading: false,
-      chartId_bar: `barChart${new Date().getTime()}${Math.random()}`
+      grid: { left: 60, right: 20, bottom: 20, top: 20 },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        },
+        formatter: (data) => {
+          let time = data[0].axisValue
+          let result = ''
+          data.forEach((item) => {
+            result += `${time}：${numberFormat(item.value)} ${vm.unit}<br/>`
+          })
+          return result
+        }
+      }
     }
   },
-  mixins: [resize, bar],
+  mixins: [Echart_Base, Echart_Axis],
   props: {
     dataMap: Object,
     unit: String,
     name: String
   },
   methods: {
-    setChartOption() {
+    getChartOption() {
+      const chartOption = { ...this.chartOption }
       const data = this.dataMap
-      const vm = this
-      this.chartOption_bar.color = this.color
-      this.chartOption_bar.grid.top = '20px'
-      this.chartOption_bar.grid.left = '60px'
-      this.chartOption_bar.series = {
+      chartOption.color = this.color
+      chartOption.series = {
         type: 'bar',
         barWidth: '36%',
         data: []
       }
-      this.chartOption_bar.tooltip.formatter = (data) => {
-        let time = data[0].axisValue
-        let result = ''
-        let unit = this.unit
-        data.forEach((item) => {
-          result += `${time}：${numberFormat(item.value)} ${unit}<br/>`
-        })
-        return result
-      }
-      this.chartOption_bar.xAxis.data = []
-      this.chartOption_bar.series.data = []
+      chartOption.xAxis.data = []
+      chartOption.series.data = []
       let max = 0
       for (let key in data) {
         if (key !== 'name' && key !== 'unit') {
           let value = data[key]
           max = Math.max(max, Number(value))
-          this.chartOption_bar.series.data.push(value)
-          this.chartOption_bar.xAxis.data.push(key)
+          chartOption.series.data.push(value)
+          chartOption.xAxis.data.push(key)
         }
       }
-      return this.chartOption_bar
+      return chartOption
     }
   },
   mounted() {

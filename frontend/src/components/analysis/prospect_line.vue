@@ -1,6 +1,6 @@
 <template>
   <div class="com-chart" v-loading="loading">
-    <div v-if="!noData" class="chart-main" :id="chartId_line"></div>
+    <div v-if="!noData" class="chart-main" :id="chartId"></div>
     <no-data-show class="chart-nodata" :show="noData"></no-data-show>
   </div>
 </template>
@@ -8,20 +8,25 @@
 <script>
 import { converUnit } from '@/libs/utils'
 import { prospectData } from '@/api/analysis'
-import resize from '@/mixins/resize'
-import line from '@/mixins/line'
+import { Echart_Base, Echart_Axis } from '@/mixins/echarts'
 export default {
   data() {
     return {
-      chartId_line: `line_${new Date().getTime()}_${Math.random()}`,
-      formatter: (data) => {
-        let result = `${data[0].axisValue}<br/>`
-        data.forEach((item) => {
-          let value = this.type === 'ratio' ? `${item.value}%` : `${converUnit(item.value)}${this.unit}`
-          result += `${item.seriesName}：${value}<br/>`
-        })
-        return result
-      }
+      tooltip: {
+        trigger: 'axis',
+        formatter: (data) => {
+          let result = `${data[0].axisValue}<br/>`
+          data.forEach((item) => {
+            let value = this.type === 'ratio' ? `${item.value}%` : `${converUnit(item.value)}${this.unit}`
+            result += `${item.seriesName}：${value}<br/>`
+          })
+          return result
+        }
+      },
+      grid: { left: 60, right: 20, bottom: 30, top: 60 },
+      request: prospectData,
+      urlOptions: {},
+      reponseKey: 'profit'
     }
   },
   props: {
@@ -46,42 +51,33 @@ export default {
       }
     }
   },
-  mixins: [resize, line],
+  mixins: [Echart_Base, Echart_Axis],
   methods: {
-    async getChartData() {
-      let data = await prospectData()
-      let result = data.profit || []
-      this.noData = result.length === 0
-      return result
-    },
-    setChartOption() {
-      this.chartId_line = this.chartId_line
-      this.chartOption_line.color = this.color
-      this.chartOption_line.legend.left = 0
-      this.chartOption_line.tooltip.formatter = this.formatter
-      this.chartOption_line.grid.left = '60px'
-      this.chartOption_line.xAxis.data = []
-      this.chartOption_line.yAxis.min = null
-      this.chartOption_line.series = {
+    getChartOption() {
+      const chartOptions = { ...this.chartOption }
+      chartOptions.color = this.color
+      chartOptions.legend.left = 0
+      chartOptions.xAxis.data = []
+      chartOptions.series = {
         name: this.name,
         type: 'line',
         barWidth: '16%',
         data: []
       }
-      this.lineData.forEach((item) => {
-        this.chartOption_line.xAxis.data.push(item.rpt)
+      this.chartData.forEach((item) => {
+        chartOptions.xAxis.data.push(item.rpt)
         if (this.name === '行业毛利率') {
-          this.chartOption_line.series.data.push(item.value1)
+          chartOptions.series.data.push(item.value1)
         } else {
-          this.chartOption_line.series.data.push(item.value2)
+          chartOptions.series.data.push(item.value2)
         }
       })
       if (this.type === 'ratio') {
-        this.chartOption_line.yAxis.axisLabel.formatter = '{value}%'
+        chartOptions.yAxis.axisLabel.formatter = '{value}%'
       } else {
-        this.chartOption_line.yAxis.axisLabel.formatter = (d) => converUnit(d, 'zh', 0)
+        chartOptions.yAxis.axisLabel.formatter = (d) => converUnit(d, 'zh', 0)
       }
-      return this.chartOption_line
+      return chartOptions
     }
   }
 }

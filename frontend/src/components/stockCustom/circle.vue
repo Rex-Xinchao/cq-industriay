@@ -4,25 +4,27 @@
       {{ title }}
       <i class="icon-tip" :title="`来源于重庆银行${industry}授信客户`"></i>
     </h1>
-    <div v-if="!noData" class="chart-main" :id="`circleChart_${timeStamp}`"></div>
+    <div v-if="!noData" class="chart-main" :id="chartId"></div>
     <no-data-show class="chart-nodata" :show="noData"></no-data-show>
   </div>
 </template>
 
 <script>
-import { numberFormat, converUnit } from '@/libs/utils'
-import resize from '@/mixins/resize'
-import pie from '@/mixins/pie'
 import { mapGetters } from 'vuex'
+import { numberFormat, converUnit } from '@/libs/utils'
+import { Echart_Base, Echart_Pie } from '@/mixins/echarts'
 export default {
   data() {
     let vm = this
     return {
       cfgs: [],
-      timeStamp: new Date().getTime(),
       data: [],
       color: ['#147AD6', '#79D2DE', '#EC6666'],
       legend: {
+        show: true,
+        icon: 'circle',
+        orient: 'vertical',
+        right: '10%',
         top: '40',
         data: [],
         formatter: function (name) {
@@ -61,7 +63,7 @@ export default {
       }
     }
   },
-  mixins: [resize, pie],
+  mixins: [Echart_Base, Echart_Pie],
   props: {
     title: String,
     legendData: Array,
@@ -102,12 +104,11 @@ export default {
       }
       return result
     },
-    setChartOption() {
-      const data = this.pieData
-      this.chartId_pie = `circleChart_${this.timeStamp}`
-      this.chartOption_pie.color = this.color
-      this.chartOption_pie.legend = Object.assign({}, this.chartOption_pie.legend, this.legend)
-      this.chartOption_pie.legend.data = this.legendData
+    getChartOption() {
+      const data = this.chartData
+      const chartOption = { ...this.chartOption_pie }
+      chartOption.color = this.color
+      chartOption.legend.data = this.legendData
       this.data = []
       for (let key in data) {
         this.data.push({
@@ -116,17 +117,17 @@ export default {
           amount: converUnit(data[key].amount.amount)
         })
       }
-      this.chartOption_pie.series[0].data = this.data
+      chartOption.series[0].data = this.data
       const isOnly = this.data.filter((item) => item.amount).length === 1
       if (isOnly) {
-        this.chartOption_pie.series[0].label.position = 'center'
+        chartOption.series[0].label.position = 'center'
       } else {
-        this.chartOption_pie.series[0].label.position = 'inside'
+        chartOption.series[0].label.position = 'inside'
       }
       if (window && window.innerWidth && window.innerWidth <= 1440) {
-        this.chartOption_pie.legend.right = 0
+        chartOption.legend.right = 0
       }
-      return this.chartOption_pie
+      return chartOption
     }
   }
 }

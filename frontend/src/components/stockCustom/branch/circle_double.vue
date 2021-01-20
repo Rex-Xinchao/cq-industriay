@@ -7,7 +7,7 @@
       <time-select v-model="dataTime" :options="options" startValue="1Y"></time-select>
     </h1>
     <div v-loading="loading" v-if="!noData" class="chart-main">
-      <div class="half" :id="`pieChart_${timeStamp}`"></div>
+      <div class="half" :id="chartId"></div>
       <div class="half">
         <span class="table-title">{{ tableTitle }}</span>
         <el-table height="300" :data="tableData">
@@ -30,11 +30,10 @@
 </template>
 
 <script>
-import { numberFormat, converUnit } from '@/libs/utils'
-import resize from '@/mixins/resize'
-import pie from '@/mixins/pie'
 import { mapGetters } from 'vuex'
+import { numberFormat, converUnit } from '@/libs/utils'
 import { neg_events } from '@/api/custom'
+import { Echart_Base, Echart_Pie } from '@/mixins/echarts'
 const colors = [
   {
     color: '#3B6EEE',
@@ -101,7 +100,9 @@ export default {
         trigger: 'item',
         formatter: '{b}: {c} ({d}%)'
       },
-      series: []
+      series: [],
+      request: neg_events,
+      responseKey: 'events'
     }
   },
   computed: {
@@ -115,7 +116,7 @@ export default {
       }
     }
   },
-  mixins: [resize, pie],
+  mixins: [Echart_Base, Echart_Pie],
   props: {
     title: String,
     subTitle: String,
@@ -136,15 +137,6 @@ export default {
   methods: {
     numberFormat,
     converUnit,
-    async getChartData() {
-      let result = []
-      this.response = await neg_events(this.urlOptions)
-        .then((res) => res)
-        .catch((e) => {})
-      result = (this.response && this.response.events) || []
-      this.noData = result.length === 0
-      return result
-    },
     setChartEvent() {
       this.myChart.on('click', (params) => {
         if (params.componentSubType === 'pie') {
@@ -155,11 +147,9 @@ export default {
         }
       })
     },
-    setChartOption() {
-      this.chartId_pie = `pieChart_${this.timeStamp}`
-      this.chartOption_pie.legend.show = false
-      this.chartOption_pie.tooltip = this.tooltip
-      this.chartOption_pie.series = this.series
+    getChartOption() {
+      const chartOption = { ...this.chartOption_pie }
+      chartOption.legend.show = false
       let series_in = {
         type: 'pie',
         hoverAnimation: false,
@@ -191,7 +181,7 @@ export default {
         color: [],
         data: []
       }
-      this.pieData.forEach((item_p, i) => {
+      this.chartData.forEach((item_p, i) => {
         series_in.color.push(colors[i].color)
         series_in.data.push({
           name: item_p.eventName,
@@ -212,18 +202,15 @@ export default {
           }
         })
       })
-
-      console.log(series_in.data)
-      console.log(series_out.data)
       const isOnly = series_in.data.length === 1
       if (isOnly) {
         series_in.label.position = 'center'
       } else {
         series_in.label.position = 'inside'
       }
-      this.chartOption_pie.series[1] = series_in
-      this.chartOption_pie.series[0] = series_out
-      return this.chartOption_pie
+      chartOption.series[1] = series_in
+      chartOption.series[0] = series_out
+      return chartOption
     }
   }
 }

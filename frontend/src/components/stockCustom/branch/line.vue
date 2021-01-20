@@ -4,15 +4,14 @@
       {{ title }}
       <i class="icon-tip" :title="tip"></i>
     </h1>
-    <div v-if="!noData" class="chart-main" :id="`lineChart_${timeStamp}`"></div>
+    <div v-if="!noData" class="chart-main" :id="chartId"></div>
     <no-data-show class="chart-nodata" :show="noData"></no-data-show>
   </div>
 </template>
 
 <script>
 const echarts = require('echarts')
-import resize from '@/mixins/resize'
-import line from '@/mixins/line'
+import { Echart_Base, Echart_Axis } from '@/mixins/echarts'
 export default {
   data() {
     const vm = this
@@ -37,10 +36,7 @@ export default {
         itemWidth: 16,
         bottom: 0
       },
-      grid: {
-        bottom: '50px',
-        top: '20px'
-      },
+      grid: { bottom: 50, top: 20, left: 40, right: 40 },
       series: {
         name: null,
         type: 'line',
@@ -61,7 +57,7 @@ export default {
       }
     }
   },
-  mixins: [resize, line],
+  mixins: [Echart_Base, Echart_Axis],
   props: {
     chartData: Object
   },
@@ -83,21 +79,18 @@ export default {
       this.name = this.chartData.name
       return this.chartData
     },
-    setChartOption() {
-      this.chartId_line = `lineChart_${this.timeStamp}`
-      this.chartOption_line.color = this.color
-      this.chartOption_line.tooltip = Object.assign({}, this.chartOption_line.tooltip, this.tooltip)
-      this.chartOption_line.grid = Object.assign({}, this.chartOption_line.grid, this.grid)
-      this.chartOption_line.legend = this.legend
+    getChartOption() {
+      const chartOption = { ...this.chartOption }
+      chartOption.color = this.color
       this.series.name = this.name
-      this.chartOption_line.series = this.series
-      this.chartOption_line.xAxis.data = []
-      this.chartOption_line.series.data = []
-      this.lineData.indexes.forEach((item) => {
-        this.chartOption_line.xAxis.data.push(item.rpt)
-        this.chartOption_line.series.data.push(item.indexRatio)
+      chartOption.series = this.series
+      chartOption.xAxis.data = []
+      chartOption.series.data = []
+      chartData.indexes.forEach((item) => {
+        chartOption.xAxis.data.push(item.rpt)
+        chartOption.series.data.push(item.indexRatio)
       })
-      return this.chartOption_line
+      return chartOption
     }
   }
 }

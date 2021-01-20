@@ -14,7 +14,7 @@
         {{ item.name }}
       </span>
     </div>
-    <div v-loading="loading" v-show="!noData" class="chart-main" id="lineChart"></div>
+    <div v-loading="loading" v-show="!noData" class="chart-main" :id="chartId"></div>
     <no-data-show v-loading="loading" class="chart-nodata" :show="noData"></no-data-show>
   </div>
 </template>
@@ -22,8 +22,7 @@
 import { mapGetters } from 'vuex'
 import { converUnit } from '@/libs/utils'
 import { tendency, getBaseItem } from '@/api/base'
-import resize from '@/mixins/resize'
-import line from '@/mixins/line'
+import { Echart_Base, Echart_Axis } from '@/mixins/echarts'
 export default {
   data() {
     return {
@@ -33,6 +32,7 @@ export default {
       loading: false,
       activeHead: null,
       color: ['#5B8FF9', '#5AD8A6', '#5D7092', '#F6BD16', '#E8684A'],
+      grid: { left: 60, right: 20, bottom: 30, top: 60 },
       legends: [
         {
           name: '优秀值',
@@ -89,27 +89,27 @@ export default {
       }
     }
   },
-  mixins: [resize, line],
+  mixins: [Echart_Base, Echart_Axis],
   methods: {
-    setChartOption() {
-      this.chartOption_line.color = this.color
-      this.chartOption_line.legend.left = 0
-      this.chartOption_line.grid.left = '60px'
+    getChartOption() {
+      const chartOption = { ...this.chartOption }
+      chartOption.color = this.color
+      chartOption.legend.left = 0
       const series = []
       this.legends.forEach((item) => {
         series.push({
           name: item.name,
           type: 'line',
-          data: this.lineData.map((data) => data[item.code])
+          data: this.chartData.map((data) => data[item.code])
         })
       })
-      let valueType = this.lineData[0].valueType === 1 ? 'ratio' : 'number'
+      let valueType = this.chartData[0].valueType === 1 ? 'ratio' : 'number'
       if (valueType === 'ratio') {
-        this.chartOption_line.yAxis.axisLabel.formatter = '{value}%'
+        chartOption.yAxis.axisLabel.formatter = '{value}%'
       } else {
-        this.chartOption_line.yAxis.axisLabel.formatter = (data) => converUnit(data, 'zh', 0)
+        chartOption.yAxis.axisLabel.formatter = (data) => converUnit(data, 'zh', 0)
       }
-      this.chartOption_line.tooltip.formatter = (data) => {
+      chartOption.tooltip.formatter = (data) => {
         let time = data[0].axisValue
         let result = `${time}<br/>`
         data.forEach((item) => {
@@ -119,10 +119,10 @@ export default {
         })
         return result
       }
-      this.chartOption_line.series = series
-      this.chartOption_line.xAxis.data = this.lineData.map((data) => data.year)
-      this.chartOption_line.yAxis.min = null
-      return this.chartOption_line
+      chartOption.series = series
+      chartOption.xAxis.data = this.chartData.map((data) => data.year)
+      chartOption.xAxis.axisLabel.formatter = '{value}'
+      return chartOption
     }
   },
   mounted() {

@@ -24,7 +24,7 @@
           <ratio-line
             color="#344CE9"
             title="行业存量授信客户不良率"
-            legend="行业存量授信客户不良率"
+            legendName="行业存量授信客户不良率"
             class="card_lg"
             :rejectData="rejectData"
             keyName="rejectRate"
@@ -32,7 +32,7 @@
           <ratio-line
             color="#72AF78"
             title="行业存量授信客户违约率"
-            legend="行业存量授信客户违约率"
+            legendName="行业存量授信客户违约率"
             class="card_lg"
             :rejectData="rejectData"
             keyName="defaultRate"

@@ -22,7 +22,7 @@
         <span class="num">{{ indexNum }}</span>
       </div>
       <div class="chart-main">
-        <div id="lineChart_M"></div>
+        <div class="lineChart_M" :id="chartId"></div>
         <no-data-show class="chart-nodata" :show="noData"></no-data-show>
       </div>
     </div>
@@ -32,23 +32,17 @@
 <script>
 import { converUnit } from '@/libs/utils'
 import { competitionIndex } from '@/api/analysis'
-import resize from '@/mixins/resize'
-import line from '@/mixins/line'
+import { Echart_Base, Echart_Axis } from '@/mixins/echarts'
 export default {
   data() {
     return {
       indexNum: 0,
+      grid: { left: 100, right: 20, bottom: 30, top: 60 },
       tooltip: {
         trigger: 'axis',
         formatter: (data) => {
-          return `${this.title}：${converUnit(data[0].value, 'zh', 2)}`
+          return `${this.title}：${converUnit(data[0].value, 'zh', 0)}`
         }
-      },
-      grid: {
-        left: '100px',
-        right: '20px',
-        bottom: '30px',
-        top: '60px'
       },
       visualMap: {
         orient: 'horizontal',
@@ -90,20 +84,17 @@ export default {
       }
     }
   },
-  mixins: [resize, line],
+  mixins: [Echart_Base, Echart_Axis],
   methods: {
-    setChartOption() {
-      this.chartId_line = 'lineChart_M'
-      this.chartOption_line.tooltip = this.tooltip
-      this.chartOption_line.grid = this.grid
-      this.chartOption_line.visualMap = this.visualMap
-      this.chartOption_line.series = this.series
-      this.indexNum = this.lineData[this.lineData.length - 1]
-        ? parseInt(this.lineData[this.lineData.length - 1].value)
+    getChartOption() {
+      const chartOption = { ...this.chartOption }
+      chartOption.visualMap = this.visualMap
+      this.indexNum = this.chartData[this.chartData.length - 1]
+        ? parseInt(this.chartData[this.chartData.length - 1].value)
         : 0
-      this.chartOption_line.xAxis.data = this.lineData.map((item) => item.rpt)
-      this.chartOption_line.series.data = this.lineData.map((item) => item.value)
-      return this.chartOption_line
+      chartOption.xAxis.data = this.chartData.map((item) => item.rpt)
+      chartOption.series.data = this.chartData.map((item) => item.value)
+      return chartOption
     },
     getRoute(num) {
       let current = -70
@@ -197,7 +188,7 @@ export default {
   height: 100%;
   position: relative;
 
-  #lineChart_M {
+  .lineChart_M {
     width: 100%;
     height: 100%;
   }

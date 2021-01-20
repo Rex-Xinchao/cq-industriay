@@ -8,7 +8,7 @@
       </el-select>
     </h1>
     <div class="com-chart" v-loading="loading">
-      <div v-if="!noData" class="chart-main" :id="chartId_bar"></div>
+      <div v-if="!noData" class="chart-main" :id="chartId"></div>
       <no-data-show class="chart-nodata" :show="noData"></no-data-show>
     </div>
   </div>
@@ -17,10 +17,10 @@
 <script>
 import { converUnit } from '@/libs/utils'
 import { prospectData } from '@/api/analysis'
-import resize from '@/mixins/resize'
-import bar from '@/mixins/bar'
+import { Echart_Base, Echart_Axis } from '@/mixins/echarts'
 export default {
   data() {
+    const vm = this
     return {
       barType: 0,
       options: [
@@ -36,14 +36,23 @@ export default {
       legends: ['上市', '三板', '发债'],
       chartId_bar: `barChart${new Date().getTime()}`,
       color: ['#3398DB', '#79D2DE', '#FFD37A'],
-      formatter: (data) => {
-        let result = `${data[0].axisValue}<br/>`
-        data.forEach((item) => {
-          let value = this.type === 'ratio' ? `${item.value}%` : `${converUnit(item.value, 'zh', 0)}${this.unit}`
-          result += `${item.seriesName}：${value}<br/>`
-        })
-        return result
-      }
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        },
+        formatter: (data) => {
+          let result = `${data[0].axisValue}<br/>`
+          data.forEach((item) => {
+            let value = vm.type === 'ratio' ? `${item.value}%` : `${converUnit(item.value, 'zh', 0)}${vm.unit}`
+            result += `${item.seriesName}：${value}<br/>`
+          })
+          return result
+        }
+      },
+      request: prospectData,
+      urlOptions: {},
+      reponseKey: 'prospect'
     }
   },
   props: {
@@ -76,15 +85,10 @@ export default {
       this.drawChart()
     }
   },
-  mixins: [resize, bar],
+  mixins: [Echart_Base, Echart_Axis],
   methods: {
-    async getChartData() {
-      let data = await prospectData()
-      let result = data.prospect || []
-      this.noData = result.length === 0
-      return result
-    },
-    setChartOption() {
+    getChartOption() {
+      const chartOption = { ...this.chartOption }
       const series = []
       this.legends.forEach((item) => {
         series.push({
@@ -94,33 +98,32 @@ export default {
           data: []
         })
       })
-      this.chartOption_bar.color = this.color
-      this.chartOption_bar.grid.left = '60px'
-      this.chartOption_bar.tooltip.formatter = this.formatter
-      this.chartOption_bar.series = series
-      this.chartOption_bar.xAxis.data = []
-      this.chartOption_bar.series[0].data = []
-      this.chartOption_bar.series[1] && (this.chartOption_bar.series[1].data = [])
-      this.chartOption_bar.series[2] && (this.chartOption_bar.series[2].data = [])
+      chartOption.color = this.color
+      chartOption.grid.left = 60
+      chartOption.series = series
+      chartOption.xAxis.data = []
+      chartOption.series[0].data = []
+      chartOption.series[1] && (chartOption.series[1].data = [])
+      chartOption.series[2] && (chartOption.series[2].data = [])
       if (this.barType === 0) {
-        this.barData.forEach((item) => {
-          this.chartOption_bar.xAxis.data.push(item.rpt)
-          this.chartOption_bar.series[0].data.push(item.value1)
-          this.chartOption_bar.series[1].data.push(item.value2)
-          this.chartOption_bar.series[2].data.push(item.value3)
+        this.chartData.forEach((item) => {
+          chartOption.xAxis.data.push(item.rpt)
+          chartOption.series[0].data.push(item.value1)
+          chartOption.series[1].data.push(item.value2)
+          chartOption.series[2].data.push(item.value3)
         })
       } else {
-        this.barData.forEach((item) => {
-          this.chartOption_bar.xAxis.data.push(item.rpt)
-          this.chartOption_bar.series[0].data.push(item.value4)
+        this.chartData.forEach((item) => {
+          chartOption.xAxis.data.push(item.rpt)
+          chartOption.series[0].data.push(item.value4)
         })
       }
       if (this.type === 'ratio') {
-        this.chartOption_bar.yAxis.axisLabel.formatter = '{value}%'
+        chartOption.yAxis.axisLabel.formatter = '{value}%'
       } else {
-        this.chartOption_bar.yAxis.axisLabel.formatter = (d) => converUnit(d, 'zh', 0) + this.unit
+        chartOption.yAxis.axisLabel.formatter = (d) => converUnit(d, 'zh', 0) + this.unit
       }
-      return this.chartOption_bar
+      return chartOption
     }
   }
 }

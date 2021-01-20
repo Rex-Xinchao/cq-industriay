@@ -10,7 +10,7 @@
         <time-select class="select" v-model="dateTime"></time-select>
       </div>
     </h1>
-    <div v-loading="loading" v-if="!noData" class="chart-main" id="barChart"></div>
+    <div v-loading="loading" v-if="!noData" class="chart-main" :id="chartId"></div>
     <no-data-show v-loading="loading" class="chart-nodata" :show="noData"></no-data-show>
   </div>
 </template>
@@ -19,10 +19,10 @@
 const echarts = require('echarts')
 import { numberFormat } from '@/libs/utils'
 import { barData } from '@/mockData/risk'
-import resize from '@/mixins/resize'
-import bar from '@/mixins/bar'
+import { Echart_Base, Echart_Axis } from '@/mixins/echarts'
 export default {
   data() {
+    const vm = this
     return {
       areaSelect: 'CSF_CN_500000',
       areaOptions: [
@@ -34,16 +34,23 @@ export default {
       dateTime: [],
       color: ['#3398DB', '#79D2DE'],
       unit: '起',
+      grid: { top: 40, bottom: 20, left: 60, right: 40 },
       tooltip: {
-        formatter: (data) => {
-          let result = `${data.name}<br/>`
-          result += `${data.seriesName}：${numberFormat(data.value, 0)} ${this.unit}<br/>`
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        },
+        formatter: (item) => {
+          let result = `${item[0].name}<br/>`
+          item.forEach((data) => {
+            result += `${data.seriesName}：${numberFormat(data.value, 0)} ${vm.unit}<br/>`
+          })
           return result
         }
       }
     }
   },
-  mixins: [resize, bar],
+  mixins: [Echart_Base, Echart_Axis],
   props: {
     industryCode: String,
     title: String,
@@ -64,7 +71,8 @@ export default {
     }
   },
   methods: {
-    setChartOption() {
+    getChartOption() {
+      const chartOption = { ...this.chartOption }
       const series = []
       this.legends.forEach((item) => {
         series.push({
@@ -74,23 +82,17 @@ export default {
           data: []
         })
       })
-      this.chartOption_bar.color = this.color
-      this.chartOption_bar.series = series
-      this.chartOption_bar.tooltip = this.tooltip
-      this.chartOption_bar.legend.show = false
-      this.chartOption_bar.grid.left = '60px'
-      this.chartOption_bar.grid.top = '40px'
-      this.chartOption_bar.color = this.color
-      let max = 0
-      this.chartOption_bar.xAxis.data = []
-      this.chartOption_bar.series[0].data = []
+      chartOption.color = this.color
+      chartOption.series = series
+      chartOption.legend.show = false
+      chartOption.xAxis.data = []
+      chartOption.series[0].data = []
       barData.forEach((item) => {
-        max = Math.max(max, item.value)
-        this.chartOption_bar.xAxis.data.push(item.time)
-        this.chartOption_bar.series[0].data.push(item.value)
+        chartOption.xAxis.data.push(item.time)
+        chartOption.series[0].data.push(item.value)
       })
-      this.chartOption_bar.yAxis.axisLabel.formatter = `{value} ${this.unit}`
-      return this.chartOption_bar
+      chartOption.yAxis.axisLabel.formatter = `{value} ${this.unit}`
+      return chartOption
     }
   }
 }
