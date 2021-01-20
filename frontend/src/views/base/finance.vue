@@ -40,6 +40,7 @@
             <el-option v-for="item in markets" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
         </span>
+        <el-button class="filter-item btn" style="width: 56px" type="primary" @click="search">查询</el-button>
         <span class="filter-label fr">披露期：{{ `${new Date(dateTime).getFullYear()} ${timeType}` || '--' }}</span>
       </div>
       <el-table v-loading="loading" class="table-head-grey" :data="tableData" height="calc(100% - 120px)">
@@ -55,7 +56,7 @@
         </el-table-column>
         <el-table-column
           v-for="(item, index) in keyList"
-          :prop="item.itemCode"
+          :prop="`finItem.${item.itemCode}`"
           :label="item.itemName"
           :key="item.itemCode"
           align="right"
@@ -63,10 +64,12 @@
           sortable
         >
           <template slot-scope="scope">
-            <template v-if="scope.row[item.itemCode]">
-              <span v-if="scope.row[item.itemCode].valueType === 1">{{ scope.row[item.itemCode].value }}%</span>
+            <template v-if="scope.row.finItem[item.itemCode]">
+              <span v-if="scope.row.finItem[item.itemCode].valueType === 1">
+                {{ scope.row.finItem[item.itemCode].value }}%
+              </span>
               <span v-else>
-                {{ converUnit(scope.row[item.itemCode].value) }}
+                {{ converUnit(scope.row.finItem[item.itemCode].value) }}
               </span>
             </template>
             <span v-else>--</span>
@@ -166,18 +169,6 @@ export default {
     ...mapGetters(['industryCode', 'industry', 'baseMenu'])
   },
   watch: {
-    dateTime() {
-      this.getData()
-    },
-    timeType() {
-      this.getData()
-    },
-    norm() {
-      this.getData()
-    },
-    market() {
-      this.getData()
-    },
     industryCode: {
       immediate: true,
       handler(data) {
@@ -194,6 +185,10 @@ export default {
       list = list.map((item) => this.marketsMap[item])
       return list.join(',')
     },
+    search() {
+      this.page.count = 0
+      this.getData()
+    },
     getData() {
       this.loading = true
       let params = {
@@ -208,13 +203,7 @@ export default {
       leading_financial(params)
         .then((res) => {
           this.loading = false
-          this.tableData = res.result.map((item) => {
-            item.items &&
-              item.items.forEach((itm) => {
-                item[itm.itemCode] = itm
-              })
-            return item
-          })
+          this.tableData = res.result
           this.time = res.time
           this.page.total = res.total
           this.dateTime = res.year
