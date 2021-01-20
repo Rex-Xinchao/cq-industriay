@@ -203,10 +203,10 @@ export default {
       leading_financial(params)
         .then((res) => {
           this.loading = false
-          this.tableData = res.result
+          this.tableData = res.result || []
           this.time = res.time
           this.page.total = res.total
-          this.dateTime = res.year
+          this.dateTime = this.dateTime || res.year
           this.maxDate = res.year
           let keyList = []
           this.baseMenu.forEach((item) => {

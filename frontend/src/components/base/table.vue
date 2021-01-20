@@ -117,7 +117,7 @@ export default {
           this.loading = false
           this.tableData = res.result || []
           // this.$eventBus.$emit('getShowHeads')
-          this.dateTime = this.tableData[0].year
+          this.dateTime = this.dateTime || this.tableData[0].year
           this.maxDate = this.tableData[0].year
         })
         .catch((err) => {
