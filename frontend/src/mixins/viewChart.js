@@ -238,6 +238,9 @@ export default {
         .attr('ry', this.rect.radius)
         .attr('x', (this.rect.width / 2) * -1)
         .attr('y', (this.rect.height / 2) * -1)
+        .on('click', (d) => {
+          this.showTip(d3.event, d.data)
+        })
         .attr('text-anchor', 'middle')
         .append('title')
         .text((d) => `${d.data.name}`)

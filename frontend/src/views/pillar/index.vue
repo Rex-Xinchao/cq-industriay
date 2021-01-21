@@ -3,10 +3,14 @@
     <h1 class="main-title">支柱产业</h1>
     <div class="map" id="map" v-loading="loading"></div>
     <div class="rank">
-      <div class="card" v-for="item in regions" :class="item.class" :key="item.class" v-loading="loading">
+      <div class="card" v-for="(item, key) in regions" :class="item.class" :key="item.class" v-loading="loading">
         <h1>{{ item.regionName }}</h1>
         <ul style="position: relative">
-          <li v-for="child in item.tree" :key="child.id" @click="pageTo('/pillar/chart', { id: child.id })">
+          <li
+            v-for="child in item.tree"
+            :key="child.id"
+            @click="pageTo('/pillar/chart', { id: child.id, region: key })"
+          >
             {{ child.name }}
           </li>
           <no-data-show class="no-data-show" :show="item.tree.length === 0"></no-data-show>

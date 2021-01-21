@@ -66,7 +66,7 @@
           <template slot-scope="scope">
             <template v-if="scope.row.finItem[item.itemCode]">
               <span v-if="scope.row.finItem[item.itemCode].valueType === 1">
-                {{ converUnit(scope.row.finItem[item.itemCode].value) }}%
+                {{ numberFormat(scope.row.finItem[item.itemCode].value, 1) }}%
               </span>
               <span v-else>
                 {{ converUnit(scope.row.finItem[item.itemCode].value) }}
@@ -88,7 +88,7 @@
 </template>
 <script>
 import { leading_financial } from '@/api/base'
-import { converUnit, formatDate } from '@/libs/utils'
+import { converUnit, formatDate, numberFormat } from '@/libs/utils'
 import { mapGetters } from 'vuex'
 export default {
   data() {

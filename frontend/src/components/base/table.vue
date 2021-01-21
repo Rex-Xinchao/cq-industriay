@@ -51,7 +51,7 @@
   </div>
 </template>
 <script>
-import { converUnit } from '@/libs/utils'
+import { converUnit, numberFormat } from '@/libs/utils'
 import { standard } from '@/api/base'
 import { mapGetters } from 'vuex'
 import { formatDate } from '@/libs/utils'
@@ -128,7 +128,8 @@ export default {
     getValue(value, type = 1) {
       if (!value) return '--'
       const unit = type === 1 ? '%' : '元'
-      return `${converUnit(value)}${unit}`
+      const number = type === 1 ? numberFormat(value, 1) : converUnit(value)
+      return `${number}${unit}`
     }
   }
 }
