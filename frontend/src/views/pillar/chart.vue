@@ -12,7 +12,7 @@
             <el-option v-for="item in regions" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
         </div>
-        <div class="filter-label">产业链：</div>
+        <div class="filter-label">支柱产业链：</div>
         <div class="filter-value">
           <el-select ref="idSelect" v-model="form.id" placeholder="请选择产业链">
             <el-option
@@ -48,10 +48,11 @@
           <span @click="onItemClick('/analysis/customer')">行业获客</span>
           <span @click="onItemClick('/analysis/information')">行业舆情</span>
           <h1>行业基准</h1>
-          <span @click="onItemClick('/base/grow')">成长能力</span>
-          <span @click="onItemClick('/base/profit')">盈利能力</span>
-          <span @click="onItemClick('/base/repay')">偿还能力</span>
-          <span @click="onItemClick('/base/business')">运营能力</span>
+          <span @click="onItemClick('/base/ability', 1)">成长能力</span>
+          <span @click="onItemClick('/base/ability', 2)">盈利能力</span>
+          <span @click="onItemClick('/base/ability', 3)">偿还能力</span>
+          <span @click="onItemClick('/base/ability', 4)">运营能力</span>
+          <span @click="onItemClick('/base/ability', 5)">业务指标</span>
           <span @click="onItemClick('/base/finance')">龙头财务</span>
           <h1>产业分析</h1>
           <span @click="onItemClick('/industrial/boom')">景气图谱</span>
@@ -59,7 +60,7 @@
           <h1>存量客户</h1>
           <span @click="onItemClick('/stockCustom/index')">存量客户画像</span>
         </template>
-        <div v-else style="text-align: center; line-height: 340px">暂无数据</div>
+        <div v-else style="text-align: center" :style="{ 'line-height': this.tooltip.height + 'px' }">暂无数据</div>
       </div>
     </div>
   </div>
@@ -117,6 +118,8 @@ export default {
         if (this.idMap[this.form.region]) {
           this.form.name = this.idMap[this.form.region].find((item) => item.value === data).label
         }
+        this.showDepth_min = 2
+        this.hideTip()
         this.getData()
       }
     }
@@ -126,21 +129,16 @@ export default {
     showTip(event, data) {
       let top = 0
       let left = 0
+      if (data.samCodes && data.samCodes[0]) {
+        this.tooltip.height = 360
+      } else {
+        this.tooltip.height = 80
+      }
       if (data.productCode === this.form.id) return
       this.current = data
       this.currentSam = data.samCodes && data.samCodes[0] ? data.samCodes[0].samCode || null : null
-      if (event.pageX < this.tooltip.width) {
-        left = this.treeNode.width / 2
-      } else if (event.pageX > document.getElementById('chart').clientWidth - this.tooltip.width / 2) {
-        left = document.getElementById('chart').clientWidth - this.tooltip.width - this.treeNode.width / 2
-      } else {
-        left = event.pageX - this.tooltip.width / 2
-      }
-      if (event.pageY + this.tooltip.height > document.getElementById('chart').clientHeight) {
-        top = event.pageY - this.tooltip.height - this.treeNode.height - 100
-      } else {
-        top = event.pageY - this.tooltip.height / 2
-      }
+      left = event.pageX
+      top = event.pageY - this.tooltip.height / 2 - 100
       this.$refs.tooltip.style.display = 'block'
       this.$refs.tooltip.style.top = top + 'px'
       this.$refs.tooltip.style.left = left + 'px'
@@ -148,10 +146,14 @@ export default {
     hideTip() {
       this.$refs.tooltip.style.display = 'none'
     },
-    onItemClick(path) {
+    onItemClick(path, abilityType) {
       let { name, code } = { ...this.current }
       let type = 2
-      this.pageTo(path, { name, type, code: thid.currentSam }, true)
+      if (abilityType) {
+        this.pageTo(path, { name, type, code: this.currentSam, abilityType: abilityType }, true)
+      } else {
+        this.pageTo(path, { name, type, code: this.currentSam }, true)
+      }
     },
     backTo() {
       this.$router.go(-1)
@@ -269,7 +271,6 @@ export default {
   display: none;
   position: absolute;
   width: 500px;
-  height: 360px;
   top: 0;
   left: 0;
   background: #ffffff;

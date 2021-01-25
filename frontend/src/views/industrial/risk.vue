@@ -20,10 +20,11 @@
         <span @click="onItemClick('/analysis/customer')">行业获客</span>
         <span @click="onItemClick('/analysis/information')">行业舆情</span>
         <h1>行业基准</h1>
-        <span @click="onItemClick('/base/grow')">成长能力</span>
-        <span @click="onItemClick('/base/profit')">盈利能力</span>
-        <span @click="onItemClick('/base/repay')">偿还能力</span>
-        <span @click="onItemClick('/base/business')">运营能力</span>
+        <span @click="onItemClick('/base/ability', 1)">成长能力</span>
+        <span @click="onItemClick('/base/ability', 2)">盈利能力</span>
+        <span @click="onItemClick('/base/ability', 3)">偿还能力</span>
+        <span @click="onItemClick('/base/ability', 4)">运营能力</span>
+        <span @click="onItemClick('/base/ability', 5)">业务指标</span>
         <span @click="onItemClick('/base/finance')">龙头财务</span>
         <h1>产业分析</h1>
         <span @click="onItemClick('/industrial/boom')">景气图谱</span>
@@ -174,10 +175,14 @@ export default {
           this.noData = true
         })
     },
-    onItemClick(path) {
+    onItemClick(path, abilityType) {
       let { name, code } = { ...this.current }
       let type = 2
-      this.pageTo(path, { name, code, type }, true)
+      if (abilityType) {
+        this.pageTo(path, { name, type, code: this.currentSam, abilityType: abilityType }, true)
+      } else {
+        this.pageTo(path, { name, type, code: this.currentSam }, true)
+      }
     }
   }
 }

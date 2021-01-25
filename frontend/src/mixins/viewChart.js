@@ -294,6 +294,7 @@ export default {
         })
         .on('click', (d) => {
           d.children = d.children ? null : d._children
+          this.showDepth_min = this.showDepth_min < d.depth + 1 ? +1 : this.showDepth_min
           this.update(d)
         })
     },
