@@ -9,7 +9,7 @@
           <li
             v-for="child in item.tree"
             :key="child.id"
-            @click="pageTo('/pillar/chart', { id: child.id, region: key })"
+            @click="pageTo('/pillar/chart', { id: child.id, region: key, name: child.name })"
           >
             {{ child.name }}
           </li>

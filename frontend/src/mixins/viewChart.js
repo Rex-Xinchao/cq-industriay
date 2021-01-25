@@ -49,6 +49,8 @@ export default {
   methods: {
     // 提供外部调用
     async start(data, list) {
+      let $graphBox = document.querySelector('#chart')
+      $graphBox.innerHTML = '' // 清空tree图
       this.nodeList = []
       this.initList(data)
       this.treeMap = data
@@ -259,6 +261,9 @@ export default {
           } else {
             return d.data.name
           }
+        })
+        .on('click', (d) => {
+          this.showTip(d3.event, d.data)
         })
         .append('title')
         .text((d) => d.data.name)

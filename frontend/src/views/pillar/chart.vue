@@ -8,13 +8,13 @@
       <div class="filter">
         <div class="filter-label">省份：</div>
         <div class="filter-value">
-          <el-select v-model="form.region" placeholder="请选择省份">
+          <el-select ref="regionSelect" v-model="form.region" placeholder="请选择省份">
             <el-option v-for="item in regions" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
         </div>
         <div class="filter-label">产业链：</div>
         <div class="filter-value">
-          <el-select v-model="form.id" placeholder="请选择产业链">
+          <el-select ref="idSelect" v-model="form.id" placeholder="请选择产业链">
             <el-option
               v-for="item in idMap[form.region]"
               :label="item.label"
@@ -24,33 +24,42 @@
           </el-select>
         </div>
       </div>
-      <div class="chart-main" id="chart"></div>
+      <div class="chart-main" id="chart" @click="clearDrop"></div>
       <div ref="tooltip" class="chart-tooltip" @mouseleave="hideTip">
-        <div style="margin-bottom: 16px" v-if="current && current.samCodes">
-          <h1 style="margin-bottom: 4px">请选择sam节点</h1>
-          <el-radio v-model="currentSam" v-for="item in current.samCodes" :label="item.samCode" :key="item.samCode">
-            {{ item.samName }}
-          </el-radio>
-        </div>
-        <h1>行业分析</h1>
-        <span @click="onItemClick('/analysis/env')">行业环境</span>
-        <span @click="onItemClick('/analysis/prospect')">行业前景</span>
-        <span @click="onItemClick('/analysis/policy')">政策导向</span>
-        <span @click="onItemClick('/analysis/compete')">竞争格局</span>
-        <span @click="onItemClick('/analysis/risk')">行业风险</span>
-        <span @click="onItemClick('/analysis/customer')">行业获客</span>
-        <span @click="onItemClick('/analysis/information')">行业舆情</span>
-        <h1>行业基准</h1>
-        <span @click="onItemClick('/base/grow')">成长能力</span>
-        <span @click="onItemClick('/base/profit')">盈利能力</span>
-        <span @click="onItemClick('/base/repay')">偿还能力</span>
-        <span @click="onItemClick('/base/business')">运营能力</span>
-        <span @click="onItemClick('/base/finance')">龙头财务</span>
-        <h1>产业分析</h1>
-        <span @click="onItemClick('/industrial/boom')">景气图谱</span>
-        <span @click="onItemClick('/industrial/risk')">风险图谱</span>
-        <h1>存量客户</h1>
-        <span @click="onItemClick('/stockCustom/index')">存量客户画像</span>
+        <template v-if="current && current.samCodes && current.samCodes.length">
+          <div style="margin-bottom: 16px">
+            <h1 v-show="current.samCodes.length > 1" style="margin-bottom: 4px">请选择细分产业节点</h1>
+            <el-radio
+              v-show="current.samCodes.length > 1"
+              v-model="currentSam"
+              v-for="item in current.samCodes"
+              :label="item.samCode"
+              :key="item.samCode"
+            >
+              {{ item.samName }}
+            </el-radio>
+          </div>
+          <h1>行业分析</h1>
+          <span @click="onItemClick('/analysis/env')">行业环境</span>
+          <span @click="onItemClick('/analysis/prospect')">行业前景</span>
+          <span @click="onItemClick('/analysis/policy')">政策导向</span>
+          <span @click="onItemClick('/analysis/compete')">竞争格局</span>
+          <span @click="onItemClick('/analysis/risk')">行业风险</span>
+          <span @click="onItemClick('/analysis/customer')">行业获客</span>
+          <span @click="onItemClick('/analysis/information')">行业舆情</span>
+          <h1>行业基准</h1>
+          <span @click="onItemClick('/base/grow')">成长能力</span>
+          <span @click="onItemClick('/base/profit')">盈利能力</span>
+          <span @click="onItemClick('/base/repay')">偿还能力</span>
+          <span @click="onItemClick('/base/business')">运营能力</span>
+          <span @click="onItemClick('/base/finance')">龙头财务</span>
+          <h1>产业分析</h1>
+          <span @click="onItemClick('/industrial/boom')">景气图谱</span>
+          <span @click="onItemClick('/industrial/risk')">风险图谱</span>
+          <h1>存量客户</h1>
+          <span @click="onItemClick('/stockCustom/index')">存量客户画像</span>
+        </template>
+        <div v-else style="text-align: center; line-height: 340px">暂无数据</div>
       </div>
     </div>
   </div>
@@ -99,11 +108,15 @@ export default {
       handler(data) {
         if (this.isInited) return
         this.form.id = this.idMap[data][0].value
+        this.form.name = this.idMap[data][0].label
       }
     },
     'form.id': {
       deep: true,
       handler(data) {
+        if (this.idMap[this.form.region]) {
+          this.form.name = this.idMap[this.form.region].find((item) => item.value === data).label
+        }
         this.getData()
       }
     }
@@ -113,9 +126,9 @@ export default {
     showTip(event, data) {
       let top = 0
       let left = 0
-      if (!data.samCodes || data.samCodes.length === 0) return
+      if (data.productCode === this.form.id) return
       this.current = data
-      this.currentSam = data.samCodes[0].samCode
+      this.currentSam = data.samCodes && data.samCodes[0] ? data.samCodes[0].samCode || null : null
       if (event.pageX < this.tooltip.width) {
         left = this.treeNode.width / 2
       } else if (event.pageX > document.getElementById('chart').clientWidth - this.tooltip.width / 2) {
@@ -138,7 +151,7 @@ export default {
     onItemClick(path) {
       let { name, code } = { ...this.current }
       let type = 2
-      this.pageTo(path, { name, code, type }, true)
+      this.pageTo(path, { name, type, code: thid.currentSam }, true)
     },
     backTo() {
       this.$router.go(-1)
@@ -147,11 +160,18 @@ export default {
       this.loading = true
       getIndustry({
         region: this.form.region,
-        type: this.form.id
+        id: this.form.id
       })
         .then((res) => {
           this.loading = false
           let map = {}
+          map[this.form.id] = {
+            productCode: this.form.id,
+            name: this.form.name,
+            parentCode: null,
+            children: [],
+            samCodes: []
+          }
           res.result.forEach((item) => {
             item.productCode = item.code
             item.children = item.children || []
@@ -160,10 +180,13 @@ export default {
           res.result.forEach((item) => {
             if (item.parentCode) {
               map[item.parentCode].children.push(item)
+            } else if (item.code !== this.form.id) {
+              item.parentCode = this.form.id
+              map[item.parentCode].children.push(item)
             }
           })
-          let startCode = res.result.filter((item) => !item.parentCode)[0]
-          this.name = startCode.industryName
+          let startCode = map[this.form.id]
+          this.name = startCode.name
           this.start(startCode, [])
           this.isInited = false
         })
@@ -187,8 +210,13 @@ export default {
           })
           this.form.region = this.$route.query.region
           this.form.id = this.$route.query.id
+          this.form.name = this.$route.query.name
         })
         .then((err) => {})
+    },
+    clearDrop() {
+      this.$refs.regionSelect.handleClose()
+      this.$refs.idSelect.handleClose()
     }
   },
   mounted() {
