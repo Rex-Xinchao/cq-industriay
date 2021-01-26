@@ -179,6 +179,7 @@ export default {
   },
   methods: {
     converUnit,
+    numberFormat,
     getMarket(list) {
       if (!list) return '--'
       if (!list.length) return '--'

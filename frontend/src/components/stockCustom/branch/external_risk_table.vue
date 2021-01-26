@@ -61,11 +61,12 @@
       height="324px"
       :id="tableId"
     >
-      <el-table-column prop="comName" label="公司名称"></el-table-column>
-      <el-table-column prop="buName" label="管护机构" width="80"></el-table-column>
-      <el-table-column label="贷款余额（万元）" align="right">
+      <el-table-column prop="comName" label="公司名称" align="left"></el-table-column>
+      <el-table-column prop="buName" label="管护机构" width="80" align="left"></el-table-column>
+      <el-table-column label="贷款余额（元）" align="right">
         <template slot-scope="scope">
-          {{ scope.row.amount || '--' }}
+          <template v-if="scope.row.loanBalance">{{ converUnit(scope.row.loanBalance.amount) }}</template>
+          <template v-else>--</template>
         </template>
       </el-table-column>
       <el-table-column label="最大逾期天数" align="right">
@@ -75,28 +76,32 @@
       </el-table-column>
       <el-table-column label="裁判文书" align="right">
         <template slot-scope="scope">
-          <span class="active-text" @click="showDialog(1, scope.row)">
-            {{ scope.row.judgements ? scope.row.judgements + '起' : '--' }}
+          <template v-if="!scope.row.judgements">--</template>
+          <span v-else class="active-text" @click="showDialog(1, scope.row)">
+            {{ scope.row.judgements + '起' }}
           </span>
         </template>
       </el-table-column>
       <el-table-column label="被执行情况" align="right">
         <template slot-scope="scope">
-          <span class="active-text" @click="showDialog(2, scope.row)">
-            {{ scope.row.enforcements ? scope.row.enforcements + '起' : '--' }}
+          <template v-if="!scope.row.enforcements">--</template>
+          <span v-else class="active-text" @click="showDialog(2, scope.row)">
+            {{ scope.row.enforcements + '起' }}
           </span>
         </template>
       </el-table-column>
       <el-table-column label="失信被执行情况" align="right">
         <template slot-scope="scope">
-          <span class="active-text" @click="showDialog(3, scope.row)">
-            {{ scope.row.disEnforcements ? scope.row.disEnforcements + '起' : '--' }}
+          <template v-if="!scope.row.disEnforcements">--</template>
+          <span v-else class="active-text" @click="showDialog(3, scope.row)">
+            {{ scope.row.disEnforcements + '起' }}
           </span>
         </template>
       </el-table-column>
       <el-table-column label="股权冻结情况" align="right">
         <template slot-scope="scope">
-          <span class="active-text" @click="showDialog(4, scope.row)">详情</span>
+          <template v-if="!scope.row.freezes">--</template>
+          <span v-else class="active-text" @click="showDialog(4, scope.row)">详情</span>
         </template>
       </el-table-column>
     </el-table>
@@ -107,13 +112,19 @@
       width="80%"
       :before-close="handleClose"
     >
-      <el-table class="table-main table-head-grey" :data="dialogData" height="396" v-loading="loading_table">
+      <el-table
+        class="table-main table-head-grey"
+        id="dialogTable"
+        :data="dialogData"
+        height="396"
+        v-loading="loading_table"
+      >
         <el-table-column
           v-for="item in tableConf"
           :prop="item.prop"
           :label="item.label"
           :key="item.prop"
-          align="center"
+          :align="item.align || 'left'"
         ></el-table-column>
       </el-table>
     </el-dialog>
@@ -122,7 +133,7 @@
 
 <script>
 import { industry_risk, judgement, enforcement, dishonest_enforcement, shares_freeze } from '@/api/custom'
-import scroll from '@/mixins/scroll'
+import { converUnit } from '@/libs/utils'
 export default {
   data() {
     return {
@@ -157,10 +168,22 @@ export default {
       tableConf: [],
       dialogTitle: null,
       dialogVisible: false,
+      dialogType: null,
+      dialogCode: null,
       num_1: 0,
       num_2: 0,
       num_3: 0,
-      num_4: 0
+      num_4: 0,
+      page: {
+        pageNo: 0,
+        pageSize: 50
+      },
+      tableEnd: false,
+      dialogPage: {
+        pageNo: 0,
+        pageSize: 50
+      },
+      dialogTableEnd: false
     }
   },
   props: {
@@ -179,8 +202,35 @@ export default {
       }
     }
   },
-  mixins: [scroll],
   methods: {
+    converUnit,
+    handleScroll: function () {
+      // 设备/屏幕高度
+      let scrollObj = null // 滚动区域
+      if (this.dialogVisible) {
+        scrollObj = document.querySelector('#dialogTable>.el-table__body-wrapper')
+      } else {
+        scrollObj = document.querySelector('#riskTable>.el-table__body-wrapper')
+      }
+      if (!scrollObj) return
+      let scrollTop = scrollObj.scrollTop // div 到头部的距离
+      let scrollHeight = scrollObj.scrollHeight // 滚动条的总高度
+      let clientHeight = scrollObj.clientHeight
+      //滚动条到底部的条件
+      if (scrollTop && scrollTop + clientHeight >= scrollHeight) {
+        if (this.dialogVisible) {
+          if (!this.loading && !this.dialogTableEnd) {
+            this.dialogPage.pageNo = this.dialogPage.pageNo + 1
+            this[`getTypeData_${this.dialogType}`](this.dialogCode)
+          }
+        } else {
+          if (!this.loading && !this.tableEnd) {
+            this.page.pageNo = this.page.pageNo + 1
+            this.getDate()
+          }
+        }
+      }
+    },
     getDate() {
       this.loading = true
       industry_risk({
@@ -191,11 +241,8 @@ export default {
       })
         .then((res) => {
           this.loading = false
-          if (res.customers.length === 0) {
-            this.end = true
-          } else {
-            this.tableData.push(...res.customers)
-          }
+          this.tableData.push(...res.customers)
+          this.tableEnd = res.total <= this.tableData.length
           this.noData = this.tableData.length === 0
           this.num_1 = res.judgements
           this.num_2 = res.enforcements
@@ -214,15 +261,21 @@ export default {
     },
     handleClose() {
       this.dialogData = []
-      this.dialogTitle = null
       this.dialogVisible = false
+      this.dialogTableEnd = false
+      this.dialogTitle = null
+      this.dialogType = null
+      this.dialogCode = null
+      this.dialogPage.pageNo = 0
     },
     showDialog(type = 1, data) {
       let typeNameList = ['裁判文书', '被执行情况', '失信被执行情况', '股权冻结情况']
       this.tableConf = null
       this.dialogTitle = `${data.comName} ${typeNameList[type - 1]}`
       this.dialogVisible = true
-      this[`getTypeData_${type}`](data.csfId)
+      this.dialogType = type
+      this.dialogCode = data.comCode
+      this[`getTypeData_${type}`](data.comCode)
     },
     getTypeData_1(csfId) {
       this.tableConf = [
@@ -260,14 +313,16 @@ export default {
         }
       ]
       this.loading_table = true
-      judgement({ companyId: csfId })
+      judgement({ companyId: csfId, page: this.dialogPage.pageNo, size: this.dialogPage.pageSize })
         .then((res) => {
-          this.dialogData = res.result || []
+          this.dialogData.push(...res.result)
+          this.dialogTableEnd = res.total <= this.dialogData.length
           this.loading_table = false
         })
         .catch((err) => {
           this.dialogData = []
           this.loading_table = false
+          this.dialogTableEnd = true
         })
     },
     getTypeData_2(csfId) {
@@ -286,7 +341,8 @@ export default {
         },
         {
           label: '执行标的（元）',
-          prop: 'executionSubject'
+          prop: 'executionSubject',
+          align: 'right'
         },
         {
           label: '立案时间',
@@ -294,14 +350,16 @@ export default {
         }
       ]
       this.loading_table = true
-      enforcement({ companyId: csfId })
+      enforcement({ companyId: csfId, page: this.dialogPage.pageNo, size: this.dialogPage.pageSize })
         .then((res) => {
-          this.dialogData = res.result || []
+          this.dialogData.push(...res.result)
+          this.dialogTableEnd = res.total <= this.dialogData.length
           this.loading_table = false
         })
         .catch((err) => {
           this.dialogData = []
           this.loading_table = false
+          this.dialogTableEnd = true
         })
     },
     getTypeData_3(csfId) {
@@ -336,14 +394,16 @@ export default {
         }
       ]
       this.loading_table = true
-      dishonest_enforcement({ companyId: csfId })
+      dishonest_enforcement({ companyId: csfId, page: this.dialogPage.pageNo, size: this.dialogPage.pageSize })
         .then((res) => {
-          this.dialogData = res.result || []
+          this.dialogData.push(...res.result)
+          this.dialogTableEnd = res.total <= this.dialogData.length
           this.loading_table = false
         })
         .catch((err) => {
           this.dialogData = []
           this.loading_table = false
+          this.dialogTableEnd = true
         })
     },
     getTypeData_4(csfId) {
@@ -370,20 +430,29 @@ export default {
         },
         {
           label: '冻结股权金额',
-          prop: 'money'
+          prop: 'money',
+          align: 'right'
         }
       ]
       this.loading_table = true
-      shares_freeze({ companyId: csfId })
+      shares_freeze({ companyId: csfId, page: this.dialogPage.pageNo, size: this.dialogPage.pageSize })
         .then((res) => {
-          this.dialogData = res.result || []
+          this.dialogData.push(...res.result)
+          this.dialogTableEnd = res.total <= this.dialogData.length
           this.loading_table = false
         })
         .catch((err) => {
           this.dialogData = []
           this.loading_table = false
+          this.dialogTableEnd = true
         })
     }
+  },
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll, true) // 监听（绑定）滚轮滚动事件
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.handleScroll, true) //  离开页面清除（移除）滚轮滚动事件
   }
 }
 </script>
