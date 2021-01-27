@@ -78,7 +78,8 @@
         :industryCode="GBs"
       ></doucle-circle-chart>
       <risk-table-com
-        class="item_100 item_last height_mid"
+        class="item_100 item_last"
+        style="height: 860px"
         title="行业存量授信客户的外部风险"
         :industryCode="GBs"
       ></risk-table-com>
@@ -152,7 +153,7 @@ export default {
     getData() {
       this.loading = true
       core_index({
-        industryCode: this.GBs,
+        industryCode: this.GBs.join(','),
         buCode: null,
         limit: null
       })
@@ -168,7 +169,7 @@ export default {
           this.dataList = [{}, {}, {}, {}]
         })
       reject_default({
-        industryCode: this.GBs
+        industryCode: this.GBs.join(',')
       })
         .then((res) => {
           this.rejectData = res.result || []

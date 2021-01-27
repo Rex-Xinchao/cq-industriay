@@ -181,7 +181,7 @@ export default {
     init() {
       this.loading = true
       this.request({
-        industryCode: this.industryCode,
+        industryCode: this.industryCode.join(','),
         buCode: null,
         amountLower: this.amountRange[0],
         amountUpper: this.amountRange[1],

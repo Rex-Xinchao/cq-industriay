@@ -152,6 +152,7 @@ export const Mappings = {
   },
   methods: {
     getMappings() {
+      if (!this.$route.query.name) return
       if (this.$route.query.name.indexOf('国标') >= 0) {
         nodeMapping({
           code: this.$route.query.code,
@@ -201,6 +202,7 @@ export const Mappings_GB = {
   },
   methods: {
     getMappings() {
+      if (!this.$route.query.name) return
       nodeMapping({
         code: this.$route.query.code,
         isSam: this.$route.query.name.indexOf('国标') < 0

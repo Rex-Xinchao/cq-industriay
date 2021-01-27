@@ -58,7 +58,7 @@ export default {
     ...mapGetters(['industry']),
     urlOptions() {
       return {
-        industryCode: this.industryCode,
+        industryCode: this.industryCode.join(','),
         buCode: null
       }
     }

@@ -48,7 +48,7 @@
               <b>{{ num_4 }}</b>
               家企业
             </p>
-            <p>被执行人</p>
+            <p>股权冻结</p>
           </span>
         </div>
       </div>
@@ -58,11 +58,11 @@
       class="com-table table-main table-head-grey"
       :data="tableData"
       style="width: 100%"
-      height="324px"
+      height="800px"
       :id="tableId"
     >
-      <el-table-column prop="comName" label="公司名称" align="left"></el-table-column>
-      <el-table-column prop="buName" label="管护机构" width="80" align="left"></el-table-column>
+      <el-table-column width="240" prop="comName" label="公司名称" align="left"></el-table-column>
+      <el-table-column width="240" prop="buName" label="管护机构" align="left"></el-table-column>
       <el-table-column label="贷款余额（元）" align="right">
         <template slot-scope="scope">
           <template v-if="scope.row.loanBalance">{{ converUnit(scope.row.loanBalance.amount) }}</template>
@@ -125,7 +125,14 @@
           :label="item.label"
           :key="item.prop"
           :align="item.align || 'left'"
-        ></el-table-column>
+        >
+          <template slot-scope="scope">
+            <template v-if="scope.row[item.prop] == 'null'">--</template>
+            <template v-else>
+              {{ scope.row[item.prop] || '--' }}
+            </template>
+          </template>
+        </el-table-column>
       </el-table>
     </el-dialog>
   </div>
@@ -234,7 +241,7 @@ export default {
     getDate() {
       this.loading = true
       industry_risk({
-        industryCode: '',
+        industryCode: this.industryCode.join(','),
         buCode: '',
         page: this.page.pageNo,
         size: this.page.pageSize
